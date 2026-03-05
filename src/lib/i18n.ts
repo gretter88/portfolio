@@ -149,6 +149,8 @@ const projects: Project[] = [
 
 
   return {
+	  
+	  
     langLabel: isEs ? "Español" : "English",
     switchTo: isEs ? "English" : "Español",
     switchHref: isEs ? "/en" : "/es",
@@ -224,5 +226,42 @@ skills: [
 
     projects,
     footer: "Portfolio · Santiago Gretter",
+	
+	sectionNowTitle: isEs ? "Disponible" : "Available",
+sectionNowDesc: isEs
+  ? "Estoy abierto a proyectos y colaboraciones. Si querés que armemos algo sólido (web + mobile + backend), escribime."
+  : "Open to projects and collaborations. If you want to build something solid (web + mobile + backend), reach out.",
+
+nowPoints: isEs
+  ? [
+      "Remoto (Uruguay) · Flexible por husos horarios",
+      "Full-stack orientado a producto (UX + performance + tiempo real)",
+      "Experiencia real en producción: deploys, monitoreo y mejoras iterativas",
+    ]
+  : [
+      "Remote (Uruguay) · Flexible across time zones",
+      "Product-driven full-stack (UX + performance + real-time)",
+      "Production experience: deploys, monitoring and iterative improvements",
+    ],
+
+nowResponseTime: isEs
+  ? "Respuesta típica: 24–48h"
+  : "Typical response time: 24–48h",
+
+nowCtaPrimary: isEs ? "Hablemos" : "Let’s talk",
+nowCtaSecondary: isEs ? "Descargar CV" : "Download CV",
+
+nowChipsLabel: isEs ? "Open to:" : "Open to:",
+nowChips: isEs
+  ? ["Web", "Mobile", "Backend"]
+  : ["Web", "Mobile", "Backend"],
+
+bestFitLabel: isEs ? "Mejor encaje:" : "Best fit:",
+bestFitItems: isEs
+  ? ["Apps en tiempo real", "Mapas", "Admin/CMS"]
+  : ["Real-time apps", "Maps", "Admin/CMS"],
+
+	
+	
   };
 }
