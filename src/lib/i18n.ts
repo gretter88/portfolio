@@ -15,6 +15,7 @@ export type Project = {
   image?: { src: string; alt: string };
   links?: { demo?: string; repo?: string };
   badge?: string; // 👈 nuevo
+  order?: number;
 };
 
 export function t(lang: Lang) {
