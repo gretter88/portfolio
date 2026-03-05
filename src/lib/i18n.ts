@@ -17,9 +17,11 @@ export type Project = {
   badge?: string;
   order?: number;
 
-  highlights?: string[]; // 👈 bullets (features)
-  gallery?: Array<{ src: string; alt: string }>; // 👈 3 screenshots
+  // ✅ NUEVO (opcional)
+  screenshots?: { src: string; alt: string }[];
+  features?: string[];
 };
+
 
 
 

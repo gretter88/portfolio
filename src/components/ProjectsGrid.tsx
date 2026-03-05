@@ -162,7 +162,7 @@ export default function ProjectsGrid({
                     src={p.image.src}
                     alt={p.image.alt}
                     loading="lazy"
-                    className="w-full"
+                     className="h-44 w-full object-cover object-top transition duration-300 hover:scale-[1.03]"
                     style={{
                       height: 220,
                       objectFit: "contain",
