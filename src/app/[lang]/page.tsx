@@ -106,12 +106,12 @@ export default async function Page({
         {/* PROJECTS */}
         <section id="projects" className="mt-16">
           <h3 className="text-2xl font-semibold">{i.sectionProjectsTitle}</h3>
-          <p className="mt-2" style={mutedStyle}>
+        {/*  <p className="mt-2" style={mutedStyle}>
             {i.sectionProjectsDesc}
-          </p>
-
+          </p>*/}
+<p className="mt-2 text-zinc-600 dark:text-zinc-400">{i.sectionProjectsKicker}</p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {i.projects.map((p) => {
+           {[...i.projects].sort((a, b) => (a.order ?? 999) - (b.order ?? 999)).map((p) => {
              const isRestricted =
   p.title.includes("Kiosco") || p.title.includes("Kiosk");
 
@@ -152,20 +152,31 @@ export default async function Page({
 />
                     </div>
                   ) : null}
+				  
+				  
 
                   <h4 className="text-lg font-semibold">{p.title}</h4>
-				  {p.badge ? (
-  <span
-    className="mt-2 inline-flex w-fit items-center rounded-full border px-3 py-1 text-xs"
-    style={{
-      borderColor: "var(--card-border)",
-      color: "var(--muted)",
-      background: "var(--hover)",
-    }}
-  >
-    {p.badge}
-  </span>
+			{p.badge ? (
+  <div className="mb-3">
+    <span className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-200">
+     <span
+  className={[
+    "h-2 w-2 rounded-full",
+    /restricted/i.test(p.badge)
+      ? "bg-zinc-400"
+      : /testing/i.test(p.badge)
+      ? "bg-amber-400"
+      : /live/i.test(p.badge)
+      ? "bg-green-400"
+      : "bg-zinc-500",
+  ].join(" ")}
+/>
+
+      {p.badge}
+    </span>
+  </div>
 ) : null}
+
                   <p className="mt-2 text-sm leading-relaxed" style={mutedStyle}>
                     {p.desc}
                   </p>
@@ -239,6 +250,9 @@ export default async function Page({
         {/* SKILLS */}
         <section className="mt-16">
           <h3 className="text-2xl font-semibold">{i.sectionSkillsTitle}</h3>
+<p className="mt-2 text-zinc-600 dark:text-zinc-400">
+  {i.sectionSkillsKicker}
+</p>
 
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {i.skills.map((s) => (
