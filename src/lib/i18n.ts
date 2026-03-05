@@ -14,15 +14,19 @@ export type Project = {
   stack: string[];
   image?: { src: string; alt: string };
   links?: { demo?: string; repo?: string };
-  badge?: string; // 👈 nuevo
+  badge?: string;
   order?: number;
+
+  highlights?: string[]; // 👈 bullets (features)
+  gallery?: Array<{ src: string; alt: string }>; // 👈 3 screenshots
 };
+
+
 
 export function t(lang: Lang) {
   const isEs = lang === "es";
 
 const projects: Project[] = [
-
   {
     order: 1,
     title: "RadarSocial",
@@ -32,33 +36,113 @@ const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "React Native", "Node.js", "MongoDB", "Socket.IO"],
     image: { src: "/screenshots/radarsocialweb.webp", alt: "RadarSocial (Web)" },
     links: { demo: "https://radarsocial.com.uy/", repo: "" },
-    badge: isEs ? "Web: Live · Android: Testing" : "Web: Live · Android: Testing",
-  },
-  {
-    order: 2,
-    title: "Museo Canario (Web)",
-    desc: isEs
-      ? "Sitio moderno en Next.js bilingüe (ES/EN), con secciones dinámicas, catálogo y foco en performance/SEO."
-      : "Modern bilingual (ES/EN) Next.js website with dynamic sections, catalog, and strong performance/SEO focus.",
-    stack: ["Next.js", "TypeScript", "Tailwind", "MongoDB", "Cloudinary", "Cloudflare"],
-    image: { src: "/screenshots/museo2.webp", alt: "Museo Canario website" },
-    links: { demo: "https://www.museocanario.com.uy", repo: "" },
-	  badge: isEs ? "Web: Live" : "Web: Live",
+    badge: "Web: Live · Android: Testing",
 
+    // ✅ NUEVO
+    screenshots: [
+      { src: "/screenshots/radarsocial-1.webp", alt: "RadarSocial — Perfil / UX" },
+      { src: "/screenshots/radarsocial-2.webp", alt: "RadarSocial — Chat en tiempo real" },
+      { src: "/screenshots/radarsocial-3.webp", alt: "RadarSocial — Mapa y usuarios cercanos" },
+	  { src: "/screenshots/radarsocial-4.webp", alt: "RadarSocial — Inicio / UX" },
+    ],
+    features: isEs
+      ? [
+          "Chat 1:1 en tiempo real (Socket.IO) con estados: online / escribiendo / no leídos",
+          "Mapa con geolocalización y usuarios cercanos + navegación directa al chat",
+          "Stickers y multimedia + notificaciones push (FCM/Notifee)",
+          "Llamadas por internet (audio/video) integradas al flujo del chat",
+          "Backend Node/Express + MongoDB con auth JWT, logs y APIs REST",
+        ]
+      : [
+          "Real-time 1:1 chat (Socket.IO) with presence: online / typing / unread counters",
+          "Map with geolocation and nearby users + direct navigation to chat",
+          "Stickers and rich media + push notifications (FCM/Notifee)",
+          "Internet calls (audio/video) integrated into the chat flow",
+          "Node/Express + MongoDB backend with JWT auth, logs, and REST APIs",
+        ],
   },
-  {
-    order: 3,
-    title: isEs ? "Kiosco Interactivo (Museo)" : "Interactive Kiosk (Museum)",
-    desc: isEs
-      ? "Kiosco táctil para tablet fija en museo. Módulos interactivos, fullscreen y UX optimizada para público general."
-      : "Tablet-fixed interactive kiosk. Touch-friendly modules, fullscreen mode, and UX optimized for museum visitors.",
-    stack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
-    image: { src: "/screenshots/kio2.webp", alt: "Kiosco interactivo" },
-    links: { demo: "https://kiosco.museocanario.com.uy", repo: "" },
-   badge: isEs ? "Tablet: Live · Restricted" : "Tablet: Live · Restricted",
 
-  },
+ {
+  order: 2,
+  title: "Museo Canario (Web)",
+  desc: isEs
+    ? "Sitio oficial bilingüe (ES/EN) en producción, integrado con un panel Admin (compartido con el kiosco) para gestionar contenido, salas y piezas."
+    : "Official bilingual (ES/EN) production website, integrated with a shared Admin panel (also used by the kiosk) to manage content, rooms, and items.",
+  stack: ["Next.js", "TypeScript", "Tailwind", "MongoDB", "Cloudinary", "Cloudflare"],
+  image: { src: "/screenshots/museo2.webp", alt: "Museo Canario website" },
+  links: { demo: "https://www.museocanario.com.uy", repo: "" },
+  badge: "Web: Live",
+
+  screenshots: [
+    { src: "/screenshots/museo-1.webp", alt: "Museo Canario — seccion / Noticias, Libros y Recursos" },
+    { src: "/screenshots/museo-2.webp", alt: "Museo Canario — seccion / Museos canarios" },
+    { src: "/screenshots/museo-3.webp", alt: "Museo Canario — seccion / Museos canarios" },
+	{ src: "/screenshots/museo-4.webp", alt: "Museo Canario — Galeria / Piezas / Salas" },
+	{ src: "/screenshots/museo-5.webp", alt: "Museo Canario — Home / secciones" },
+  ],
+
+  features: isEs
+    ? [
+        "Website en producción con i18n ES/EN y estructura editorial (secciones, catálogo, piezas)",
+        "Contenido dinámico desde MongoDB: salas, piezas y metadata (títulos/descripciones ES/EN)",
+        "Integración con Cloudinary para gestión de imágenes (subir/editar/eliminar) con URLs optimizadas",
+        "Panel Admin compartido con el kiosco: mismo flujo y permisos para administrar el contenido",
+        "Export/Import JSON: exportar salas/piezas, importar y hacer carga masiva",
+        "Infra y despliegue: Vercel + Cloudflare (DNS, cache, SSL) + OpenGraph/SEO",
+      ]
+    : [
+        "Production website with ES/EN i18n and an editorial structure (sections, catalog, items)",
+        "Dynamic content from MongoDB: rooms, items, and metadata (ES/EN titles/descriptions)",
+        "Cloudinary integration for image management (upload/edit/delete) with optimized delivery",
+        "Shared Admin panel with the kiosk: same flow and permissions to manage content",
+        "JSON export/import: export rooms/items, import for bulk loading and sync",
+        "Infra & deployment: Vercel + Cloudflare (DNS, cache, SSL) + OpenGraph/SEO",
+      ],
+},
+
+{
+  order: 3,
+  title: isEs ? "Kiosco Interactivo (Museo)" : "Interactive Kiosk (Museum)",
+  desc: isEs
+    ? "Experiencia táctil para tablet fija en museo: plano interactivo, tour guiado, piezas 3D (Luma), autoguía con QR por pieza y administración completa vía panel Admin."
+    : "Tablet-fixed museum experience: interactive floor map, guided tour, 3D pieces (Luma), QR-based self-guide per item, and full content management via Admin panel.",
+  stack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion", "MongoDB", "Cloudinary"],
+  image: { src: "/screenshots/kio2.webp", alt: "Kiosco interactivo" },
+  links: { demo: "https://kiosco.museocanario.com.uy", repo: "" },
+  badge: isEs ? "Tablet: Live · Restricted" : "Tablet: Live · Restricted",
+
+  screenshots: [
+    { src: "/screenshots/kiosco-1.webp", alt: "Kiosco — Catalogo" },
+    { src: "/screenshots/kiosco-2.webp", alt: "Kiosco — Plano / Pieza" },
+    { src: "/screenshots/kiosco-3.webp", alt: "Kiosco — Seccion / Juegos" },
+	{ src: "/screenshots/kiosco-4.webp", alt: "Kiosco — Seccion / Piezas 3D" },
+  ],
+
+  features: isEs
+    ? [
+        "Modo tablet fijo (horizontal): UI táctil grande, navegación simple y resistente a uso público",
+        "Plano interactivo del museo: salas + piezas, navegación por ubicación y contexto",
+        "Tour guiado: recorrido sugerido y módulos temáticos dentro del kiosco",
+        "Piezas en 3D (Luma 3D) integradas para visualización inmersiva",
+        "Autoguía con QR: cada pieza tiene QR para abrir su ficha y continuar el recorrido",
+        "Panel Admin (compartido con la web): administrar acceso, contenido, salas y piezas",
+        "Gestión de imágenes: subir/editar/eliminar con Cloudinary + sincronización con MongoDB",
+        "Herramientas pro: exportar JSON (salas/piezas), importar JSON, y carga masiva",
+      ]
+    : [
+        "Fixed-tablet mode (landscape): large touch UI, simple navigation, built for public usage",
+        "Interactive museum floor map: rooms + items, navigation by location and context",
+        "Guided tour: suggested route and themed modules inside the kiosk experience",
+        "3D pieces (Luma 3D) integrated for immersive viewing",
+        "QR self-guide: each item has a QR to open its detail view and continue the route",
+        "Admin panel (shared with the website): manage access, content, rooms, and items",
+        "Image management: upload/edit/delete via Cloudinary + sync with MongoDB",
+        "Pro tools: export JSON (rooms/items), import JSON, and bulk loading workflow",
+      ],
+},
+
 ];
+
 
 
 
