@@ -261,6 +261,127 @@ bestFitItems: isEs
   ? ["Apps en tiempo real", "Mapas", "Admin/CMS"]
   : ["Real-time apps", "Maps", "Admin/CMS"],
 
+sectionExperienceTitle: isEs ? "Experiencia" : "Experience",
+sectionExperienceKicker: isEs
+  ? "Experiencia presencial/contratada en sector público y consultoría (detalles redactados de forma general por confidencialidad)."
+  : "On-site/contracted experience in public sector and consulting (written generically for confidentiality).",
+
+experience: isEs
+  ? [
+      {
+        company: "Consultoría tecnológica (cliente del sector banca) · Montevideo, Uruguay",
+        role: "Analista de Sistemas / Funcional · IT Support (Presencial)",
+        period: "2013 – 2022",
+        bullets: [
+          "Referente funcional/técnico en módulos CRM/ERP (Compras y Recursos Humanos) dentro del área de Desarrollo.",
+          "Interacción directa con usuarios finales y equipos internos del banco: relevamiento, seguimiento y soporte post-producción.",
+          "Coordinación con proveedores y stakeholders para análisis, resolución de incidentes y mejoras evolutivas.",
+          "Integración de sistemas y middleware + automatizaciones para flujos operativos diarios (logs, procesos, depósitos).",
+          "Automatización con Control-M: reducción de tareas manuales recurrentes y minimización de errores operativos.",
+          "Reporting/BI: reportes y dashboards para negocio (SQL/Oracle + Power BI/Excel) integrando fuentes (banking/CRM/ERP).",
+          "Documentos/reportes operativos (Java + Oracle + JasperReports) para procesos internos.",
+          "Metodologías ágiles (Scrum) y herramientas de seguimiento (JIRA).",
+        ],
+        stack: [
+          "Java",
+          "Oracle",
+          "SQL",
+          "JasperReports",
+          "Power BI",
+          "Control-M",
+          "CRM/ERP",
+          "Middleware",
+          "JIRA",
+          "Scrum",
+        ],
+      },
+
+      {
+        company: "Organismo público (Registro) · Montevideo, Uruguay",
+        role: "Web Design & Development · IT Help Desk Support (Presencial)",
+        period: "2023 – 2024",
+        bullets: [
+          "Soporte TI a usuarios internos: mantenimiento, resolución de incidencias y asistencia operativa.",
+          "Desarrollo y soporte de aplicaciones internas y mejoras evolutivas.",
+          "Diseño y mantenimiento web (HTML/CSS/JS + PHP/WordPress) para sitios y módulos internos.",
+          "Reportes y documentación: JasperReports/Jaspersoft Studio para necesidades de negocio.",
+          "ERP: desarrollo de módulos en Odoo e integraciones con base de datos Oracle.",
+        ],
+        stack: ["Java", "JavaScript", "Oracle", "JasperReports", "Odoo", "WordPress", "HTML/CSS"],
+      },
+
+      {
+        company: "Software factory (proyectos web) · Montevideo, Uruguay",
+        role: "Web Design & Development · Full-Stack Java Developer",
+        period: "2011 – 2013",
+        bullets: [
+          "Desarrollo de aplicaciones web con Java (Servlet/JSP) y front-end (JS/CSS/HTML).",
+          "Implementación de soluciones con Play Framework y stack Java clásico (Hibernate/Maven/Tomcat).",
+          "Trabajo por iteraciones con enfoque ágil (Scrum) y herramientas de desarrollo (Eclipse).",
+        ],
+        stack: ["Java", "Play Framework", "Servlet/JSP", "Hibernate", "Maven", "Tomcat", "MySQL"],
+      },
+    ]
+  : [
+      {
+        company: "Tech consulting (client in banking sector) · Montevideo, Uruguay",
+        role: "Systems / Functional Analyst · IT Support (On-site)",
+        period: "2013 – 2022",
+        bullets: [
+          "Functional/technical point of contact for CRM/ERP modules (Procurement and HR) within the Development area.",
+          "Direct collaboration with end users and internal bank teams: requirements, tracking and post-production support.",
+          "Coordination with vendors and stakeholders for analysis, incident resolution and iterative improvements.",
+          "System integrations and middleware work + automation for daily operational flows (logs, processes, deposits).",
+          "Automation with Control-M: reduced recurring manual tasks and operational errors.",
+          "Reporting/BI: business reports and dashboards (SQL/Oracle + Power BI/Excel) integrating sources (banking/CRM/ERP).",
+          "Operational documents/reports (Java + Oracle + JasperReports) supporting internal processes.",
+          "Agile delivery (Scrum) and tracking tools (JIRA).",
+        ],
+        stack: [
+          "Java",
+          "Oracle",
+          "SQL",
+          "JasperReports",
+          "Power BI",
+          "Control-M",
+          "CRM/ERP",
+          "Middleware",
+          "JIRA",
+          "Scrum",
+        ],
+      },
+
+      {
+        company: "Public sector agency (Registry) · Montevideo, Uruguay",
+        role: "Web Design & Development · IT Help Desk Support (On-site)",
+        period: "2023 – 2024",
+        bullets: [
+          "On-site IT support for internal users: maintenance, incident handling, and operational assistance.",
+          "Built and supported internal applications and iterative improvements.",
+          "Web design & maintenance (HTML/CSS/JS + PHP/WordPress) for internal sites/modules.",
+          "Reporting and documentation: JasperReports/Jaspersoft Studio for business needs.",
+          "ERP: Odoo module development and integrations with Oracle database.",
+        ],
+        stack: ["Java", "JavaScript", "Oracle", "JasperReports", "Odoo", "WordPress", "HTML/CSS"],
+      },
+
+      {
+        company: "Software factory (web projects) · Montevideo, Uruguay",
+        role: "Web Design & Development · Full-Stack Java Developer",
+        period: "2011 – 2013",
+        bullets: [
+          "Built web applications with Java (Servlet/JSP) and front-end (JS/CSS/HTML).",
+          "Implemented solutions using Play Framework and classic Java stack (Hibernate/Maven/Tomcat).",
+          "Worked iteratively with an agile mindset (Scrum) and dev tooling (Eclipse).",
+        ],
+        stack: ["Java", "Play Framework", "Servlet/JSP", "Hibernate", "Maven", "Tomcat", "MySQL"],
+      },
+    ],
+
+
+
+
+
 	
 	
   };

@@ -119,6 +119,85 @@ export default async function Page({
          <ProjectsGrid lang={lang} projects={i.projects} />
         </section>
 
+{/* EXPERIENCE */}
+<section className="mt-16">
+  <h3 className="text-2xl font-semibold">{i.sectionExperienceTitle}</h3>
+  <p className="mt-3 text-sm" style={mutedStyle}>
+    {i.sectionExperienceKicker}
+  </p>
+
+  <div className="mt-6 grid gap-4">
+    {i.experience.map(
+      (e: {
+        company: string;
+        role: string;
+        period: string;
+        bullets: string[];
+        stack: string[];
+      }) => (
+        <div key={`${e.company}-${e.period}`} className="rounded-2xl border p-5" style={cardStyle}>
+          <div className="flex flex-col gap-1">
+        <div className="flex flex-wrap items-start justify-between gap-2">
+  <div className="min-w-0">
+    <h4 className="text-lg font-semibold leading-snug">{e.company}</h4>
+
+    {/* role muted */}
+    <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
+      {e.role}
+    </div>
+  </div>
+
+  {/* period pill */}
+  <span
+    className="shrink-0 text-xs rounded-full border px-3 py-1"
+    style={{
+      borderColor: "var(--card-border)",
+      color: "var(--muted-2)",
+      background: "var(--background)",
+    }}
+  >
+    {e.period}
+  </span>
+</div>
+
+          </div>
+
+          <ul className="mt-4 space-y-2 text-sm" style={mutedStyle}>
+            {e.bullets.map((b) => (
+              <li key={b} className="flex items-start gap-2">
+                <span
+                  className="mt-2 h-1.5 w-1.5 rounded-full"
+                  style={{ background: "var(--muted-2)" }}
+                />
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            {e.stack.map((s) => (
+              <span
+                key={s}
+                className="text-xs rounded-full border px-3 py-1"
+                style={{
+                  borderColor: "var(--card-border)",
+                  color: "var(--muted)",
+                  background: "var(--background)",
+                }}
+              >
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+      )
+    )}
+  </div>
+</section>
+
+
+
+
         {/* SKILLS */}
         <section className="mt-16">
           <h3 className="text-2xl font-semibold">{i.sectionSkillsTitle}</h3>
