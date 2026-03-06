@@ -114,6 +114,14 @@ export default async function LangLayout({
             >
               {i.sectionContactTitle}
             </a>
+			
+			    <a
+              href="#experience"
+              className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
+              style={{ borderColor: "var(--card-border)", background: "transparent" }}
+            >
+              {i.sectionExperieciaTitle}
+            </a>
 
             <a
               href={i.switchHref}

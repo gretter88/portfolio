@@ -20,6 +20,7 @@ export type Project = {
   // ✅ NUEVO (opcional)
   screenshots?: { src: string; alt: string }[];
   features?: string[];
+  video?: { provider: "youtube"; id: string; label?: string; duration?: string };
 };
 
 
@@ -143,6 +144,47 @@ const projects: Project[] = [
       ],
 },
 
+
+{
+  order: 4,
+  title: isEs ? "Intranet (WordPress) — Organismo público" : "Intranet (WordPress) — Public agency",
+  desc: isEs
+    ? "Intranet interna (sin acceso público) para comunicación y gestión. Implementación completa en WordPress: diseño a medida, módulos sociales, eventos y base de conocimiento, con optimización y mantenimiento."
+    : "Internal intranet (no public access) for communication and operations. End-to-end WordPress implementation: custom UI, social modules, events and knowledge base, plus performance and maintenance.",
+  stack: ["WordPress", "PHP", "HTML/CSS", "JavaScript"],
+  image: { src: "/screenshots/intranet-1.webp", alt: "Intranet (WordPress) screenshot" },
+  links: { repo: "" }, // demo no pública
+  badge: isEs ? "Internal · Screenshots only" : "Internal · Screenshots only",
+
+ video: { provider: "youtube", id: "mrsk8z4_Xg0", label: isEs ? "Ver video" : "View video", duration: "50s" },
+
+  features: isEs
+    ? [
+        "Diseño y maquetación (Elementor/Divi)",
+        "Módulos sociales/comunidad (BuddyPress/bbPress)",
+        "Eventos, encuestas y formularios",
+        "Knowledge base / documentación interna",
+        "Optimización: cache/limpieza/compresión + buenas prácticas",
+      ]
+    : [
+        "Custom UI/layout (Elementor/Divi)",
+        "Social/community modules (BuddyPress/bbPress)",
+        "Events, surveys and forms",
+        "Internal knowledge base / documentation",
+        "Performance: cache/cleanup/compression + best practices",
+      ],
+
+  screenshots: [
+    { src: "/screenshots/intranet-1.webp", alt: isEs ? "Inicio intranet" : "Intranet home" },
+    { src: "/screenshots/intranet-2.webp", alt: isEs ? "Sección interna" : "Internal section" },
+    { src: "/screenshots/intranet-3.webp", alt: isEs ? "Módulo / panel" : "Module / dashboard" },
+  ],
+ 
+
+
+},
+
+
 ];
 
 
@@ -155,7 +197,10 @@ const projects: Project[] = [
     switchTo: isEs ? "English" : "Español",
     switchHref: isEs ? "/en" : "/es",
 
-    heroKicker: isEs ? "Disponible remoto / Uruguay" : "Open to remote / Uruguay",
+    heroKicker: isEs
+  ? "Disponible: Remoto · Freelance · Full-time"
+  : "Available: Remote · Freelance · Full-time",
+
     name: "Santiago Gretter",
     role: "Fullstack / Mobile Developer (React Native · Node · Next.js)",
     summary: isEs
@@ -164,6 +209,7 @@ const projects: Project[] = [
 
     ctaProjects: isEs ? "Ver proyectos" : "View projects",
     ctaContact: isEs ? "Contacto" : "Contact",
+	ctaExperience: isEs ? "Experiencia" : "Experience",
     ctaEmail: isEs ? "Enviar email" : "Email me",
     ctaGithub: "GitHub",
     ctaLinkedin: "LinkedIn",
@@ -220,6 +266,7 @@ skills: [
 
 
     sectionContactTitle: isEs ? "Contacto" : "Contact",
+	sectionExperieciaTitle: isEs ? "Experiencia" : "Experience",
     sectionContactDesc: isEs
       ? "Si querés que trabajemos juntos, escribime:"
       : "Want to work together? Reach out:",

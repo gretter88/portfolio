@@ -19,6 +19,7 @@ export default function ProjectsGrid({
   emailTo = "gretter88@gmail.com",
 }: Props) {
   const isEs = lang === "es";
+const [showVideo, setShowVideo] = useState(false);
 
   // ✅ mismos helpers de estilos que tu page.tsx
   const cardStyle: React.CSSProperties = {
@@ -49,13 +50,27 @@ export default function ProjectsGrid({
   const getDotClass = (badge?: string) => {
     const b = (badge || "").toLowerCase();
     if (b.includes("restricted")) return "bg-zinc-400";
-    if (b.includes("testing")) return "bg-amber-400";
-    if (b.includes("live")) return "bg-green-400";
+if (b.includes("internal")) return "bg-zinc-400";
+if (b.includes("testing")) return "bg-amber-400";
+if (b.includes("live")) return "bg-green-400";
+
     return "bg-zinc-500";
   };
+  
+  
+  const isIntranetProject = (p: Project) => {
+  const t = (p.title || "").toLowerCase();
+  return t.includes("intranet");
+};
+
 
   const isRestrictedProject = (p: Project) =>
     p.title.includes("Kiosco") || p.title.includes("Kiosk");
+
+
+const isInternalProject = (p: Project) =>
+  (p.badge || "").toLowerCase().includes("internal");
+
 
   const buildMailto = (p: Project) => {
     const subject = encodeURIComponent(
@@ -90,13 +105,25 @@ export default function ProjectsGrid({
     setOpen(false);
     setShotIndex(0);
     setActiveProject(null);
+	setShowVideo(false);
   };
 
-  const openModal = (p: Project) => {
-    setActiveProject(p);
-    setShotIndex(0);
-    setOpen(true);
-  };
+ const openModal = (p: Project) => {
+  setActiveProject(p);
+  setShotIndex(0);
+
+  const hasYoutubeVideo = p.video?.provider === "youtube" && !!p.video?.id;
+
+  // ✅ solo intranet arranca en video
+  if (hasYoutubeVideo && isIntranetProject(p)) {
+    setShowVideo(true);
+  } else {
+    setShowVideo(false);
+  }
+
+  setOpen(true);
+};
+
 
   // ESC para cerrar + lock scroll
   useEffect(() => {
@@ -154,6 +181,8 @@ export default function ProjectsGrid({
               )}
               style={cardStyle}
             >
+			
+
               {/* ✅ Imagen siempre primero */}
               {p.image?.src ? (
                 <div className="mb-4 overflow-hidden rounded-xl border" style={cardStyle}>
@@ -205,40 +234,65 @@ export default function ProjectsGrid({
               </div>
 
               <div className="mt-5 flex flex-wrap gap-3 text-sm">
-                {/* DEMO / ACCESO */}
-                {p.links?.demo ? (
-                  isRestricted ? (
-                    <a
-                      className={ghostBtnClass}
-                      style={ghostBtnStyle}
-                      href={buildMailto(p)}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {isEs ? "Solicitar acceso" : "Request access"}
-                    </a>
-                  ) : (
-                    <a
-                      className={ghostBtnClass}
-                      style={ghostBtnStyle}
-                      href={p.links.demo}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Demo
-                    </a>
-                  )
-                ) : (
-                  <span
-                    className="rounded-xl border px-4 py-2"
-                    style={{
-                      borderColor: "var(--card-border)",
-                      color: "var(--muted-2)",
-                    }}
-                  >
-                    {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
-                  </span>
-                )}
+               {/* DEMO / ACCESO */}
+{isInternalProject(p) ? (
+  <>
+    {/* En internal no hay demo: abrimos modal */}
+    <button
+      type="button"
+      className={ghostBtnClass}
+      style={ghostBtnStyle}
+      onClick={(e) => {
+        e.stopPropagation();
+        openModal(p);
+      }}
+    >
+      {isEs ? "Ver screenshots" : "View screenshots"}
+    </button>
+
+    <a
+      className={softBtnClass}
+      style={softBtnStyle}
+      href={buildMailto(p)}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {isEs ? "Consultar" : "Contact"}
+    </a>
+  </>
+) : p.links?.demo ? (
+  isRestricted ? (
+    <a
+      className={ghostBtnClass}
+      style={ghostBtnStyle}
+      href={buildMailto(p)}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {isEs ? "Solicitar acceso" : "Request access"}
+    </a>
+  ) : (
+    <a
+      className={ghostBtnClass}
+      style={ghostBtnStyle}
+      href={p.links.demo}
+      target="_blank"
+      rel="noreferrer"
+      onClick={(e) => e.stopPropagation()}
+    >
+      Demo
+    </a>
+  )
+) : (
+  <span
+    className="rounded-xl border px-4 py-2"
+    style={{
+      borderColor: "var(--card-border)",
+      color: "var(--muted-2)",
+    }}
+  >
+    {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
+  </span>
+)}
+
 
                 {/* REPO */}
                 {p.links?.repo ? (
@@ -273,208 +327,307 @@ export default function ProjectsGrid({
         })}
       </div>
 
-      {/* MODAL */}
-      {open && activeProject ? (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true">
-          {/* backdrop */}
-          <div
-            className="absolute inset-0"
-            onClick={closeModal}
-            style={{ background: "rgba(0,0,0,0.55)" }}
-          />
+{/* MODAL */}
+{open && activeProject ? (
+  <div
+    className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+    role="dialog"
+    aria-modal="true"
+  >
+    {/* backdrop */}
+    <div
+      className="absolute inset-0"
+      onClick={closeModal}
+      style={{ background: "rgba(0,0,0,0.55)" }}
+    />
 
-          {/* panel */}
-          <div
-            className="relative w-full max-w-4xl rounded-2xl border"
-            style={{
-              background: "var(--card)",
-              borderColor: "var(--card-border)",
-              boxShadow: "0 20px 80px rgba(0,0,0,0.45)",
-            }}
-          >
-            {/* header */}
-            <div className="flex items-start justify-between gap-4 p-5 border-b" style={{ borderColor: "var(--card-border)" }}>
-              <div className="min-w-0">
-                {activeProject.badge ? (
-                  <div className="mb-2">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-200">
-                      <span className={clsx("h-2 w-2 rounded-full", getDotClass(activeProject.badge))} />
-                      {activeProject.badge}
-                    </span>
-                  </div>
-                ) : null}
+    {/* panel */}
+    <div
+      className="relative z-[210] w-full max-w-4xl rounded-2xl border flex flex-col"
+      style={{
+        background: "var(--card)",
+        borderColor: "var(--card-border)",
+        boxShadow: "0 20px 80px rgba(0,0,0,0.45)",
+        maxHeight: "calc(100vh - 32px)", // ✅ no se pasa de la pantalla
+      }}
+    >
+      {/* header (fijo) */}
+      <div
+        className="flex-none flex items-start justify-between gap-4 p-5 border-b"
+        style={{ borderColor: "var(--card-border)" }}
+      >
+        <div className="min-w-0">
+          {activeProject.badge ? (
+            <div className="mb-2">
+              <span className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-200">
+                <span className={clsx("h-2 w-2 rounded-full", getDotClass(activeProject.badge))} />
+                {activeProject.badge}
+              </span>
+            </div>
+          ) : null}
 
-                <h3 className="text-xl font-semibold truncate">{activeProject.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed" style={mutedStyle}>
-                  {activeProject.desc}
-                </p>
+          <h3 className="text-xl font-semibold truncate">{activeProject.title}</h3>
+          <p className="mt-1 text-sm leading-relaxed" style={mutedStyle}>
+            {activeProject.desc}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={closeModal}
+          className="rounded-xl border px-3 py-2 text-sm"
+          style={ghostBtnStyle}
+          aria-label={isEs ? "Cerrar" : "Close"}
+          title="Esc"
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* content (scrolleable) */}
+      <div
+        className="flex-1 overflow-y-auto p-5"
+        style={{ WebkitOverflowScrolling: "touch" }}
+      >
+        <div className="grid gap-5 md:grid-cols-[1.25fr_0.75fr]">
+          {/* left: video/screenshot + nav */}
+          <div>
+            {/* ✅ Video toggle (solo si hay video) */}
+            {activeProject?.video?.provider === "youtube" && activeProject?.video?.id ? (
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  className={ghostBtnClass}
+                  style={ghostBtnStyle}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowVideo((v) => !v);
+                  }}
+                >
+                  {showVideo
+                    ? isEs
+                      ? "Ver screenshots"
+                      : "View screenshots"
+                    : activeProject.video.label || (isEs ? "Ver video" : "View video")}
+                </button>
+
+                <span className="text-xs inline-flex items-center gap-2" style={muted2Style}>
+  {activeProject?.video?.provider === "youtube" && activeProject?.video?.id && isIntranetProject(activeProject) ? (
+    <>
+      <span style={{ opacity: 0.9 }}>▶</span>
+      <span>
+        {lang === "es" ? "Video demo" : "Video demo"}
+        {activeProject.video.duration ? ` (${activeProject.video.duration})` : " (50s)"}
+      </span>
+    </>
+  ) : (
+    <span>{isEs ? "Tip: podés usar ←/→ para screenshots" : "Tip: use ←/→ for screenshots"}</span>
+  )}
+</span>
+
               </div>
+            ) : null}
 
-              <button
-                type="button"
-                onClick={closeModal}
-                className="rounded-xl border px-3 py-2 text-sm"
-                style={ghostBtnStyle}
-                aria-label={isEs ? "Cerrar" : "Close"}
-                title="Esc"
-              >
-                ✕
-              </button>
+            {/* ✅ Viewer */}
+            <div className="overflow-hidden rounded-xl border relative z-[220]" style={cardStyle}>
+              {showVideo &&
+              activeProject?.video?.provider === "youtube" &&
+              activeProject?.video?.id ? (
+                <div
+                  className="relative z-[230]"
+                  style={{ height: 360, background: "var(--background)" }}
+                >
+                  <iframe
+                    title={`${activeProject.title} video`}
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    style={{ border: 0, display: "block" }}
+                  />
+                </div>
+              ) : activeShot ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={activeShot.src}
+                  alt={activeShot.alt}
+                  className="w-full"
+                  style={{
+                    height: 360,
+                    objectFit: "contain",
+                    background: "var(--background)",
+                    display: "block",
+                  }}
+                  loading="lazy"
+                />
+              ) : (
+                <div
+                  className="grid place-items-center"
+                  style={{ height: 360, color: "var(--muted)" }}
+                >
+                  {isEs ? "Sin screenshots todavía" : "No screenshots yet"}
+                </div>
+              )}
             </div>
 
-            {/* content */}
-            <div className="grid gap-5 p-5 md:grid-cols-[1.25fr_0.75fr]">
-              {/* left: screenshots */}
-              <div>
-                <div className="overflow-hidden rounded-xl border" style={cardStyle}>
-                  {activeShot ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={activeShot.src}
-                      alt={activeShot.alt}
-                      className="w-full"
+            {/* ✅ Nav screenshots (solo si NO estás viendo video) */}
+            {!showVideo && modalShots.length > 1 ? (
+              <div className="mt-3 flex items-center gap-2">
+                <button
+                  type="button"
+                  className={ghostBtnClass}
+                  style={ghostBtnStyle}
+                  onClick={() => setShotIndex((v) => Math.max(0, v - 1))}
+                  disabled={shotIndex === 0}
+                  aria-label={isEs ? "Anterior" : "Previous"}
+                >
+                  ←
+                </button>
+
+                <div className="flex flex-1 items-center gap-2 overflow-x-auto">
+                  {modalShots.slice(0, 6).map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setShotIndex(idx)}
+                      className="h-2.5 w-2.5 rounded-full border transition"
                       style={{
-                        height: 360,
-                        objectFit: "contain",
-                        background: "var(--background)",
-                        display: "block",
+                        borderColor: "var(--card-border)",
+                        background: idx === shotIndex ? "var(--foreground)" : "transparent",
+                        opacity: idx === shotIndex ? 1 : 0.6,
                       }}
-                      loading="lazy"
+                      aria-label={`Screenshot ${idx + 1}`}
                     />
-                  ) : (
-                    <div className="grid place-items-center" style={{ height: 360, color: "var(--muted)" }}>
-                      {isEs ? "Sin screenshots todavía" : "No screenshots yet"}
-                    </div>
-                  )}
+                  ))}
                 </div>
 
-                {modalShots.length > 1 ? (
-                  <div className="mt-3 flex items-center gap-2">
-                    <button
-                      type="button"
-                      className={ghostBtnClass}
-                      style={ghostBtnStyle}
-                      onClick={() => setShotIndex((v) => Math.max(0, v - 1))}
-                      disabled={shotIndex === 0}
-                      aria-label={isEs ? "Anterior" : "Previous"}
-                    >
-                      ←
-                    </button>
+                <button
+                  type="button"
+                  className={ghostBtnClass}
+                  style={ghostBtnStyle}
+                  onClick={() => setShotIndex((v) => Math.min(modalShots.length - 1, v + 1))}
+                  disabled={shotIndex >= modalShots.length - 1}
+                  aria-label={isEs ? "Siguiente" : "Next"}
+                >
+                  →
+                </button>
+              </div>
+            ) : !showVideo ? (
+              <div className="mt-3 text-xs" style={muted2Style}>
+                {isEs ? "Tip: podés navegar con ← →" : "Tip: use ← → to navigate"}
+              </div>
+            ) : null}
+          </div>
 
-                    <div className="flex flex-1 items-center gap-2 overflow-x-auto">
-                      {modalShots.slice(0, 6).map((_, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => setShotIndex(idx)}
-                          className="h-2.5 w-2.5 rounded-full border transition"
-                          style={{
-                            borderColor: "var(--card-border)",
-                            background: idx === shotIndex ? "var(--foreground)" : "transparent",
-                            opacity: idx === shotIndex ? 1 : 0.6,
-                          }}
-                          aria-label={`Screenshot ${idx + 1}`}
-                        />
-                      ))}
-                    </div>
+          {/* right: features + links */}
+          <div className="min-w-0">
+            <h4 className="font-semibold">{isEs ? "Highlights" : "Highlights"}</h4>
 
-                    <button
-                      type="button"
-                      className={ghostBtnClass}
-                      style={ghostBtnStyle}
-                      onClick={() => setShotIndex((v) => Math.min(modalShots.length - 1, v + 1))}
-                      disabled={shotIndex >= modalShots.length - 1}
-                      aria-label={isEs ? "Siguiente" : "Next"}
+            {activeProject.features?.length ? (
+              <ul className="mt-3 space-y-2 text-sm" style={mutedStyle}>
+                {activeProject.features.slice(0, 10).map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <span
+                      className="mt-2 h-1.5 w-1.5 rounded-full"
+                      style={{ background: "var(--muted-2)" }}
+                    />
+                    <span className="leading-relaxed">{f}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-3 text-sm" style={mutedStyle}>
+                {isEs
+                  ? "Agregá `features` en el proyecto para mostrar bullets acá."
+                  : "Add `features` to the project to show bullets here."}
+              </p>
+            )}
+
+            <div className="mt-5">
+              <h4 className="font-semibold">{isEs ? "Links" : "Links"}</h4>
+
+              <div className="mt-3 flex flex-wrap gap-3">
+                {/* DEMO */}
+                {activeProject.links?.demo ? (
+                  isRestrictedProject(activeProject) ? (
+                    <a
+                      className={primaryBtnClass}
+                      style={primaryBtnStyle}
+                      href={buildMailto(activeProject)}
                     >
-                      →
-                    </button>
-                  </div>
+                      {isEs ? "Solicitar acceso" : "Request access"}
+                    </a>
+                  ) : (
+                    <a
+                      className={primaryBtnClass}
+                      style={primaryBtnStyle}
+                      href={activeProject.links.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Demo
+                    </a>
+                  )
                 ) : (
-                  <div className="mt-3 text-xs" style={muted2Style}>
-                    {isEs ? "Tip: podés navegar con ← →" : "Tip: use ← → to navigate"}
-                  </div>
+                  <span
+                    className="rounded-xl border px-4 py-2 text-sm"
+                    style={{
+                      borderColor: "var(--card-border)",
+                      color: "var(--muted-2)",
+                    }}
+                  >
+                    {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
+                  </span>
                 )}
+
+                {/* Repo */}
+                {activeProject.links?.repo ? (
+                  <a
+                    className={softBtnClass}
+                    style={softBtnStyle}
+                    href={activeProject.links.repo}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Repo
+                  </a>
+                ) : (
+                  <span
+                    className="rounded-xl border px-4 py-2 text-sm"
+                    style={{
+                      borderColor: "var(--card-border)",
+                      color: "var(--muted)",
+                    }}
+                  >
+                    {isEs ? "Repo: Privado" : "Repo: Private"}
+                  </span>
+                )}
+
+                <button
+                  type="button"
+                  className={ghostBtnClass}
+                  style={ghostBtnStyle}
+                  onClick={closeModal}
+                >
+                  {isEs ? "Cerrar" : "Close"}
+                </button>
               </div>
 
-              {/* right: features + links */}
-              <div className="min-w-0">
-                <h4 className="font-semibold">{isEs ? "Highlights" : "Highlights"}</h4>
-
-                {activeProject.features?.length ? (
-                  <ul className="mt-3 space-y-2 text-sm" style={mutedStyle}>
-                    {activeProject.features.slice(0, 10).map((f) => (
-                      <li key={f} className="flex items-start gap-2">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: "var(--muted-2)" }} />
-                        <span className="leading-relaxed">{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="mt-3 text-sm" style={mutedStyle}>
-                    {isEs
-                      ? "Agregá `features` en el proyecto para mostrar bullets acá."
-                      : "Add `features` to the project to show bullets here."}
-                  </p>
-                )}
-
-                <div className="mt-5">
-                  <h4 className="font-semibold">{isEs ? "Links" : "Links"}</h4>
-
-                  <div className="mt-3 flex flex-wrap gap-3">
-                    {/* DEMO */}
-                    {activeProject.links?.demo ? (
-                      isRestrictedProject(activeProject) ? (
-                        <a className={primaryBtnClass} style={primaryBtnStyle} href={buildMailto(activeProject)}>
-                          {isEs ? "Solicitar acceso" : "Request access"}
-                        </a>
-                      ) : (
-                        <a
-                          className={primaryBtnClass}
-                          style={primaryBtnStyle}
-                          href={activeProject.links.demo}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Demo
-                        </a>
-                      )
-                    ) : (
-                      <span
-                        className="rounded-xl border px-4 py-2 text-sm"
-                        style={{ borderColor: "var(--card-border)", color: "var(--muted-2)" }}
-                      >
-                        {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
-                      </span>
-                    )}
-
-                    {/* Repo */}
-                    {activeProject.links?.repo ? (
-                      <a className={softBtnClass} style={softBtnStyle} href={activeProject.links.repo} target="_blank" rel="noreferrer">
-                        Repo
-                      </a>
-                    ) : (
-                      <span
-                        className="rounded-xl border px-4 py-2 text-sm"
-                        style={{ borderColor: "var(--card-border)", color: "var(--muted)" }}
-                      >
-                        {isEs ? "Repo: Privado" : "Repo: Private"}
-                      </span>
-                    )}
-
-                    <button type="button" className={ghostBtnClass} style={ghostBtnStyle} onClick={closeModal}>
-                      {isEs ? "Cerrar" : "Close"}
-                    </button>
-                  </div>
-
-                  <div className="mt-4 text-xs" style={muted2Style}>
-                    {isEs ? "Esc: cerrar · ←/→: cambiar screenshot" : "Esc: close · ←/→: change screenshot"}
-                  </div>
-                </div>
+              <div className="mt-4 text-xs" style={muted2Style}>
+                {isEs
+                  ? "Esc: cerrar · ←/→: cambiar screenshot"
+                  : "Esc: close · ←/→: change screenshot"}
               </div>
             </div>
           </div>
         </div>
-      ) : null}
+      </div>
+    </div>
+  </div>
+) : null}
+
+
     </>
   );
 }

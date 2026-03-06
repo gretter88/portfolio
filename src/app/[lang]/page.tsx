@@ -74,6 +74,9 @@ export default async function Page({
             <a href="#contact" className={softBtnClass} style={softBtnStyle}>
               {i.ctaContact}
             </a>
+			<a href="#experience" className={softBtnClass} style={softBtnStyle}>
+              {i.ctaExperience}
+            </a>
 
             <a href="/cv.pdf" className={softBtnClass} style={softBtnStyle}>
               {i.ctaDownloadCv}
@@ -120,7 +123,7 @@ export default async function Page({
         </section>
 
 {/* EXPERIENCE */}
-<section className="mt-16">
+<section id="experience" className="mt-16">
   <h3 className="text-2xl font-semibold">{i.sectionExperienceTitle}</h3>
   <p className="mt-3 text-sm" style={mutedStyle}>
     {i.sectionExperienceKicker}
