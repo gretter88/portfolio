@@ -7,6 +7,11 @@ function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
 }
 
+// ✅ Pre-genera /es y /en (pro y estable)
+export function generateStaticParams() {
+  return LANGS.map((lang) => ({ lang }));
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -26,13 +31,15 @@ export async function generateMetadata({
     metadataBase: baseUrl,
     title,
     description,
+
     alternates: {
-      canonical: url.pathname,
+      canonical: url.toString(), // ✅ mejor que pathname
       languages: {
-        es: "/es",
-        en: "/en",
+        es: new URL("/es", baseUrl).toString(),
+        en: new URL("/en", baseUrl).toString(),
       },
     },
+
     openGraph: {
       type: "website",
       locale: lang === "es" ? "es_ES" : "en_US",
@@ -49,6 +56,12 @@ export async function generateMetadata({
         },
       ],
     },
+
+    // ✅ “locale alternate” ayuda en algunos parsers (FB/LinkedIn)
+    other: {
+      "og:locale:alternate": lang === "es" ? "en_US" : "es_ES",
+    },
+
     twitter: {
       card: "summary_large_image",
       title,
@@ -114,8 +127,8 @@ export default async function LangLayout({
             >
               {i.sectionContactTitle}
             </a>
-			
-			    <a
+
+            <a
               href="#experience"
               className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
               style={{ borderColor: "var(--card-border)", background: "transparent" }}
@@ -160,4 +173,3 @@ export default async function LangLayout({
     </div>
   );
 }
-

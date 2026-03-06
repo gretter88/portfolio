@@ -437,15 +437,22 @@ const isInternalProject = (p: Project) =>
                   className="relative z-[230]"
                   style={{ height: 360, background: "var(--background)" }}
                 >
-                  <iframe
-                    title={`${activeProject.title} video`}
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    style={{ border: 0, display: "block" }}
-                  />
+                 <iframe
+  title={`${activeProject.title} video`}
+  width="100%"
+  height="100%"
+  src={`https://www.youtube-nocookie.com/embed/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=1&controls=1&origin=${encodeURIComponent(
+    typeof window !== "undefined"
+      ? window.location.origin
+      : "https://www.santiagogretter.com.uy"
+  )}`}
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+  referrerPolicy="strict-origin-when-cross-origin"
+  style={{ border: 0, display: "block" }}
+/>
+
+
                 </div>
               ) : activeShot ? (
                 // eslint-disable-next-line @next/next/no-img-element
