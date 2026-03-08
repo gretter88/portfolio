@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { LANGS, type Lang, LINKS, t } from "@/lib/i18n";
 import ThemeToggle from "@/components/ThemeToggle";
-
+import { Analytics } from "@vercel/analytics/next";
 function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
 }
@@ -168,6 +168,7 @@ export default async function LangLayout({
       </header>
 
       {children}
+	  <Analytics />
     </div>
   );
 }
