@@ -130,6 +130,16 @@ export default function ProjectsGrid({
 
     setOpen(true);
   };
+  
+  const getPublicDemoPath = (p: Project) => {
+  const slug = getProjectSlug(p);
+
+  if (slug === "radar") return "/go/demo/radar";
+  if (slug === "museo") return "/go/demo/museo";
+
+  return p.links?.demo || "#";
+};
+
 
   useEffect(() => {
     if (!initialProjectSlug) return;
@@ -294,7 +304,8 @@ export default function ProjectsGrid({
                     <a
                       className={ghostBtnClass}
                       style={ghostBtnStyle}
-                      href={p.links.demo}
+                      href={getPublicDemoPath(p)}
+
                       target="_blank"
                       rel="noreferrer"
                       onClick={(e) => e.stopPropagation()}
@@ -596,7 +607,7 @@ export default function ProjectsGrid({
                           <a
                             className={primaryBtnClass}
                             style={primaryBtnStyle}
-                            href={activeProject.links.demo}
+                            href={getPublicDemoPath(activeProject)}
                             target="_blank"
                             rel="noreferrer"
                           >
