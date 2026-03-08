@@ -2,6 +2,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 const baseUrl = new URL("https://www.santiagogretter.com.uy");
 
@@ -57,7 +58,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
       </head>
-      <body>{children}</body>
+      <body>
+	  {children}
+	  <Analytics />
+	  </body>
     </html>
   );
 }
