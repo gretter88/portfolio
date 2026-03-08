@@ -253,7 +253,8 @@ const isInternalProject = (p: Project) =>
     <a
       className={softBtnClass}
       style={softBtnStyle}
-      href={buildMailto(p)}
+      href={`/go/request-access?project=${encodeURIComponent(p.title)}`}
+
       onClick={(e) => e.stopPropagation()}
     >
       {isEs ? "Consultar" : "Contact"}
@@ -261,14 +262,15 @@ const isInternalProject = (p: Project) =>
   </>
 ) : p.links?.demo ? (
   isRestricted ? (
-    <a
-      className={ghostBtnClass}
-      style={ghostBtnStyle}
-      href={buildMailto(p)}
-      onClick={(e) => e.stopPropagation()}
-    >
-      {isEs ? "Solicitar acceso" : "Request access"}
-    </a>
+<a
+  className={ghostBtnClass}
+  style={ghostBtnStyle}
+  href={`/go/request-access?project=${encodeURIComponent(p.title)}`}
+  onClick={(e) => e.stopPropagation()}
+>
+  {isEs ? "Solicitar acceso" : "Request access"}
+</a>
+
   ) : (
     <a
       className={ghostBtnClass}
@@ -558,13 +560,14 @@ const isInternalProject = (p: Project) =>
                 {/* DEMO */}
                 {activeProject.links?.demo ? (
                   isRestrictedProject(activeProject) ? (
-                    <a
-                      className={primaryBtnClass}
-                      style={primaryBtnStyle}
-                      href={buildMailto(activeProject)}
-                    >
-                      {isEs ? "Solicitar acceso" : "Request access"}
-                    </a>
+                  <a
+  className={primaryBtnClass}
+  style={primaryBtnStyle}
+  href={`/go/request-access?project=${encodeURIComponent(activeProject.title)}`}
+>
+  {isEs ? "Solicitar acceso" : "Request access"}
+</a>
+
                   ) : (
                     <a
                       className={primaryBtnClass}
