@@ -144,25 +144,23 @@ export default async function LangLayout({
               {i.switchTo}
             </a>
 
-            <a
-              href={LINKS.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
-              style={{ borderColor: "var(--card-border)", background: "transparent" }}
-            >
-              {i.ctaLinkedin}
-            </a>
+           <a
+  href="/go/linkedin"
+  className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
+  style={{ borderColor: "var(--card-border)", background: "transparent" }}
+>
+  {i.ctaLinkedin}
+</a>
+
 
             <a
-              href={LINKS.github}
-              target="_blank"
-              rel="noreferrer"
-              className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
-              style={{ borderColor: "var(--card-border)", background: "transparent" }}
-            >
-              {i.ctaGithub}
-            </a>
+  href="/go/github"
+  className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
+  style={{ borderColor: "var(--card-border)", background: "transparent" }}
+>
+  {i.ctaGithub}
+</a>
+
 
             <ThemeToggle />
           </nav>

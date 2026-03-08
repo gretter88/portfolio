@@ -78,9 +78,11 @@ export default async function Page({
               {i.ctaExperience}
             </a>
 
-            <a href="/cv.pdf" className={softBtnClass} style={softBtnStyle}>
-              {i.ctaDownloadCv}
-            </a>
+            <a href="/go/cv" className={softBtnClass} style={softBtnStyle}>
+  {i.ctaDownloadCv}
+</a>
+
+
           </div>
 
           <div className="mt-2 flex flex-wrap gap-3 text-sm" style={mutedStyle}>
@@ -88,25 +90,24 @@ export default async function Page({
               {LINKS.emailText}
             </a>
             <span style={muted2Style}>•</span>
-            <a
-              href={LINKS.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className={linkClass}
-              style={linkStyle}
-            >
-              LinkedIn
-            </a>
+           <a
+  href="/go/linkedin"
+  className={linkClass}
+  style={linkStyle}
+>
+  LinkedIn
+</a>
+
             <span style={muted2Style}>•</span>
             <a
-              href={LINKS.github}
-              target="_blank"
-              rel="noreferrer"
-              className={linkClass}
-              style={linkStyle}
-            >
-              GitHub
-            </a>
+  href="/go/github"
+  className={linkClass}
+  style={linkStyle}
+>
+  GitHub
+</a>
+
+
           </div>
         </section>
 
@@ -318,9 +319,10 @@ export default async function Page({
         {i.nowCtaPrimary}
       </a>
 
-      <a href="/cv.pdf" className={softBtnClass} style={softBtnStyle}>
-        {i.nowCtaSecondary}
-      </a>
+      <a href="/go/cv" className={softBtnClass} style={softBtnStyle}>
+  {i.nowCtaSecondary}
+</a>
+
 
       <span className="text-sm" style={{ color: "var(--muted-2)" }}>
         {i.nowResponseTime}
@@ -343,25 +345,23 @@ export default async function Page({
               {i.ctaEmail}
             </a>
 
-            <a
-              href={LINKS.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className={softBtnClass}
-              style={softBtnStyle}
-            >
-              {i.ctaLinkedin}
-            </a>
+           <a
+  href="/go/linkedin"
+  className={softBtnClass}
+  style={softBtnStyle}
+>
+  {i.ctaLinkedin}
+</a>
+
 
             <a
-              href={LINKS.github}
-              target="_blank"
-              rel="noreferrer"
-              className={softBtnClass}
-              style={softBtnStyle}
-            >
-              {i.ctaGithub}
-            </a>
+  href="/go/github"
+  className={softBtnClass}
+  style={softBtnStyle}
+>
+  {i.ctaGithub}
+</a>
+
           </div>
 
           <div className="mt-4 text-sm" style={mutedStyle}>
