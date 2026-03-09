@@ -7,6 +7,7 @@ export type AnalyticsEvent = {
   path: string;
   lang?: string | null;
   project?: string | null;
+  visitorId?: string | null;
   referrer?: string | null;
   userAgent?: string | null;
   ip?: string | null;
@@ -25,6 +26,9 @@ export async function getAnalyticsStats() {
   const [
     totalEvents,
     pageViews,
+    uniqueVisitors,
+    esPageViews,
+    enPageViews,
     cvClicks,
     linkedinClicks,
     githubClicks,
@@ -36,6 +40,12 @@ export async function getAnalyticsStats() {
   ] = await Promise.all([
     col.countDocuments(),
     col.countDocuments({ type: "pageview" }),
+    col.distinct("visitorId", {
+      type: "pageview",
+      visitorId: { $ne: null },
+    }),
+    col.countDocuments({ type: "pageview", path: "/es" }),
+    col.countDocuments({ type: "pageview", path: "/en" }),
     col.countDocuments({ path: "/go/cv" }),
     col.countDocuments({ path: "/go/linkedin" }),
     col.countDocuments({ path: "/go/github" }),
@@ -49,6 +59,9 @@ export async function getAnalyticsStats() {
   return {
     totalEvents,
     pageViews,
+    visitors: uniqueVisitors.length,
+    esPageViews,
+    enPageViews,
     cvClicks,
     linkedinClicks,
     githubClicks,
@@ -59,3 +72,4 @@ export async function getAnalyticsStats() {
     latestEvents,
   };
 }
+

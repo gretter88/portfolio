@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
       path: body.path || "/",
       lang: body.lang || null,
       project: body.project || null,
+      visitorId: body.visitorId || null,
       referrer: body.referrer || null,
       userAgent: req.headers.get("user-agent"),
       ip,
@@ -24,3 +25,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false }, { status: 500 });
   }
 }
+

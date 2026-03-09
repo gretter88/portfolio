@@ -28,21 +28,67 @@ export default async function AdminPage() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <AdminStatCard label="Total Events" value={stats.totalEvents} hint="Todos los eventos guardados" />
-          <AdminStatCard label="Page Views" value={stats.pageViews} hint="Eventos pageview" />
-          <AdminStatCard label="CV Clicks" value={stats.cvClicks} hint="/go/cv" />
-          <AdminStatCard label="LinkedIn Clicks" value={stats.linkedinClicks} hint="/go/linkedin" />
-          <AdminStatCard label="GitHub Clicks" value={stats.githubClicks} hint="/go/github" />
-          <AdminStatCard label="Museo Demo" value={stats.museoDemoClicks} hint="/go/demo/museo" />
-          <AdminStatCard label="Radar Demo" value={stats.radarDemoClicks} hint="/go/demo/radar" />
-          <AdminStatCard label="Request Access" value={stats.requestAccessClicks} hint="/go/request-access/*" />
-        </div>
+          <AdminStatCard
+            label="Visitors"
+            value={stats.visitors}
+            hint="Visitantes únicos"
+          />
+          <AdminStatCard
+            label="Page Views"
+            value={stats.pageViews}
+            hint="Páginas vistas"
+          />
+          <AdminStatCard
+            label="ES Views"
+            value={stats.esPageViews}
+            hint="/es"
+          />
+          <AdminStatCard
+            label="EN Views"
+            value={stats.enPageViews}
+            hint="/en"
+          />
 
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <AdminStatCard
+            label="CV Clicks"
+            value={stats.cvClicks}
+            hint="/go/cv"
+          />
+          <AdminStatCard
+            label="LinkedIn Clicks"
+            value={stats.linkedinClicks}
+            hint="/go/linkedin"
+          />
+          <AdminStatCard
+            label="GitHub Clicks"
+            value={stats.githubClicks}
+            hint="/go/github"
+          />
+          <AdminStatCard
+            label="Request Access"
+            value={stats.requestAccessClicks}
+            hint="/go/request-access/*"
+          />
+
+          <AdminStatCard
+            label="Museo Demo"
+            value={stats.museoDemoClicks}
+            hint="/go/demo/museo"
+          />
+          <AdminStatCard
+            label="Radar Demo"
+            value={stats.radarDemoClicks}
+            hint="/go/demo/radar"
+          />
           <AdminStatCard
             label="Open Video Intranet"
             value={stats.openVideoIntranet}
             hint="/go/open-video/intranet"
+          />
+          <AdminStatCard
+            label="Total Events"
+            value={stats.totalEvents}
+            hint="Todos los eventos guardados"
           />
         </div>
 
@@ -69,6 +115,7 @@ export default async function AdminPage() {
                   <th className="py-2">Path</th>
                   <th className="py-2">Lang</th>
                   <th className="py-2">Proyecto</th>
+                  <th className="py-2">Visitor ID</th>
                   <th className="py-2">Fecha</th>
                 </tr>
               </thead>
@@ -85,7 +132,12 @@ export default async function AdminPage() {
                     <td className="py-2">{event.lang || "-"}</td>
                     <td className="py-2">{event.project || "-"}</td>
                     <td className="py-2">
-                      {event.createdAt ? new Date(event.createdAt).toLocaleString() : "-"}
+                      {event.visitorId ? String(event.visitorId).slice(0, 8) : "-"}
+                    </td>
+                    <td className="py-2">
+                      {event.createdAt
+                        ? new Date(event.createdAt).toLocaleString()
+                        : "-"}
                     </td>
                   </tr>
                 ))}
@@ -97,3 +149,4 @@ export default async function AdminPage() {
     </main>
   );
 }
+

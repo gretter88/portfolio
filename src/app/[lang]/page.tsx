@@ -52,6 +52,7 @@ export default async function Page({
 
   return (
     <main>
+	 <TrackPageView path={`/${lang}`} lang={lang} />
       <div className="mx-auto max-w-5xl px-6 py-14">
         {/* HERO */}
         <section className="flex flex-col gap-6">
@@ -358,7 +359,7 @@ export default async function Page({
           © {new Date().getFullYear()} {i.footer}
         </footer>
       </div>
-	  <TrackPageView path={`/${lang}`} lang={lang} />
+	 
     </main>
   );
 }
