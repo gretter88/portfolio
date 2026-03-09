@@ -13,6 +13,24 @@ export default async function AdminPage() {
 
   const stats = await getAnalyticsStats();
 
+function getProjectLabel(event: {
+  project?: string | null;
+  path?: string | null;
+}) {
+  if (event.project) return event.project;
+
+  const path = event.path || "";
+
+  if (path.includes("/kiosco")) return "kiosco";
+  if (path.includes("/intranet")) return "intranet";
+  if (path.includes("/museo")) return "museo";
+  if (path.includes("/radar")) return "radar";
+
+  return "-";
+}
+
+
+
   return (
     <main className="min-h-screen px-6 py-10">
       <div className="mx-auto max-w-6xl">
@@ -113,6 +131,23 @@ export default async function AdminPage() {
             value={stats.openVideoIntranet}
             hint="/go/open-video/intranet"
           />
+		  
+		  <AdminStatCard
+  label="Screenshot Prev"
+  value={stats.screenshotPrevClicks}
+  hint="/modal/screenshot-prev"
+/>
+<AdminStatCard
+  label="Screenshot Next"
+  value={stats.screenshotNextClicks}
+  hint="/modal/screenshot-next"
+/>
+<AdminStatCard
+  label="Screenshot Dot"
+  value={stats.screenshotDotClicks}
+  hint="/modal/screenshot-dot"
+/>
+
           <AdminStatCard
             label="Total Events"
             value={stats.totalEvents}
@@ -158,7 +193,7 @@ export default async function AdminPage() {
                     <td className="py-2">{event.type}</td>
                     <td className="py-2">{event.path}</td>
                     <td className="py-2">{event.lang || "-"}</td>
-                    <td className="py-2">{event.project || "-"}</td>
+                   <td className="py-2">{getProjectLabel(event)}</td>
                     <td className="py-2">
                       {event.visitorId ? String(event.visitorId).slice(0, 8) : "-"}
                     </td>

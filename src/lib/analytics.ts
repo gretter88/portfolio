@@ -43,8 +43,14 @@ const [
   radarDemoClicks,
   requestAccessClicks,
   openVideoIntranet,
+
+  screenshotPrevClicks,
+  screenshotNextClicks,
+  screenshotDotClicks,
+
   latestEvents,
 ] = await Promise.all([
+
 
 
     col.countDocuments(),
@@ -67,6 +73,10 @@ col.countDocuments({ path: "/nav/contact" }),
 col.countDocuments({ path: "/nav/experience" }),
 col.countDocuments({ path: "/nav/linkedin" }),
 col.countDocuments({ path: "/nav/github" }),
+col.countDocuments({ path: "/modal/screenshot-prev" }),
+col.countDocuments({ path: "/modal/screenshot-next" }),
+col.countDocuments({ path: "/modal/screenshot-dot" }),
+
 col.find().sort({ createdAt: -1 }).limit(20).toArray(),
   ]);
 
@@ -90,6 +100,10 @@ navGithubClicks,
     radarDemoClicks,
     requestAccessClicks,
     openVideoIntranet,
+	screenshotPrevClicks,
+screenshotNextClicks,
+screenshotDotClicks,
+
     latestEvents,
 	
   };

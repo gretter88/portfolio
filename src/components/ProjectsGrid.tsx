@@ -105,6 +105,48 @@ export default function ProjectsGrid({
   const getRequestAccessPath = (p: Project) =>
     `/go/request-access/${getProjectSlug(p)}`;
 
+const getVisitorId = () => {
+  if (typeof document === "undefined") return null;
+
+  const cookieName = "visitor_id=";
+  const cookies = document.cookie.split(";");
+
+  for (const cookie of cookies) {
+    const trimmed = cookie.trim();
+    if (trimmed.startsWith(cookieName)) {
+      return trimmed.substring(cookieName.length);
+    }
+  }
+
+  const id = crypto.randomUUID();
+  document.cookie = `visitor_id=${id}; path=/; max-age=31536000; samesite=lax`;
+  return id;
+};
+
+const trackModalEvent = async (path: string, project: string) => {
+  try {
+    const visitorId = getVisitorId();
+
+    await fetch("/api/track", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "click",
+        path,
+        lang,
+        project,
+        visitorId,
+        referrer: typeof document !== "undefined" ? document.referrer || null : null,
+      }),
+      keepalive: true,
+    });
+  } catch {}
+};
+
+
+
   const sortedProjects = useMemo(() => {
     return [...projects].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
   }, [projects]);
@@ -519,46 +561,60 @@ export default function ProjectsGrid({
 
                   {!showVideo && modalShots.length > 1 ? (
                     <div className="mt-3 flex items-center gap-2">
-                      <button
-                        type="button"
-                        className={ghostBtnClass}
-                        style={ghostBtnStyle}
-                        onClick={() => setShotIndex((v) => Math.max(0, v - 1))}
-                        disabled={shotIndex === 0}
-                        aria-label={isEs ? "Anterior" : "Previous"}
-                      >
-                        ←
-                      </button>
+                     <button
+  type="button"
+  className={ghostBtnClass}
+  style={ghostBtnStyle}
+  onClick={async () => {
+    if (!activeProject) return;
+    await trackModalEvent("/modal/screenshot-prev", getProjectSlug(activeProject));
+    setShotIndex((v) => Math.max(0, v - 1));
+  }}
+  disabled={shotIndex === 0}
+  aria-label={isEs ? "Anterior" : "Previous"}
+>
+  ←
+</button>
+
 
                       <div className="flex flex-1 items-center gap-2 overflow-x-auto">
                         {modalShots.slice(0, 6).map((_, idx) => (
-                          <button
-                            key={idx}
-                            type="button"
-                            onClick={() => setShotIndex(idx)}
-                            className="h-2.5 w-2.5 rounded-full border transition"
-                            style={{
-                              borderColor: "var(--card-border)",
-                              background: idx === shotIndex ? "var(--foreground)" : "transparent",
-                              opacity: idx === shotIndex ? 1 : 0.6,
-                            }}
-                            aria-label={`Screenshot ${idx + 1}`}
-                          />
+                         <button
+  key={idx}
+  type="button"
+  onClick={async () => {
+    if (!activeProject) return;
+    await trackModalEvent("/modal/screenshot-dot", getProjectSlug(activeProject));
+    setShotIndex(idx);
+  }}
+  className="h-2.5 w-2.5 rounded-full border transition"
+  style={{
+    borderColor: "var(--card-border)",
+    background: idx === shotIndex ? "var(--foreground)" : "transparent",
+    opacity: idx === shotIndex ? 1 : 0.6,
+  }}
+  aria-label={`Screenshot ${idx + 1}`}
+/>
+
+
                         ))}
                       </div>
 
-                      <button
-                        type="button"
-                        className={ghostBtnClass}
-                        style={ghostBtnStyle}
-                        onClick={() =>
-                          setShotIndex((v) => Math.min(modalShots.length - 1, v + 1))
-                        }
-                        disabled={shotIndex >= modalShots.length - 1}
-                        aria-label={isEs ? "Siguiente" : "Next"}
-                      >
-                        →
-                      </button>
+                     <button
+  type="button"
+  className={ghostBtnClass}
+  style={ghostBtnStyle}
+  onClick={async () => {
+    if (!activeProject) return;
+    await trackModalEvent("/modal/screenshot-next", getProjectSlug(activeProject));
+    setShotIndex((v) => Math.min(modalShots.length - 1, v + 1));
+  }}
+  disabled={shotIndex >= modalShots.length - 1}
+  aria-label={isEs ? "Siguiente" : "Next"}
+>
+  →
+</button>
+
                     </div>
                   ) : !showVideo ? (
                     <div className="mt-3 text-xs" style={muted2Style}>
