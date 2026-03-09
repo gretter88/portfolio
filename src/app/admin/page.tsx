@@ -3,6 +3,10 @@ import AdminLogoutButton from "@/components/admin/AdminLogoutButton";
 import { getAnalyticsStats } from "@/lib/analytics";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { redirect } from "next/navigation";
+import DeleteEventButton from "@/components/admin/DeleteEventButton";
+import AdminRefreshButton from "@/components/admin/AdminRefreshButton";
+import DeleteOldEventsButton from "@/components/admin/DeleteOldEventsButton";
+import AdminEventsTable from "@/components/admin/AdminEventsTable";
 
 export default async function AdminPage() {
   const ok = await isAdminAuthenticated();
@@ -12,22 +16,41 @@ export default async function AdminPage() {
   }
 
   const stats = await getAnalyticsStats();
+  
+  const latestEventsSerialized = stats.latestEvents.map((event: any) => ({
+  _id: event._id?.toString() || "",
+  type: event.type || null,
+  path: event.path || null,
+  lang: event.lang || null,
+  project: event.project || null,
+  visitorId: event.visitorId || null,
+  referrer: event.referrer || null,
+  userAgent: event.userAgent || null,
+  ip: event.ip || null,
+  createdAt: event.createdAt
+    ? new Date(event.createdAt).toISOString()
+    : null,
+}));
 
-function getProjectLabel(event: {
+
+  
+  function getProjectLabel(event: {
   project?: string | null;
   path?: string | null;
 }) {
-  if (event.project) return event.project;
+  const project = (event.project || "").toLowerCase();
+  const path = (event.path || "").toLowerCase();
 
-  const path = event.path || "";
-
-  if (path.includes("/kiosco")) return "kiosco";
-  if (path.includes("/intranet")) return "intranet";
-  if (path.includes("/museo")) return "museo";
-  if (path.includes("/radar")) return "radar";
+  if (project === "kiosco" || path.includes("/kiosco")) return "Kiosco";
+  if (project === "intranet" || path.includes("/intranet")) return "Intranet";
+  if (project === "museo" || path.includes("/museo")) return "Museo";
+  if (project === "radar" || path.includes("/radar")) return "RadarSocial";
 
   return "-";
 }
+
+
+
 
 
 
@@ -42,7 +65,12 @@ function getProjectLabel(event: {
             </p>
           </div>
 
-          <AdminLogoutButton />
+          <div className="flex flex-wrap items-center gap-3">
+  <AdminRefreshButton />
+  <DeleteOldEventsButton days={30} />
+  <AdminLogoutButton />
+</div>
+
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -164,49 +192,12 @@ function getProjectLabel(event: {
         >
           <h2 className="text-lg font-semibold">Últimos eventos</h2>
 
-          <div className="mt-4 overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr
-                  style={{
-                    textAlign: "left",
-                    color: "var(--muted-2)",
-                    borderBottom: "1px solid var(--card-border)",
-                  }}
-                >
-                  <th className="py-2">Tipo</th>
-                  <th className="py-2">Path</th>
-                  <th className="py-2">Lang</th>
-                  <th className="py-2">Proyecto</th>
-                  <th className="py-2">Visitor ID</th>
-                  <th className="py-2">Fecha</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stats.latestEvents.map((event: any) => (
-                  <tr
-                    key={event._id?.toString()}
-                    style={{
-                      borderBottom: "1px solid var(--card-border)",
-                    }}
-                  >
-                    <td className="py-2">{event.type}</td>
-                    <td className="py-2">{event.path}</td>
-                    <td className="py-2">{event.lang || "-"}</td>
-                   <td className="py-2">{getProjectLabel(event)}</td>
-                    <td className="py-2">
-                      {event.visitorId ? String(event.visitorId).slice(0, 8) : "-"}
-                    </td>
-                    <td className="py-2">
-                      {event.createdAt
-                        ? new Date(event.createdAt).toLocaleString()
-                        : "-"}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+         <div className="mt-4">
+ <AdminEventsTable events={latestEventsSerialized} />
+
+
+</div>
+
         </div>
       </div>
     </main>
