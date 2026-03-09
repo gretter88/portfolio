@@ -23,21 +23,30 @@ export async function getAnalyticsStats() {
   const db = await getDb();
   const col = db.collection<AnalyticsEvent>("analytics_events");
 
-  const [
-    totalEvents,
-    pageViews,
-    uniqueVisitors,
-    esPageViews,
-    enPageViews,
-    cvClicks,
-    linkedinClicks,
-    githubClicks,
-    museoDemoClicks,
-    radarDemoClicks,
-    requestAccessClicks,
-    openVideoIntranet,
-    latestEvents,
-  ] = await Promise.all([
+const [
+  totalEvents,
+  pageViews,
+  uniqueVisitors,
+  esPageViews,
+  enPageViews,
+
+  navProjectsClicks,
+  navContactClicks,
+  navExperienceClicks,
+  navLinkedinClicks,
+  navGithubClicks,
+
+  cvClicks,
+  linkedinClicks,
+  githubClicks,
+  museoDemoClicks,
+  radarDemoClicks,
+  requestAccessClicks,
+  openVideoIntranet,
+  latestEvents,
+] = await Promise.all([
+
+
     col.countDocuments(),
     col.countDocuments({ type: "pageview" }),
     col.distinct("visitorId", {
@@ -53,7 +62,12 @@ export async function getAnalyticsStats() {
     col.countDocuments({ path: "/go/demo/radar" }),
     col.countDocuments({ path: { $regex: "^/go/request-access/" } }),
     col.countDocuments({ path: "/go/open-video/intranet" }),
-    col.find().sort({ createdAt: -1 }).limit(20).toArray(),
+	col.countDocuments({ path: "/nav/projects" }),
+col.countDocuments({ path: "/nav/contact" }),
+col.countDocuments({ path: "/nav/experience" }),
+col.countDocuments({ path: "/nav/linkedin" }),
+col.countDocuments({ path: "/nav/github" }),
+col.find().sort({ createdAt: -1 }).limit(20).toArray(),
   ]);
 
   return {
@@ -62,6 +76,13 @@ export async function getAnalyticsStats() {
     visitors: uniqueVisitors.length,
     esPageViews,
     enPageViews,
+	navProjectsClicks,
+navContactClicks,
+navExperienceClicks,
+navLinkedinClicks,
+navGithubClicks,
+
+
     cvClicks,
     linkedinClicks,
     githubClicks,
@@ -70,6 +91,7 @@ export async function getAnalyticsStats() {
     requestAccessClicks,
     openVideoIntranet,
     latestEvents,
+	
   };
 }
 

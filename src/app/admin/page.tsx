@@ -48,6 +48,34 @@ export default async function AdminPage() {
             value={stats.enPageViews}
             hint="/en"
           />
+		  
+		  <AdminStatCard
+  label="Nav Projects"
+  value={stats.navProjectsClicks}
+  hint="/nav/projects"
+/>
+<AdminStatCard
+  label="Nav Contact"
+  value={stats.navContactClicks}
+  hint="/nav/contact"
+/>
+<AdminStatCard
+  label="Nav Experience"
+  value={stats.navExperienceClicks}
+  hint="/nav/experience"
+/>
+<AdminStatCard
+  label="Nav LinkedIn"
+  value={stats.navLinkedinClicks}
+  hint="/nav/linkedin"
+/>
+<AdminStatCard
+  label="Nav GitHub"
+  value={stats.navGithubClicks}
+  hint="/nav/github"
+/>
+
+
 
           <AdminStatCard
             label="CV Clicks"

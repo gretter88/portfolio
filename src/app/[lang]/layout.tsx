@@ -2,14 +2,11 @@
 import type { Metadata } from "next";
 import { LANGS, type Lang, LINKS, t } from "@/lib/i18n";
 import ThemeToggle from "@/components/ThemeToggle";
+import TrackedLink from "@/components/TrackedLink";
 import { Analytics } from "@vercel/analytics/next";
+
 function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
-}
-
-// ✅ Pre-genera /es y /en (pro y estable)
-export function generateStaticParams() {
-  return LANGS.map((lang) => ({ lang }));
 }
 
 export async function generateMetadata({
@@ -31,15 +28,13 @@ export async function generateMetadata({
     metadataBase: baseUrl,
     title,
     description,
-
     alternates: {
-      canonical: url.toString(), // ✅ mejor que pathname
+      canonical: url.pathname,
       languages: {
-        es: new URL("/es", baseUrl).toString(),
-        en: new URL("/en", baseUrl).toString(),
+        es: "/es",
+        en: "/en",
       },
     },
-
     openGraph: {
       type: "website",
       locale: lang === "es" ? "es_ES" : "en_US",
@@ -56,12 +51,6 @@ export async function generateMetadata({
         },
       ],
     },
-
-    // ✅ “locale alternate” ayuda en algunos parsers (FB/LinkedIn)
-    other: {
-      "og:locale:alternate": lang === "es" ? "en_US" : "es_ES",
-    },
-
     twitter: {
       card: "summary_large_image",
       title,
@@ -112,29 +101,35 @@ export default async function LangLayout({
           </div>
 
           <nav className="flex items-center gap-2">
-            <a
+            <TrackedLink
               href="#projects"
+              trackPath="/nav/projects"
+              lang={lang}
               className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
               style={{ borderColor: "var(--card-border)", background: "transparent" }}
             >
               {i.sectionProjectsTitle}
-            </a>
+            </TrackedLink>
 
-            <a
+            <TrackedLink
               href="#contact"
+              trackPath="/nav/contact"
+              lang={lang}
               className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
               style={{ borderColor: "var(--card-border)", background: "transparent" }}
             >
               {i.sectionContactTitle}
-            </a>
+            </TrackedLink>
 
-            <a
+            <TrackedLink
               href="#experience"
+              trackPath="/nav/experience"
+              lang={lang}
               className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
               style={{ borderColor: "var(--card-border)", background: "transparent" }}
             >
-              {i.sectionExperieciaTitle}
-            </a>
+              {i.sectionExperienceTitle}
+            </TrackedLink>
 
             <a
               href={i.switchHref}
@@ -144,23 +139,25 @@ export default async function LangLayout({
               {i.switchTo}
             </a>
 
-           <a
-  href="/go/linkedin"
-  className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
-  style={{ borderColor: "var(--card-border)", background: "transparent" }}
->
-  {i.ctaLinkedin}
-</a>
+            <TrackedLink
+              href="/go/linkedin"
+              trackPath="/nav/linkedin"
+              lang={lang}
+              className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
+              style={{ borderColor: "var(--card-border)", background: "transparent" }}
+            >
+              {i.ctaLinkedin}
+            </TrackedLink>
 
-
-            <a
-  href="/go/github"
-  className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
-  style={{ borderColor: "var(--card-border)", background: "transparent" }}
->
-  {i.ctaGithub}
-</a>
-
+            <TrackedLink
+              href="/go/github"
+              trackPath="/nav/github"
+              lang={lang}
+              className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
+              style={{ borderColor: "var(--card-border)", background: "transparent" }}
+            >
+              {i.ctaGithub}
+            </TrackedLink>
 
             <ThemeToggle />
           </nav>
@@ -172,3 +169,4 @@ export default async function LangLayout({
     </div>
   );
 }
+
