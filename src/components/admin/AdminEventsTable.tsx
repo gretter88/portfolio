@@ -30,6 +30,28 @@ function getProjectLabel(event: AdminEvent) {
   return "-";
 }
 
+function formatMontevideoDate(value?: string | Date | null) {
+  if (!value) return "-";
+
+  const date = new Date(value);
+
+  const parts = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "America/Montevideo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+
+  const get = (type: string) => parts.find((p) => p.type === type)?.value || "00";
+
+  return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
+}
+
+
 export default function AdminEventsTable({ events }: Props) {
   const router = useRouter();
 
@@ -250,11 +272,8 @@ export default function AdminEventsTable({ events }: Props) {
                   <td className="py-2">
                     {event.visitorId ? String(event.visitorId).slice(0, 8) : "-"}
                   </td>
-                  <td className="py-2">
-                    {event.createdAt
-                      ? new Date(event.createdAt).toISOString().replace("T", " ").slice(0, 19)
-                      : "-"}
-                  </td>
+                  <td className="py-2">{formatMontevideoDate(event.createdAt)}</td>
+
                   <td className="py-2">
                     {eventId ? <DeleteEventButton eventId={eventId} /> : null}
                   </td>
