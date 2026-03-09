@@ -1,7 +1,7 @@
 // src/app/[lang]/page.tsx
 import { LANGS, type Lang, LINKS, t } from "@/lib/i18n";
 import ProjectsGrid from "@/components/ProjectsGrid";
-
+import TrackPageView from "@/components/TrackPageView";
 function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
 }
@@ -358,6 +358,7 @@ export default async function Page({
           © {new Date().getFullYear()} {i.footer}
         </footer>
       </div>
+	  <TrackPageView path={`/${lang}`} lang={lang} />
     </main>
   );
 }

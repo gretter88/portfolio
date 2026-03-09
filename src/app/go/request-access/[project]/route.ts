@@ -1,5 +1,6 @@
 //src/app/go/request-access/[project]/route.ts
 import type { NextRequest } from "next/server";
+import { trackGoEvent } from "@/lib/track-go-event";
 
 const EMAIL = "gretter88@gmail.com";
 
@@ -12,12 +13,19 @@ const PROJECT_LABELS: Record<string, string> = {
 };
 
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   context: { params: Promise<{ project: string }> }
 ) {
   const { project } = await context.params;
   const key = project?.toLowerCase() || "demo";
   const projectLabel = PROJECT_LABELS[key] || project || "Project demo";
+  const path = `/go/request-access/${key}`;
+
+  await trackGoEvent({
+    req,
+    path,
+    project: key,
+  });
 
   const subject = encodeURIComponent(`Solicitud de acceso demo: ${projectLabel}`);
   const body = encodeURIComponent(
@@ -26,4 +34,3 @@ export async function GET(
 
   return Response.redirect(`mailto:${EMAIL}?subject=${subject}&body=${body}`, 302);
 }
-
