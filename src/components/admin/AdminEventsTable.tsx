@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import DeleteEventButton from "@/components/admin/DeleteEventButton";
 
@@ -51,6 +51,36 @@ function formatMontevideoDate(value?: string | Date | null) {
   return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
 }
 
+function formatTimeAgo(value: string | Date | null | undefined, now: number) {
+  if (!value) return "-";
+
+  const date = new Date(value);
+  const diffMs = now - date.getTime();
+
+  if (diffMs < 0) return "-";
+
+  const minute = 60 * 1000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+
+  if (diffMs < minute) return "hace unos segundos";
+
+  if (diffMs < hour) {
+    const mins = Math.floor(diffMs / minute);
+    return mins === 1 ? "hace 1 min" : `hace ${mins} min`;
+  }
+
+  if (diffMs < day) {
+    const hours = Math.floor(diffMs / hour);
+    return hours === 1 ? "hace 1 hora" : `hace ${hours} horas`;
+  }
+
+  const days = Math.floor(diffMs / day);
+  return days === 1 ? "hace 1 día" : `hace ${days} días`;
+}
+
+
+
 
 export default function AdminEventsTable({ events }: Props) {
   const router = useRouter();
@@ -61,7 +91,7 @@ export default function AdminEventsTable({ events }: Props) {
 
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [bulkDeleting, setBulkDeleting] = useState(false);
-
+const [now, setNow] = useState(Date.now());
   const filteredEvents = useMemo(() => {
     const now = Date.now();
 
@@ -148,6 +178,15 @@ export default function AdminEventsTable({ events }: Props) {
       setBulkDeleting(false);
     }
   }
+
+useEffect(() => {
+  const interval = window.setInterval(() => {
+    setNow(Date.now());
+  }, 30000);
+
+  return () => window.clearInterval(interval);
+}, []);
+
 
   return (
     <>
@@ -242,7 +281,9 @@ export default function AdminEventsTable({ events }: Props) {
               <th className="py-2">Proyecto</th>
               <th className="py-2">Visitor ID</th>
               <th className="py-2">Fecha</th>
+              <th className="py-2">Hace cuánto</th>
               <th className="py-2">Acción</th>
+
             </tr>
           </thead>
           <tbody>
@@ -273,10 +314,12 @@ export default function AdminEventsTable({ events }: Props) {
                     {event.visitorId ? String(event.visitorId).slice(0, 8) : "-"}
                   </td>
                   <td className="py-2">{formatMontevideoDate(event.createdAt)}</td>
+<td className="py-2">{formatTimeAgo(event.createdAt, now)}</td>
 
-                  <td className="py-2">
-                    {eventId ? <DeleteEventButton eventId={eventId} /> : null}
-                  </td>
+<td className="py-2">
+  {eventId ? <DeleteEventButton eventId={eventId} /> : null}
+</td>
+
                 </tr>
               );
             })}
