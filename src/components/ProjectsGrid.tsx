@@ -74,14 +74,32 @@ export default function ProjectsGrid({
   
   const isMobileProject = (p: Project) => {
   const slug = getProjectSlug(p);
-  return slug === "marketplace";
+  return slug === "marketplace" || slug== "radar" ;
+};
+
+const isMobileShot = (
+  shot?: { src?: string },
+  project?: Project | null
+) => {
+  const src = (shot?.src || "").toLowerCase();
+  const slug = project ? getProjectSlug(project) : "";
+
+  return (
+    slug === "marketplace" ||
+    src.includes("-app-") ||
+    src.includes("/app-") ||
+    src.includes("mobile")
+  );
 };
 
 
-  const isMarketplaceProject = (p: Project) => {
-  const t = (p.title || "").toLowerCase();
-  return t.includes("marketplace");
+
+
+ const isMarketplaceProject = (project?: Project | null) => {
+  if (!project) return false;
+  return getProjectSlug(project) === "marketplace";
 };
+
 
 
   const isRestrictedProject = (p: Project) =>
@@ -249,14 +267,26 @@ const getPublicDemoPath = (p: Project) => {
   }, [open, activeProject]);
 
   const modalShots = useMemo(() => {
-    if (!activeProject) return [];
-    const arr = activeProject.screenshots?.filter(Boolean) ?? [];
-    if (arr.length > 0) return arr.slice(0, 6);
-    if (activeProject.image?.src) {
-      return [{ src: activeProject.image.src, alt: activeProject.image.alt }];
-    }
-    return [];
-  }, [activeProject]);
+  if (!activeProject) return [];
+
+  const arr = activeProject.screenshots?.filter(Boolean) ?? [];
+
+  if (arr.length > 0) {
+    return [...arr].sort((a, b) => {
+      const aMobile = isMobileShot(a, activeProject) ? 0 : 1;
+      const bMobile = isMobileShot(b, activeProject) ? 0 : 1;
+      return aMobile - bMobile;
+    });
+  }
+
+  if (activeProject.image?.src) {
+    return [{ src: activeProject.image.src, alt: activeProject.image.alt }];
+  }
+
+  return [];
+}, [activeProject]);
+
+
 
   const activeShot = modalShots[shotIndex];
 
@@ -289,63 +319,71 @@ const getPublicDemoPath = (p: Project) => {
       background: "var(--background)",
     }}
   >
-    {isMobileProject(p) ? (
-      <div
-        className="grid place-items-center"
-        style={{
-          minHeight: 300,
-          padding: "14px 0",
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
-        }}
-      >
-        <div
-          style={{
-            width: 170,
-            maxWidth: "72%",
-            borderRadius: 26,
-            padding: 6,
-            background: "#0f0f10",
-            boxShadow:
-              "0 12px 30px rgba(0,0,0,0.32), inset 0 0 0 1px rgba(255,255,255,0.05)",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}
-        >
+    {isMobileShot(p.image, p) ? (
+
+     <div
+  className="grid place-items-center"
+  style={{
+    minHeight: isMarketplaceProject(p) ? 320 : 300,
+    padding: isMarketplaceProject(p) ? "22px 0" : "14px 0",
+    background:
+      "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+  }}
+>
+
+       <div
+  style={{
+    width: isMarketplaceProject(p) ? 156 : 170,
+    maxWidth: "72%",
+    borderRadius: isMarketplaceProject(p) ? 28 : 26,
+    padding: isMarketplaceProject(p) ? 7 : 6,
+    background: "#0f0f10",
+    boxShadow:
+      "0 12px 30px rgba(0,0,0,0.32), inset 0 0 0 1px rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.08)",
+  }}
+>
+
           <div
-            style={{
-              position: "relative",
-              borderRadius: 20,
-              overflow: "hidden",
-              background: "#000",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: 6,
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: 48,
-                height: 10,
-                borderRadius: 999,
-                background: "#111",
-                zIndex: 2,
-                opacity: 0.95,
-              }}
-            />
+  style={{
+    position: "relative",
+    borderRadius: isMarketplaceProject(p) ? 22 : 20,
+    overflow: "hidden",
+    background: "#000",
+  }}
+>
+
+           <div
+  style={{
+    position: "absolute",
+    top: 7,
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: isMarketplaceProject(p) ? 34 : 48,
+    height: isMarketplaceProject(p) ? 8 : 10,
+    borderRadius: 999,
+    background: "#111",
+    zIndex: 2,
+    opacity: 0.96,
+    boxShadow: "0 1px 2px rgba(255,255,255,0.04) inset",
+  }}
+/>
+
             <img
-              src={p.image.src}
-              alt={p.image.alt}
-              loading="lazy"
-              className="transition duration-300 hover:scale-[1.03]"
-              style={{
-                width: "100%",
-                height: 270,
-                objectFit: "cover",
-                objectPosition: "top center",
-                display: "block",
-              }}
-            />
+  src={p.image.src}
+  alt={p.image.alt}
+  loading="lazy"
+  className="transition duration-300 hover:scale-[1.03]"
+  style={{
+    width: "100%",
+    height: isMarketplaceProject(p) ? 250 : 270,
+    objectFit: isMarketplaceProject(p) ? "contain" : "cover",
+    objectPosition: "top center",
+    display: "block",
+    background: "#000",
+  }}
+/>
+
           </div>
         </div>
       </div>
@@ -366,6 +404,8 @@ const getPublicDemoPath = (p: Project) => {
     )}
   </div>
 ) : null}
+
+
 
 
 
@@ -638,61 +678,70 @@ activeProject?.video?.id ? (
     />
   </div>
 ) : activeShot ? (
-  isMobileProject(activeProject) ? (
-    <div
-      className="grid place-items-center"
-      style={{
-        minHeight: 560,
-        padding: "20px 0",
-        background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
-      }}
-    >
-      <div
-        style={{
-          width: 280,
-          maxWidth: "88%",
-          borderRadius: 36,
-          padding: 10,
-          background: "#0f0f10",
-          boxShadow:
-            "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
-          border: "1px solid rgba(255,255,255,0.08)",
-        }}
-      >
+  isMobileShot(activeShot, activeProject) ? (
+
+   <div
+  className="grid place-items-center"
+  style={{
+    minHeight: isMarketplaceProject(activeProject) ? 590 : 560,
+    padding: isMarketplaceProject(activeProject) ? "34px 0" : "20px 0",
+    background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+  }}
+>
+
+<div
+  style={{
+    width: isMarketplaceProject(activeProject) ? 258 : 280,
+    maxWidth: "88%",
+    borderRadius: isMarketplaceProject(activeProject) ? 38 : 36,
+    padding: isMarketplaceProject(activeProject) ? 11 : 10,
+    background: "#0f0f10",
+    boxShadow:
+      "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
+    border: "1px solid rgba(255,255,255,0.08)",
+  }}
+>
+
         <div
-          style={{
-            position: "relative",
-            borderRadius: 28,
-            overflow: "hidden",
-            background: "#000",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              top: 8,
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: 80,
-              height: 18,
-              borderRadius: 999,
-              background: "#111",
-              zIndex: 2,
-              opacity: 0.95,
-            }}
-          />
-          <img
-            src={activeShot.src}
-            alt={activeShot.alt}
-            loading="lazy"
-            style={{
-              width: "100%",
-              height: 520,
-              objectFit: "cover",
-              objectPosition: "top center",
-              display: "block",
-            }}
-          />
+  style={{
+    position: "relative",
+    borderRadius: isMarketplaceProject(activeProject) ? 30 : 28,
+    overflow: "hidden",
+    background: "#000",
+  }}
+>
+
+         <div
+  style={{
+    position: "absolute",
+    top: 10,
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: isMarketplaceProject(activeProject) ? 52 : 80,
+    height: isMarketplaceProject(activeProject) ? 12 : 18,
+    borderRadius: 999,
+    background: "#111",
+    zIndex: 2,
+    opacity: 0.96,
+    boxShadow: "0 1px 3px rgba(255,255,255,0.05) inset",
+  }}
+/>
+
+
+        <img
+  src={activeShot.src}
+  alt={activeShot.alt}
+  loading="lazy"
+  style={{
+    width: "100%",
+    height: isMarketplaceProject(activeProject) ? 500 : 520,
+    objectFit: isMarketplaceProject(activeProject) ? "contain" : "cover",
+    objectPosition: "top center",
+    display: "block",
+    background: "#000",
+  }}
+/>
+
         </div>
       </div>
     </div>
@@ -742,7 +791,7 @@ activeProject?.video?.id ? (
 
 
                       <div className="flex flex-1 items-center gap-2 overflow-x-auto">
-                        {modalShots.slice(0, 6).map((_, idx) => (
+                        {modalShots.map((_, idx) => (
                          <button
   key={idx}
   type="button"

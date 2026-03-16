@@ -30,40 +30,57 @@ export function t(lang: Lang) {
   const isEs = lang === "es";
 
 const projects: Project[] = [
-  {
-    order: 1,
-    title: "RadarSocial",
-    desc: isEs
-      ? "Web en producción + App Android en testing. Plataforma social con chat en tiempo real, mapas, estado online, stickers y llamadas. Backend Node/MongoDB + Socket.IO. App Android en testing (Google Play – acceso por invitación)."
-      : "Web live + Android app in testing. Social platform with real-time chat, maps, online presence, stickers and calls. Node/MongoDB + Socket.IO backend. Android app in testing (Google Play – invite-only).",
-    stack: ["Next.js", "TypeScript", "React Native", "Node.js", "MongoDB", "Socket.IO"],
-    image: { src: "/screenshots/radarsocialweb.webp", alt: "RadarSocial (Web)" },
-    links: { demo: "https://radarsocial.com.uy/", repo: "" },
-    badge: "Web: Live · Android: Testing",
+ {
+  order: 1,
+  title: "RadarSocial",
+  desc: isEs
+    ? "Web en producción + App Android en testing. Plataforma social con chat en tiempo real, mapas, estado online, stickers y llamadas. Backend Node/MongoDB + Socket.IO. Las capturas actuales corresponden a la versión web en producción; la app Android está en testing privado (Google Play – acceso por invitación)."
+    : "Web live + Android app in testing. Social platform with real-time chat, maps, online presence, stickers and calls. Node/MongoDB + Socket.IO backend. Current screenshots correspond to the live web version; the Android app is in private testing (Google Play – invite-only).",
+  stack: ["Next.js", "TypeScript", "React Native", "Node.js", "MongoDB", "Socket.IO"],
+  image: {
+  src: "/screenshots/radarsocial-app-1.webp",
+  alt: isEs
+    ? "RadarSocial — App / vista principal"
+    : "RadarSocial — App / main view",
+},
 
-    // ✅ NUEVO
-    screenshots: [
-      { src: "/screenshots/radarsocial-1.webp", alt: "RadarSocial — Perfil / UX" },
-      { src: "/screenshots/radarsocial-2.webp", alt: "RadarSocial — Chat en tiempo real" },
-      { src: "/screenshots/radarsocial-3.webp", alt: "RadarSocial — Mapa y usuarios cercanos" },
-	  { src: "/screenshots/radarsocial-4.webp", alt: "RadarSocial — Inicio / UX" },
-    ],
-    features: isEs
-      ? [
-          "Chat 1:1 en tiempo real (Socket.IO) con estados: online / escribiendo / no leídos",
-          "Mapa con geolocalización y usuarios cercanos + navegación directa al chat",
-          "Stickers y multimedia + notificaciones push (FCM/Notifee)",
-          "Llamadas por internet (audio/video) integradas al flujo del chat",
-          "Backend Node/Express + MongoDB con auth JWT, logs y APIs REST",
-        ]
-      : [
-          "Real-time 1:1 chat (Socket.IO) with presence: online / typing / unread counters",
-          "Map with geolocation and nearby users + direct navigation to chat",
-          "Stickers and rich media + push notifications (FCM/Notifee)",
-          "Internet calls (audio/video) integrated into the chat flow",
-          "Node/Express + MongoDB backend with JWT auth, logs, and REST APIs",
-        ],
-  },
+
+  links: { demo: "https://radarsocial.com.uy/", repo: "" },
+  badge: isEs ? "Web: Live · App Android: Testing privado" : "Web: Live · Android App: Private testing",
+  screenshots: [
+	{ src: "/screenshots/radarsocial-app-1.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
+	{ src: "/screenshots/radarsocial-app-2.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
+	{ src: "/screenshots/radarsocial-app-3.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
+	{ src: "/screenshots/radarsocial-app-4.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
+	{ src: "/screenshots/radarsocial-app-5.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
+	{ src: "/screenshots/radarsocial-app-6.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
+	{ src: "/screenshots/radarsocial-app-7.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
+    { src: "/screenshots/radarsocial-1.webp", alt: isEs ? "RadarSocial — Web / Perfil / UX" : "RadarSocial — Web / Profile / UX" },
+    { src: "/screenshots/radarsocial-2.webp", alt: isEs ? "RadarSocial — Web / Chat en tiempo real" : "RadarSocial — Web / Real-time chat" },
+    { src: "/screenshots/radarsocial-3.webp", alt: isEs ? "RadarSocial — Web / Mapa y usuarios cercanos" : "RadarSocial — Web / Map and nearby users" },
+    { src: "/screenshots/radarsocial-4.webp", alt: isEs ? "RadarSocial — Web / Inicio / UX" : "RadarSocial — Web / Home / UX" },
+	
+  ],
+  features: isEs
+    ? [
+        "Plataforma social con versión web en producción y app Android en testing",
+        "Chat 1:1 en tiempo real (Socket.IO) con estados: online / escribiendo / no leídos",
+        "Mapa con geolocalización y usuarios cercanos + navegación directa al chat",
+        "Stickers y multimedia + notificaciones push (FCM/Notifee)",
+        "Llamadas por internet (audio/video) integradas al flujo del chat",
+        "Backend Node/Express + MongoDB con auth JWT, logs y APIs REST",
+      ]
+    : [
+        "Social platform with live web version and Android app in testing",
+        "Real-time 1:1 chat (Socket.IO) with presence: online / typing / unread counters",
+        "Map with geolocation and nearby users + direct navigation to chat",
+        "Stickers and rich media + push notifications (FCM/Notifee)",
+        "Internet calls (audio/video) integrated into the chat flow",
+        "Node/Express + MongoDB backend with JWT auth, logs, and REST APIs",
+      ],
+},
+
+
   
   
 
@@ -250,6 +267,13 @@ const projects: Project[] = [
     },
     {
       src: "/screenshots/marketplace-6.webp",
+      alt: isEs
+        ? "Marketplace — Auditoría / logs admin"
+        : "Marketplace — Audit logs / admin",
+    },
+	
+	    {
+      src: "/screenshots/marketplace-7.webp",
       alt: isEs
         ? "Marketplace — Auditoría / logs admin"
         : "Marketplace — Audit logs / admin",
