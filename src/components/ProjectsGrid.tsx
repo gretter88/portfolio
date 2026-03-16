@@ -71,6 +71,11 @@ export default function ProjectsGrid({
     const t = (p.title || "").toLowerCase();
     return t.includes("intranet");
   };
+  const isMarketplaceProject = (p: Project) => {
+  const t = (p.title || "").toLowerCase();
+  return t.includes("marketplace");
+};
+
 
   const isRestrictedProject = (p: Project) =>
     p.title.includes("Kiosco") || p.title.includes("Kiosk");
@@ -270,21 +275,31 @@ const getPublicDemoPath = (p: Project) => {
               style={cardStyle}
             >
               {p.image?.src ? (
-                <div className="mb-4 overflow-hidden rounded-xl border" style={cardStyle}>
-                  <img
-                    src={p.image.src}
-                    alt={p.image.alt}
-                    loading="lazy"
-                    className="h-44 w-full object-cover object-top transition duration-300 hover:scale-[1.03]"
-                    style={{
-                      height: 220,
-                      objectFit: "contain",
-                      background: "var(--background)",
-                      display: "block",
-                    }}
-                  />
-                </div>
-              ) : null}
+  <div
+    className="mb-4 overflow-hidden rounded-xl border flex items-center justify-center"
+    style={{
+      ...cardStyle,
+      minHeight: isMarketplaceProject(p) ? 320 : 220,
+      background: "var(--background)",
+    }}
+  >
+    <img
+      src={p.image.src}
+      alt={p.image.alt}
+      loading="lazy"
+      className="transition duration-300 hover:scale-[1.03]"
+      style={{
+        height: isMarketplaceProject(p) ? 300 : 220,
+        width: "100%",
+        objectFit: "contain",
+        background: "var(--background)",
+        display: "block",
+        padding: isMarketplaceProject(p) ? "10px 0" : "0",
+      }}
+    />
+  </div>
+) : null}
+
 
               {p.badge ? (
                 <div className="mb-3">
@@ -416,17 +431,22 @@ const getPublicDemoPath = (p: Project) => {
           aria-modal="true"
         >
           <div
-            className="absolute inset-0"
-            onClick={closeModal}
-            style={{ background: "rgba(0,0,0,0.55)" }}
-          />
+  className="absolute inset-0"
+  onClick={closeModal}
+  style={{
+    background: "rgba(0,0,0,0.78)",
+    backdropFilter: "blur(3px)",
+    WebkitBackdropFilter: "blur(3px)",
+  }}
+/>
+
 
           <div
             className="relative z-[210] w-full max-w-4xl rounded-2xl border flex flex-col"
             style={{
               background: "var(--card)",
               borderColor: "var(--card-border)",
-              boxShadow: "0 20px 80px rgba(0,0,0,0.45)",
+              boxShadow: "0 24px 100px rgba(0,0,0,0.6)",
               maxHeight: "calc(100vh - 32px)",
             }}
           >
@@ -520,7 +540,14 @@ const getPublicDemoPath = (p: Project) => {
                     </div>
                   ) : null}
 
-                  <div className="overflow-hidden rounded-xl border relative z-[220]" style={cardStyle}>
+                 <div
+  className="overflow-hidden rounded-xl border relative z-[220] flex items-center justify-center"
+  style={{
+    ...cardStyle,
+    background: "var(--background)",
+  }}
+>
+
                     {showVideo &&
                     activeProject?.video?.provider === "youtube" &&
                     activeProject?.video?.id ? (
@@ -542,18 +569,20 @@ const getPublicDemoPath = (p: Project) => {
                         />
                       </div>
                     ) : activeShot ? (
-                      <img
-                        src={activeShot.src}
-                        alt={activeShot.alt}
-                        className="w-full"
-                        style={{
-                          height: 360,
-                          objectFit: "contain",
-                          background: "var(--background)",
-                          display: "block",
-                        }}
-                        loading="lazy"
-                      />
+                    <img
+  src={activeShot.src}
+  alt={activeShot.alt}
+  className="w-full"
+  style={{
+    height: isMarketplaceProject(activeProject) ? 460 : 360,
+    objectFit: "contain",
+    background: "var(--background)",
+    display: "block",
+    padding: isMarketplaceProject(activeProject) ? "12px 0" : "0",
+  }}
+  loading="lazy"
+/>
+
                     ) : (
                       <div
                         className="grid place-items-center"
