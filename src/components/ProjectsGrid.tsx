@@ -71,6 +71,13 @@ export default function ProjectsGrid({
     const t = (p.title || "").toLowerCase();
     return t.includes("intranet");
   };
+  
+  const isMobileProject = (p: Project) => {
+  const slug = getProjectSlug(p);
+  return slug === "marketplace" || slug === "radar";
+};
+
+
   const isMarketplaceProject = (p: Project) => {
   const t = (p.title || "").toLowerCase();
   return t.includes("marketplace");
@@ -540,57 +547,119 @@ const getPublicDemoPath = (p: Project) => {
                     </div>
                   ) : null}
 
-                 <div
-  className="overflow-hidden rounded-xl border relative z-[220] flex items-center justify-center"
+                <div
+  className="overflow-hidden rounded-xl border relative z-[220]"
   style={{
     ...cardStyle,
-    background: "var(--background)",
+    background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
   }}
 >
 
-                    {showVideo &&
-                    activeProject?.video?.provider === "youtube" &&
-                    activeProject?.video?.id ? (
-                      <div
-                        className="relative z-[230]"
-                        style={{ height: 360, background: "var(--background)" }}
-                      >
-                        <iframe
-                          title={`${activeProject.title} video`}
-                          width="100%"
-                          height="100%"
-                          src={`${YT_EMBED_BASE}/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=1&controls=1&origin=${encodeURIComponent(
-                            SITE_ORIGIN
-                          )}`}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          style={{ border: 0, display: "block" }}
-                        />
-                      </div>
-                    ) : activeShot ? (
-                    <img
-  src={activeShot.src}
-  alt={activeShot.alt}
-  className="w-full"
-  style={{
-    height: isMarketplaceProject(activeProject) ? 460 : 360,
-    objectFit: "contain",
-    background: "var(--background)",
-    display: "block",
-    padding: isMarketplaceProject(activeProject) ? "12px 0" : "0",
-  }}
-  loading="lazy"
-/>
 
-                    ) : (
-                      <div
-                        className="grid place-items-center"
-                        style={{ height: 360, color: "var(--muted)" }}
-                      >
-                        {isEs ? "Sin screenshots todavía" : "No screenshots yet"}
-                      </div>
-                    )}
+                   {showVideo &&
+activeProject?.video?.provider === "youtube" &&
+activeProject?.video?.id ? (
+  <div
+    className="relative z-[230]"
+    style={{ height: 360, background: "var(--background)" }}
+  >
+    <iframe
+      title={`${activeProject.title} video`}
+      width="100%"
+      height="100%"
+      src={`${YT_EMBED_BASE}/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=1&controls=1&origin=${encodeURIComponent(
+        SITE_ORIGIN
+      )}`}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowFullScreen
+      referrerPolicy="strict-origin-when-cross-origin"
+      style={{ border: 0, display: "block" }}
+    />
+  </div>
+) : activeShot ? (
+  isMobileProject(activeProject) ? (
+    <div
+      className="grid place-items-center"
+      style={{
+        minHeight: 560,
+        padding: "20px 0",
+        background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+      }}
+    >
+      <div
+        style={{
+          width: 280,
+          maxWidth: "88%",
+          borderRadius: 36,
+          padding: 10,
+          background: "#0f0f10",
+          boxShadow:
+            "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
+          border: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            borderRadius: 28,
+            overflow: "hidden",
+            background: "#000",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: 8,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: 80,
+              height: 18,
+              borderRadius: 999,
+              background: "#111",
+              zIndex: 2,
+              opacity: 0.95,
+            }}
+          />
+          <img
+            src={activeShot.src}
+            alt={activeShot.alt}
+            loading="lazy"
+            style={{
+              width: "100%",
+              height: 520,
+              objectFit: "cover",
+              objectPosition: "top center",
+              display: "block",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  ) : (
+    <img
+      src={activeShot.src}
+      alt={activeShot.alt}
+      className="w-full"
+      style={{
+        height: 360,
+        objectFit: "contain",
+        objectPosition: "center",
+        background: "var(--background)",
+        display: "block",
+      }}
+      loading="lazy"
+    />
+  )
+) : (
+  <div
+    className="grid place-items-center"
+    style={{ height: 360, color: "var(--muted)" }}
+  >
+    {isEs ? "Sin screenshots todavía" : "No screenshots yet"}
+  </div>
+)}
+
+
                   </div>
 
                   {!showVideo && modalShots.length > 1 ? (
