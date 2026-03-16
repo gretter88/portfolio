@@ -5,12 +5,14 @@ import { trackGoEvent } from "@/lib/track-go-event";
 const EMAIL = "gretter88@gmail.com";
 
 const PROJECT_LABELS: Record<string, string> = {
+  marketplace: "Marketplace de Servicios",
   kiosco: "Kiosco Interactivo (Museo)",
   intranet: "Intranet (WordPress) — Organismo público",
   radar: "RadarSocial",
   museo: "Museo Canario (Web)",
   demo: "Project demo",
 };
+
 
 export async function GET(
   req: NextRequest,

@@ -1,3 +1,4 @@
+//src/components/ProjectsGrid
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -85,16 +86,19 @@ export default function ProjectsGrid({
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
-  const getProjectSlug = (p: Project) => {
-    const title = (p.title || "").toLowerCase();
+ const getProjectSlug = (p: Project) => {
+  const title = (p.title || "").toLowerCase();
 
-    if (title.includes("kiosco") || title.includes("kiosk")) return "kiosco";
-    if (title.includes("intranet")) return "intranet";
-    if (title.includes("radarsocial")) return "radar";
-    if (title.includes("museo")) return "museo";
+  if (title.includes("marketplace de servicios")) return "marketplace";
+  if (title.includes("services marketplace")) return "marketplace";
+  if (title.includes("marketplace")) return "marketplace";
+  if (title.includes("kiosco") || title.includes("kiosk")) return "kiosco";
+  if (title.includes("intranet")) return "intranet";
+  if (title.includes("radarsocial")) return "radar";
+  if (title.includes("museo")) return "museo";
 
-    return slugify(p.title || "demo");
-  };
+  return slugify(p.title || "demo");
+};
 
   const getOpenModalPath = (p: Project) =>
     `/go/open-modal/${getProjectSlug(p)}?lang=${lang}`;
@@ -173,14 +177,15 @@ const trackModalEvent = async (path: string, project: string) => {
     setOpen(true);
   };
   
-  const getPublicDemoPath = (p: Project) => {
+const getPublicDemoPath = (p: Project) => {
   const slug = getProjectSlug(p);
-
   if (slug === "radar") return "/go/demo/radar";
   if (slug === "museo") return "/go/demo/museo";
-
+  if (slug === "marketplace") return "/go/demo/marketplace";
   return p.links?.demo || "#";
 };
+
+
 
 
   useEffect(() => {

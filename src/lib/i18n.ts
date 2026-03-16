@@ -64,6 +64,12 @@ const projects: Project[] = [
           "Node/Express + MongoDB backend with JWT auth, logs, and REST APIs",
         ],
   },
+  
+  
+
+
+
+
 
  {
   order: 2,
@@ -184,6 +190,93 @@ const projects: Project[] = [
 
 },
 
+
+{
+  order: 5,
+  title: isEs
+    ? "Marketplace de Servicios"
+    : "Services Marketplace",
+  desc: isEs
+    ? "Proyecto actual en desarrollo. Plataforma mobile full stack para conectar clientes, proveedores y administración en una sola operación: solicitudes, chat en tiempo real, mapa, ubicación, push notifications, reseñas, historial y dashboard admin."
+    : "Current project in development. Full-stack mobile platform connecting clients, providers, and admin in a single workflow: service requests, real-time chat, map, location, push notifications, reviews, history, and admin dashboard.",
+  stack: [
+    "React Native",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Socket.IO",
+    "Firebase",
+    "Google Maps",
+  ],
+  image: {
+    src: "/screenshots/marketplace-1.webp",
+    alt: isEs
+      ? "Marketplace de Servicios — vista principal"
+      : "Services Marketplace — main view",
+  },
+  links: { repo: "" },
+  badge: isEs ? "Mobile App · En desarrollo" : "Mobile App · In development",
+  screenshots: [
+    {
+      src: "/screenshots/marketplace-1.webp",
+      alt: isEs
+        ? "Marketplace — Login / acceso"
+        : "Marketplace — Login / access",
+    },
+    {
+      src: "/screenshots/marketplace-2.webp",
+      alt: isEs
+        ? "Marketplace — Home cliente"
+        : "Marketplace — Client home",
+    },
+    {
+      src: "/screenshots/marketplace-3.webp",
+      alt: isEs
+        ? "Marketplace — Solicitudes / chat"
+        : "Marketplace — Requests / chat",
+    },
+    {
+      src: "/screenshots/marketplace-4.webp",
+      alt: isEs
+        ? "Marketplace — Dashboard admin"
+        : "Marketplace — Admin dashboard",
+    },
+    {
+      src: "/screenshots/marketplace-5.webp",
+      alt: isEs
+        ? "Marketplace — Perfil proveedor"
+        : "Marketplace — Provider profile",
+    },
+    {
+      src: "/screenshots/marketplace-6.webp",
+      alt: isEs
+        ? "Marketplace — Auditoría / logs admin"
+        : "Marketplace — Audit logs / admin",
+    },
+  ],
+  features: isEs
+    ? [
+        "Autenticación con roles: cliente, proveedor y administrador",
+        "Solicitudes de servicio con seguimiento por estados",
+        "Chat por solicitud en tiempo real con unread count, typing y read receipts",
+        "Ubicación del cliente y mapa de proveedores activos",
+        "Notificaciones push con Firebase Cloud Messaging",
+        "Sistema de reseñas, rating e historial de servicios",
+        "Perfil editable del proveedor con disponibilidad y categorías",
+        "Dashboard admin con métricas, filtros, exportes CSV, auditoría y soft delete",
+      ]
+    : [
+        "Role-based authentication: client, provider, and admin",
+        "Service requests with status-based workflow tracking",
+        "Real-time request chat with unread count, typing, and read receipts",
+        "Client location and active providers map",
+        "Push notifications with Firebase Cloud Messaging",
+        "Reviews, ratings, and service history",
+        "Editable provider profile with availability and categories",
+        "Admin dashboard with metrics, filters, CSV exports, audit logs, and soft delete",
+      ],
+},
 
 ];
 
