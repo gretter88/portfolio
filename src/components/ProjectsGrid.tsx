@@ -74,7 +74,7 @@ export default function ProjectsGrid({
   
   const isMobileProject = (p: Project) => {
   const slug = getProjectSlug(p);
-  return slug === "marketplace" || slug === "radar";
+  return slug === "marketplace";
 };
 
 
@@ -281,31 +281,92 @@ const getPublicDemoPath = (p: Project) => {
               )}
               style={cardStyle}
             >
-              {p.image?.src ? (
+             {p.image?.src ? (
   <div
-    className="mb-4 overflow-hidden rounded-xl border flex items-center justify-center"
+    className="mb-4 overflow-hidden rounded-xl border"
     style={{
       ...cardStyle,
-      minHeight: isMarketplaceProject(p) ? 320 : 220,
       background: "var(--background)",
     }}
   >
-    <img
-      src={p.image.src}
-      alt={p.image.alt}
-      loading="lazy"
-      className="transition duration-300 hover:scale-[1.03]"
-      style={{
-        height: isMarketplaceProject(p) ? 300 : 220,
-        width: "100%",
-        objectFit: "contain",
-        background: "var(--background)",
-        display: "block",
-        padding: isMarketplaceProject(p) ? "10px 0" : "0",
-      }}
-    />
+    {isMobileProject(p) ? (
+      <div
+        className="grid place-items-center"
+        style={{
+          minHeight: 300,
+          padding: "14px 0",
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+        }}
+      >
+        <div
+          style={{
+            width: 170,
+            maxWidth: "72%",
+            borderRadius: 26,
+            padding: 6,
+            background: "#0f0f10",
+            boxShadow:
+              "0 12px 30px rgba(0,0,0,0.32), inset 0 0 0 1px rgba(255,255,255,0.05)",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              borderRadius: 20,
+              overflow: "hidden",
+              background: "#000",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: 6,
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: 48,
+                height: 10,
+                borderRadius: 999,
+                background: "#111",
+                zIndex: 2,
+                opacity: 0.95,
+              }}
+            />
+            <img
+              src={p.image.src}
+              alt={p.image.alt}
+              loading="lazy"
+              className="transition duration-300 hover:scale-[1.03]"
+              style={{
+                width: "100%",
+                height: 270,
+                objectFit: "cover",
+                objectPosition: "top center",
+                display: "block",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    ) : (
+      <img
+        src={p.image.src}
+        alt={p.image.alt}
+        loading="lazy"
+        className="w-full transition duration-300 hover:scale-[1.03]"
+        style={{
+          height: 220,
+          objectFit: "contain",
+          objectPosition: "center",
+          background: "var(--background)",
+          display: "block",
+        }}
+      />
+    )}
   </div>
 ) : null}
+
 
 
               {p.badge ? (
