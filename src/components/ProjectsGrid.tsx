@@ -102,20 +102,27 @@ export default function ProjectsGrid({
     return slug === "marketplace" || slug === "radar";
   };
 
-  const isMobileShot = (
-    shot?: { src?: string },
-    project?: Project | null
-  ) => {
-    const src = (shot?.src || "").toLowerCase();
-    const slug = project ? getProjectSlug(project) : "";
-    return (
-      slug === "marketplace" ||
-      slug === "radar" ||
-      src.includes("-app-") ||
-      src.includes("/app-") ||
-      src.includes("mobile")
-    );
-  };
+ const isMobileShot = (
+  shot?: { src?: string },
+  project?: Project | null
+) => {
+  const src = (shot?.src || "").toLowerCase();
+  const slug = project ? getProjectSlug(project) : "";
+
+  return (
+    slug === "marketplace" ||
+    src.includes("-app-") ||
+    src.includes("/app-") ||
+    src.includes("mobile") ||
+    src.includes("chatscreen") ||
+    src.includes("mapscreen") ||
+    src.includes("homescreen") ||
+    src.includes("contactosguardadosscreen") ||
+    src.includes("buscarprofesionalesscreen") ||
+    src.includes("radarsocial-app")
+  );
+};
+
 
   const isLiveWebsiteProject = (p: Project) => {
     const slug = getProjectSlug(p);
