@@ -29,10 +29,22 @@ export async function GET(
     project: key,
   });
 
-  const subject = encodeURIComponent(`Solicitud de acceso demo: ${projectLabel}`);
-  const body = encodeURIComponent(
-    `Hola Santiago,\n\nMe gustaría acceder a la demo de "${projectLabel}".\n\nNombre:\nEmpresa:\nMotivo:\n\nGracias!`
-  );
+const isCommercialLead = key === "radar" || key === "marketplace";
+
+
+const subject = encodeURIComponent(
+  isCommercialLead
+    ? `Consulta comercial: ${projectLabel}`
+    : `Solicitud de acceso demo: ${projectLabel}`
+);
+
+const body = encodeURIComponent(
+  isCommercialLead
+    ? `Hola Santiago,\n\nMe interesa conocer la propuesta comercial de "${projectLabel}".\n\nNombre:\nEmpresa:\nPaís:\nCaso de uso:\nModelo de interés (licencia / partnership / implementación / adquisición):\nVolumen estimado de usuarios:\n\nQuedo atento/a.\n\nGracias!`
+    : `Hola Santiago,\n\nMe gustaría acceder a la demo de "${projectLabel}".\n\nNombre:\nEmpresa:\nMotivo:\n\nGracias!`
+);
+
+
 
   return Response.redirect(`mailto:${EMAIL}?subject=${subject}&body=${body}`, 302);
 }
