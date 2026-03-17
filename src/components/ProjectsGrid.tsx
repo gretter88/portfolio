@@ -147,6 +147,60 @@ export default function ProjectsGrid({
     return getProjectSlug(project) === "marketplace";
   };
 
+const getCommercialLabel = (p: Project) => {
+  const slug = getProjectSlug(p);
+
+  if (slug === "radar") {
+    return isEs ? "Licenciamiento" : "Licensing";
+  }
+
+  if (slug === "marketplace") {
+    return isEs ? "White-label / Implementación" : "White-label / Deployment";
+  }
+
+  if (slug === "kiosco") {
+    return isEs ? "Adaptable" : "Adaptable";
+  }
+
+  return null;
+};
+
+const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
+  const slug = getProjectSlug(p);
+
+  if (slug === "radar") {
+    return {
+      border: "1px solid rgba(59,130,246,0.28)",
+      background: "rgba(59,130,246,0.10)",
+      color: "#60a5fa",
+    };
+  }
+
+  if (slug === "marketplace") {
+    return {
+      border: "1px solid rgba(34,197,94,0.28)",
+      background: "rgba(34,197,94,0.10)",
+      color: "#4ade80",
+    };
+  }
+
+  if (slug === "kiosco") {
+    return {
+      border: "1px solid rgba(168,85,247,0.28)",
+      background: "rgba(168,85,247,0.10)",
+      color: "#c084fc",
+    };
+  }
+
+  return {
+    border: "1px solid var(--card-border)",
+    background: "rgba(255,255,255,0.03)",
+    color: "var(--muted)",
+  };
+};
+
+
+
   const getOpenModalPath = (p: Project) =>
     `/go/open-modal/${getProjectSlug(p)}?lang=${lang}`;
 
@@ -294,8 +348,10 @@ export default function ProjectsGrid({
   return (
     <>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {sortedProjects.map((p) => {
-          const isRestricted = isRestrictedProject(p);
+       {sortedProjects.map((p) => {
+  const isRestricted = isRestrictedProject(p);
+  const commercialLabel = getCommercialLabel(p);
+
 
           return (
             <div
@@ -437,6 +493,22 @@ export default function ProjectsGrid({
                   </span>
                 </div>
               ) : null}
+			  
+			  {commercialLabel ? (
+  <div className="mb-3">
+    <span
+      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
+      style={getCommercialBadgeStyle(p)}
+    >
+      <span
+        className="h-2 w-2 rounded-full"
+        style={{ background: "currentColor", opacity: 0.9 }}
+      />
+      {commercialLabel}
+    </span>
+  </div>
+) : null}
+
 
               <h4 className="text-lg font-semibold">{p.title}</h4>
 
@@ -631,6 +703,23 @@ export default function ProjectsGrid({
                     </span>
                   </div>
                 ) : null}
+
+
+{getCommercialLabel(activeProject) ? (
+  <div className="mb-2">
+    <span
+      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
+      style={getCommercialBadgeStyle(activeProject)}
+    >
+      <span
+        className="h-2 w-2 rounded-full"
+        style={{ background: "currentColor", opacity: 0.9 }}
+      />
+      {getCommercialLabel(activeProject)}
+    </span>
+  </div>
+) : null}
+
 
                 <h3 className="text-xl font-semibold truncate">
                   {activeProject.title}

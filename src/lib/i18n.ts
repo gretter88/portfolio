@@ -680,6 +680,7 @@ experience: isEs
 
 
 navCommercial: isEs ? "Licenciamiento" : "Licensing",
+
 commercialProjectsTitle: isEs
   ? "Proyectos comercializables"
   : "Commercial projects",
@@ -696,22 +697,31 @@ commercialProjectsBadge: isEs
   ? "Negocio / Licenciamiento"
   : "Business / Licensing",
 
-
 commercialProjectsModelLabel: isEs
   ? "Modelo"
   : "Model",
 
 commercialProjectsCta: isEs
-  ? "Si te interesa licenciar uno de estos productos, implementarlo para tu organización o conversar una posible alianza, podés contactarme para recibir una ficha comercial o propuesta de alcance."
-  : "If you are interested in licensing one of these products, implementing it for your organization, or exploring a partnership, feel free to contact me to receive a commercial one-pager or scope proposal.",
+  ? "Si te interesa licenciar uno de estos productos, implementarlo para tu organización o conversar una posible alianza, podés contactarme para recibir una ficha comercial, propuesta de alcance o alternativa de colaboración."
+  : "If you are interested in licensing one of these products, implementing it for your organization, or exploring a partnership, feel free to contact me to receive a commercial one-pager, scope proposal, or collaboration option.",
 
 commercialProjectsContact: isEs
   ? "Contactar"
   : "Contact",
 
 commercialProjectsRequest: isEs
-  ? "Solicitar ficha comercial"
-  : "Request one-pager",
+  ? "Solicitar ficha RadarSocial"
+  : "Request RadarSocial one-pager",
+
+commercialProjectsSecondaryNote: isEs
+  ? "También disponible para adaptar a otros modelos o verticales."
+  : "Also available to adapt for other models or verticals.",
+
+
+
+commercialProjectsBottomNote: isEs
+  ? "Modalidades posibles: licenciamiento, implementación, white-label, adaptación por vertical, partnership estratégico o adquisición, según el proyecto."
+  : "Possible models: licensing, deployment, white-label, vertical adaptation, strategic partnership, or acquisition, depending on the project.",
 
 commercialProjectsItems: [
   {
@@ -725,6 +735,9 @@ commercialProjectsItems: [
     model: isEs
       ? "Licencia / Partnership / Adquisición"
       : "License / Partnership / Acquisition",
+    tags: isEs
+      ? ["Licencia", "Partnership", "Adquisición"]
+      : ["License", "Partnership", "Acquisition"],
   },
   {
     title: isEs
@@ -739,6 +752,9 @@ commercialProjectsItems: [
     model: isEs
       ? "Implementación / White-label / Adaptación"
       : "Deployment / White-label / Adaptation",
+    tags: isEs
+      ? ["Implementación", "White-label", "Adaptación"]
+      : ["Deployment", "White-label", "Adaptation"],
   },
   {
     title: isEs
@@ -753,8 +769,12 @@ commercialProjectsItems: [
     model: isEs
       ? "Proyecto a medida / Licencia parcial"
       : "Custom project / Partial license",
+    tags: isEs
+      ? ["Proyecto a medida", "Licencia parcial", "Adaptación"]
+      : ["Custom project", "Partial license", "Adaptation"],
   },
 ],
+
 
 	
 	
