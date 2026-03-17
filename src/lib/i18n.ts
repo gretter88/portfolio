@@ -34,8 +34,8 @@ const projects: Project[] = [
   order: 1,
   title: "RadarSocial",
   desc: isEs
-    ? "Web en producción + App Android en testing. Plataforma social con chat en tiempo real, mapas, estado online, stickers, llamadas y monetización mobile (AdMob, compras in-app y premium). Backend Node/MongoDB + Socket.IO. Las capturas actuales combinan versión app y web; la app Android está en testing privado (Google Play – acceso por invitación)."
-    : "Web live + Android app in testing. Social platform with real-time chat, maps, online presence, stickers, calls, and mobile monetization (AdMob, in-app purchases, and premium). Node/MongoDB + Socket.IO backend. Current screenshots combine app and web views; the Android app is in private testing (Google Play – invite-only).",
+    ? "Web en producción + App Android en testing. Plataforma social y de servicios en tiempo real con dos experiencias dentro de la misma app: modo social y modo servicio. Incluye chat, mapas, estado online, proximidad por BLE, stickers, mensajes de voz, llamadas, videollamadas y monetización mobile (AdMob, compras in-app y premium). Backend Node/MongoDB + Socket.IO. Las capturas actuales combinan versión app y web; la app Android está en testing privado (Google Play – acceso por invitación)."
+    : "Web live + Android app in testing. Real-time social and services platform with two experiences inside the same app: social mode and service mode. It includes chat, maps, online presence, BLE proximity, stickers, voice messages, calls, video calls, and mobile monetization (AdMob, in-app purchases, and premium). Node/MongoDB + Socket.IO backend. Current screenshots combine app and web views; the Android app is in private testing (Google Play – invite-only).",
   stack: [
     "Next.js",
     "TypeScript",
@@ -46,12 +46,14 @@ const projects: Project[] = [
     "Firebase",
     "AdMob",
     "Google Play Billing",
+    "WebRTC",
+    "BLE",
   ],
   image: {
     src: "/screenshots/radarsocial-app-1.webp",
     alt: isEs
-      ? "RadarSocial — App / Login"
-      : "RadarSocial — App / Login",
+      ? "RadarSocial — App / vista principal"
+      : "RadarSocial — App / main view",
   },
   links: { demo: "https://radarsocial.com.uy/", repo: "" },
   badge: isEs
@@ -61,51 +63,55 @@ const projects: Project[] = [
     {
       src: "/screenshots/radarsocial-app-1.webp",
       alt: isEs
-        ? "RadarSocial — App / Login"
-        : "RadarSocial — App / Login",
+        ? "RadarSocial — App / Login o inicio"
+        : "RadarSocial — App / Login or home",
     },
     {
       src: "/screenshots/radarsocial-app-2.webp",
       alt: isEs
-        ? "RadarSocial — App / Home"
-        : "RadarSocial — App / Home",
+        ? "RadarSocial — App / Home social o servicio"
+        : "RadarSocial — App / Social or service home",
     },
     {
       src: "/screenshots/radarsocial-app-3.webp",
       alt: isEs
-        ? "RadarSocial — App / Chat"
-        : "RadarSocial — App / Chat",
+        ? "RadarSocial — App / Chat en tiempo real"
+        : "RadarSocial — App / Real-time chat",
     },
     {
       src: "/screenshots/radarsocial-app-4.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa"
-        : "RadarSocial — App / Map",
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
     },
-  {
+ {
       src: "/screenshots/radarsocial-app-5.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa"
-        : "RadarSocial — App / Map",
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
     },
-  {
+
+ {
       src: "/screenshots/radarsocial-app-6.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa"
-        : "RadarSocial — App / Map",
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
     },
-  {
+
+ {
       src: "/screenshots/radarsocial-app-7.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa"
-        : "RadarSocial — App / Map",
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
     },
-  {
+
+ {
       src: "/screenshots/radarsocial-app-8.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa"
-        : "RadarSocial — App / Map",
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
     },
+
     {
       src: "/screenshots/radarsocial-1.webp",
       alt: isEs
@@ -133,26 +139,43 @@ const projects: Project[] = [
   ],
   features: isEs
     ? [
-        "Plataforma social con versión web en producción y app Android en testing",
-        "Chat 1:1 en tiempo real (Socket.IO) con estados: online / escribiendo / no leídos",
-        "Mapa con geolocalización y usuarios cercanos + navegación directa al chat",
-        "Stickers y multimedia + notificaciones push (FCM/Notifee)",
-        "Llamadas por internet (audio/video) integradas al flujo del chat",
+        "Plataforma con dos experiencias dentro de la misma app: modo social y modo servicio",
+        "Registro y login con email/password + acceso con Google",
+        "Verificación de cuenta por email en el flujo de registro tradicional",
+        "Personalización de perfil con selección de avatar y uso automático de foto de Google en perfil y mapa al iniciar sesión con Google",
+        "Chat 1:1 en tiempo real (Socket.IO) con estados: online / escribiendo / no leídos / leídos",
+        "Mensajes de voz estilo WhatsApp, stickers y multimedia dentro del chat",
+        "Llamadas de audio y videollamadas integradas al flujo del chat",
+        "Notificaciones push de mensajes, llamadas y videollamadas, incluso en segundo plano o con la app cerrada",
+        "Mapa con geolocalización, usuarios cercanos y servicios publicados en tiempo real",
+        "Modo servicio con publicación de servicios, búsqueda en mapa y contacto cliente/proveedor",
+        "Detección de proximidad por BLE con configuración de visibilidad y datos compartidos",
+        "Conexión entre usuarios cercanos: guardar contacto descubierto por BLE y abrir chat en tiempo real",
         "Monetización mobile con AdMob, compras dentro de la app y plan premium sin publicidad",
         "Economía interna con estrellas, beneficios premium y descuentos en compras",
+        "Panel/admin interno para controlar usuarios, accesos, APIs, métricas y operación general",
         "Backend Node/Express + MongoDB con auth JWT, logs y APIs REST",
       ]
     : [
-        "Social platform with live web version and Android app in testing",
-        "Real-time 1:1 chat (Socket.IO) with presence: online / typing / unread counters",
-        "Map with geolocation and nearby users + direct navigation to chat",
-        "Stickers and rich media + push notifications (FCM/Notifee)",
-        "Internet calls (audio/video) integrated into the chat flow",
+        "Platform with two experiences inside the same app: social mode and service mode",
+        "Sign up and login with email/password + Google sign-in",
+        "Email account verification in the traditional registration flow",
+        "Profile personalization with avatar selection and automatic Google profile photo usage across profile and map when signing in with Google",
+        "Real-time 1:1 chat (Socket.IO) with presence: online / typing / unread / read states",
+        "WhatsApp-style voice messages, stickers, and rich media inside chat",
+        "Audio calls and video calls integrated into the chat flow",
+        "Push notifications for messages, calls, and video calls, including background and app-closed scenarios",
+        "Map with geolocation, nearby users, and real-time published services",
+        "Service mode with service publishing, map-based discovery, and client/provider interaction",
+        "BLE proximity discovery with configurable visibility and shared profile data",
+        "Nearby user connection flow: save BLE-discovered contacts and open real-time chat",
         "Mobile monetization with AdMob, in-app purchases, and a premium ad-free plan",
         "Internal stars economy, premium benefits, and discounted purchases",
+        "Internal admin panel to manage users, access, APIs, metrics, and overall operations",
         "Node/Express + MongoDB backend with JWT auth, logs, and REST APIs",
       ],
 },
+
 
 
 
