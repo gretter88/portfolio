@@ -679,7 +679,82 @@ experience: isEs
 
 
 
+navCommercial: isEs ? "Licenciamiento" : "Licensing",
+commercialProjectsTitle: isEs
+  ? "Proyectos comercializables"
+  : "Commercial projects",
 
+commercialProjectsKicker: isEs
+  ? "Productos digitales desarrollados y disponibles para licenciamiento, partnership, implementación comercial o adquisición, según alcance y modelo de negocio."
+  : "Digital products developed and available for licensing, partnership, commercial deployment, or acquisition, depending on scope and business model.",
+
+commercialProjectsIntro: isEs
+  ? "Además de desarrollar soluciones a medida, también construyo productos propios con potencial de comercialización. Algunos proyectos de este portfolio pueden adaptarse, licenciarse o implementarse para terceros bajo distintos esquemas de colaboración."
+  : "In addition to building custom solutions, I also create proprietary products with commercial potential. Some projects in this portfolio can be adapted, licensed, or deployed for third parties under different collaboration models.",
+
+commercialProjectsBadge: isEs
+  ? "Negocio / Licenciamiento"
+  : "Business / Licensing",
+
+
+commercialProjectsModelLabel: isEs
+  ? "Modelo"
+  : "Model",
+
+commercialProjectsCta: isEs
+  ? "Si te interesa licenciar uno de estos productos, implementarlo para tu organización o conversar una posible alianza, podés contactarme para recibir una ficha comercial o propuesta de alcance."
+  : "If you are interested in licensing one of these products, implementing it for your organization, or exploring a partnership, feel free to contact me to receive a commercial one-pager or scope proposal.",
+
+commercialProjectsContact: isEs
+  ? "Contactar"
+  : "Contact",
+
+commercialProjectsRequest: isEs
+  ? "Solicitar ficha comercial"
+  : "Request one-pager",
+
+commercialProjectsItems: [
+  {
+    title: isEs ? "RadarSocial" : "RadarSocial",
+    status: isEs
+      ? "Disponible para licenciamiento"
+      : "Available for licensing",
+    description: isEs
+      ? "Plataforma full stack de interacción social y servicios en tiempo real. Incluye app móvil, web, backend, chat, mapas, llamadas, BLE, monetización y panel administrativo. Disponible para licenciamiento, partnership o implementación comercial."
+      : "Full-stack real-time social and services platform. Includes mobile app, web, backend, chat, maps, calls, BLE, monetization, and admin panel. Available for licensing, partnership, or commercial deployment.",
+    model: isEs
+      ? "Licencia / Partnership / Adquisición"
+      : "License / Partnership / Acquisition",
+  },
+  {
+    title: isEs
+      ? "Marketplace de Servicios"
+      : "Services Marketplace",
+    status: isEs
+      ? "Disponible para implementación"
+      : "Available for deployment",
+    description: isEs
+      ? "Solución mobile orientada a conectar clientes, proveedores y administración en una sola operación. Incluye solicitudes, chat en tiempo real, mapa, historial, reseñas y dashboard admin. Disponible para implementación comercial y adaptación por vertical."
+      : "Mobile solution designed to connect clients, providers, and admin workflows in a single operation. Includes requests, real-time chat, map, history, reviews, and admin dashboard. Available for commercial deployment and vertical adaptation.",
+    model: isEs
+      ? "Implementación / White-label / Adaptación"
+      : "Deployment / White-label / Adaptation",
+  },
+  {
+    title: isEs
+      ? "Kiosco Interactivo / Museo"
+      : "Interactive Kiosk / Museum",
+    status: isEs
+      ? "Disponible para adaptación"
+      : "Available for adaptation",
+    description: isEs
+      ? "Sistema interactivo para espacios culturales, educativos o institucionales. Puede adaptarse como solución de exhibición, consulta y experiencia inmersiva para proyectos con requerimientos específicos de contenido y operación."
+      : "Interactive system for cultural, educational, or institutional spaces. It can be adapted as an exhibition, consultation, and immersive experience solution for projects with specific content and operational requirements.",
+    model: isEs
+      ? "Proyecto a medida / Licencia parcial"
+      : "Custom project / Partial license",
+  },
+],
 
 	
 	

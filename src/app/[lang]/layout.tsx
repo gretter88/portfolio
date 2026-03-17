@@ -4,7 +4,7 @@ import { LANGS, type Lang, LINKS, t } from "@/lib/i18n";
 import ThemeToggle from "@/components/ThemeToggle";
 import TrackedLink from "@/components/TrackedLink";
 import { Analytics } from "@vercel/analytics/next";
-
+import Link from "next/link";
 function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
 }
@@ -17,10 +17,8 @@ export async function generateMetadata({
   const resolved = await Promise.resolve(params);
   const lang = (LANGS.includes(resolved.lang as Lang) ? resolved.lang : "es") as Lang;
   const i = t(lang);
-
   const baseUrl = new URL("https://www.santiagogretter.com.uy");
   const url = new URL(`/${lang}`, baseUrl);
-
   const title = `${i.name} — Portfolio`;
   const description = i.summary;
 
@@ -112,6 +110,16 @@ export default async function LangLayout({
             </TrackedLink>
 
             <TrackedLink
+              href="#commercial-projects"
+              trackPath="/nav/commercial-projects"
+              lang={lang}
+              className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
+              style={{ borderColor: "var(--card-border)", background: "transparent" }}
+            >
+              {i.navCommercial}
+            </TrackedLink>
+
+            <TrackedLink
               href="#contact"
               trackPath="/nav/contact"
               lang={lang}
@@ -131,13 +139,14 @@ export default async function LangLayout({
               {i.sectionExperienceTitle}
             </TrackedLink>
 
-            <a
-              href={i.switchHref}
-              className={clsx("rounded-xl border px-4 py-2 text-sm")}
-              style={{ borderColor: "var(--card-border)", background: "transparent" }}
-            >
-              {i.switchTo}
-            </a>
+          <Link
+  href={i.switchHref}
+  className={clsx("rounded-xl border px-4 py-2 text-sm")}
+  style={{ borderColor: "var(--card-border)", background: "transparent" }}
+>
+  {i.switchTo}
+</Link>
+
 
             <TrackedLink
               href="/go/linkedin"
@@ -165,7 +174,7 @@ export default async function LangLayout({
       </header>
 
       {children}
-	  <Analytics />
+      <Analytics />
     </div>
   );
 }

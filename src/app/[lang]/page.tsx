@@ -2,6 +2,8 @@
 import { LANGS, type Lang, LINKS, t } from "@/lib/i18n";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import TrackPageView from "@/components/TrackPageView";
+import CommercialProjectsSection from "@/components/CommercialProjectsSection";
+
 function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
 }
@@ -15,7 +17,6 @@ export default async function Page({
 }) {
   const resolved = await Promise.resolve(params);
   const resolvedSearchParams = await Promise.resolve(searchParams);
-
   const lang = (LANGS.includes(resolved.lang as Lang) ? resolved.lang : "es") as Lang;
   const i = t(lang);
 
@@ -26,6 +27,7 @@ export default async function Page({
     background: "var(--card)",
     borderColor: "var(--card-border)",
   };
+
   const mutedStyle: React.CSSProperties = { color: "var(--muted)" };
   const muted2Style: React.CSSProperties = { color: "var(--muted-2)" };
 
@@ -52,7 +54,8 @@ export default async function Page({
 
   return (
     <main>
-	 <TrackPageView path={`/${lang}`} lang={lang} />
+      <TrackPageView path={`/${lang}`} lang={lang} />
+
       <div className="mx-auto max-w-5xl px-6 py-14">
         {/* HERO */}
         <section className="flex flex-col gap-6">
@@ -92,15 +95,11 @@ export default async function Page({
             <a href={LINKS.email} className={linkClass} style={linkStyle}>
               {LINKS.emailText}
             </a>
-
             <span style={muted2Style}>•</span>
-
             <a href="/go/linkedin" className={linkClass} style={linkStyle}>
               LinkedIn
             </a>
-
             <span style={muted2Style}>•</span>
-
             <a href="/go/github" className={linkClass} style={linkStyle}>
               GitHub
             </a>
@@ -110,7 +109,6 @@ export default async function Page({
         {/* PROJECTS */}
         <section id="projects" className="mt-16">
           <h3 className="text-2xl font-semibold">{i.sectionProjectsTitle}</h3>
-
           <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
             {i.sectionProjectsKicker}
           </p>
@@ -123,10 +121,11 @@ export default async function Page({
           />
         </section>
 
+        <CommercialProjectsSection i={i} />
+
         {/* EXPERIENCE */}
         <section id="experience" className="mt-16">
           <h3 className="text-2xl font-semibold">{i.sectionExperienceTitle}</h3>
-
           <p className="mt-3 text-sm" style={mutedStyle}>
             {i.sectionExperienceKicker}
           </p>
@@ -149,7 +148,6 @@ export default async function Page({
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <div className="min-w-0">
                         <h4 className="text-lg font-semibold leading-snug">{e.company}</h4>
-
                         <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
                           {e.role}
                         </div>
@@ -204,7 +202,6 @@ export default async function Page({
         {/* SKILLS */}
         <section className="mt-16">
           <h3 className="text-2xl font-semibold">{i.sectionSkillsTitle}</h3>
-
           <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
             {i.sectionSkillsKicker}
           </p>
@@ -213,7 +210,6 @@ export default async function Page({
             {i.skills.map((s) => (
               <div key={s.title} className="rounded-2xl border p-5" style={cardStyle}>
                 <h4 className="font-semibold">{s.title}</h4>
-
                 <ul className="mt-3 space-y-2 text-sm" style={mutedStyle}>
                   {s.items.map((item) => (
                     <li key={item} className="flex items-center gap-2">
@@ -326,7 +322,6 @@ export default async function Page({
         {/* CONTACT */}
         <section id="contact" className="mt-16">
           <h3 className="text-2xl font-semibold">{i.sectionContactTitle}</h3>
-
           <p className="mt-2" style={mutedStyle}>
             {i.sectionContactDesc}
           </p>
@@ -335,11 +330,9 @@ export default async function Page({
             <a href={LINKS.email} className={primaryBtnClass} style={primaryBtnStyle}>
               {i.ctaEmail}
             </a>
-
             <a href="/go/linkedin" className={softBtnClass} style={softBtnStyle}>
               {i.ctaLinkedin}
             </a>
-
             <a href="/go/github" className={softBtnClass} style={softBtnStyle}>
               {i.ctaGithub}
             </a>
@@ -359,8 +352,8 @@ export default async function Page({
           © {new Date().getFullYear()} {i.footer}
         </footer>
       </div>
-	 
     </main>
   );
 }
+
 

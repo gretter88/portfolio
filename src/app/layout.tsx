@@ -1,4 +1,3 @@
-// src/app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
 import Script from "next/script";
@@ -10,7 +9,6 @@ export const metadata: Metadata = {
   metadataBase: baseUrl,
   title: "Santiago Gretter — Portfolio",
   description: "Fullstack / Mobile Developer (React Native · Node · Next.js)",
-
   robots: {
     index: true,
     follow: true,
@@ -22,12 +20,10 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-
   manifest: "/manifest.webmanifest",
-
   icons: {
     icon: [
-      { url: "/favicon.ico" }, // ✅ compatibilidad máxima
+      { url: "/favicon.ico" },
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
@@ -37,31 +33,49 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html suppressHydrationWarning>
       <head>
-        {/* Tema (dark/light) antes de pintar */}
         <Script id="theme-init" strategy="beforeInteractive">{`
 (function() {
   try {
-    var saved = localStorage.getItem('theme'); // 'light' | 'dark' | null
-    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var saved = localStorage.getItem('theme');
+    var prefersDark =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
     var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
-    if (theme === 'dark') document.documentElement.classList.add('dark');
-    else document.documentElement.classList.remove('dark');
+
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   } catch (e) {}
 })();
         `}</Script>
 
-        {/* ✅ theme-color pro (mejora barra mobile) */}
-        <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <meta
+          name="theme-color"
+          content="#0a0a0a"
+          media="(prefers-color-scheme: dark)"
+        />
+        <meta
+          name="theme-color"
+          content="#ffffff"
+          media="(prefers-color-scheme: light)"
+        />
       </head>
-      <body>
-	  {children}
-	  <Analytics />
-	  </body>
+
+      <body className="bg-[var(--background)] text-[var(--foreground)]">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
+
