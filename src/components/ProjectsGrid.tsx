@@ -92,6 +92,17 @@ const isMobileShot = (
   );
 };
 
+const isLiveWebsiteProject = (p: Project) => {
+  const slug = getProjectSlug(p);
+  return slug === "radar" || slug === "museo";
+};
+
+const isLiveBadgeProject = (p: Project) => {
+  const slug = getProjectSlug(p);
+  return slug === "radar" || slug === "museo";
+};
+
+
 
 const getPrimaryLinkLabel = (p: Project) => {
   const slug = getProjectSlug(p);
@@ -419,13 +430,38 @@ const getPublicDemoPath = (p: Project) => {
 
 
               {p.badge ? (
-                <div className="mb-3">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-200">
-                    <span className={clsx("h-2 w-2 rounded-full", getDotClass(p.badge))} />
-                    {p.badge}
-                  </span>
-                </div>
-              ) : null}
+  <div className="mb-3">
+    <span
+      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs"
+      style={
+        isLiveBadgeProject(p)
+          ? {
+              border: "1px solid rgba(34,197,94,0.35)",
+              background: "rgba(34,197,94,0.10)",
+              color: "var(--foreground)",
+            }
+          : {
+              border: "1px solid var(--card-border)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--muted)",
+            }
+      }
+    >
+      <span
+        className={clsx("rounded-full", getDotClass(p.badge))}
+        style={{
+          width: isLiveBadgeProject(p) ? 9 : 8,
+          height: isLiveBadgeProject(p) ? 9 : 8,
+          boxShadow: isLiveBadgeProject(p)
+            ? "0 0 0 4px rgba(34,197,94,0.12)"
+            : "none",
+        }}
+      />
+      {p.badge}
+    </span>
+  </div>
+) : null}
+
 
               <h4 className="text-lg font-semibold">{p.title}</h4>
 
@@ -480,16 +516,32 @@ const getPublicDemoPath = (p: Project) => {
                       {isEs ? "Solicitar acceso" : "Request access"}
                     </a>
                   ) : (
-                  <a
+                <a
   className={ghostBtnClass}
-  style={ghostBtnStyle}
+  style={
+    isLiveWebsiteProject(p)
+      ? {
+          background: "rgba(34,197,94,0.10)",
+          borderColor: "rgba(34,197,94,0.35)",
+          color: "var(--foreground)",
+        }
+      : ghostBtnStyle
+  }
   href={getPublicDemoPath(p)}
   target="_blank"
   rel="noreferrer"
   onClick={(e) => e.stopPropagation()}
 >
-  {getPrimaryLinkLabel(p)}
+  {isLiveWebsiteProject(p) ? (
+    <span className="inline-flex items-center gap-2">
+      <span className="h-2 w-2 rounded-full bg-green-400" />
+      {getPrimaryLinkLabel(p)}
+    </span>
+  ) : (
+    getPrimaryLinkLabel(p)
+  )}
 </a>
+
 
 
 
@@ -575,13 +627,38 @@ const getPublicDemoPath = (p: Project) => {
             >
               <div className="min-w-0">
                 {activeProject.badge ? (
-                  <div className="mb-2">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-200">
-                      <span className={clsx("h-2 w-2 rounded-full", getDotClass(activeProject.badge))} />
-                      {activeProject.badge}
-                    </span>
-                  </div>
-                ) : null}
+  <div className="mb-2">
+    <span
+      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs"
+      style={
+        isLiveBadgeProject(activeProject)
+          ? {
+              border: "1px solid rgba(34,197,94,0.35)",
+              background: "rgba(34,197,94,0.10)",
+              color: "var(--foreground)",
+            }
+          : {
+              border: "1px solid var(--card-border)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--muted)",
+            }
+      }
+    >
+      <span
+        className={clsx("rounded-full", getDotClass(activeProject.badge))}
+        style={{
+          width: isLiveBadgeProject(activeProject) ? 9 : 8,
+          height: isLiveBadgeProject(activeProject) ? 9 : 8,
+          boxShadow: isLiveBadgeProject(activeProject)
+            ? "0 0 0 4px rgba(34,197,94,0.12)"
+            : "none",
+        }}
+      />
+      {activeProject.badge}
+    </span>
+  </div>
+) : null}
+
 
                 <h3 className="text-xl font-semibold truncate">{activeProject.title}</h3>
                 <p className="mt-1 text-sm leading-relaxed" style={mutedStyle}>
@@ -886,13 +963,28 @@ activeProject?.video?.id ? (
                         ) : (
                           <a
   className={primaryBtnClass}
-  style={primaryBtnStyle}
+  style={
+    isLiveWebsiteProject(activeProject)
+      ? {
+          background: "#16a34a",
+          color: "#ffffff",
+        }
+      : primaryBtnStyle
+  }
   href={getPublicDemoPath(activeProject)}
   target="_blank"
   rel="noreferrer"
 >
-  {getPrimaryLinkLabel(activeProject)}
+  {isLiveWebsiteProject(activeProject) ? (
+    <span className="inline-flex items-center gap-2">
+      <span className="h-2 w-2 rounded-full bg-white/90" />
+      {getPrimaryLinkLabel(activeProject)}
+    </span>
+  ) : (
+    getPrimaryLinkLabel(activeProject)
+  )}
 </a>
+
 
                         )
                       ) : (
