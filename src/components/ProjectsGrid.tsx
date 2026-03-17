@@ -471,17 +471,22 @@ const getPublicDemoPath = (p: Project) => {
                       {isEs ? "Solicitar acceso" : "Request access"}
                     </a>
                   ) : (
-                    <a
-                      className={ghostBtnClass}
-                      style={ghostBtnStyle}
-                      href={getPublicDemoPath(p)}
+                   <a
+  className={ghostBtnClass}
+  style={ghostBtnStyle}
+  href={getPublicDemoPath(p)}
+  target="_blank"
+  rel="noreferrer"
+  onClick={(e) => e.stopPropagation()}
+>
+  {getProjectSlug(p) === "radar"
+    ? isEs
+      ? "Ver sitio"
+      : "View site"
+    : "Demo"}
+</a>
 
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Demo
-                    </a>
+
                   )
                 ) : (
                   <span

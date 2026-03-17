@@ -30,36 +30,106 @@ export function t(lang: Lang) {
   const isEs = lang === "es";
 
 const projects: Project[] = [
- {
+{
   order: 1,
   title: "RadarSocial",
   desc: isEs
-    ? "Web en producción + App Android en testing. Plataforma social con chat en tiempo real, mapas, estado online, stickers y llamadas. Backend Node/MongoDB + Socket.IO. Las capturas actuales corresponden a la versión web en producción; la app Android está en testing privado (Google Play – acceso por invitación)."
-    : "Web live + Android app in testing. Social platform with real-time chat, maps, online presence, stickers and calls. Node/MongoDB + Socket.IO backend. Current screenshots correspond to the live web version; the Android app is in private testing (Google Play – invite-only).",
-  stack: ["Next.js", "TypeScript", "React Native", "Node.js", "MongoDB", "Socket.IO"],
+    ? "Web en producción + App Android en testing. Plataforma social con chat en tiempo real, mapas, estado online, stickers, llamadas y monetización mobile (AdMob, compras in-app y premium). Backend Node/MongoDB + Socket.IO. Las capturas actuales combinan versión app y web; la app Android está en testing privado (Google Play – acceso por invitación)."
+    : "Web live + Android app in testing. Social platform with real-time chat, maps, online presence, stickers, calls, and mobile monetization (AdMob, in-app purchases, and premium). Node/MongoDB + Socket.IO backend. Current screenshots combine app and web views; the Android app is in private testing (Google Play – invite-only).",
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "React Native",
+    "Node.js",
+    "MongoDB",
+    "Socket.IO",
+    "Firebase",
+    "AdMob",
+    "Google Play Billing",
+  ],
   image: {
-  src: "/screenshots/radarsocial-app-1.webp",
-  alt: isEs
-    ? "RadarSocial — App / vista principal"
-    : "RadarSocial — App / main view",
-},
-
-
+    src: "/screenshots/radarsocial-app-1.webp",
+    alt: isEs
+      ? "RadarSocial — App / Login"
+      : "RadarSocial — App / Login",
+  },
   links: { demo: "https://radarsocial.com.uy/", repo: "" },
-  badge: isEs ? "Web: Live · App Android: Testing privado" : "Web: Live · Android App: Private testing",
+  badge: isEs
+    ? "Web: Live · App Android: Testing privado"
+    : "Web: Live · Android App: Private testing",
   screenshots: [
-	{ src: "/screenshots/radarsocial-app-1.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
-	{ src: "/screenshots/radarsocial-app-2.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
-	{ src: "/screenshots/radarsocial-app-3.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
-	{ src: "/screenshots/radarsocial-app-4.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
-	{ src: "/screenshots/radarsocial-app-5.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
-	{ src: "/screenshots/radarsocial-app-6.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
-	{ src: "/screenshots/radarsocial-app-7.webp", alt: isEs ? "RadarSocial — App / Inicio / UX" : "RadarSocial — App / Home / UX" },
-    { src: "/screenshots/radarsocial-1.webp", alt: isEs ? "RadarSocial — Web / Perfil / UX" : "RadarSocial — Web / Profile / UX" },
-    { src: "/screenshots/radarsocial-2.webp", alt: isEs ? "RadarSocial — Web / Chat en tiempo real" : "RadarSocial — Web / Real-time chat" },
-    { src: "/screenshots/radarsocial-3.webp", alt: isEs ? "RadarSocial — Web / Mapa y usuarios cercanos" : "RadarSocial — Web / Map and nearby users" },
-    { src: "/screenshots/radarsocial-4.webp", alt: isEs ? "RadarSocial — Web / Inicio / UX" : "RadarSocial — Web / Home / UX" },
-	
+    {
+      src: "/screenshots/radarsocial-app-1.webp",
+      alt: isEs
+        ? "RadarSocial — App / Login"
+        : "RadarSocial — App / Login",
+    },
+    {
+      src: "/screenshots/radarsocial-app-2.webp",
+      alt: isEs
+        ? "RadarSocial — App / Home"
+        : "RadarSocial — App / Home",
+    },
+    {
+      src: "/screenshots/radarsocial-app-3.webp",
+      alt: isEs
+        ? "RadarSocial — App / Chat"
+        : "RadarSocial — App / Chat",
+    },
+    {
+      src: "/screenshots/radarsocial-app-4.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa"
+        : "RadarSocial — App / Map",
+    },
+  {
+      src: "/screenshots/radarsocial-app-5.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa"
+        : "RadarSocial — App / Map",
+    },
+  {
+      src: "/screenshots/radarsocial-app-6.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa"
+        : "RadarSocial — App / Map",
+    },
+  {
+      src: "/screenshots/radarsocial-app-7.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa"
+        : "RadarSocial — App / Map",
+    },
+  {
+      src: "/screenshots/radarsocial-app-8.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa"
+        : "RadarSocial — App / Map",
+    },
+    {
+      src: "/screenshots/radarsocial-1.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Perfil / UX"
+        : "RadarSocial — Web / Profile / UX",
+    },
+    {
+      src: "/screenshots/radarsocial-2.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Chat en tiempo real"
+        : "RadarSocial — Web / Real-time chat",
+    },
+    {
+      src: "/screenshots/radarsocial-3.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Mapa y usuarios cercanos"
+        : "RadarSocial — Web / Map and nearby users",
+    },
+    {
+      src: "/screenshots/radarsocial-4.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / UX",
+    },
   ],
   features: isEs
     ? [
@@ -68,6 +138,8 @@ const projects: Project[] = [
         "Mapa con geolocalización y usuarios cercanos + navegación directa al chat",
         "Stickers y multimedia + notificaciones push (FCM/Notifee)",
         "Llamadas por internet (audio/video) integradas al flujo del chat",
+        "Monetización mobile con AdMob, compras dentro de la app y plan premium sin publicidad",
+        "Economía interna con estrellas, beneficios premium y descuentos en compras",
         "Backend Node/Express + MongoDB con auth JWT, logs y APIs REST",
       ]
     : [
@@ -76,9 +148,13 @@ const projects: Project[] = [
         "Map with geolocation and nearby users + direct navigation to chat",
         "Stickers and rich media + push notifications (FCM/Notifee)",
         "Internet calls (audio/video) integrated into the chat flow",
+        "Mobile monetization with AdMob, in-app purchases, and a premium ad-free plan",
+        "Internal stars economy, premium benefits, and discounted purchases",
         "Node/Express + MongoDB backend with JWT auth, logs, and REST APIs",
       ],
 },
+
+
 
 
   
