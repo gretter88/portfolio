@@ -93,6 +93,15 @@ const isMobileShot = (
 };
 
 
+const getPrimaryLinkLabel = (p: Project) => {
+  const slug = getProjectSlug(p);
+
+  if (slug === "radar" || slug === "museo") {
+    return isEs ? "Ver sitio" : "View site";
+  }
+
+  return "Demo";
+};
 
 
  const isMarketplaceProject = (project?: Project | null) => {
@@ -471,7 +480,7 @@ const getPublicDemoPath = (p: Project) => {
                       {isEs ? "Solicitar acceso" : "Request access"}
                     </a>
                   ) : (
-                   <a
+                  <a
   className={ghostBtnClass}
   style={ghostBtnStyle}
   href={getPublicDemoPath(p)}
@@ -479,12 +488,9 @@ const getPublicDemoPath = (p: Project) => {
   rel="noreferrer"
   onClick={(e) => e.stopPropagation()}
 >
-  {getProjectSlug(p) === "radar"
-    ? isEs
-      ? "Ver sitio"
-      : "View site"
-    : "Demo"}
+  {getPrimaryLinkLabel(p)}
 </a>
+
 
 
                   )
@@ -879,14 +885,15 @@ activeProject?.video?.id ? (
                           </a>
                         ) : (
                           <a
-                            className={primaryBtnClass}
-                            style={primaryBtnStyle}
-                            href={getPublicDemoPath(activeProject)}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Demo
-                          </a>
+  className={primaryBtnClass}
+  style={primaryBtnStyle}
+  href={getPublicDemoPath(activeProject)}
+  target="_blank"
+  rel="noreferrer"
+>
+  {getPrimaryLinkLabel(activeProject)}
+</a>
+
                         )
                       ) : (
                         <span
