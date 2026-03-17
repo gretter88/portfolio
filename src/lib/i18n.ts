@@ -105,8 +105,44 @@ const projects: Project[] = [
         : "RadarSocial — App / Map and users or services",
     },
 
- {
+
+	 {
       src: "/screenshots/radarsocial-app-8.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
+    },
+	
+	 {
+      src: "/screenshots/radarsocial-app-9.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
+    },
+	
+	 {
+      src: "/screenshots/radarsocial-app-10.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
+    },
+	
+	 {
+      src: "/screenshots/radarsocial-app-11.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
+    },
+	
+	 {
+      src: "/screenshots/radarsocial-app-12.webp",
+      alt: isEs
+        ? "RadarSocial — App / Mapa y usuarios o servicios"
+        : "RadarSocial — App / Map and users or services",
+    },
+	
+	 {
+      src: "/screenshots/radarsocial-app-13.webp",
       alt: isEs
         ? "RadarSocial — App / Mapa y usuarios o servicios"
         : "RadarSocial — App / Map and users or services",

@@ -333,94 +333,96 @@ const getPublicDemoPath = (p: Project) => {
             >
              {p.image?.src ? (
   <div
-    className="mb-4 overflow-hidden rounded-xl border"
-    style={{
-      ...cardStyle,
-      background: "var(--background)",
-    }}
-  >
+  className="mb-4 overflow-hidden rounded-xl border"
+  style={{
+    ...cardStyle,
+    background: "var(--background)",
+    minHeight: 290,
+    display: "grid",
+    alignItems: "center",
+  }}
+>
+
     {isMobileShot(p.image, p) ? (
 
-     <div
+<div
   className="grid place-items-center"
   style={{
-    minHeight: isMarketplaceProject(p) ? 320 : 300,
-    padding: isMarketplaceProject(p) ? "22px 0" : "14px 0",
+    minHeight: isMarketplaceProject(p) ? 360 : 340,
+    padding: isMarketplaceProject(p) ? "26px 0" : "20px 0",
     background:
       "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
   }}
 >
-
-       <div
-  style={{
-    width: isMarketplaceProject(p) ? 156 : 170,
-    maxWidth: "72%",
-    borderRadius: isMarketplaceProject(p) ? 28 : 26,
-    padding: isMarketplaceProject(p) ? 7 : 6,
-    background: "#0f0f10",
-    boxShadow:
-      "0 12px 30px rgba(0,0,0,0.32), inset 0 0 0 1px rgba(255,255,255,0.05)",
-    border: "1px solid rgba(255,255,255,0.08)",
-  }}
->
-
-          <div
-  style={{
-    position: "relative",
-    borderRadius: isMarketplaceProject(p) ? 22 : 20,
-    overflow: "hidden",
-    background: "#000",
-  }}
->
-
-           <div
-  style={{
-    position: "absolute",
-    top: 7,
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: isMarketplaceProject(p) ? 34 : 48,
-    height: isMarketplaceProject(p) ? 8 : 10,
-    borderRadius: 999,
-    background: "#111",
-    zIndex: 2,
-    opacity: 0.96,
-    boxShadow: "0 1px 2px rgba(255,255,255,0.04) inset",
-  }}
-/>
-
-            <img
-  src={p.image.src}
-  alt={p.image.alt}
-  loading="lazy"
-  className="transition duration-300 hover:scale-[1.03]"
-  style={{
-    width: "100%",
-    height: isMarketplaceProject(p) ? 250 : 270,
-    objectFit: isMarketplaceProject(p) ? "contain" : "cover",
-    objectPosition: "top center",
-    display: "block",
-    background: "#000",
-  }}
-/>
-
-          </div>
-        </div>
-      </div>
-    ) : (
+  <div
+    style={{
+      width: isMarketplaceProject(p) ? 170 : 182,
+      maxWidth: "78%",
+      borderRadius: isMarketplaceProject(p) ? 30 : 28,
+      padding: isMarketplaceProject(p) ? 8 : 7,
+      background: "#0f0f10",
+      boxShadow:
+        "0 16px 38px rgba(0,0,0,0.36), inset 0 0 0 1px rgba(255,255,255,0.05)",
+      border: "1px solid rgba(255,255,255,0.08)",
+    }}
+  >
+    <div
+      style={{
+        position: "relative",
+        borderRadius: isMarketplaceProject(p) ? 24 : 22,
+        overflow: "hidden",
+        background: "#000",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 7,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: isMarketplaceProject(p) ? 32 : 40,
+          height: isMarketplaceProject(p) ? 7 : 8,
+          borderRadius: 999,
+          background: "#111",
+          zIndex: 2,
+          opacity: 0.96,
+          boxShadow: "0 1px 2px rgba(255,255,255,0.04) inset",
+        }}
+      />
       <img
         src={p.image.src}
         alt={p.image.alt}
         loading="lazy"
-        className="w-full transition duration-300 hover:scale-[1.03]"
+        className="transition duration-300 hover:scale-[1.03]"
         style={{
-          height: 220,
+          width: "100%",
+          height: isMarketplaceProject(p) ? 292 : 305,
           objectFit: "contain",
-          objectPosition: "center",
-          background: "var(--background)",
+          objectPosition: "top center",
           display: "block",
+          background: "#000",
         }}
       />
+    </div>
+  </div>
+</div>
+
+    ) : (
+      <img
+  src={p.image.src}
+  alt={p.image.alt}
+  loading="lazy"
+  className="w-full transition duration-300 hover:scale-[1.03]"
+  style={{
+    height: 260,
+    objectFit: "contain",
+    objectPosition: "center",
+    background: "var(--background)",
+    display: "block",
+    padding: "8px 0",
+  }}
+/>
+
     )}
   </div>
 ) : null}
@@ -613,7 +615,7 @@ const getPublicDemoPath = (p: Project) => {
 
 
           <div
-            className="relative z-[210] w-full max-w-4xl rounded-2xl border flex flex-col"
+           className="relative z-[210] w-full max-w-5xl rounded-2xl border flex flex-col"
             style={{
               background: "var(--card)",
               borderColor: "var(--card-border)",
@@ -682,7 +684,8 @@ const getPublicDemoPath = (p: Project) => {
               className="flex-1 overflow-y-auto p-5"
               style={{ WebkitOverflowScrolling: "touch" }}
             >
-              <div className="grid gap-5 md:grid-cols-[1.25fr_0.75fr]">
+              <div className="grid gap-5 md:grid-cols-[1.35fr_0.65fr]">
+
                 <div>
                   {activeProject?.video?.provider === "youtube" && activeProject?.video?.id ? (
                     <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -771,15 +774,18 @@ activeProject?.video?.id ? (
    <div
   className="grid place-items-center"
   style={{
-    minHeight: isMarketplaceProject(activeProject) ? 590 : 560,
-    padding: isMarketplaceProject(activeProject) ? "34px 0" : "20px 0",
-    background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+    minHeight: isMarketplaceProject(activeProject) ? 640 : 620,
+    padding: isMarketplaceProject(activeProject) ? "36px 0" : "26px 0",
+    background:
+      "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
   }}
 >
 
+
+
 <div
   style={{
-    width: isMarketplaceProject(activeProject) ? 258 : 280,
+    width: isMarketplaceProject(activeProject) ? 270 : 292,
     maxWidth: "88%",
     borderRadius: isMarketplaceProject(activeProject) ? 38 : 36,
     padding: isMarketplaceProject(activeProject) ? 11 : 10,
@@ -789,6 +795,7 @@ activeProject?.video?.id ? (
     border: "1px solid rgba(255,255,255,0.08)",
   }}
 >
+
 
         <div
   style={{
@@ -816,19 +823,21 @@ activeProject?.video?.id ? (
 />
 
 
-        <img
+<img
   src={activeShot.src}
   alt={activeShot.alt}
   loading="lazy"
   style={{
     width: "100%",
-    height: isMarketplaceProject(activeProject) ? 500 : 520,
-    objectFit: isMarketplaceProject(activeProject) ? "contain" : "cover",
-    objectPosition: "top center",
+    height: isMarketplaceProject(activeProject) ? 540 : 560,
+    objectFit: "contain",
+    objectPosition: "center top",
     display: "block",
     background: "#000",
   }}
 />
+
+
 
         </div>
       </div>
