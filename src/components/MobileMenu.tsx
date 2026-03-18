@@ -52,6 +52,7 @@ export default function MobileMenu({ labels }: Props) {
             aria-label="Close menu overlay"
             onClick={() => setOpen(false)}
             className="fixed inset-0 z-40 md:hidden transition-opacity duration-200"
+			
             style={{
               background: "rgba(0,0,0,0.38)",
               backdropFilter: "blur(6px)",
@@ -62,20 +63,22 @@ export default function MobileMenu({ labels }: Props) {
           <div
             className="fixed right-4 top-[72px] z-50 w-[min(92vw,320px)] rounded-2xl border p-3 shadow-2xl md:hidden animate-[mobileMenuIn_.22s_ease-out]"
            style={{
-  background: "color-mix(in srgb, var(--card) 98%, black 2%)",
-  borderColor: "var(--card-border)",
-  backdropFilter: "blur(8px)",
-  WebkitBackdropFilter: "blur(8px)",
+  background: "rgba(10,10,12,0.96)",
+  borderColor: "rgba(255,255,255,0.08)",
+  backdropFilter: "blur(4px)",
+  WebkitBackdropFilter: "blur(4px)",
   transformOrigin: "top right",
-  boxShadow: "0 22px 60px rgba(0,0,0,0.32)",
+  boxShadow: "0 24px 70px rgba(0,0,0,0.45)",
 }}
+
 >
             <div
               className="mb-3 rounded-2xl border p-3"
               style={{
                 borderColor: "var(--card-border)",
                background:
-  "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04))",
+  "linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05))",
+
 
               }}
             >
@@ -110,7 +113,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.06)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -122,7 +125,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                 background: "rgba(255,255,255,0.04)",
+                 background: "rgba(255,255,255,0.06)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -134,7 +137,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.06)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -146,7 +149,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.06)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -158,7 +161,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.06)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -170,7 +173,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.06)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -182,7 +185,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.06)",
                 }}
                 onClick={() => setOpen(false)}
               >

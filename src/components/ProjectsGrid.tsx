@@ -638,500 +638,518 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
       </div>
 
       {open && activeProject ? (
-        <div
-          className="fixed inset-0 z-[200] flex items-center justify-center p-2 md:p-4 overflow-x-hidden"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div
-            className="absolute inset-0"
-            onClick={closeModal}
-            style={{
-              background: "rgba(0,0,0,0.78)",
-              backdropFilter: "blur(3px)",
-              WebkitBackdropFilter: "blur(3px)",
-            }}
-          />
+  <div
+    className="fixed inset-0 z-[200] flex items-center justify-center p-2 md:p-4 overflow-x-hidden"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div
+      className="absolute inset-0"
+      onClick={closeModal}
+      style={{
+        background: "rgba(0,0,0,0.82)",
+        backdropFilter: "blur(4px)",
+        WebkitBackdropFilter: "blur(4px)",
+      }}
+    />
 
-          <div
-            className="relative z-[210] w-full max-w-5xl rounded-2xl border flex flex-col overflow-hidden"
-            style={{
-              background: "var(--card)",
-              borderColor: "var(--card-border)",
-              boxShadow: "0 24px 100px rgba(0,0,0,0.6)",
-              width: "min(100%, 1100px)",
-              maxHeight: "calc(100dvh - 16px)",
-            }}
-          >
-            <div
-              className="flex-none flex items-start justify-between gap-3 p-4 md:p-5 border-b"
-              style={{ borderColor: "var(--card-border)" }}
-            >
-              <div className="min-w-0">
-                {activeProject.badge ? (
-                  <div className="mb-2">
-                    <span
-                      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs"
-                      style={
-                        isLiveBadgeProject(activeProject)
-                          ? {
-                              border: "1px solid rgba(34,197,94,0.35)",
-                              background: "rgba(34,197,94,0.10)",
-                              color: "var(--foreground)",
-                            }
-                          : {
-                              border: "1px solid var(--card-border)",
-                              background: "rgba(255,255,255,0.03)",
-                              color: "var(--muted)",
-                            }
-                      }
-                    >
-                      <span
-                        className={clsx(
-                          "rounded-full",
-                          getDotClass(activeProject.badge)
-                        )}
-                        style={{
-                          width: isLiveBadgeProject(activeProject) ? 9 : 8,
-                          height: isLiveBadgeProject(activeProject) ? 9 : 8,
-                          boxShadow: isLiveBadgeProject(activeProject)
-                            ? "0 0 0 4px rgba(34,197,94,0.12)"
-                            : "none",
-                        }}
-                      />
-                      {activeProject.badge}
-                    </span>
-                  </div>
-                ) : null}
-
-
-{getCommercialLabel(activeProject) ? (
-  <div className="mb-2">
-    <span
-      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
-      style={getCommercialBadgeStyle(activeProject)}
+    <div
+      className="relative z-[210] w-full max-w-5xl rounded-2xl border flex flex-col overflow-hidden"
+      style={{
+        background: "var(--card)",
+        borderColor: "var(--card-border)",
+        boxShadow: "0 24px 100px rgba(0,0,0,0.6)",
+        width: "min(100%, 1100px)",
+        maxHeight: "calc(100dvh - 16px)",
+      }}
     >
-      <span
-        className="h-2 w-2 rounded-full"
-        style={{ background: "currentColor", opacity: 0.9 }}
-      />
-      {getCommercialLabel(activeProject)}
-    </span>
-  </div>
-) : null}
-
-
-                <h3 className="text-xl font-semibold truncate">
-                  {activeProject.title}
-                </h3>
-
-                <p className="mt-1 text-sm leading-relaxed" style={mutedStyle}>
-                  {activeProject.desc}
-                </p>
-              </div>
-
-              <button
-                type="button"
-                onClick={closeModal}
-                className="rounded-xl border px-3 py-2 text-sm"
-                style={ghostBtnStyle}
-                aria-label={isEs ? "Cerrar" : "Close"}
-                title="Esc"
+      <div
+        className="flex-none flex items-start justify-between gap-3 p-3 md:p-5 border-b"
+        style={{ borderColor: "var(--card-border)" }}
+      >
+        <div className="min-w-0">
+          {activeProject.badge ? (
+            <div className="mb-2">
+              <span
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs"
+                style={
+                  isLiveBadgeProject(activeProject)
+                    ? {
+                        border: "1px solid rgba(34,197,94,0.35)",
+                        background: "rgba(34,197,94,0.10)",
+                        color: "var(--foreground)",
+                      }
+                    : {
+                        border: "1px solid var(--card-border)",
+                        background: "rgba(255,255,255,0.03)",
+                        color: "var(--muted)",
+                      }
+                }
               >
-                ✕
-              </button>
+                <span
+                  className={clsx(
+                    "rounded-full",
+                    getDotClass(activeProject.badge)
+                  )}
+                  style={{
+                    width: isLiveBadgeProject(activeProject) ? 9 : 8,
+                    height: isLiveBadgeProject(activeProject) ? 9 : 8,
+                    boxShadow: isLiveBadgeProject(activeProject)
+                      ? "0 0 0 4px rgba(34,197,94,0.12)"
+                      : "none",
+                  }}
+                />
+                {activeProject.badge}
+              </span>
+            </div>
+          ) : null}
+
+          {getCommercialLabel(activeProject) ? (
+            <div className="mb-2">
+              <span
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
+                style={getCommercialBadgeStyle(activeProject)}
+              >
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ background: "currentColor", opacity: 0.9 }}
+                />
+                {getCommercialLabel(activeProject)}
+              </span>
+            </div>
+          ) : null}
+
+          <h3 className="text-xl font-semibold truncate">
+            {activeProject.title}
+          </h3>
+
+          <p
+            className="mt-1 text-[14px] leading-7 md:text-sm md:leading-relaxed"
+            style={mutedStyle}
+          >
+            {activeProject.desc}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={closeModal}
+          className="rounded-xl border px-3 py-2 text-sm"
+          style={ghostBtnStyle}
+          aria-label={isEs ? "Cerrar" : "Close"}
+          title="Esc"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div
+        className="flex-1 overflow-y-auto p-3 md:p-5"
+        style={{ WebkitOverflowScrolling: "touch" }}
+      >
+        <div className="grid grid-cols-1 gap-4 md:gap-5 md:grid-cols-[1.35fr_0.65fr]">
+          <div className="order-1">
+            {activeProject?.video?.provider === "youtube" &&
+            activeProject?.video?.id ? (
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                {isIntranetProject(activeProject) && !showVideo ? (
+                  <a
+                    className={ghostBtnClass}
+                    style={ghostBtnStyle}
+                    href={getOpenVideoPath(activeProject)}
+                  >
+                    {activeProject.video.label ||
+                      (isEs ? "Ver video" : "View video")}
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    className={ghostBtnClass}
+                    style={ghostBtnStyle}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowVideo((v) => !v);
+                    }}
+                  >
+                    {showVideo
+                      ? isEs
+                        ? "Ver screenshots"
+                        : "View screenshots"
+                      : activeProject.video.label ||
+                        (isEs ? "Ver video" : "View video")}
+                  </button>
+                )}
+
+                <span
+                  className="text-xs inline-flex items-center gap-2"
+                  style={muted2Style}
+                >
+                  {activeProject?.video?.provider === "youtube" &&
+                  activeProject?.video?.id &&
+                  isIntranetProject(activeProject) ? (
+                    <>
+                      <span style={{ opacity: 0.9 }}>▶</span>
+                      <span>
+                        Video demo
+                        {activeProject.video.duration
+                          ? ` (${activeProject.video.duration})`
+                          : " (50s)"}
+                      </span>
+                    </>
+                  ) : (
+                    <span>
+                      {isEs
+                        ? "Tip: podés usar ←/→ para screenshots"
+                        : "Tip: use ←/→ for screenshots"}
+                    </span>
+                  )}
+                </span>
+              </div>
+            ) : null}
+
+            <div
+              className="overflow-hidden rounded-xl border relative z-[220]"
+              style={{
+                ...cardStyle,
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+              }}
+            >
+              {showVideo &&
+              activeProject?.video?.provider === "youtube" &&
+              activeProject?.video?.id ? (
+                <div
+                  className="relative z-[230]"
+                  style={{ height: 360, background: "var(--background)" }}
+                >
+                  <iframe
+                    title={`${activeProject.title} video`}
+                    width="100%"
+                    height="100%"
+                    src={`${YT_EMBED_BASE}/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=1&controls=1&origin=${encodeURIComponent(
+                      SITE_ORIGIN
+                    )}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    style={{ border: 0, display: "block" }}
+                  />
+                </div>
+              ) : activeShot ? (
+                isMobileShot(activeShot, activeProject) ? (
+                  <div
+                    className="grid place-items-center"
+                    style={{
+                      minHeight: isMarketplaceProject(activeProject)
+                        ? 640
+                        : 620,
+                      padding: isMarketplaceProject(activeProject)
+                        ? "36px 0"
+                        : "26px 0",
+                      background:
+                        "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: isMarketplaceProject(activeProject) ? 270 : 292,
+                        maxWidth: "min(84vw, 320px)",
+                        borderRadius: isMarketplaceProject(activeProject)
+                          ? 38
+                          : 36,
+                        padding: isMarketplaceProject(activeProject) ? 11 : 10,
+                        background: "#0f0f10",
+                        boxShadow:
+                          "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "relative",
+                          borderRadius: isMarketplaceProject(activeProject)
+                            ? 30
+                            : 28,
+                          overflow: "hidden",
+                          background: "#000",
+                        }}
+                      >
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: 10,
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            width: isMarketplaceProject(activeProject)
+                              ? 52
+                              : 80,
+                            height: isMarketplaceProject(activeProject)
+                              ? 12
+                              : 18,
+                            borderRadius: 999,
+                            background: "#111",
+                            zIndex: 2,
+                            opacity: 0.96,
+                            boxShadow:
+                              "0 1px 3px rgba(255,255,255,0.05) inset",
+                          }}
+                        />
+                        <img
+                          src={activeShot.src}
+                          alt={activeShot.alt}
+                          loading="lazy"
+                          style={{
+                            width: "100%",
+                            height: isMarketplaceProject(activeProject)
+                              ? 540
+                              : 560,
+                            objectFit: "contain",
+                            objectPosition: "center top",
+                            display: "block",
+                            background: "#000",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={activeShot.src}
+                    alt={activeShot.alt}
+                    className="w-full"
+                    style={{
+                      height: 360,
+                      objectFit: "contain",
+                      objectPosition: "center",
+                      background: "var(--background)",
+                      display: "block",
+                    }}
+                    loading="lazy"
+                  />
+                )
+              ) : (
+                <div
+                  className="grid place-items-center"
+                  style={{ height: 360, color: "var(--muted)" }}
+                >
+                  {isEs ? "Sin screenshots todavía" : "No screenshots yet"}
+                </div>
+              )}
+
+              {!showVideo && modalShots.length > 1 ? (
+                <>
+                  <button
+                    type="button"
+                    className="absolute left-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
+                    style={{
+                      background: "rgba(15,15,16,0.72)",
+                      borderColor: "rgba(255,255,255,0.12)",
+                      color: "#fff",
+                      backdropFilter: "blur(6px)",
+                      WebkitBackdropFilter: "blur(6px)",
+                    }}
+                    onClick={async () => {
+                      if (!activeProject) return;
+                      await trackModalEvent(
+                        "/modal/screenshot-prev",
+                        getProjectSlug(activeProject)
+                      );
+                      setShotIndex((v) => Math.max(0, v - 1));
+                    }}
+                    disabled={shotIndex === 0}
+                    aria-label={isEs ? "Anterior" : "Previous"}
+                  >
+                    ←
+                  </button>
+
+                  <button
+                    type="button"
+                    className="absolute right-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
+                    style={{
+                      background: "rgba(15,15,16,0.72)",
+                      borderColor: "rgba(255,255,255,0.12)",
+                      color: "#fff",
+                      backdropFilter: "blur(6px)",
+                      WebkitBackdropFilter: "blur(6px)",
+                    }}
+                    onClick={async () => {
+                      if (!activeProject) return;
+                      await trackModalEvent(
+                        "/modal/screenshot-next",
+                        getProjectSlug(activeProject)
+                      );
+                      setShotIndex((v) =>
+                        Math.min(modalShots.length - 1, v + 1)
+                      );
+                    }}
+                    disabled={shotIndex >= modalShots.length - 1}
+                    aria-label={isEs ? "Siguiente" : "Next"}
+                  >
+                    →
+                  </button>
+                </>
+              ) : null}
             </div>
 
-            <div
-              className="flex-1 overflow-y-auto p-4 md:p-5"
-              style={{ WebkitOverflowScrolling: "touch" }}
-            >
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-[1.35fr_0.65fr]">
-                <div>
-                  {activeProject?.video?.provider === "youtube" &&
-                  activeProject?.video?.id ? (
-                    <div className="mb-3 flex flex-wrap items-center gap-2">
-                      {isIntranetProject(activeProject) && !showVideo ? (
-                        <a
-                          className={ghostBtnClass}
-                          style={ghostBtnStyle}
-                          href={getOpenVideoPath(activeProject)}
-                        >
-                          {activeProject.video.label ||
-                            (isEs ? "Ver video" : "View video")}
-                        </a>
+            {!showVideo && modalShots.length > 1 ? (
+              <div className="mt-3 flex justify-center">
+                <div className="flex items-center gap-2 overflow-x-auto">
+                  {modalShots.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={async () => {
+                        if (!activeProject) return;
+                        await trackModalEvent(
+                          "/modal/screenshot-dot",
+                          getProjectSlug(activeProject)
+                        );
+                        setShotIndex(idx);
+                      }}
+                      className="h-2.5 w-2.5 rounded-full border transition"
+                      style={{
+                        borderColor: "var(--card-border)",
+                        background:
+                          idx === shotIndex
+                            ? "var(--foreground)"
+                            : "transparent",
+                        opacity: idx === shotIndex ? 1 : 0.6,
+                      }}
+                      aria-label={`Screenshot ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : !showVideo ? (
+              <div className="mt-3 text-xs" style={muted2Style}>
+                {isEs
+                  ? "Tip: podés navegar con ← →"
+                  : "Tip: use ← → to navigate"}
+              </div>
+            ) : null}
+          </div>
+
+          <div className="min-w-0 order-2">
+            <h4 className="font-semibold">
+              {isEs ? "Highlights" : "Highlights"}
+            </h4>
+
+            {activeProject.features?.length ? (
+              <ul className="mt-3 space-y-2 text-sm" style={mutedStyle}>
+                {activeProject.features.slice(0, 10).map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <span
+                      className="mt-2 h-1.5 w-1.5 rounded-full"
+                      style={{ background: "var(--muted-2)" }}
+                    />
+                    <span className="leading-relaxed">{f}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-3 text-sm" style={mutedStyle}>
+                {isEs
+                  ? "Agregá `features` en el proyecto para mostrar bullets acá."
+                  : "Add `features` to the project to show bullets here."}
+              </p>
+            )}
+
+            <div className="mt-5">
+              <h4 className="font-semibold">{isEs ? "Links" : "Links"}</h4>
+
+              <div className="mt-3 flex flex-wrap gap-3">
+                {activeProject.links?.demo ? (
+                  isRestrictedProject(activeProject) ? (
+                    <a
+                      className={primaryBtnClass}
+                      style={primaryBtnStyle}
+                      href={getRequestAccessPath(activeProject)}
+                    >
+                      {isEs ? "Solicitar acceso" : "Request access"}
+                    </a>
+                  ) : (
+                    <a
+                      className={primaryBtnClass}
+                      style={
+                        isLiveWebsiteProject(activeProject)
+                          ? {
+                              background: "#16a34a",
+                              color: "#ffffff",
+                            }
+                          : primaryBtnStyle
+                      }
+                      href={getPublicDemoPath(activeProject)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {isLiveWebsiteProject(activeProject) ? (
+                        <span className="inline-flex items-center gap-2">
+                          <span className="h-2 w-2 rounded-full bg-white/90" />
+                          {getPrimaryLinkLabel(activeProject)}
+                        </span>
                       ) : (
-                        <button
-                          type="button"
-                          className={ghostBtnClass}
-                          style={ghostBtnStyle}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setShowVideo((v) => !v);
-                          }}
-                        >
-                          {showVideo
-                            ? isEs
-                              ? "Ver screenshots"
-                              : "View screenshots"
-                            : activeProject.video.label ||
-                              (isEs ? "Ver video" : "View video")}
-                        </button>
+                        getPrimaryLinkLabel(activeProject)
                       )}
+                    </a>
+                  )
+                ) : (
+                  <span
+                    className="rounded-xl border px-4 py-2 text-sm"
+                    style={{
+                      borderColor: "var(--card-border)",
+                      color: "var(--muted-2)",
+                    }}
+                  >
+                    {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
+                  </span>
+                )}
 
-                      <span
-                        className="text-xs inline-flex items-center gap-2"
-                        style={muted2Style}
-                      >
-                        {activeProject?.video?.provider === "youtube" &&
-                        activeProject?.video?.id &&
-                        isIntranetProject(activeProject) ? (
-                          <>
-                            <span style={{ opacity: 0.9 }}>▶</span>
-                            <span>
-                              Video demo
-                              {activeProject.video.duration
-                                ? ` (${activeProject.video.duration})`
-                                : " (50s)"}
-                            </span>
-                          </>
-                        ) : (
-                          <span>
-                            {isEs
-                              ? "Tip: podés usar ←/→ para screenshots"
-                              : "Tip: use ←/→ for screenshots"}
-                          </span>
-                        )}
-                      </span>
-                    </div>
-                  ) : null}
+                {activeProject.links?.repo ? (
+                  <a
+                    className={softBtnClass}
+                    style={softBtnStyle}
+                    href={activeProject.links.repo}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Repo
+                  </a>
+                ) : (
+                  <span
+                    className="rounded-xl border px-4 py-2 text-sm"
+                    style={{
+                      borderColor: "var(--card-border)",
+                      color: "var(--muted)",
+                    }}
+                  >
+                    {isEs ? "Repo: Privado" : "Repo: Private"}
+                  </span>
+                )}
 
-                 <div
-  className="overflow-hidden rounded-xl border relative z-[220]"
-  style={{
-    ...cardStyle,
-    background:
-      "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
-  }}
->
-  {showVideo &&
-  activeProject?.video?.provider === "youtube" &&
-  activeProject?.video?.id ? (
-    <div
-      className="relative z-[230]"
-      style={{ height: 360, background: "var(--background)" }}
-    >
-      <iframe
-        title={`${activeProject.title} video`}
-        width="100%"
-        height="100%"
-        src={`${YT_EMBED_BASE}/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=1&controls=1&origin=${encodeURIComponent(
-          SITE_ORIGIN
-        )}`}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        referrerPolicy="strict-origin-when-cross-origin"
-        style={{ border: 0, display: "block" }}
-      />
-    </div>
-  ) : activeShot ? (
-    isMobileShot(activeShot, activeProject) ? (
-      <div
-        className="grid place-items-center"
-        style={{
-          minHeight: isMarketplaceProject(activeProject) ? 640 : 620,
-          padding: isMarketplaceProject(activeProject) ? "36px 0" : "26px 0",
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
-        }}
-      >
-        <div
-          style={{
-            width: isMarketplaceProject(activeProject) ? 270 : 292,
-            maxWidth: "min(84vw, 320px)",
-            borderRadius: isMarketplaceProject(activeProject) ? 38 : 36,
-            padding: isMarketplaceProject(activeProject) ? 11 : 10,
-            background: "#0f0f10",
-            boxShadow:
-              "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}
-        >
-          <div
-            style={{
-              position: "relative",
-              borderRadius: isMarketplaceProject(activeProject) ? 30 : 28,
-              overflow: "hidden",
-              background: "#000",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: 10,
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: isMarketplaceProject(activeProject) ? 52 : 80,
-                height: isMarketplaceProject(activeProject) ? 12 : 18,
-                borderRadius: 999,
-                background: "#111",
-                zIndex: 2,
-                opacity: 0.96,
-                boxShadow: "0 1px 3px rgba(255,255,255,0.05) inset",
-              }}
-            />
-            <img
-              src={activeShot.src}
-              alt={activeShot.alt}
-              loading="lazy"
-              style={{
-                width: "100%",
-                height: isMarketplaceProject(activeProject) ? 540 : 560,
-                objectFit: "contain",
-                objectPosition: "center top",
-                display: "block",
-                background: "#000",
-              }}
-            />
+                <button
+                  type="button"
+                  className={ghostBtnClass}
+                  style={ghostBtnStyle}
+                  onClick={closeModal}
+                >
+                  {isEs ? "Cerrar" : "Close"}
+                </button>
+              </div>
+
+              <div className="mt-4 text-xs" style={muted2Style}>
+                {isEs
+                  ? "Esc: cerrar · ←/→: cambiar screenshot"
+                  : "Esc: close · ←/→: change screenshot"}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    ) : (
-      <img
-        src={activeShot.src}
-        alt={activeShot.alt}
-        className="w-full"
-        style={{
-          height: 360,
-          objectFit: "contain",
-          objectPosition: "center",
-          background: "var(--background)",
-          display: "block",
-        }}
-        loading="lazy"
-      />
-    )
-  ) : (
-    <div
-      className="grid place-items-center"
-      style={{ height: 360, color: "var(--muted)" }}
-    >
-      {isEs ? "Sin screenshots todavía" : "No screenshots yet"}
     </div>
-  )}
-
-  {!showVideo && modalShots.length > 1 ? (
-    <>
-      <button
-        type="button"
-        className="absolute left-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
-        style={{
-          background: "rgba(15,15,16,0.72)",
-          borderColor: "rgba(255,255,255,0.12)",
-          color: "#fff",
-          backdropFilter: "blur(6px)",
-          WebkitBackdropFilter: "blur(6px)",
-        }}
-        onClick={async () => {
-          if (!activeProject) return;
-          await trackModalEvent(
-            "/modal/screenshot-prev",
-            getProjectSlug(activeProject)
-          );
-          setShotIndex((v) => Math.max(0, v - 1));
-        }}
-        disabled={shotIndex === 0}
-        aria-label={isEs ? "Anterior" : "Previous"}
-      >
-        ←
-      </button>
-
-      <button
-        type="button"
-        className="absolute right-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
-        style={{
-          background: "rgba(15,15,16,0.72)",
-          borderColor: "rgba(255,255,255,0.12)",
-          color: "#fff",
-          backdropFilter: "blur(6px)",
-          WebkitBackdropFilter: "blur(6px)",
-        }}
-        onClick={async () => {
-          if (!activeProject) return;
-          await trackModalEvent(
-            "/modal/screenshot-next",
-            getProjectSlug(activeProject)
-          );
-          setShotIndex((v) => Math.min(modalShots.length - 1, v + 1));
-        }}
-        disabled={shotIndex >= modalShots.length - 1}
-        aria-label={isEs ? "Siguiente" : "Next"}
-      >
-        →
-      </button>
-    </>
-  ) : null}
-</div>
-
-
-                 {!showVideo && modalShots.length > 1 ? (
-  <div className="mt-3 flex justify-center">
-    <div className="flex items-center gap-2 overflow-x-auto">
-      {modalShots.map((_, idx) => (
-        <button
-          key={idx}
-          type="button"
-          onClick={async () => {
-            if (!activeProject) return;
-            await trackModalEvent(
-              "/modal/screenshot-dot",
-              getProjectSlug(activeProject)
-            );
-            setShotIndex(idx);
-          }}
-          className="h-2.5 w-2.5 rounded-full border transition"
-          style={{
-            borderColor: "var(--card-border)",
-            background:
-              idx === shotIndex ? "var(--foreground)" : "transparent",
-            opacity: idx === shotIndex ? 1 : 0.6,
-          }}
-          aria-label={`Screenshot ${idx + 1}`}
-        />
-      ))}
-    </div>
-  </div>
-) : !showVideo ? (
-  <div className="mt-3 text-xs" style={muted2Style}>
-    {isEs ? "Tip: podés navegar con ← →" : "Tip: use ← → to navigate"}
   </div>
 ) : null}
 
-                </div>
 
-                <div className="min-w-0">
-                  <h4 className="font-semibold">
-                    {isEs ? "Highlights" : "Highlights"}
-                  </h4>
-
-                  {activeProject.features?.length ? (
-                    <ul className="mt-3 space-y-2 text-sm" style={mutedStyle}>
-                      {activeProject.features.slice(0, 10).map((f) => (
-                        <li key={f} className="flex items-start gap-2">
-                          <span
-                            className="mt-2 h-1.5 w-1.5 rounded-full"
-                            style={{ background: "var(--muted-2)" }}
-                          />
-                          <span className="leading-relaxed">{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="mt-3 text-sm" style={mutedStyle}>
-                      {isEs
-                        ? "Agregá `features` en el proyecto para mostrar bullets acá."
-                        : "Add `features` to the project to show bullets here."}
-                    </p>
-                  )}
-
-                  <div className="mt-5">
-                    <h4 className="font-semibold">
-                      {isEs ? "Links" : "Links"}
-                    </h4>
-
-                    <div className="mt-3 flex flex-wrap gap-3">
-                      {activeProject.links?.demo ? (
-                        isRestrictedProject(activeProject) ? (
-                          <a
-                            className={primaryBtnClass}
-                            style={primaryBtnStyle}
-                            href={getRequestAccessPath(activeProject)}
-                          >
-                            {isEs ? "Solicitar acceso" : "Request access"}
-                          </a>
-                        ) : (
-                          <a
-                            className={primaryBtnClass}
-                            style={
-                              isLiveWebsiteProject(activeProject)
-                                ? {
-                                    background: "#16a34a",
-                                    color: "#ffffff",
-                                  }
-                                : primaryBtnStyle
-                            }
-                            href={getPublicDemoPath(activeProject)}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {isLiveWebsiteProject(activeProject) ? (
-                              <span className="inline-flex items-center gap-2">
-                                <span className="h-2 w-2 rounded-full bg-white/90" />
-                                {getPrimaryLinkLabel(activeProject)}
-                              </span>
-                            ) : (
-                              getPrimaryLinkLabel(activeProject)
-                            )}
-                          </a>
-                        )
-                      ) : (
-                        <span
-                          className="rounded-xl border px-4 py-2 text-sm"
-                          style={{
-                            borderColor: "var(--card-border)",
-                            color: "var(--muted-2)",
-                          }}
-                        >
-                          {isEs
-                            ? "Demo (próximamente)"
-                            : "Demo (coming soon)"}
-                        </span>
-                      )}
-
-                      {activeProject.links?.repo ? (
-                        <a
-                          className={softBtnClass}
-                          style={softBtnStyle}
-                          href={activeProject.links.repo}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Repo
-                        </a>
-                      ) : (
-                        <span
-                          className="rounded-xl border px-4 py-2 text-sm"
-                          style={{
-                            borderColor: "var(--card-border)",
-                            color: "var(--muted)",
-                          }}
-                        >
-                          {isEs ? "Repo: Privado" : "Repo: Private"}
-                        </span>
-                      )}
-
-                      <button
-                        type="button"
-                        className={ghostBtnClass}
-                        style={ghostBtnStyle}
-                        onClick={closeModal}
-                      >
-                        {isEs ? "Cerrar" : "Close"}
-                      </button>
-                    </div>
-
-                    <div className="mt-4 text-xs" style={muted2Style}>
-                      {isEs
-                        ? "Esc: cerrar · ←/→: cambiar screenshot"
-                        : "Esc: close · ←/→: change screenshot"}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
     </>
   );
 }
