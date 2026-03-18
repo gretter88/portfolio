@@ -719,14 +719,15 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
             </div>
           ) : null}
 
-          <h3 className="text-xl font-semibold truncate">
+         <h3 className="text-lg md:text-xl font-semibold truncate">
             {activeProject.title}
           </h3>
 
           <p
-            className="mt-1 text-[14px] leading-7 md:text-sm md:leading-relaxed"
-            style={mutedStyle}
-          >
+  className="mt-1 text-[13px] leading-6 md:text-sm md:leading-relaxed"
+  style={mutedStyle}
+>
+
             {activeProject.desc}
           </p>
         </div>
@@ -745,6 +746,7 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
 
       <div
         className="flex-1 overflow-y-auto p-3 md:p-5"
+
         style={{ WebkitOverflowScrolling: "touch" }}
       >
         <div className="grid grid-cols-1 gap-4 md:gap-5 md:grid-cols-[1.35fr_0.65fr]">
@@ -837,96 +839,85 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
                 </div>
               ) : activeShot ? (
                 isMobileShot(activeShot, activeProject) ? (
-                  <div
-                    className="grid place-items-center"
-                    style={{
-                      minHeight: isMarketplaceProject(activeProject)
-                        ? 640
-                        : 620,
-                      padding: isMarketplaceProject(activeProject)
-                        ? "36px 0"
-                        : "26px 0",
-                      background:
-                        "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: isMarketplaceProject(activeProject) ? 270 : 292,
-                        maxWidth: "min(84vw, 320px)",
-                        borderRadius: isMarketplaceProject(activeProject)
-                          ? 38
-                          : 36,
-                        padding: isMarketplaceProject(activeProject) ? 11 : 10,
-                        background: "#0f0f10",
-                        boxShadow:
-                          "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
-                        border: "1px solid rgba(255,255,255,0.08)",
-                      }}
-                    >
-                      <div
-                        style={{
-                          position: "relative",
-                          borderRadius: isMarketplaceProject(activeProject)
-                            ? 30
-                            : 28,
-                          overflow: "hidden",
-                          background: "#000",
-                        }}
-                      >
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: 10,
-                            left: "50%",
-                            transform: "translateX(-50%)",
-                            width: isMarketplaceProject(activeProject)
-                              ? 52
-                              : 80,
-                            height: isMarketplaceProject(activeProject)
-                              ? 12
-                              : 18,
-                            borderRadius: 999,
-                            background: "#111",
-                            zIndex: 2,
-                            opacity: 0.96,
-                            boxShadow:
-                              "0 1px 3px rgba(255,255,255,0.05) inset",
-                          }}
-                        />
-                        <img
-                          src={activeShot.src}
-                          alt={activeShot.alt}
-                          loading="lazy"
-                          style={{
-                            width: "100%",
-                            height: isMarketplaceProject(activeProject)
-                              ? 540
-                              : 560,
-                            objectFit: "contain",
-                            objectPosition: "center top",
-                            display: "block",
-                            background: "#000",
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <img
-                    src={activeShot.src}
-                    alt={activeShot.alt}
-                    className="w-full"
-                    style={{
-                      height: 360,
-                      objectFit: "contain",
-                      objectPosition: "center",
-                      background: "var(--background)",
-                      display: "block",
-                    }}
-                    loading="lazy"
-                  />
-                )
+  <div
+    className="grid place-items-center"
+    style={{
+      minHeight: isMarketplaceProject(activeProject) ? 700 : 680,
+      padding: isMarketplaceProject(activeProject)
+        ? "28px 0 20px"
+        : "20px 0 16px",
+      background:
+        "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+    }}
+  >
+    <div
+      style={{
+        width: isMarketplaceProject(activeProject) ? 282 : 304,
+        maxWidth: "min(86vw, 334px)",
+        borderRadius: isMarketplaceProject(activeProject) ? 38 : 36,
+        padding: isMarketplaceProject(activeProject) ? 11 : 10,
+        background: "#0f0f10",
+        boxShadow:
+          "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          borderRadius: isMarketplaceProject(activeProject) ? 30 : 28,
+          overflow: "hidden",
+          background: "#000",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: 10,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: isMarketplaceProject(activeProject) ? 52 : 80,
+            height: isMarketplaceProject(activeProject) ? 12 : 18,
+            borderRadius: 999,
+            background: "#111",
+            zIndex: 2,
+            opacity: 0.96,
+            boxShadow: "0 1px 3px rgba(255,255,255,0.05) inset",
+          }}
+        />
+        <img
+          src={activeShot.src}
+          alt={activeShot.alt}
+          loading="lazy"
+          style={{
+            width: "100%",
+            height: isMarketplaceProject(activeProject) ? 590 : 610,
+            objectFit: "contain",
+            objectPosition: "center top",
+            display: "block",
+            background: "#000",
+          }}
+        />
+      </div>
+    </div>
+  </div>
+) : (
+  <img
+    src={activeShot.src}
+    alt={activeShot.alt}
+    className="w-full"
+    style={{
+      height: 360,
+      objectFit: "contain",
+      objectPosition: "center",
+      background: "var(--background)",
+      display: "block",
+    }}
+    loading="lazy"
+  />
+)
+
+
               ) : (
                 <div
                   className="grid place-items-center"
@@ -1029,13 +1020,14 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
             ) : null}
           </div>
 
-          <div className="min-w-0 order-2">
-            <h4 className="font-semibold">
+          <div className="min-w-0 order-2 pt-1 md:pt-0">
+           <h4 className="text-sm md:text-base font-semibold">
               {isEs ? "Highlights" : "Highlights"}
             </h4>
 
             {activeProject.features?.length ? (
-              <ul className="mt-3 space-y-2 text-sm" style={mutedStyle}>
+              <ul className="mt-2 space-y-2 text-[13px] md:text-sm" style={mutedStyle}>
+
                 {activeProject.features.slice(0, 10).map((f) => (
                   <li key={f} className="flex items-start gap-2">
                     <span
