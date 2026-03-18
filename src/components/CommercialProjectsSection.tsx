@@ -7,7 +7,9 @@ type CommercialProjectItem = {
   model: string;
   idealFor: string;
   tags: string[];
+  requestHref: string;
 };
+
 
 type Props = {
   i: {
@@ -19,12 +21,14 @@ type Props = {
     commercialProjectsIdealForLabel: string;
     commercialProjectsCta: string;
     commercialProjectsContact: string;
+    commercialProjectsCardRequest: string;
     commercialProjectsRequest: string;
     commercialProjectsBottomNote: string;
     commercialProjectsSecondaryNote: string;
     commercialProjectsItems: CommercialProjectItem[];
   };
 };
+
 
 function getTagStyle(tag: string): React.CSSProperties {
   const t = tag.toLowerCase();
@@ -201,16 +205,33 @@ export default function CommercialProjectsSection({ i }: Props) {
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border px-3 py-1 text-xs"
-                      style={getTagStyle(tag)}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+  {project.tags.map((tag) => (
+    <span
+      key={tag}
+      className="rounded-full border px-3 py-1 text-xs"
+      style={getTagStyle(tag)}
+    >
+      {tag}
+    </span>
+  ))}
+</div>
+
+
+<div className="mt-5">
+  <a
+    href={project.requestHref}
+    className="inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-medium transition"
+    style={{
+      borderColor: "var(--card-border)",
+      background: "rgba(255,255,255,0.04)",
+      color: "var(--foreground)",
+    }}
+  >
+    {i.commercialProjectsCardRequest}
+  </a>
+</div>
+
+
               </article>
             ))}
           </div>
@@ -242,7 +263,9 @@ export default function CommercialProjectsSection({ i }: Props) {
               </a>
 
               <a
-                href="/go/request-access/radar"
+                
+href="/go/request-access/commercial"
+
                 className="rounded-xl border px-4 py-2 text-sm font-medium"
                 style={{
                   background: "rgba(34,197,94,0.10)",

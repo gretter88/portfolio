@@ -713,6 +713,10 @@ commercialProjectsContact: isEs
   ? "Contactar"
   : "Contact",
 
+commercialProjectsCardRequest: isEs
+  ? "Consultar este proyecto"
+  : "Inquire about this project",
+
 commercialProjectsRequest: isEs
   ? "Solicitar ficha comercial"
   : "Request commercial one-pager",
@@ -743,6 +747,7 @@ commercialProjectsItems: [
     tags: isEs
       ? ["Licencia", "Partnership", "Adquisición"]
       : ["License", "Partnership", "Acquisition"],
+    requestHref: "/go/request-access/radar",
   },
   {
     title: isEs
@@ -763,6 +768,7 @@ commercialProjectsItems: [
     tags: isEs
       ? ["Implementación", "White-label", "Adaptación"]
       : ["Deployment", "White-label", "Adaptation"],
+    requestHref: "/go/request-access/marketplace",
   },
   {
     title: isEs
@@ -783,8 +789,14 @@ commercialProjectsItems: [
     tags: isEs
       ? ["Proyecto a medida", "Licencia parcial", "Adaptación"]
       : ["Custom project", "Partial license", "Adaptation"],
+    requestHref: "/go/request-access/kiosco",
   },
 ],
+
+
+
+
+
 
 
 
