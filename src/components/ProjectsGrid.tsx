@@ -26,10 +26,13 @@ export default function ProjectsGrid({
   initialVideo = false,
 }: Props) {
   const isEs = lang === "es";
-  const [open, setOpen] = useState(false);
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
-  const [shotIndex, setShotIndex] = useState(0);
-  const [showVideo, setShowVideo] = useState(false);
+
+const [open, setOpen] = useState(false);
+const [activeProject, setActiveProject] = useState<Project | null>(null);
+const [shotIndex, setShotIndex] = useState(0);
+const [showVideo, setShowVideo] = useState(false);
+const [showMobileDetails, setShowMobileDetails] = useState(false);
+
 
   const cardStyle: React.CSSProperties = {
     background: "var(--card)",
@@ -259,24 +262,29 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
     return [...projects].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
   }, [projects]);
 
-  const closeModal = () => {
-    setOpen(false);
-    setShotIndex(0);
-    setActiveProject(null);
-    setShowVideo(false);
-  };
+const closeModal = () => {
+  setOpen(false);
+  setShotIndex(0);
+  setActiveProject(null);
+  setShowVideo(false);
+  setShowMobileDetails(false);
+};
 
-  const openModal = (p: Project) => {
-    setActiveProject(p);
-    setShotIndex(0);
-    const hasYoutubeVideo = p.video?.provider === "youtube" && !!p.video?.id;
-    if (hasYoutubeVideo && isIntranetProject(p)) {
-      setShowVideo(true);
-    } else {
-      setShowVideo(false);
-    }
-    setOpen(true);
-  };
+
+ const openModal = (p: Project) => {
+  setActiveProject(p);
+  setShotIndex(0);
+  setShowMobileDetails(false);
+  const hasYoutubeVideo = p.video?.provider === "youtube" && !!p.video?.id;
+  if (hasYoutubeVideo && isIntranetProject(p)) {
+    setShowVideo(true);
+  } else {
+    setShowVideo(false);
+  }
+  setOpen(true);
+};
+
+
 
   useEffect(() => {
     if (!initialProjectSlug) return;
@@ -287,6 +295,7 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
     setActiveProject(match);
     setOpen(true);
     setShotIndex(0);
+	setShowMobileDetails(false);
 
     if (initialVideo && match.video?.provider === "youtube" && match.video?.id) {
       setShowVideo(true);
@@ -667,75 +676,101 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
         className="flex-none flex items-start justify-between gap-3 p-3 md:p-5 border-b"
         style={{ borderColor: "var(--card-border)" }}
       >
-        <div className="min-w-0">
-          {activeProject.badge ? (
-            <div className="mb-2">
-              <span
-                className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs"
-                style={
-                  isLiveBadgeProject(activeProject)
-                    ? {
-                        border: "1px solid rgba(34,197,94,0.35)",
-                        background: "rgba(34,197,94,0.10)",
-                        color: "var(--foreground)",
-                      }
-                    : {
-                        border: "1px solid var(--card-border)",
-                        background: "rgba(255,255,255,0.03)",
-                        color: "var(--muted)",
-                      }
-                }
-              >
-                <span
-                  className={clsx(
-                    "rounded-full",
-                    getDotClass(activeProject.badge)
-                  )}
-                  style={{
-                    width: isLiveBadgeProject(activeProject) ? 9 : 8,
-                    height: isLiveBadgeProject(activeProject) ? 9 : 8,
-                    boxShadow: isLiveBadgeProject(activeProject)
-                      ? "0 0 0 4px rgba(34,197,94,0.12)"
-                      : "none",
-                  }}
-                />
-                {activeProject.badge}
-              </span>
-            </div>
-          ) : null}
+       <div className="min-w-0">
+  {activeProject.badge ? (
+    <div className="mb-2">
+      <span
+        className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs"
+        style={
+          isLiveBadgeProject(activeProject)
+            ? {
+                border: "1px solid rgba(34,197,94,0.35)",
+                background: "rgba(34,197,94,0.10)",
+                color: "var(--foreground)",
+              }
+            : {
+                border: "1px solid var(--card-border)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--muted)",
+              }
+        }
+      >
+        <span
+          className={clsx(
+            "rounded-full",
+            getDotClass(activeProject.badge)
+          )}
+          style={{
+            width: isLiveBadgeProject(activeProject) ? 9 : 8,
+            height: isLiveBadgeProject(activeProject) ? 9 : 8,
+            boxShadow: isLiveBadgeProject(activeProject)
+              ? "0 0 0 4px rgba(34,197,94,0.12)"
+              : "none",
+          }}
+        />
+        {activeProject.badge}
+      </span>
+    </div>
+  ) : null}
 
-          {getCommercialLabel(activeProject) ? (
-            <div className="mb-2">
-              <span
-                className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
-                style={getCommercialBadgeStyle(activeProject)}
-              >
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ background: "currentColor", opacity: 0.9 }}
-                />
-                {getCommercialLabel(activeProject)}
-              </span>
-            </div>
-          ) : null}
+  {getCommercialLabel(activeProject) ? (
+    <div className="mb-2">
+      <span
+        className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
+        style={getCommercialBadgeStyle(activeProject)}
+      >
+        <span
+          className="h-2 w-2 rounded-full"
+          style={{ background: "currentColor", opacity: 0.9 }}
+        />
+        {getCommercialLabel(activeProject)}
+      </span>
+    </div>
+  ) : null}
 
-         <h3 className="text-lg md:text-xl font-semibold truncate">
-            {activeProject.title}
-          </h3>
+  <h3 className="text-lg md:text-xl font-semibold truncate">
+    {activeProject.title}
+  </h3>
 
-          <p
-  className="mt-1 text-[13px] leading-6 md:text-sm md:leading-relaxed"
-  style={mutedStyle}
->
+  <p
+    className="mt-1 text-[13px] leading-6 md:text-sm md:leading-relaxed md:max-w-none"
+    style={{
+      ...mutedStyle,
+      display: "-webkit-box",
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: "vertical",
+      overflow: "hidden",
+    }}
+  >
+    {activeProject.desc}
+  </p>
 
-            {activeProject.desc}
-          </p>
-        </div>
+  {isLiveWebsiteProject(activeProject) ? (
+    <div className="mt-3 md:hidden">
+      <a
+        href={getPublicDemoPath(activeProject)}
+        target="_blank"
+        rel="noreferrer"
+        className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium"
+        style={{
+          background: "#16a34a",
+          color: "#ffffff",
+          boxShadow: "0 10px 24px rgba(22,163,74,0.22)",
+        }}
+      >
+        <span className="h-2 w-2 rounded-full bg-white/90" />
+        {getPrimaryLinkLabel(activeProject)}
+      </a>
+    </div>
+  ) : null}
+</div>
+
 
         <button
           type="button"
           onClick={closeModal}
-          className="rounded-xl border px-3 py-2 text-sm"
+          className="rounded-xl border px-2.5 py-2 text-sm"
+
           style={ghostBtnStyle}
           aria-label={isEs ? "Cerrar" : "Close"}
           title="Esc"
@@ -1021,121 +1056,158 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
           </div>
 
           <div className="min-w-0 order-2 pt-1 md:pt-0">
-           <h4 className="text-sm md:text-base font-semibold">
-              {isEs ? "Highlights" : "Highlights"}
-            </h4>
+  <div className="md:hidden">
+    <button
+  type="button"
+  onClick={() => setShowMobileDetails((v) => !v)}
+  className="w-full rounded-xl border px-4 py-3 text-sm font-medium transition"
+  style={{
+    borderColor: "var(--card-border)",
+    background:
+      "linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))",
+    color: "var(--foreground)",
+  }}
+>
+  <span className="flex items-center justify-between gap-3">
+    <span>
+      {showMobileDetails
+        ? isEs
+          ? "Ver menos"
+          : "Show less"
+        : isEs
+        ? "Ver más"
+        : "Show more"}
+    </span>
 
-            {activeProject.features?.length ? (
-              <ul className="mt-2 space-y-2 text-[13px] md:text-sm" style={mutedStyle}>
+    <span
+      className="inline-block transition-transform duration-300"
+      style={{
+        transform: showMobileDetails ? "rotate(180deg)" : "rotate(0deg)",
+      }}
+    >
+      ▾
+    </span>
+  </span>
+</button>
 
-                {activeProject.features.slice(0, 10).map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <span
-                      className="mt-2 h-1.5 w-1.5 rounded-full"
-                      style={{ background: "var(--muted-2)" }}
-                    />
-                    <span className="leading-relaxed">{f}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="mt-3 text-sm" style={mutedStyle}>
-                {isEs
-                  ? "Agregá `features` en el proyecto para mostrar bullets acá."
-                  : "Add `features` to the project to show bullets here."}
-              </p>
-            )}
+  </div>
 
-            <div className="mt-5">
-              <h4 className="font-semibold">{isEs ? "Links" : "Links"}</h4>
+  <div className={showMobileDetails ? "mt-4 md:mt-0" : "hidden md:block"}>
+    <h4 className="text-sm md:text-base font-semibold">
+      {isEs ? "Highlights" : "Highlights"}
+    </h4>
 
-              <div className="mt-3 flex flex-wrap gap-3">
-                {activeProject.links?.demo ? (
-                  isRestrictedProject(activeProject) ? (
-                    <a
-                      className={primaryBtnClass}
-                      style={primaryBtnStyle}
-                      href={getRequestAccessPath(activeProject)}
-                    >
-                      {isEs ? "Solicitar acceso" : "Request access"}
-                    </a>
-                  ) : (
-                    <a
-                      className={primaryBtnClass}
-                      style={
-                        isLiveWebsiteProject(activeProject)
-                          ? {
-                              background: "#16a34a",
-                              color: "#ffffff",
-                            }
-                          : primaryBtnStyle
-                      }
-                      href={getPublicDemoPath(activeProject)}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {isLiveWebsiteProject(activeProject) ? (
-                        <span className="inline-flex items-center gap-2">
-                          <span className="h-2 w-2 rounded-full bg-white/90" />
-                          {getPrimaryLinkLabel(activeProject)}
-                        </span>
-                      ) : (
-                        getPrimaryLinkLabel(activeProject)
-                      )}
-                    </a>
-                  )
-                ) : (
-                  <span
-                    className="rounded-xl border px-4 py-2 text-sm"
-                    style={{
-                      borderColor: "var(--card-border)",
-                      color: "var(--muted-2)",
-                    }}
-                  >
-                    {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
-                  </span>
-                )}
+    {activeProject.features?.length ? (
+      <ul className="mt-2 space-y-2 text-[13px] md:text-sm" style={mutedStyle}>
+        {activeProject.features.slice(0, 10).map((f) => (
+          <li key={f} className="flex items-start gap-2">
+            <span
+              className="mt-2 h-1.5 w-1.5 rounded-full"
+              style={{ background: "var(--muted-2)" }}
+            />
+            <span className="leading-relaxed">{f}</span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p className="mt-3 text-sm" style={mutedStyle}>
+        {isEs
+          ? "Agregá `features` en el proyecto para mostrar bullets acá."
+          : "Add `features` to the project to show bullets here."}
+      </p>
+    )}
 
-                {activeProject.links?.repo ? (
-                  <a
-                    className={softBtnClass}
-                    style={softBtnStyle}
-                    href={activeProject.links.repo}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Repo
-                  </a>
-                ) : (
-                  <span
-                    className="rounded-xl border px-4 py-2 text-sm"
-                    style={{
-                      borderColor: "var(--card-border)",
-                      color: "var(--muted)",
-                    }}
-                  >
-                    {isEs ? "Repo: Privado" : "Repo: Private"}
-                  </span>
-                )}
+    <div className="mt-4 md:mt-5">
+      <h4 className="font-semibold">{isEs ? "Links" : "Links"}</h4>
 
-                <button
-                  type="button"
-                  className={ghostBtnClass}
-                  style={ghostBtnStyle}
-                  onClick={closeModal}
-                >
-                  {isEs ? "Cerrar" : "Close"}
-                </button>
-              </div>
+      <div className="mt-3 flex flex-wrap gap-3">
+        {activeProject.links?.demo ? (
+          isRestrictedProject(activeProject) ? (
+            <a
+              className={primaryBtnClass}
+              style={primaryBtnStyle}
+              href={getRequestAccessPath(activeProject)}
+            >
+              {isEs ? "Solicitar acceso" : "Request access"}
+            </a>
+          ) : (
+            <a
+              className={primaryBtnClass}
+              style={
+                isLiveWebsiteProject(activeProject)
+                  ? {
+                      background: "#16a34a",
+                      color: "#ffffff",
+                    }
+                  : primaryBtnStyle
+              }
+              href={getPublicDemoPath(activeProject)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {isLiveWebsiteProject(activeProject) ? (
+                <span className="inline-flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-white/90" />
+                  {getPrimaryLinkLabel(activeProject)}
+                </span>
+              ) : (
+                getPrimaryLinkLabel(activeProject)
+              )}
+            </a>
+          )
+        ) : (
+          <span
+            className="rounded-xl border px-4 py-2 text-sm"
+            style={{
+              borderColor: "var(--card-border)",
+              color: "var(--muted-2)",
+            }}
+          >
+            {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
+          </span>
+        )}
 
-              <div className="mt-4 text-xs" style={muted2Style}>
-                {isEs
-                  ? "Esc: cerrar · ←/→: cambiar screenshot"
-                  : "Esc: close · ←/→: change screenshot"}
-              </div>
-            </div>
-          </div>
-        </div>
+        {activeProject.links?.repo ? (
+          <a
+            className={softBtnClass}
+            style={softBtnStyle}
+            href={activeProject.links.repo}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Repo
+          </a>
+        ) : (
+          <span
+            className="rounded-xl border px-4 py-2 text-sm"
+            style={{
+              borderColor: "var(--card-border)",
+              color: "var(--muted)",
+            }}
+          >
+            {isEs ? "Repo: Privado" : "Repo: Private"}
+          </span>
+        )}
+
+        <button
+          type="button"
+          className={ghostBtnClass}
+          style={ghostBtnStyle}
+          onClick={closeModal}
+        >
+          {isEs ? "Cerrar" : "Close"}
+        </button>
+      </div>
+
+      <div className="mt-4 text-xs" style={muted2Style}>
+        {isEs
+          ? "Esc: cerrar · ←/→: cambiar screenshot"
+          : "Esc: close · ←/→: change screenshot"}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
       </div>
     </div>
   </div>

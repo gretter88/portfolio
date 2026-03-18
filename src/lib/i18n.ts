@@ -701,6 +701,10 @@ commercialProjectsModelLabel: isEs
   ? "Modelo"
   : "Model",
 
+commercialProjectsIdealForLabel: isEs
+  ? "Ideal para"
+  : "Ideal for",
+
 commercialProjectsCta: isEs
   ? "Si te interesa licenciar uno de estos productos, implementarlo para tu organización o conversar una posible alianza, podés contactarme para recibir una ficha comercial, propuesta de alcance o alternativa de colaboración."
   : "If you are interested in licensing one of these products, implementing it for your organization, or exploring a partnership, feel free to contact me to receive a commercial one-pager, scope proposal, or collaboration option.",
@@ -710,14 +714,12 @@ commercialProjectsContact: isEs
   : "Contact",
 
 commercialProjectsRequest: isEs
-  ? "Solicitar ficha RadarSocial"
-  : "Request RadarSocial one-pager",
+  ? "Solicitar ficha comercial"
+  : "Request commercial one-pager",
 
 commercialProjectsSecondaryNote: isEs
-  ? "También disponible para adaptar a otros modelos o verticales."
-  : "Also available to adapt for other models or verticals.",
-
-
+  ? "También disponible para adaptar a otros modelos, sectores o verticales."
+  : "Also available for adaptation to other models, sectors, or verticals.",
 
 commercialProjectsBottomNote: isEs
   ? "Modalidades posibles: licenciamiento, implementación, white-label, adaptación por vertical, partnership estratégico o adquisición, según el proyecto."
@@ -735,6 +737,9 @@ commercialProjectsItems: [
     model: isEs
       ? "Licencia / Partnership / Adquisición"
       : "License / Partnership / Acquisition",
+    idealFor: isEs
+      ? "Comunidades, networking, servicios geolocalizados, plataformas sociales privadas o modelos híbridos entre social y servicios."
+      : "Communities, networking, geolocated services, private social platforms, or hybrid social-services models.",
     tags: isEs
       ? ["Licencia", "Partnership", "Adquisición"]
       : ["License", "Partnership", "Acquisition"],
@@ -752,6 +757,9 @@ commercialProjectsItems: [
     model: isEs
       ? "Implementación / White-label / Adaptación"
       : "Deployment / White-label / Adaptation",
+    idealFor: isEs
+      ? "Empresas de servicios, verticales locales, operación multi-proveedor o productos white-label orientados a clientes finales."
+      : "Service companies, local verticals, multi-provider operations, or white-label products aimed at end customers.",
     tags: isEs
       ? ["Implementación", "White-label", "Adaptación"]
       : ["Deployment", "White-label", "Adaptation"],
@@ -769,11 +777,15 @@ commercialProjectsItems: [
     model: isEs
       ? "Proyecto a medida / Licencia parcial"
       : "Custom project / Partial license",
+    idealFor: isEs
+      ? "Museos, centros culturales, espacios educativos, exhibiciones institucionales o instalaciones interactivas con contenido curado."
+      : "Museums, cultural centers, educational spaces, institutional exhibitions, or interactive installations with curated content.",
     tags: isEs
       ? ["Proyecto a medida", "Licencia parcial", "Adaptación"]
       : ["Custom project", "Partial license", "Adaptation"],
   },
 ],
+
 
 
 	

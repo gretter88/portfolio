@@ -5,6 +5,7 @@ type CommercialProjectItem = {
   status: string;
   description: string;
   model: string;
+  idealFor: string;
   tags: string[];
 };
 
@@ -15,11 +16,12 @@ type Props = {
     commercialProjectsIntro: string;
     commercialProjectsBadge: string;
     commercialProjectsModelLabel: string;
+    commercialProjectsIdealForLabel: string;
     commercialProjectsCta: string;
     commercialProjectsContact: string;
     commercialProjectsRequest: string;
     commercialProjectsBottomNote: string;
-	commercialProjectsSecondaryNote: string;
+    commercialProjectsSecondaryNote: string;
     commercialProjectsItems: CommercialProjectItem[];
   };
 };
@@ -183,6 +185,21 @@ export default function CommercialProjectsSection({ i }: Props) {
                   <div className="mt-1 text-sm font-medium">{project.model}</div>
                 </div>
 
+                <div className="mt-4">
+                  <div
+                    className="text-xs uppercase tracking-wide"
+                    style={{ color: "var(--muted-2)" }}
+                  >
+                    {i.commercialProjectsIdealForLabel}
+                  </div>
+                  <div
+                    className="mt-1 text-sm leading-relaxed"
+                    style={{ color: "var(--muted)" }}
+                  >
+                    {project.idealFor}
+                  </div>
+                </div>
+
                 <div className="mt-4 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
@@ -212,41 +229,38 @@ export default function CommercialProjectsSection({ i }: Props) {
               {i.commercialProjectsCta}
             </p>
 
-           <div className="mt-4 flex flex-wrap gap-3">
-  <a
-    href="#contact"
-    className="rounded-xl px-4 py-2 text-sm font-medium"
-    style={{
-      background: "var(--foreground)",
-      color: "var(--background)",
-    }}
-  >
-    {i.commercialProjectsContact}
-  </a>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <a
+                href="#contact"
+                className="rounded-xl px-4 py-2 text-sm font-medium"
+                style={{
+                  background: "var(--foreground)",
+                  color: "var(--background)",
+                }}
+              >
+                {i.commercialProjectsContact}
+              </a>
 
-  <a
-    href="/go/request-access/radar"
-    className="rounded-xl border px-4 py-2 text-sm font-medium"
-    style={{
-      background: "rgba(34,197,94,0.10)",
-      borderColor: "rgba(34,197,94,0.35)",
-      color: "var(--foreground)",
-    }}
-  >
-    {i.commercialProjectsRequest}
-  </a>
-</div>
-
-
+              <a
+                href="/go/request-access/radar"
+                className="rounded-xl border px-4 py-2 text-sm font-medium"
+                style={{
+                  background: "rgba(34,197,94,0.10)",
+                  borderColor: "rgba(34,197,94,0.35)",
+                  color: "var(--foreground)",
+                }}
+              >
+                {i.commercialProjectsRequest}
+              </a>
+            </div>
 
             <div
-  className="mt-4 text-xs leading-relaxed"
-  style={{ color: "var(--muted-2)" }}
->
-  <div>{i.commercialProjectsBottomNote}</div>
-  <div className="mt-1">{i.commercialProjectsSecondaryNote}</div>
-</div>
-
+              className="mt-4 text-xs leading-relaxed"
+              style={{ color: "var(--muted-2)" }}
+            >
+              <div>{i.commercialProjectsBottomNote}</div>
+              <div className="mt-1">{i.commercialProjectsSecondaryNote}</div>
+            </div>
           </div>
         </div>
       </div>
