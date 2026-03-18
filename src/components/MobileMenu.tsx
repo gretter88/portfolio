@@ -61,20 +61,22 @@ export default function MobileMenu({ labels }: Props) {
 
           <div
             className="fixed right-4 top-[72px] z-50 w-[min(92vw,320px)] rounded-2xl border p-3 shadow-2xl md:hidden animate-[mobileMenuIn_.22s_ease-out]"
-            style={{
-              background: "color-mix(in srgb, var(--card) 92%, transparent)",
-              borderColor: "var(--card-border)",
-              backdropFilter: "blur(14px)",
-              WebkitBackdropFilter: "blur(14px)",
-              transformOrigin: "top right",
-            }}
-          >
+           style={{
+  background: "color-mix(in srgb, var(--card) 98%, black 2%)",
+  borderColor: "var(--card-border)",
+  backdropFilter: "blur(8px)",
+  WebkitBackdropFilter: "blur(8px)",
+  transformOrigin: "top right",
+  boxShadow: "0 22px 60px rgba(0,0,0,0.32)",
+}}
+>
             <div
               className="mb-3 rounded-2xl border p-3"
               style={{
                 borderColor: "var(--card-border)",
-                background:
-                  "linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))",
+               background:
+  "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04))",
+
               }}
             >
               <div className="flex items-center gap-3">
@@ -108,7 +110,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "transparent",
+                  background: "rgba(255,255,255,0.04)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -120,7 +122,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "transparent",
+                 background: "rgba(255,255,255,0.04)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -132,7 +134,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "transparent",
+                  background: "rgba(255,255,255,0.04)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -144,7 +146,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "transparent",
+                  background: "rgba(255,255,255,0.04)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -156,7 +158,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "transparent",
+                  background: "rgba(255,255,255,0.04)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -168,7 +170,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "transparent",
+                  background: "rgba(255,255,255,0.04)",
                 }}
                 onClick={() => setOpen(false)}
               >
@@ -180,7 +182,7 @@ export default function MobileMenu({ labels }: Props) {
                 className="rounded-xl border px-4 py-3 text-sm"
                 style={{
                   borderColor: "var(--card-border)",
-                  background: "transparent",
+                  background: "rgba(255,255,255,0.04)",
                 }}
                 onClick={() => setOpen(false)}
               >

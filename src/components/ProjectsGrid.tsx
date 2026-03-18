@@ -806,216 +806,207 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
                     </div>
                   ) : null}
 
-                  <div
-                    className="overflow-hidden rounded-xl border relative z-[220]"
-                    style={{
-                      ...cardStyle,
-                      background:
-                        "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
-                    }}
-                  >
-                    {showVideo &&
-                    activeProject?.video?.provider === "youtube" &&
-                    activeProject?.video?.id ? (
-                      <div
-                        className="relative z-[230]"
-                        style={{ height: 360, background: "var(--background)" }}
-                      >
-                        <iframe
-                          title={`${activeProject.title} video`}
-                          width="100%"
-                          height="100%"
-                          src={`${YT_EMBED_BASE}/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=1&controls=1&origin=${encodeURIComponent(
-                            SITE_ORIGIN
-                          )}`}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          style={{ border: 0, display: "block" }}
-                        />
-                      </div>
-                    ) : activeShot ? (
-                      isMobileShot(activeShot, activeProject) ? (
-                        <div
-                          className="grid place-items-center"
-                          style={{
-                            minHeight: isMarketplaceProject(activeProject)
-                              ? 640
-                              : 620,
-                            padding: isMarketplaceProject(activeProject)
-                              ? "36px 0"
-                              : "26px 0",
-                            background:
-                              "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: isMarketplaceProject(activeProject)
-                                ? 270
-                                : 292,
-                              maxWidth: "min(84vw, 320px)",
-                              borderRadius: isMarketplaceProject(activeProject)
-                                ? 38
-                                : 36,
-                              padding: isMarketplaceProject(activeProject)
-                                ? 11
-                                : 10,
-                              background: "#0f0f10",
-                              boxShadow:
-                                "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
-                              border: "1px solid rgba(255,255,255,0.08)",
-                            }}
-                          >
-                            <div
-                              style={{
-                                position: "relative",
-                                borderRadius: isMarketplaceProject(activeProject)
-                                  ? 30
-                                  : 28,
-                                overflow: "hidden",
-                                background: "#000",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  position: "absolute",
-                                  top: 10,
-                                  left: "50%",
-                                  transform: "translateX(-50%)",
-                                  width: isMarketplaceProject(activeProject)
-                                    ? 52
-                                    : 80,
-                                  height: isMarketplaceProject(activeProject)
-                                    ? 12
-                                    : 18,
-                                  borderRadius: 999,
-                                  background: "#111",
-                                  zIndex: 2,
-                                  opacity: 0.96,
-                                  boxShadow:
-                                    "0 1px 3px rgba(255,255,255,0.05) inset",
-                                }}
-                              />
-                              <img
-                                src={activeShot.src}
-                                alt={activeShot.alt}
-                                loading="lazy"
-                                style={{
-                                  width: "100%",
-                                  height: isMarketplaceProject(activeProject)
-                                    ? 540
-                                    : 560,
-                                  objectFit: "contain",
-                                  objectPosition: "center top",
-                                  display: "block",
-                                  background: "#000",
-                                }}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <img
-                          src={activeShot.src}
-                          alt={activeShot.alt}
-                          className="w-full"
-                          style={{
-                            height: 360,
-                            objectFit: "contain",
-                            objectPosition: "center",
-                            background: "var(--background)",
-                            display: "block",
-                          }}
-                          loading="lazy"
-                        />
-                      )
-                    ) : (
-                      <div
-                        className="grid place-items-center"
-                        style={{ height: 360, color: "var(--muted)" }}
-                      >
-                        {isEs
-                          ? "Sin screenshots todavía"
-                          : "No screenshots yet"}
-                      </div>
-                    )}
-                  </div>
+                 <div
+  className="overflow-hidden rounded-xl border relative z-[220]"
+  style={{
+    ...cardStyle,
+    background:
+      "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+  }}
+>
+  {showVideo &&
+  activeProject?.video?.provider === "youtube" &&
+  activeProject?.video?.id ? (
+    <div
+      className="relative z-[230]"
+      style={{ height: 360, background: "var(--background)" }}
+    >
+      <iframe
+        title={`${activeProject.title} video`}
+        width="100%"
+        height="100%"
+        src={`${YT_EMBED_BASE}/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=1&controls=1&origin=${encodeURIComponent(
+          SITE_ORIGIN
+        )}`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        referrerPolicy="strict-origin-when-cross-origin"
+        style={{ border: 0, display: "block" }}
+      />
+    </div>
+  ) : activeShot ? (
+    isMobileShot(activeShot, activeProject) ? (
+      <div
+        className="grid place-items-center"
+        style={{
+          minHeight: isMarketplaceProject(activeProject) ? 640 : 620,
+          padding: isMarketplaceProject(activeProject) ? "36px 0" : "26px 0",
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+        }}
+      >
+        <div
+          style={{
+            width: isMarketplaceProject(activeProject) ? 270 : 292,
+            maxWidth: "min(84vw, 320px)",
+            borderRadius: isMarketplaceProject(activeProject) ? 38 : 36,
+            padding: isMarketplaceProject(activeProject) ? 11 : 10,
+            background: "#0f0f10",
+            boxShadow:
+              "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              borderRadius: isMarketplaceProject(activeProject) ? 30 : 28,
+              overflow: "hidden",
+              background: "#000",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: 10,
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: isMarketplaceProject(activeProject) ? 52 : 80,
+                height: isMarketplaceProject(activeProject) ? 12 : 18,
+                borderRadius: 999,
+                background: "#111",
+                zIndex: 2,
+                opacity: 0.96,
+                boxShadow: "0 1px 3px rgba(255,255,255,0.05) inset",
+              }}
+            />
+            <img
+              src={activeShot.src}
+              alt={activeShot.alt}
+              loading="lazy"
+              style={{
+                width: "100%",
+                height: isMarketplaceProject(activeProject) ? 540 : 560,
+                objectFit: "contain",
+                objectPosition: "center top",
+                display: "block",
+                background: "#000",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    ) : (
+      <img
+        src={activeShot.src}
+        alt={activeShot.alt}
+        className="w-full"
+        style={{
+          height: 360,
+          objectFit: "contain",
+          objectPosition: "center",
+          background: "var(--background)",
+          display: "block",
+        }}
+        loading="lazy"
+      />
+    )
+  ) : (
+    <div
+      className="grid place-items-center"
+      style={{ height: 360, color: "var(--muted)" }}
+    >
+      {isEs ? "Sin screenshots todavía" : "No screenshots yet"}
+    </div>
+  )}
 
-                  {!showVideo && modalShots.length > 1 ? (
-                    <div className="mt-3 flex items-center gap-2">
-                      <button
-                        type="button"
-                        className={ghostBtnClass}
-                        style={ghostBtnStyle}
-                        onClick={async () => {
-                          if (!activeProject) return;
-                          await trackModalEvent(
-                            "/modal/screenshot-prev",
-                            getProjectSlug(activeProject)
-                          );
-                          setShotIndex((v) => Math.max(0, v - 1));
-                        }}
-                        disabled={shotIndex === 0}
-                        aria-label={isEs ? "Anterior" : "Previous"}
-                      >
-                        ←
-                      </button>
+  {!showVideo && modalShots.length > 1 ? (
+    <>
+      <button
+        type="button"
+        className="absolute left-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
+        style={{
+          background: "rgba(15,15,16,0.72)",
+          borderColor: "rgba(255,255,255,0.12)",
+          color: "#fff",
+          backdropFilter: "blur(6px)",
+          WebkitBackdropFilter: "blur(6px)",
+        }}
+        onClick={async () => {
+          if (!activeProject) return;
+          await trackModalEvent(
+            "/modal/screenshot-prev",
+            getProjectSlug(activeProject)
+          );
+          setShotIndex((v) => Math.max(0, v - 1));
+        }}
+        disabled={shotIndex === 0}
+        aria-label={isEs ? "Anterior" : "Previous"}
+      >
+        ←
+      </button>
 
-                      <div className="flex flex-1 items-center gap-2 overflow-x-auto">
-                        {modalShots.map((_, idx) => (
-                          <button
-                            key={idx}
-                            type="button"
-                            onClick={async () => {
-                              if (!activeProject) return;
-                              await trackModalEvent(
-                                "/modal/screenshot-dot",
-                                getProjectSlug(activeProject)
-                              );
-                              setShotIndex(idx);
-                            }}
-                            className="h-2.5 w-2.5 rounded-full border transition"
-                            style={{
-                              borderColor: "var(--card-border)",
-                              background:
-                                idx === shotIndex
-                                  ? "var(--foreground)"
-                                  : "transparent",
-                              opacity: idx === shotIndex ? 1 : 0.6,
-                            }}
-                            aria-label={`Screenshot ${idx + 1}`}
-                          />
-                        ))}
-                      </div>
+      <button
+        type="button"
+        className="absolute right-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
+        style={{
+          background: "rgba(15,15,16,0.72)",
+          borderColor: "rgba(255,255,255,0.12)",
+          color: "#fff",
+          backdropFilter: "blur(6px)",
+          WebkitBackdropFilter: "blur(6px)",
+        }}
+        onClick={async () => {
+          if (!activeProject) return;
+          await trackModalEvent(
+            "/modal/screenshot-next",
+            getProjectSlug(activeProject)
+          );
+          setShotIndex((v) => Math.min(modalShots.length - 1, v + 1));
+        }}
+        disabled={shotIndex >= modalShots.length - 1}
+        aria-label={isEs ? "Siguiente" : "Next"}
+      >
+        →
+      </button>
+    </>
+  ) : null}
+</div>
 
-                      <button
-                        type="button"
-                        className={ghostBtnClass}
-                        style={ghostBtnStyle}
-                        onClick={async () => {
-                          if (!activeProject) return;
-                          await trackModalEvent(
-                            "/modal/screenshot-next",
-                            getProjectSlug(activeProject)
-                          );
-                          setShotIndex((v) =>
-                            Math.min(modalShots.length - 1, v + 1)
-                          );
-                        }}
-                        disabled={shotIndex >= modalShots.length - 1}
-                        aria-label={isEs ? "Siguiente" : "Next"}
-                      >
-                        →
-                      </button>
-                    </div>
-                  ) : !showVideo ? (
-                    <div className="mt-3 text-xs" style={muted2Style}>
-                      {isEs
-                        ? "Tip: podés navegar con ← →"
-                        : "Tip: use ← → to navigate"}
-                    </div>
-                  ) : null}
+
+                 {!showVideo && modalShots.length > 1 ? (
+  <div className="mt-3 flex justify-center">
+    <div className="flex items-center gap-2 overflow-x-auto">
+      {modalShots.map((_, idx) => (
+        <button
+          key={idx}
+          type="button"
+          onClick={async () => {
+            if (!activeProject) return;
+            await trackModalEvent(
+              "/modal/screenshot-dot",
+              getProjectSlug(activeProject)
+            );
+            setShotIndex(idx);
+          }}
+          className="h-2.5 w-2.5 rounded-full border transition"
+          style={{
+            borderColor: "var(--card-border)",
+            background:
+              idx === shotIndex ? "var(--foreground)" : "transparent",
+            opacity: idx === shotIndex ? 1 : 0.6,
+          }}
+          aria-label={`Screenshot ${idx + 1}`}
+        />
+      ))}
+    </div>
+  </div>
+) : !showVideo ? (
+  <div className="mt-3 text-xs" style={muted2Style}>
+    {isEs ? "Tip: podés navegar con ← →" : "Tip: use ← → to navigate"}
+  </div>
+) : null}
+
                 </div>
 
                 <div className="min-w-0">
