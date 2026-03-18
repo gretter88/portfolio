@@ -5,6 +5,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 import TrackedLink from "@/components/TrackedLink";
 import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
+import MobileMenu from "@/components/MobileMenu";
+
 function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
 }
@@ -78,98 +80,140 @@ export default async function LangLayout({
           background: "color-mix(in srgb, var(--background) 75%, transparent)",
         }}
       >
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <div
-              className="h-9 w-9 rounded-xl border grid place-items-center font-semibold"
-              style={{
-                borderColor: "var(--card-border)",
-                background: "var(--card)",
-              }}
-            >
-              SG
-            </div>
-
-            <div className="leading-tight">
-              <div className="text-sm font-semibold">{i.name}</div>
-              <div className="text-xs" style={{ color: "var(--muted)" }}>
-                {i.role}
-              </div>
-            </div>
-          </div>
-
-          <nav className="flex items-center gap-2">
-            <TrackedLink
-              href="#projects"
-              trackPath="/nav/projects"
-              lang={lang}
-              className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
-              style={{ borderColor: "var(--card-border)", background: "transparent" }}
-            >
-              {i.sectionProjectsTitle}
-            </TrackedLink>
-
-            <TrackedLink
-              href="#commercial-projects"
-              trackPath="/nav/commercial-projects"
-              lang={lang}
-              className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
-              style={{ borderColor: "var(--card-border)", background: "transparent" }}
-            >
-              {i.navCommercial}
-            </TrackedLink>
-
-            <TrackedLink
-              href="#contact"
-              trackPath="/nav/contact"
-              lang={lang}
-              className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
-              style={{ borderColor: "var(--card-border)", background: "transparent" }}
-            >
-              {i.sectionContactTitle}
-            </TrackedLink>
-
-            <TrackedLink
-              href="#experience"
-              trackPath="/nav/experience"
-              lang={lang}
-              className={clsx("hidden sm:inline-flex rounded-xl border px-4 py-2 text-sm")}
-              style={{ borderColor: "var(--card-border)", background: "transparent" }}
-            >
-              {i.sectionExperienceTitle}
-            </TrackedLink>
-
-          <Link
-  href={i.switchHref}
-  className={clsx("rounded-xl border px-4 py-2 text-sm")}
-  style={{ borderColor: "var(--card-border)", background: "transparent" }}
->
-  {i.switchTo}
-</Link>
+       <div className="mx-auto flex max-w-5xl items-center justify-between px-3 py-3 md:px-6 md:py-4">
 
 
-            <TrackedLink
-              href="/go/linkedin"
-              trackPath="/nav/linkedin"
-              lang={lang}
-              className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
-              style={{ borderColor: "var(--card-border)", background: "transparent" }}
-            >
-              {i.ctaLinkedin}
-            </TrackedLink>
 
-            <TrackedLink
-              href="/go/github"
-              trackPath="/nav/github"
-              lang={lang}
-              className={clsx("hidden md:inline-flex rounded-xl border px-4 py-2 text-sm")}
-              style={{ borderColor: "var(--card-border)", background: "transparent" }}
-            >
-              {i.ctaGithub}
-            </TrackedLink>
+          <div className="flex items-center gap-2 md:gap-3 min-w-0">
+  <div
+    className="h-9 w-9 shrink-0 rounded-xl border grid place-items-center font-semibold"
+    style={{
+      borderColor: "var(--card-border)",
+      background: "var(--card)",
+    }}
+  >
+    SG
+  </div>
 
-            <ThemeToggle />
-          </nav>
+  <div className="hidden sm:block leading-tight min-w-0">
+    <div className="text-sm font-semibold truncate">{i.name}</div>
+    <div
+      className="hidden md:block text-xs"
+      style={{ color: "var(--muted)" }}
+    >
+      {i.role}
+    </div>
+  </div>
+</div>
+
+
+
+         <nav className="flex items-center gap-2">
+  <div className="hidden md:flex items-center gap-2">
+    <TrackedLink
+      href="#projects"
+      trackPath="/nav/projects"
+      lang={lang}
+      className={clsx("rounded-xl border px-4 py-2 text-sm")}
+      style={{ borderColor: "var(--card-border)", background: "transparent" }}
+    >
+      {i.sectionProjectsTitle}
+    </TrackedLink>
+
+    <TrackedLink
+      href="#commercial-projects"
+      trackPath="/nav/commercial-projects"
+      lang={lang}
+      className={clsx("rounded-xl border px-4 py-2 text-sm")}
+      style={{ borderColor: "var(--card-border)", background: "transparent" }}
+    >
+      {i.navCommercial}
+    </TrackedLink>
+
+    <TrackedLink
+      href="#contact"
+      trackPath="/nav/contact"
+      lang={lang}
+      className={clsx("rounded-xl border px-4 py-2 text-sm")}
+      style={{ borderColor: "var(--card-border)", background: "transparent" }}
+    >
+      {i.sectionContactTitle}
+    </TrackedLink>
+
+    <TrackedLink
+      href="#experience"
+      trackPath="/nav/experience"
+      lang={lang}
+      className={clsx("rounded-xl border px-4 py-2 text-sm")}
+      style={{ borderColor: "var(--card-border)", background: "transparent" }}
+    >
+      {i.sectionExperienceTitle}
+    </TrackedLink>
+
+    <Link
+      href={i.switchHref}
+      className={clsx("rounded-xl border px-4 py-2 text-sm")}
+      style={{ borderColor: "var(--card-border)", background: "transparent" }}
+    >
+      {i.switchTo}
+    </Link>
+
+    <TrackedLink
+      href="/go/linkedin"
+      trackPath="/nav/linkedin"
+      lang={lang}
+      className={clsx("hidden lg:inline-flex rounded-xl border px-4 py-2 text-sm")}
+      style={{ borderColor: "var(--card-border)", background: "transparent" }}
+    >
+      {i.ctaLinkedin}
+    </TrackedLink>
+
+    <TrackedLink
+      href="/go/github"
+      trackPath="/nav/github"
+      lang={lang}
+      className={clsx("hidden lg:inline-flex rounded-xl border px-4 py-2 text-sm")}
+      style={{ borderColor: "var(--card-border)", background: "transparent" }}
+    >
+      {i.ctaGithub}
+    </TrackedLink>
+  </div>
+
+  <div className="flex items-center gap-2 md:hidden">
+    <Link
+      href={i.switchHref}
+      className={clsx("rounded-xl border px-2.5 py-2 text-sm")}
+
+      style={{ borderColor: "var(--card-border)", background: "transparent" }}
+    >
+      {i.switchTo}
+    </Link>
+
+    <ThemeToggle />
+
+ <MobileMenu
+  lang={lang}
+  labels={{
+    name: i.name,
+    role: i.role,
+    projects: i.sectionProjectsTitle,
+    commercial: i.navCommercial,
+    experience: i.sectionExperienceTitle,
+    contact: i.sectionContactTitle,
+    linkedin: i.ctaLinkedin,
+    github: i.ctaGithub,
+    switchTo: i.switchTo,
+    switchHref: i.switchHref,
+  }}
+/>
+
+  </div>
+
+  <div className="hidden md:block">
+    <ThemeToggle />
+  </div>
+</nav>
+
         </div>
       </header>
 
