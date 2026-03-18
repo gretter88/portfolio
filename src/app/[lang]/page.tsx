@@ -120,7 +120,8 @@ export default async function Page({
   />
 </section>
 
-<CommercialProjectsSection i={i} />
+<CommercialProjectsSection i={i} lang={lang} />
+
 
 {/* EXPERIENCE */}
 <section id="experience" className="mt-16">

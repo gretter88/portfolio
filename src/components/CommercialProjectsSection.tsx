@@ -12,6 +12,7 @@ type CommercialProjectItem = {
 
 
 type Props = {
+  lang: "es" | "en";
   i: {
     commercialProjectsTitle: string;
     commercialProjectsKicker: string;
@@ -90,7 +91,8 @@ function getTagStyle(tag: string): React.CSSProperties {
   };
 }
 
-export default function CommercialProjectsSection({ i }: Props) {
+export default function CommercialProjectsSection({ i, lang }: Props) {
+
   return (
     <section id="commercial-projects" className="mt-16">
       <div
@@ -262,19 +264,20 @@ export default function CommercialProjectsSection({ i }: Props) {
                 {i.commercialProjectsContact}
               </a>
 
-              <a
-                
-href="/go/request-access/commercial"
+          <a
+  href={`/go/request-access/commercial?lang=${lang}`}
+  className="rounded-xl border px-4 py-2 text-sm font-medium"
+  style={{
+    background: "rgba(34,197,94,0.10)",
+    borderColor: "rgba(34,197,94,0.35)",
+    color: "var(--foreground)",
+  }}
+>
+  {i.commercialProjectsRequest}
+</a>
 
-                className="rounded-xl border px-4 py-2 text-sm font-medium"
-                style={{
-                  background: "rgba(34,197,94,0.10)",
-                  borderColor: "rgba(34,197,94,0.35)",
-                  color: "var(--foreground)",
-                }}
-              >
-                {i.commercialProjectsRequest}
-              </a>
+
+
             </div>
 
             <div
