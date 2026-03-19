@@ -73,23 +73,30 @@ export default async function Page({
             {i.summary}
           </p>
 
-          <div className="flex flex-wrap gap-3">
-            <a href="#projects" className={primaryBtnClass} style={primaryBtnStyle}>
-              {i.ctaProjects}
-            </a>
+         <div className="flex flex-wrap gap-3">
+  <a href="#projects" className={primaryBtnClass} style={primaryBtnStyle}>
+    {i.ctaProjects}
+  </a>
 
-            <a href="#contact" className={softBtnClass} style={softBtnStyle}>
-              {i.ctaContact}
-            </a>
+  <a href="#commercial-projects" className={softBtnClass} style={softBtnStyle}>
+    {i.navCommercial}
+  </a>
 
-            <a href="#experience" className={softBtnClass} style={softBtnStyle}>
-              {i.ctaExperience}
-            </a>
+  <a href="#contact" className={softBtnClass} style={softBtnStyle}>
+    {i.ctaContact}
+  </a>
 
-            <a href="/go/cv" className={softBtnClass} style={softBtnStyle}>
-              {i.ctaDownloadCv}
-            </a>
-          </div>
+  <a href="/go/cv" className={softBtnClass} style={softBtnStyle}>
+    {i.ctaDownloadCv}
+  </a>
+</div>
+
+<div className="mt-2 text-sm" style={muted2Style}>
+  <a href="#experience" className={linkClass} style={linkStyle}>
+    {i.ctaExperience}
+  </a>
+</div>
+
 
           <div className="mt-2 flex flex-wrap gap-3 text-sm" style={mutedStyle}>
             <a href={LINKS.email} className={linkClass} style={linkStyle}>
