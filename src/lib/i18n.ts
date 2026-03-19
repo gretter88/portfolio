@@ -1,3 +1,4 @@
+//src/lib/i18n.ts
 export type Lang = "es" | "en";
 export const LANGS: Lang[] = ["es", "en"];
 
@@ -449,17 +450,23 @@ const projects: Project[] = [
     switchTo: isEs ? "English" : "Español",
     switchHref: isEs ? "/en" : "/es",
 
-    heroKicker: isEs
-  ? "Disponible: Remoto · Freelance · Full-time"
-  : "Available: Remote · Freelance · Full-time",
+heroKicker: isEs
+  ? "Full-stack product builder · Remoto · Freelance · Full-time"
+  : "Full-stack product builder · Remote · Freelance · Full-time",
+
 
     name: "Santiago Gretter",
-    role: "Fullstack / Mobile Developer (React Native · Node · Next.js)",
-    summary: isEs
-      ? "Construyo productos completos: apps móviles, webs modernas y backends escalables. Enfocado en performance, UX y features en tiempo real (sockets, mapas, notificaciones)."
-      : "I build end-to-end products: mobile apps, modern web apps, and scalable backends. Focused on performance, UX, and real-time features (sockets, maps, notifications).",
+   role: isEs
+  ? "Full-stack / Mobile Developer · Productos digitales, apps en tiempo real y plataformas web"
+  : "Full-stack / Mobile Developer · Digital products, real-time apps, and web platforms",
+
+   summary: isEs
+  ? "Diseño y desarrollo productos digitales de punta a punta: apps móviles, plataformas web y backends escalables. Trabajo con foco en producto, UX, performance y experiencias en tiempo real, desde la idea hasta producción."
+  : "I design and build end-to-end digital products: mobile apps, web platforms, and scalable backends. I focus on product thinking, UX, performance, and real-time experiences, from concept to production.",
+
 
     ctaProjects: isEs ? "Ver proyectos" : "View projects",
+
     ctaContact: isEs ? "Contacto" : "Contact",
 	ctaExperience: isEs ? "Experiencia" : "Experience",
     ctaEmail: isEs ? "Enviar email" : "Email me",
