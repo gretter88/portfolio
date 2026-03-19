@@ -729,12 +729,20 @@ commercialProjectsBottomNote: isEs
   ? "Modalidades posibles: licenciamiento, implementación, white-label, adaptación por vertical, partnership estratégico o adquisición, según el proyecto."
   : "Possible models: licensing, deployment, white-label, vertical adaptation, strategic partnership, or acquisition, depending on the project.",
 
+commercialProjectsPdf: isEs
+  ? "Descargar ficha PDF"
+  : "Download PDF one-pager",
+
+
+
+
 commercialProjectsItems: [
   {
     title: isEs ? "RadarSocial" : "RadarSocial",
     status: isEs
       ? "Disponible para licenciamiento"
       : "Available for licensing",
+	  featuredLabel: isEs ? "Proyecto principal" : "Flagship product",
     description: isEs
       ? "Plataforma full stack de interacción social y servicios en tiempo real. Incluye app móvil, web, backend, chat, mapas, llamadas, BLE, monetización y panel administrativo. Disponible para licenciamiento, partnership o implementación comercial."
       : "Full-stack real-time social and services platform. Includes mobile app, web, backend, chat, maps, calls, BLE, monetization, and admin panel. Available for licensing, partnership, or commercial deployment.",
@@ -748,6 +756,7 @@ commercialProjectsItems: [
       ? ["Licencia", "Partnership", "Adquisición"]
       : ["License", "Partnership", "Acquisition"],
     requestHref: "/go/request-access/radar",
+	pdfHref: "/RadarSocial_ficha_comercial.pdf",
   },
   {
     title: isEs

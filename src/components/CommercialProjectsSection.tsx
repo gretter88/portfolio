@@ -8,7 +8,10 @@ type CommercialProjectItem = {
   idealFor: string;
   tags: string[];
   requestHref: string;
+  pdfHref?: string;
+  featuredLabel?: string;
 };
+
 
 
 type Props = {
@@ -26,6 +29,8 @@ type Props = {
     commercialProjectsRequest: string;
     commercialProjectsBottomNote: string;
     commercialProjectsSecondaryNote: string;
+	commercialProjectsPdf: string;
+
     commercialProjectsItems: CommercialProjectItem[];
   };
 };
@@ -171,6 +176,24 @@ export default function CommercialProjectsSection({ i, lang }: Props) {
                     {project.status}
                   </div>
                 </div>
+{project.featuredLabel ? (
+  <div className="mt-3">
+    <span
+      className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px]"
+      style={{
+        borderColor: "rgba(59,130,246,0.22)",
+        background: "rgba(59,130,246,0.08)",
+        color: "#93c5fd",
+      }}
+    >
+      <span
+        className="h-2 w-2 rounded-full"
+        style={{ background: "currentColor", opacity: 0.9 }}
+      />
+      {project.featuredLabel}
+    </span>
+  </div>
+) : null}
 
                 <h4 className="mt-4 text-lg font-semibold">{project.title}</h4>
 
@@ -219,7 +242,7 @@ export default function CommercialProjectsSection({ i, lang }: Props) {
 </div>
 
 
-<div className="mt-5">
+<div className="mt-5 flex flex-wrap gap-3">
   <a
     href={project.requestHref}
     className="inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-medium transition"
@@ -231,7 +254,25 @@ export default function CommercialProjectsSection({ i, lang }: Props) {
   >
     {i.commercialProjectsCardRequest}
   </a>
+
+  {project.pdfHref ? (
+    <a
+      href={project.pdfHref}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-medium transition"
+      style={{
+        borderColor: "rgba(59,130,246,0.35)",
+        background: "rgba(59,130,246,0.10)",
+        color: "var(--foreground)",
+      }}
+    >
+      {i.commercialProjectsPdf}
+    </a>
+  ) : null}
 </div>
+
+
 
 
               </article>
