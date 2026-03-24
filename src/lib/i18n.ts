@@ -898,7 +898,7 @@ commercialProjectsItems: [
   tags: isEs
     ? ["SaaS", "Licencia", "White-label"]
     : ["SaaS", "License", "White-label"],
-  
+   requestHref: "/go/request-access/sg-copilot-crm",
 },
 
   {
