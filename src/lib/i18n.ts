@@ -438,6 +438,120 @@ const projects: Project[] = [
       ],
 },
 
+{
+  order: 6,
+  title: isEs ? "SG Copilot CRM" : "SG Copilot CRM",
+  desc: isEs
+    ? "CRM SaaS full stack orientado a operación comercial, seguimiento de clientes y productividad con AI. Incluye autenticación, organizaciones, suscripciones con Stripe, planes Free/Pro/Business, dashboard de uso, documentos con búsqueda semántica, preguntas sobre documentos, resúmenes AI de clientes y módulo Business-only de auditoría/insights AI."
+    : "Full-stack SaaS CRM focused on sales operations, client follow-up, and AI-powered productivity. It includes authentication, organizations, Stripe subscriptions, Free/Pro/Business plans, usage dashboard, semantic document search, document Q&A, AI client summaries, and a Business-only AI audit/insights module.",
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Supabase",
+    "Stripe",
+    "OpenAI",
+    "Vercel",
+    "Tailwind CSS",
+    "PostgreSQL",
+  ],
+  image: {
+    src: "/screenshots/sg-copilot-crm-1.webp",
+    alt: isEs
+      ? "SG Copilot CRM — Dashboard principal"
+      : "SG Copilot CRM — Main dashboard",
+  },
+  links: {
+    demo: "https://sg-copilot-crm.vercel.app",
+    repo: "",
+  },
+  badge: isEs ? "SaaS · Live" : "SaaS · Live",
+  screenshots: [
+    {
+      src: "/screenshots/sg-copilot-crm-1.webp",
+      alt: isEs
+        ? "SG Copilot CRM — Dashboard"
+        : "SG Copilot CRM — Dashboard",
+    },
+	    {
+      src: "/screenshots/sg-copilot-crm-1-1.webp",
+      alt: isEs
+        ? "SG Copilot CRM — Dashboard"
+        : "SG Copilot CRM — Dashboard",
+    },
+    {
+      src: "/screenshots/sg-copilot-crm-2.webp",
+      alt: isEs
+        ? "SG Copilot CRM — Billing y planes"
+        : "SG Copilot CRM — Billing and plans",
+    },
+	  {
+      src: "/screenshots/sg-copilot-crm-2-2.webp",
+      alt: isEs
+        ? "SG Copilot CRM — Billing y planes"
+        : "SG Copilot CRM — Billing and plans",
+    },
+    {
+      src: "/screenshots/sg-copilot-crm-3.webp",
+      alt: isEs
+        ? "SG Copilot CRM — AI Assistant"
+        : "SG Copilot CRM — AI Assistant",
+    },
+	
+    {
+      src: "/screenshots/sg-copilot-crm-4.webp",
+      alt: isEs
+        ? "SG Copilot CRM — Documentos con búsqueda semántica"
+        : "SG Copilot CRM — Documents with semantic search",
+    },
+    {
+      src: "/screenshots/sg-copilot-crm-5.webp",
+      alt: isEs
+        ? "SG Copilot CRM — AI History / auditoría Business"
+        : "SG Copilot CRM — AI History / Business audit",
+    },
+	  {
+      src: "/screenshots/sg-copilot-crm-5-2.webp",
+      alt: isEs
+        ? "SG Copilot CRM — AI History / auditoría Business"
+        : "SG Copilot CRM — AI History / Business audit",
+    },
+	  {
+      src: "/screenshots/sg-copilot-crm-6.webp",
+      alt: isEs
+        ? "SG Copilot CRM — AI History / auditoría Business"
+        : "SG Copilot CRM — AI History / Business audit",
+    },
+  ],
+  features: isEs
+    ? [
+        "Autenticación y multi-organización con Supabase",
+        "Modelo SaaS con suscripciones Stripe y planes Free / Pro / Business",
+        "Dashboard con métricas, límites de uso y recomendaciones inteligentes según consumo",
+        "Gestión de clientes, tareas y documentos dentro del workspace",
+        "AI Assistant con chat comercial y resúmenes AI por cliente",
+        "Búsqueda semántica y preguntas sobre documentos usando embeddings + AI",
+        "Límites por plan y bloqueo contextual de features premium",
+        "Módulo Business-only de auditoría AI: historial, analítica, comparativas por rango, export CSV/JSON e insights guardados",
+        "Panel de insights con fijado, búsqueda, filtros y exportación",
+        "Arquitectura preparada para producto SaaS comercializable y escalable",
+      ]
+    : [
+        "Authentication and multi-organization setup with Supabase",
+        "SaaS subscription model with Stripe and Free / Pro / Business plans",
+        "Dashboard with metrics, usage limits, and smart upgrade recommendations",
+        "Client, task, and document management inside each workspace",
+        "AI Assistant with sales-focused chat and AI-generated client summaries",
+        "Semantic search and document Q&A using embeddings + AI",
+        "Per-plan limits and contextual premium feature gating",
+        "Business-only AI audit module: history, analytics, range comparisons, CSV/JSON export, and saved insights",
+        "Insights panel with pinning, search, filters, and export",
+        "Architecture ready for a scalable and commercial SaaS product",
+      ],
+},
+
+
+
+
 ];
 
 
@@ -765,6 +879,28 @@ commercialProjectsItems: [
     requestHref: "/go/request-access/radar",
 	pdfHref: "/RadarSocial_ficha_comercial.pdf",
   },
+  
+  {
+  title: isEs ? "SG Copilot CRM" : "SG Copilot CRM",
+  status: isEs
+    ? "Disponible para licenciamiento / implementación"
+    : "Available for licensing / deployment",
+  featuredLabel: isEs ? "SaaS B2B" : "B2B SaaS",
+  description: isEs
+    ? "CRM SaaS full stack con AI, billing por suscripción, límites por plan, documentos inteligentes y módulo Business de auditoría/insights. Disponible para licenciamiento, white-label o implementación comercial para equipos, consultoras y operaciones B2B."
+    : "Full-stack SaaS CRM with AI, subscription billing, plan limits, smart documents, and a Business audit/insights module. Available for licensing, white-label, or commercial deployment for teams, consulting firms, and B2B operations.",
+  model: isEs
+    ? "Licencia / White-label / Implementación"
+    : "License / White-label / Deployment",
+  idealFor: isEs
+    ? "Equipos comerciales, consultoras, operaciones B2B, agencias o empresas que necesiten CRM + AI + modelo SaaS listo para evolucionar."
+    : "Sales teams, consulting firms, B2B operations, agencies, or companies needing a CRM + AI + SaaS-ready product.",
+  tags: isEs
+    ? ["SaaS", "Licencia", "White-label"]
+    : ["SaaS", "License", "White-label"],
+  
+},
+
   {
     title: isEs
       ? "Marketplace de Servicios"
