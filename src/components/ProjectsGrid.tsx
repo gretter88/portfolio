@@ -88,17 +88,22 @@ const [showMobileDetails, setShowMobileDetails] = useState(false);
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
-  const getProjectSlug = (p: Project) => {
-    const title = (p.title || "").toLowerCase();
-    if (title.includes("marketplace de servicios")) return "marketplace";
-    if (title.includes("services marketplace")) return "marketplace";
-    if (title.includes("marketplace")) return "marketplace";
-    if (title.includes("kiosco") || title.includes("kiosk")) return "kiosco";
-    if (title.includes("intranet")) return "intranet";
-    if (title.includes("radarsocial")) return "radar";
-    if (title.includes("museo")) return "museo";
-    return slugify(p.title || "demo");
-  };
+ const getProjectSlug = (p: Project) => {
+  const title = (p.title || "").toLowerCase();
+
+  if (title.includes("sg saas starter")) return "sg-saas-starter";
+  if (title.includes("marketplace de servicios")) return "marketplace";
+  if (title.includes("services marketplace")) return "marketplace";
+  if (title.includes("marketplace")) return "marketplace";
+  if (title.includes("kiosco") || title.includes("kiosk")) return "kiosco";
+  if (title.includes("intranet")) return "intranet";
+  if (title.includes("radarsocial")) return "radar";
+  if (title.includes("museo")) return "museo";
+
+  return slugify(p.title || "demo");
+};
+
+
 
   const isMobileProject = (p: Project) => {
     const slug = getProjectSlug(p);
@@ -137,13 +142,26 @@ const [showMobileDetails, setShowMobileDetails] = useState(false);
     return slug === "radar" || slug === "museo";
   };
 
-  const getPrimaryLinkLabel = (p: Project) => {
-    const slug = getProjectSlug(p);
-    if (slug === "radar" || slug === "museo") {
-      return isEs ? "Ver sitio" : "View site";
-    }
-    return "Demo";
-  };
+const getPrimaryLinkLabel = (p: Project) => {
+  const slug = getProjectSlug(p);
+
+  if (slug === "sg-saas-starter") {
+    return isEs ? "Comprar en Gumroad" : "Buy on Gumroad";
+  }
+
+  if (slug === "radar" || slug === "museo") {
+    return isEs ? "Ver sitio" : "View site";
+  }
+
+  return "Demo";
+};
+
+
+const isGumroadProduct = (p: Project) => {
+  return getProjectSlug(p) === "sg-saas-starter";
+};
+
+
 
   const isMarketplaceProject = (project?: Project | null) => {
     if (!project) return false;
@@ -572,30 +590,46 @@ const closeModal = () => {
                     </a>
                   ) : (
                     <a
-                      className={ghostBtnClass}
-                      style={
-                        isLiveWebsiteProject(p)
-                          ? {
-                              background: "rgba(34,197,94,0.10)",
-                              borderColor: "rgba(34,197,94,0.35)",
-                              color: "var(--foreground)",
-                            }
-                          : ghostBtnStyle
-                      }
-                      href={getPublicDemoPath(p)}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {isLiveWebsiteProject(p) ? (
-                        <span className="inline-flex items-center gap-2">
-                          <span className="h-2 w-2 rounded-full bg-green-400" />
-                          {getPrimaryLinkLabel(p)}
-                        </span>
-                      ) : (
-                        getPrimaryLinkLabel(p)
-                      )}
-                    </a>
+  className={ghostBtnClass}
+  style={
+    isGumroadProduct(p)
+      ? {
+          background: "rgba(168,85,247,0.12)",
+          borderColor: "rgba(168,85,247,0.35)",
+          color: "var(--foreground)",
+          boxShadow: "0 10px 24px rgba(168,85,247,0.16)",
+        }
+      : isLiveWebsiteProject(p)
+      ? {
+          background: "rgba(34,197,94,0.10)",
+          borderColor: "rgba(34,197,94,0.35)",
+          color: "var(--foreground)",
+        }
+      : ghostBtnStyle
+  }
+  href={getPublicDemoPath(p)}
+  target="_blank"
+  rel="noreferrer"
+  onClick={(e) => e.stopPropagation()}
+>
+  {isGumroadProduct(p) ? (
+    <span className="inline-flex items-center gap-2">
+      <span
+        className="h-2 w-2 rounded-full"
+        style={{ background: "#c084fc" }}
+      />
+      {getPrimaryLinkLabel(p)}
+    </span>
+  ) : isLiveWebsiteProject(p) ? (
+    <span className="inline-flex items-center gap-2">
+      <span className="h-2 w-2 rounded-full bg-green-400" />
+      {getPrimaryLinkLabel(p)}
+    </span>
+  ) : (
+    getPrimaryLinkLabel(p)
+  )}
+</a>
+
                   )
                 ) : (
                   <span
