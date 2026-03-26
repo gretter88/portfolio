@@ -344,8 +344,123 @@ const projects: Project[] = [
 },
 
 
+
 {
   order: 5,
+  title: "SG SaaS Starter",
+  desc: isEs
+    ? "Starter full stack comercializable orientado a productos SaaS. Incluye dashboard admin moderno, autenticación, usuarios, actividad, notificaciones, configuraciones, backend Node.js API y estructura lista para extender como producto real o base de nuevos desarrollos."
+    : "Commercial full-stack starter built for SaaS products. It includes a modern admin dashboard, authentication, users, activity, notifications, settings, a Node.js API backend, and a production-ready structure to extend into real products or new commercial builds.",
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Node.js",
+    "Express",
+    "MongoDB",
+  ],
+  image: {
+    src: "/screenshots/sg-saas-starter-1.webp",
+    alt: isEs
+      ? "SG SaaS Starter — Dashboard principal"
+      : "SG SaaS Starter — Main dashboard",
+  },
+  links: {
+    demo: "https://gretter.gumroad.com/l/qpxbzq",
+    repo: "",
+  },
+  badge: isEs ? "Digital Product · Gumroad" : "Digital Product · Gumroad",
+  screenshots: [
+    {
+      src: "/screenshots/sg-saas-starter-1.webp",
+      alt: isEs
+        ? "SG SaaS Starter — Dashboard"
+        : "SG SaaS Starter — Dashboard",
+    },
+    {
+      src: "/screenshots/sg-saas-starter-2.webp",
+      alt: isEs
+        ? "SG SaaS Starter — Users"
+        : "SG SaaS Starter — Users",
+    },
+    {
+      src: "/screenshots/sg-saas-starter-3.webp",
+      alt: isEs
+        ? "SG SaaS Starter — Activity"
+        : "SG SaaS Starter — Activity",
+    },
+    {
+      src: "/screenshots/sg-saas-starter-4.webp",
+      alt: isEs
+        ? "SG SaaS Starter — Notifications"
+        : "SG SaaS Starter — Notifications",
+    },
+    {
+      src: "/screenshots/sg-saas-starter-5.webp",
+      alt: isEs
+        ? "SG SaaS Starter — Settings"
+        : "SG SaaS Starter — Settings",
+    },
+	{
+      src: "/screenshots/sg-saas-starter-6.webp",
+      alt: isEs
+        ? "SG SaaS Starter — Settings"
+        : "SG SaaS Starter — Settings",
+    },
+	{
+      src: "/screenshots/sg-saas-starter-7.webp",
+      alt: isEs
+        ? "SG SaaS Starter — Settings"
+        : "SG SaaS Starter — Settings",
+    },
+  ],
+  features: isEs
+    ? [
+        "Dashboard admin moderno listo para usar como base SaaS",
+        "Arquitectura full stack separada entre frontend y backend API",
+        "Gestión de usuarios con vistas administrativas",
+        "Módulo de actividad con filtros y exportación",
+        "Sistema de notificaciones y configuraciones base",
+        "Diseño responsive y estructura extensible para nuevos módulos",
+        "Ideal como starter comercializable, boilerplate privado o base de producto",
+      ]
+    : [
+        "Modern admin dashboard ready to use as a SaaS foundation",
+        "Full-stack architecture with separate frontend and backend API",
+        "User management with admin views",
+        "Activity module with filters and export support",
+        "Base notifications and settings system",
+        "Responsive design and extensible structure for new modules",
+        "Ideal as a commercial starter, private boilerplate, or product foundation",
+      ],
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  order: 6,
   title: isEs
     ? "Marketplace de Servicios"
     : "Services Marketplace",
@@ -439,7 +554,7 @@ const projects: Project[] = [
 },
 
 {
-  order: 6,
+  order: 7,
   title: isEs ? "SG Copilot CRM" : "SG Copilot CRM",
   desc: isEs
     ? "CRM SaaS full stack orientado a operación comercial, seguimiento de clientes y productividad con AI. Incluye autenticación, organizaciones, suscripciones con Stripe, planes Free/Pro/Business, dashboard de uso, documentos con búsqueda semántica, preguntas sobre documentos, resúmenes AI de clientes y módulo Business-only de auditoría/insights AI."
@@ -900,6 +1015,34 @@ commercialProjectsItems: [
     : ["SaaS", "License", "White-label"],
    requestHref: "/go/request-access/sg-copilot-crm",
 },
+
+
+
+{
+  title: isEs ? "SG SaaS Starter" : "SG SaaS Starter",
+  status: isEs
+    ? "Disponible en Gumroad / Licenciamiento"
+    : "Available on Gumroad / Licensing",
+  featuredLabel: isEs ? "Digital Product" : "Digital Product",
+  description: isEs
+    ? "Starter full stack orientado a SaaS y dashboards administrativos. Disponible como producto digital en Gumroad y también como base adaptable para implementaciones, white-label o nuevos productos comerciales."
+    : "Full-stack starter focused on SaaS and admin dashboards. Available as a digital product on Gumroad and also as an adaptable base for deployments, white-label solutions, or new commercial products.",
+  model: isEs
+    ? "Producto digital / Licencia / White-label"
+    : "Digital product / License / White-label",
+  idealFor: isEs
+    ? "Founders, equipos técnicos, agencias o desarrolladores que necesiten una base moderna para lanzar un SaaS o panel administrativo más rápido."
+    : "Founders, technical teams, agencies, or developers who need a modern foundation to launch a SaaS product or admin dashboard faster.",
+  tags: isEs
+    ? ["Gumroad", "Licencia", "White-label"]
+    : ["Gumroad", "License", "White-label"],
+  requestHref: "/go/request-access/sg-saas-starter",
+},
+
+
+
+
+
 
   {
     title: isEs

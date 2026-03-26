@@ -1,3 +1,4 @@
+//src/components/CommercialProjectSection.tsx
 import React from "react";
 
 type CommercialProjectItem = {
