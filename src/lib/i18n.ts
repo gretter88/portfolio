@@ -17,11 +17,19 @@ export type Project = {
   links?: { demo?: string; repo?: string };
   badge?: string;
   order?: number;
-
-  // ✅ NUEVO (opcional)
   screenshots?: { src: string; alt: string }[];
   features?: string[];
   video?: { provider: "youtube"; id: string; label?: string; duration?: string };
+
+  downloadLinks?: {
+    apk?: string;
+    playTesting?: string;
+    apkLabel?: string;
+    playLabel?: string;
+    note?: string;
+  };
+
+  statusNote?: string;
 };
 
 
@@ -35,8 +43,8 @@ const projects: Project[] = [
   order: 1,
   title: "RadarSocial",
   desc: isEs
-    ? "Web en producción + App Android en testing. Plataforma social y de servicios en tiempo real con dos experiencias dentro de la misma app: modo social y modo servicio. Incluye chat, mapas, estado online, proximidad por BLE, stickers, mensajes de voz, llamadas, videollamadas y monetización mobile (AdMob, compras in-app y premium). Backend Node/MongoDB + Socket.IO. Las capturas actuales combinan versión app y web; la app Android está en testing privado (Google Play – acceso por invitación)."
-    : "Web live + Android app in testing. Real-time social and services platform with two experiences inside the same app: social mode and service mode. It includes chat, maps, online presence, BLE proximity, stickers, voice messages, calls, video calls, and mobile monetization (AdMob, in-app purchases, and premium). Node/MongoDB + Socket.IO backend. Current screenshots combine app and web views; the Android app is in private testing (Google Play – invite-only).",
+    ? "Plataforma full stack en producción con versión web activa y app Android en Google Play Closed Testing. Combina red social + servicios en tiempo real dentro del mismo producto, con chat, mapas, BLE, audio, videollamadas, notificaciones push, monetización mobile y backend escalable."
+    : "Full-stack platform with a live web version and an Android app currently in Google Play Closed Testing. It combines social + services experiences in a single product, including chat, maps, BLE, audio, video calls, push notifications, mobile monetization, and a scalable backend.",
   stack: [
     "Next.js",
     "TypeScript",
@@ -56,10 +64,25 @@ const projects: Project[] = [
       ? "RadarSocial — App / vista principal"
       : "RadarSocial — App / main view",
   },
-  links: { demo: "https://radarsocial.com.uy/", repo: "" },
+  links: {
+    demo: "https://radarsocial.com.uy/",
+    repo: "",
+  },
+  downloadLinks: {
+    apk: "/apk/RadarSocial-Android-Release.apk", // ← cambiá esta ruta por la real
+    playTesting: "https://play.google.com/apps/testing/com.testlinking", // ← o tu link real de testing
+    apkLabel: isEs ? "Descargar APK" : "Download APK",
+    playLabel: isEs ? "Google Play Testing" : "Google Play Testing",
+    note: isEs
+      ? "Versión Android final actualmente en Google Play Closed Testing (última etapa de validación antes del release público)."
+      : "Final Android version currently in Google Play Closed Testing (last validation stage before public release).",
+  },
+  statusNote: isEs
+    ? "Estado actual: Web en producción · Android en Closed Testing · Backend en vivo"
+    : "Current status: Web in production · Android in Closed Testing · Backend live",
   badge: isEs
-    ? "Web: Live · App Android: Testing privado"
-    : "Web: Live · Android App: Private testing",
+    ? "Web: Live · Android: Google Play Closed Testing"
+    : "Web: Live · Android: Google Play Closed Testing",
   screenshots: [
     {
       src: "/screenshots/radarsocial-app-1.webp",
@@ -85,70 +108,60 @@ const projects: Project[] = [
         ? "RadarSocial — App / Mapa y usuarios o servicios"
         : "RadarSocial — App / Map and users or services",
     },
- {
+    {
       src: "/screenshots/radarsocial-app-5.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa y usuarios o servicios"
-        : "RadarSocial — App / Map and users or services",
+        ? "RadarSocial — App / Vista mobile"
+        : "RadarSocial — App / Mobile view",
     },
-
- {
+    {
       src: "/screenshots/radarsocial-app-6.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa y usuarios o servicios"
-        : "RadarSocial — App / Map and users or services",
+        ? "RadarSocial — App / Vista mobile"
+        : "RadarSocial — App / Mobile view",
     },
-
- {
+    {
       src: "/screenshots/radarsocial-app-7.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa y usuarios o servicios"
-        : "RadarSocial — App / Map and users or services",
+        ? "RadarSocial — App / Vista mobile"
+        : "RadarSocial — App / Mobile view",
     },
-
-
-	 {
+    {
       src: "/screenshots/radarsocial-app-8.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa y usuarios o servicios"
-        : "RadarSocial — App / Map and users or services",
+        ? "RadarSocial — App / Vista mobile"
+        : "RadarSocial — App / Mobile view",
     },
-	
-	 {
+    {
       src: "/screenshots/radarsocial-app-9.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa y usuarios o servicios"
-        : "RadarSocial — App / Map and users or services",
+        ? "RadarSocial — App / Vista mobile"
+        : "RadarSocial — App / Mobile view",
     },
-	
-	 {
+    {
       src: "/screenshots/radarsocial-app-10.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa y usuarios o servicios"
-        : "RadarSocial — App / Map and users or services",
+        ? "RadarSocial — App / Vista mobile"
+        : "RadarSocial — App / Mobile view",
     },
-	
-	 {
+    {
       src: "/screenshots/radarsocial-app-11.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa y usuarios o servicios"
-        : "RadarSocial — App / Map and users or services",
+        ? "RadarSocial — App / Vista mobile"
+        : "RadarSocial — App / Mobile view",
     },
-	
-	 {
+    {
       src: "/screenshots/radarsocial-app-12.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa y usuarios o servicios"
-        : "RadarSocial — App / Map and users or services",
+        ? "RadarSocial — App / Vista mobile"
+        : "RadarSocial — App / Mobile view",
     },
-	
-	 {
+    {
       src: "/screenshots/radarsocial-app-13.webp",
       alt: isEs
-        ? "RadarSocial — App / Mapa y usuarios o servicios"
-        : "RadarSocial — App / Map and users or services",
+        ? "RadarSocial — App / Vista mobile"
+        : "RadarSocial — App / Mobile view",
     },
-
     {
       src: "/screenshots/radarsocial-1.webp",
       alt: isEs
@@ -157,6 +170,12 @@ const projects: Project[] = [
     },
     {
       src: "/screenshots/radarsocial-2.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Chat en tiempo real"
+        : "RadarSocial — Web / Real-time chat",
+    },
+	{
+      src: "/screenshots/radarsocial-2-1.webp",
       alt: isEs
         ? "RadarSocial — Web / Chat en tiempo real"
         : "RadarSocial — Web / Real-time chat",
@@ -173,13 +192,70 @@ const projects: Project[] = [
         ? "RadarSocial — Web / Inicio / UX"
         : "RadarSocial — Web / Home / UX",
     },
+	 {
+      src: "/screenshots/radarsocial-5.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / UX",
+    },
+	{
+      src: "/screenshots/radarsocial-6.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / UX",
+    },
+	{
+      src: "/screenshots/radarsocial-7.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / UX",
+    },
+	{
+      src: "/screenshots/radarsocial-8.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / UX",
+    },
+	{
+      src: "/screenshots/radarsocial-9.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / UX",
+    },
+	{
+      src: "/screenshots/radarsocial-10.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / UX",
+    },
+	{
+      src: "/screenshots/radarsocial-11.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / UX",
+    },
+	{
+      src: "/screenshots/radarsocial-12.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / UX",
+    },
+	{
+      src: "/screenshots/radarsocial-13.webp",
+      alt: isEs
+        ? "RadarSocial — Web / Inicio / UX"
+        : "RadarSocial — Web / Home / ux",
+    },
+	
+	
   ],
   features: isEs
     ? [
+        "Producto full stack con versión web activa y app Android en Google Play Closed Testing",
         "Plataforma con dos experiencias dentro de la misma app: modo social y modo servicio",
         "Registro y login con email/password + acceso con Google",
         "Verificación de cuenta por email en el flujo de registro tradicional",
-        "Personalización de perfil con selección de avatar y uso automático de foto de Google en perfil y mapa al iniciar sesión con Google",
+        "Personalización de perfil con selección de avatar y uso automático de foto de Google",
         "Chat 1:1 en tiempo real (Socket.IO) con estados: online / escribiendo / no leídos / leídos",
         "Mensajes de voz estilo WhatsApp, stickers y multimedia dentro del chat",
         "Llamadas de audio y videollamadas integradas al flujo del chat",
@@ -189,15 +265,15 @@ const projects: Project[] = [
         "Detección de proximidad por BLE con configuración de visibilidad y datos compartidos",
         "Conexión entre usuarios cercanos: guardar contacto descubierto por BLE y abrir chat en tiempo real",
         "Monetización mobile con AdMob, compras dentro de la app y plan premium sin publicidad",
-        "Economía interna con estrellas, beneficios premium y descuentos en compras",
         "Panel/admin interno para controlar usuarios, accesos, APIs, métricas y operación general",
         "Backend Node/Express + MongoDB con auth JWT, logs y APIs REST",
       ]
     : [
+        "Full-stack product with a live web version and Android app in Google Play Closed Testing",
         "Platform with two experiences inside the same app: social mode and service mode",
         "Sign up and login with email/password + Google sign-in",
         "Email account verification in the traditional registration flow",
-        "Profile personalization with avatar selection and automatic Google profile photo usage across profile and map when signing in with Google",
+        "Profile personalization with avatar selection and automatic Google profile photo usage",
         "Real-time 1:1 chat (Socket.IO) with presence: online / typing / unread / read states",
         "WhatsApp-style voice messages, stickers, and rich media inside chat",
         "Audio calls and video calls integrated into the chat flow",
@@ -207,13 +283,10 @@ const projects: Project[] = [
         "BLE proximity discovery with configurable visibility and shared profile data",
         "Nearby user connection flow: save BLE-discovered contacts and open real-time chat",
         "Mobile monetization with AdMob, in-app purchases, and a premium ad-free plan",
-        "Internal stars economy, premium benefits, and discounted purchases",
         "Internal admin panel to manage users, access, APIs, metrics, and overall operations",
         "Node/Express + MongoDB backend with JWT auth, logs, and REST APIs",
       ],
 },
-
-
 
 
 
