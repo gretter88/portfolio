@@ -1,4 +1,3 @@
-//src/components/ProjectsGrid
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -8,7 +7,10 @@ function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
 }
 
-const SITE_ORIGIN = "https://www.santiagogretter.com.uy";
+const SITE_ORIGIN=
+  typeof window !== "undefined"
+    ? window.location.origin
+    : "https://www.santiagogretter.com.uy";
 const YT_EMBED_BASE = "https://www.youtube-nocookie.com/embed";
 
 type Props = {
@@ -27,12 +29,11 @@ export default function ProjectsGrid({
 }: Props) {
   const isEs = lang === "es";
 
-const [open, setOpen] = useState(false);
-const [activeProject, setActiveProject] = useState<Project | null>(null);
-const [shotIndex, setShotIndex] = useState(0);
-const [showVideo, setShowVideo] = useState(false);
-const [showMobileDetails, setShowMobileDetails] = useState(false);
-
+  const [open, setOpen] = useState(false);
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [shotIndex, setShotIndex] = useState(0);
+  const [showVideo, setShowVideo] = useState(false);
+  const [showMobileDetails, setShowMobileDetails] = useState(false);
 
   const cardStyle: React.CSSProperties = {
     background: "var(--card)",
@@ -88,49 +89,46 @@ const [showMobileDetails, setShowMobileDetails] = useState(false);
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
- const getProjectSlug = (p: Project) => {
-  const title = (p.title || "").toLowerCase();
+  const getProjectSlug = (p: Project) => {
+    const title = (p.title || "").toLowerCase();
 
-  if (title.includes("sg saas starter")) return "sg-saas-starter";
-  if (title.includes("marketplace de servicios")) return "marketplace";
-  if (title.includes("services marketplace")) return "marketplace";
-  if (title.includes("marketplace")) return "marketplace";
-  if (title.includes("kiosco") || title.includes("kiosk")) return "kiosco";
-  if (title.includes("intranet")) return "intranet";
-  if (title.includes("radarsocial")) return "radar";
-  if (title.includes("museo")) return "museo";
+    if (title.includes("sg saas starter")) return "sg-saas-starter";
+    if (title.includes("marketplace de servicios")) return "marketplace";
+    if (title.includes("services marketplace")) return "marketplace";
+    if (title.includes("marketplace")) return "marketplace";
+    if (title.includes("kiosco") || title.includes("kiosk")) return "kiosco";
+    if (title.includes("intranet")) return "intranet";
+    if (title.includes("radarsocial")) return "radar";
+    if (title.includes("museo")) return "museo";
 
-  return slugify(p.title || "demo");
-};
-
-
+    return slugify(p.title || "demo");
+  };
 
   const isMobileProject = (p: Project) => {
     const slug = getProjectSlug(p);
     return slug === "marketplace" || slug === "radar";
   };
 
- const isMobileShot = (
-  shot?: { src?: string },
-  project?: Project | null
-) => {
-  const src = (shot?.src || "").toLowerCase();
-  const slug = project ? getProjectSlug(project) : "";
+  const isMobileShot = (
+    shot?: { src?: string },
+    project?: Project | null
+  ) => {
+    const src = (shot?.src || "").toLowerCase();
+    const slug = project ? getProjectSlug(project) : "";
 
-  return (
-    slug === "marketplace" ||
-    src.includes("-app-") ||
-    src.includes("/app-") ||
-    src.includes("mobile") ||
-    src.includes("chatscreen") ||
-    src.includes("mapscreen") ||
-    src.includes("homescreen") ||
-    src.includes("contactosguardadosscreen") ||
-    src.includes("buscarprofesionalesscreen") ||
-    src.includes("radarsocial-app")
-  );
-};
-
+    return (
+      slug === "marketplace" ||
+      src.includes("-app-") ||
+      src.includes("/app-") ||
+      src.includes("mobile") ||
+      src.includes("chatscreen") ||
+      src.includes("mapscreen") ||
+      src.includes("homescreen") ||
+      src.includes("contactosguardadosscreen") ||
+      src.includes("buscarprofesionalesscreen") ||
+      src.includes("radarsocial-app")
+    );
+  };
 
   const isLiveWebsiteProject = (p: Project) => {
     const slug = getProjectSlug(p);
@@ -142,85 +140,88 @@ const [showMobileDetails, setShowMobileDetails] = useState(false);
     return slug === "radar" || slug === "museo";
   };
 
-const getPrimaryLinkLabel = (p: Project) => {
-  const slug = getProjectSlug(p);
+  const getPrimaryLinkLabel = (p: Project) => {
+    const slug = getProjectSlug(p);
 
-  if (slug === "sg-saas-starter") {
-    return isEs ? "Comprar en Gumroad" : "Buy on Gumroad";
-  }
+    if (slug === "sg-saas-starter") {
+      return isEs ? "Comprar en Gumroad" : "Buy on Gumroad";
+    }
 
-  if (slug === "radar" || slug === "museo") {
-    return isEs ? "Ver sitio" : "View site";
-  }
+    if (slug === "radar" || slug === "museo") {
+      return isEs ? "Ver sitio" : "View site";
+    }
 
-  return "Demo";
-};
+    return "Demo";
+  };
 
+  const isGumroadProduct = (p: Project) => {
+    return getProjectSlug(p) === "sg-saas-starter";
+  };
 
-const isGumroadProduct = (p: Project) => {
-  return getProjectSlug(p) === "sg-saas-starter";
-};
+  const hasDownloadLinks = (p: Project) => {
+    return !!p.downloadLinks?.apk || !!p.downloadLinks?.playTesting;
+  };
 
-
+  const isRadarProject = (p: Project) => {
+    return getProjectSlug(p) === "radar";
+  };
 
   const isMarketplaceProject = (project?: Project | null) => {
     if (!project) return false;
     return getProjectSlug(project) === "marketplace";
   };
 
-const getCommercialLabel = (p: Project) => {
-  const slug = getProjectSlug(p);
+  const getCommercialLabel = (p: Project) => {
+    const slug = getProjectSlug(p);
 
-  if (slug === "radar") {
-    return isEs ? "Licenciamiento" : "Licensing";
-  }
+    if (slug === "radar") {
+      return isEs ? "Licenciamiento" : "Licensing";
+    }
 
-  if (slug === "marketplace") {
-    return isEs ? "White-label / Implementación" : "White-label / Deployment";
-  }
+    if (slug === "marketplace") {
+      return isEs ? "White-label / Implementación" : "White-label / Deployment";
+    }
 
-  if (slug === "kiosco") {
-    return isEs ? "Adaptable" : "Adaptable";
-  }
+    if (slug === "kiosco") {
+      return isEs ? "Adaptable" : "Adaptable";
+    }
 
-  return null;
-};
-
-const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
-  const slug = getProjectSlug(p);
-
-  if (slug === "radar") {
-    return {
-      border: "1px solid rgba(59,130,246,0.28)",
-      background: "rgba(59,130,246,0.10)",
-      color: "#60a5fa",
-    };
-  }
-
-  if (slug === "marketplace") {
-    return {
-      border: "1px solid rgba(34,197,94,0.28)",
-      background: "rgba(34,197,94,0.10)",
-      color: "#4ade80",
-    };
-  }
-
-  if (slug === "kiosco") {
-    return {
-      border: "1px solid rgba(168,85,247,0.28)",
-      background: "rgba(168,85,247,0.10)",
-      color: "#c084fc",
-    };
-  }
-
-  return {
-    border: "1px solid var(--card-border)",
-    background: "rgba(255,255,255,0.03)",
-    color: "var(--muted)",
+    return null;
   };
-};
 
+  const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
+    const slug = getProjectSlug(p);
 
+    if (slug === "radar") {
+      return {
+        border: "1px solid rgba(59,130,246,0.28)",
+        background: "rgba(59,130,246,0.10)",
+        color: "#60a5fa",
+      };
+    }
+
+    if (slug === "marketplace") {
+      return {
+        border: "1px solid rgba(34,197,94,0.28)",
+        background: "rgba(34,197,94,0.10)",
+        color: "#4ade80",
+      };
+    }
+
+    if (slug === "kiosco") {
+      return {
+        border: "1px solid rgba(168,85,247,0.28)",
+        background: "rgba(168,85,247,0.10)",
+        color: "#c084fc",
+      };
+    }
+
+    return {
+      border: "1px solid var(--card-border)",
+      background: "rgba(255,255,255,0.03)",
+      color: "var(--muted)",
+    };
+  };
 
   const getOpenModalPath = (p: Project) =>
     `/go/open-modal/${getProjectSlug(p)}?lang=${lang}`;
@@ -280,29 +281,26 @@ const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
     return [...projects].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
   }, [projects]);
 
-const closeModal = () => {
-  setOpen(false);
-  setShotIndex(0);
-  setActiveProject(null);
-  setShowVideo(false);
-  setShowMobileDetails(false);
-};
-
-
- const openModal = (p: Project) => {
-  setActiveProject(p);
-  setShotIndex(0);
-  setShowMobileDetails(false);
-  const hasYoutubeVideo = p.video?.provider === "youtube" && !!p.video?.id;
-  if (hasYoutubeVideo && isIntranetProject(p)) {
-    setShowVideo(true);
-  } else {
+  const closeModal = () => {
+    setOpen(false);
+    setShotIndex(0);
+    setActiveProject(null);
     setShowVideo(false);
-  }
-  setOpen(true);
-};
+    setShowMobileDetails(false);
+  };
 
-
+  const openModal = (p: Project) => {
+    setActiveProject(p);
+    setShotIndex(0);
+    setShowMobileDetails(false);
+    const hasYoutubeVideo = p.video?.provider === "youtube" && !!p.video?.id;
+    if (hasYoutubeVideo && isIntranetProject(p)) {
+      setShowVideo(true);
+    } else {
+      setShowVideo(false);
+    }
+    setOpen(true);
+  };
 
   useEffect(() => {
     if (!initialProjectSlug) return;
@@ -313,7 +311,7 @@ const closeModal = () => {
     setActiveProject(match);
     setOpen(true);
     setShotIndex(0);
-	setShowMobileDetails(false);
+    setShowMobileDetails(false);
 
     if (initialVideo && match.video?.provider === "youtube" && match.video?.id) {
       setShowVideo(true);
@@ -375,10 +373,9 @@ const closeModal = () => {
   return (
     <>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-       {sortedProjects.map((p) => {
-  const isRestricted = isRestrictedProject(p);
-  const commercialLabel = getCommercialLabel(p);
-
+        {sortedProjects.map((p) => {
+          const isRestricted = isRestrictedProject(p);
+          const commercialLabel = getCommercialLabel(p);
 
           return (
             <div
@@ -520,22 +517,21 @@ const closeModal = () => {
                   </span>
                 </div>
               ) : null}
-			  
-			  {commercialLabel ? (
-  <div className="mb-3">
-    <span
-      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
-      style={getCommercialBadgeStyle(p)}
-    >
-      <span
-        className="h-2 w-2 rounded-full"
-        style={{ background: "currentColor", opacity: 0.9 }}
-      />
-      {commercialLabel}
-    </span>
-  </div>
-) : null}
 
+              {commercialLabel ? (
+                <div className="mb-3">
+                  <span
+                    className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
+                    style={getCommercialBadgeStyle(p)}
+                  >
+                    <span
+                      className="h-2 w-2 rounded-full"
+                      style={{ background: "currentColor", opacity: 0.9 }}
+                    />
+                    {commercialLabel}
+                  </span>
+                </div>
+              ) : null}
 
               <h4 className="text-lg font-semibold">{p.title}</h4>
 
@@ -590,46 +586,45 @@ const closeModal = () => {
                     </a>
                   ) : (
                     <a
-  className={ghostBtnClass}
-  style={
-    isGumroadProduct(p)
-      ? {
-          background: "rgba(168,85,247,0.12)",
-          borderColor: "rgba(168,85,247,0.35)",
-          color: "var(--foreground)",
-          boxShadow: "0 10px 24px rgba(168,85,247,0.16)",
-        }
-      : isLiveWebsiteProject(p)
-      ? {
-          background: "rgba(34,197,94,0.10)",
-          borderColor: "rgba(34,197,94,0.35)",
-          color: "var(--foreground)",
-        }
-      : ghostBtnStyle
-  }
-  href={getPublicDemoPath(p)}
-  target="_blank"
-  rel="noreferrer"
-  onClick={(e) => e.stopPropagation()}
->
-  {isGumroadProduct(p) ? (
-    <span className="inline-flex items-center gap-2">
-      <span
-        className="h-2 w-2 rounded-full"
-        style={{ background: "#c084fc" }}
-      />
-      {getPrimaryLinkLabel(p)}
-    </span>
-  ) : isLiveWebsiteProject(p) ? (
-    <span className="inline-flex items-center gap-2">
-      <span className="h-2 w-2 rounded-full bg-green-400" />
-      {getPrimaryLinkLabel(p)}
-    </span>
-  ) : (
-    getPrimaryLinkLabel(p)
-  )}
-</a>
-
+                      className={ghostBtnClass}
+                      style={
+                        isGumroadProduct(p)
+                          ? {
+                              background: "rgba(168,85,247,0.12)",
+                              borderColor: "rgba(168,85,247,0.35)",
+                              color: "var(--foreground)",
+                              boxShadow: "0 10px 24px rgba(168,85,247,0.16)",
+                            }
+                          : isLiveWebsiteProject(p)
+                          ? {
+                              background: "rgba(34,197,94,0.10)",
+                              borderColor: "rgba(34,197,94,0.35)",
+                              color: "var(--foreground)",
+                            }
+                          : ghostBtnStyle
+                      }
+                      href={getPublicDemoPath(p)}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {isGumroadProduct(p) ? (
+                        <span className="inline-flex items-center gap-2">
+                          <span
+                            className="h-2 w-2 rounded-full"
+                            style={{ background: "#c084fc" }}
+                          />
+                          {getPrimaryLinkLabel(p)}
+                        </span>
+                      ) : isLiveWebsiteProject(p) ? (
+                        <span className="inline-flex items-center gap-2">
+                          <span className="h-2 w-2 rounded-full bg-green-400" />
+                          {getPrimaryLinkLabel(p)}
+                        </span>
+                      ) : (
+                        getPrimaryLinkLabel(p)
+                      )}
+                    </a>
                   )
                 ) : (
                   <span
@@ -642,6 +637,45 @@ const closeModal = () => {
                     {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
                   </span>
                 )}
+
+                {hasDownloadLinks(p) ? (
+                  <>
+                    {p.downloadLinks?.apk ? (
+                      <a
+                        className={ghostBtnClass}
+                        href={p.downloadLinks.apk}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                          borderColor: "rgba(59,130,246,0.35)",
+                          background: "rgba(59,130,246,0.10)",
+                          color: "var(--foreground)",
+                        }}
+                      >
+                        {p.downloadLinks.apkLabel ||
+                          (isEs ? "Descargar APK" : "Download APK")}
+                      </a>
+                    ) : null}
+
+                    {p.downloadLinks?.playTesting ? (
+                      <a
+                        className={ghostBtnClass}
+                        href={p.downloadLinks.playTesting}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                          borderColor: "rgba(245,158,11,0.35)",
+                          background: "rgba(245,158,11,0.10)",
+                          color: "var(--foreground)",
+                        }}
+                      >
+                        {p.downloadLinks.playLabel || "Google Play Testing"}
+                      </a>
+                    ) : null}
+                  </>
+                ) : null}
 
                 {p.links?.repo ? (
                   <a
@@ -675,579 +709,667 @@ const closeModal = () => {
                   {isEs ? "Ver detalles" : "View details"}
                 </a>
               </div>
+
+              {isRadarProject(p) && p.downloadLinks?.note ? (
+                <div
+                  className="mt-3 rounded-xl border px-3 py-3 text-xs leading-relaxed"
+                  style={{
+                    borderColor: "rgba(245,158,11,0.22)",
+                    background: "rgba(245,158,11,0.08)",
+                    color: "var(--muted)",
+                  }}
+                >
+                  {p.downloadLinks.note}
+                </div>
+              ) : null}
             </div>
           );
         })}
       </div>
 
       {open && activeProject ? (
-  <div
-    className="fixed inset-0 z-[200] flex items-center justify-center p-2 md:p-4 overflow-x-hidden"
-    role="dialog"
-    aria-modal="true"
-  >
-    <div
-      className="absolute inset-0"
-      onClick={closeModal}
-      style={{
-        background: "rgba(0,0,0,0.82)",
-        backdropFilter: "blur(4px)",
-        WebkitBackdropFilter: "blur(4px)",
-      }}
-    />
-
-    <div
-      className="relative z-[210] w-full max-w-5xl rounded-2xl border flex flex-col overflow-hidden"
-      style={{
-        background: "var(--card)",
-        borderColor: "var(--card-border)",
-        boxShadow: "0 24px 100px rgba(0,0,0,0.6)",
-        width: "min(100%, 1100px)",
-        maxHeight: "calc(100dvh - 16px)",
-      }}
-    >
-      <div
-        className="flex-none flex items-start justify-between gap-3 p-3 md:p-5 border-b"
-        style={{ borderColor: "var(--card-border)" }}
-      >
-       <div className="min-w-0">
-  {activeProject.badge ? (
-    <div className="mb-2">
-      <span
-        className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs"
-        style={
-          isLiveBadgeProject(activeProject)
-            ? {
-                border: "1px solid rgba(34,197,94,0.35)",
-                background: "rgba(34,197,94,0.10)",
-                color: "var(--foreground)",
-              }
-            : {
-                border: "1px solid var(--card-border)",
-                background: "rgba(255,255,255,0.03)",
-                color: "var(--muted)",
-              }
-        }
-      >
-        <span
-          className={clsx(
-            "rounded-full",
-            getDotClass(activeProject.badge)
-          )}
-          style={{
-            width: isLiveBadgeProject(activeProject) ? 9 : 8,
-            height: isLiveBadgeProject(activeProject) ? 9 : 8,
-            boxShadow: isLiveBadgeProject(activeProject)
-              ? "0 0 0 4px rgba(34,197,94,0.12)"
-              : "none",
-          }}
-        />
-        {activeProject.badge}
-      </span>
-    </div>
-  ) : null}
-
-  {getCommercialLabel(activeProject) ? (
-    <div className="mb-2">
-      <span
-        className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
-        style={getCommercialBadgeStyle(activeProject)}
-      >
-        <span
-          className="h-2 w-2 rounded-full"
-          style={{ background: "currentColor", opacity: 0.9 }}
-        />
-        {getCommercialLabel(activeProject)}
-      </span>
-    </div>
-  ) : null}
-
-  <h3 className="text-lg md:text-xl font-semibold truncate">
-    {activeProject.title}
-  </h3>
-
-  <p
-    className="mt-1 text-[13px] leading-6 md:text-sm md:leading-relaxed md:max-w-none"
-    style={{
-      ...mutedStyle,
-      display: "-webkit-box",
-      WebkitLineClamp: 2,
-      WebkitBoxOrient: "vertical",
-      overflow: "hidden",
-    }}
-  >
-    {activeProject.desc}
-  </p>
-
-  {isLiveWebsiteProject(activeProject) ? (
-    <div className="mt-3 md:hidden">
-      <a
-        href={getPublicDemoPath(activeProject)}
-        target="_blank"
-        rel="noreferrer"
-        className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium"
-        style={{
-          background: "#16a34a",
-          color: "#ffffff",
-          boxShadow: "0 10px 24px rgba(22,163,74,0.22)",
-        }}
-      >
-        <span className="h-2 w-2 rounded-full bg-white/90" />
-        {getPrimaryLinkLabel(activeProject)}
-      </a>
-    </div>
-  ) : null}
-</div>
-
-
-        <button
-          type="button"
-          onClick={closeModal}
-          className="rounded-xl border px-2.5 py-2 text-sm"
-
-          style={ghostBtnStyle}
-          aria-label={isEs ? "Cerrar" : "Close"}
-          title="Esc"
-        >
-          ✕
-        </button>
-      </div>
-
-      <div
-        className="flex-1 overflow-y-auto p-3 md:p-5"
-
-        style={{ WebkitOverflowScrolling: "touch" }}
-      >
-        <div className="grid grid-cols-1 gap-4 md:gap-5 md:grid-cols-[1.35fr_0.65fr]">
-          <div className="order-1">
-            {activeProject?.video?.provider === "youtube" &&
-            activeProject?.video?.id ? (
-              <div className="mb-3 flex flex-wrap items-center gap-2">
-                {isIntranetProject(activeProject) && !showVideo ? (
-                  <a
-                    className={ghostBtnClass}
-                    style={ghostBtnStyle}
-                    href={getOpenVideoPath(activeProject)}
-                  >
-                    {activeProject.video.label ||
-                      (isEs ? "Ver video" : "View video")}
-                  </a>
-                ) : (
-                  <button
-                    type="button"
-                    className={ghostBtnClass}
-                    style={ghostBtnStyle}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowVideo((v) => !v);
-                    }}
-                  >
-                    {showVideo
-                      ? isEs
-                        ? "Ver screenshots"
-                        : "View screenshots"
-                      : activeProject.video.label ||
-                        (isEs ? "Ver video" : "View video")}
-                  </button>
-                )}
-
-                <span
-                  className="text-xs inline-flex items-center gap-2"
-                  style={muted2Style}
-                >
-                  {activeProject?.video?.provider === "youtube" &&
-                  activeProject?.video?.id &&
-                  isIntranetProject(activeProject) ? (
-                    <>
-                      <span style={{ opacity: 0.9 }}>▶</span>
-                      <span>
-                        Video demo
-                        {activeProject.video.duration
-                          ? ` (${activeProject.video.duration})`
-                          : " (50s)"}
-                      </span>
-                    </>
-                  ) : (
-                    <span>
-                      {isEs
-                        ? "Tip: podés usar ←/→ para screenshots"
-                        : "Tip: use ←/→ for screenshots"}
-                    </span>
-                  )}
-                </span>
-              </div>
-            ) : null}
-
-            <div
-              className="overflow-hidden rounded-xl border relative z-[220]"
-              style={{
-                ...cardStyle,
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
-              }}
-            >
-              {showVideo &&
-              activeProject?.video?.provider === "youtube" &&
-              activeProject?.video?.id ? (
-                <div
-                  className="relative z-[230]"
-                  style={{ height: 360, background: "var(--background)" }}
-                >
-                  <iframe
-                    title={`${activeProject.title} video`}
-                    width="100%"
-                    height="100%"
-                    src={`${YT_EMBED_BASE}/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=1&controls=1&origin=${encodeURIComponent(
-                      SITE_ORIGIN
-                    )}`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    style={{ border: 0, display: "block" }}
-                  />
-                </div>
-              ) : activeShot ? (
-                isMobileShot(activeShot, activeProject) ? (
-  <div
-    className="grid place-items-center"
-    style={{
-      minHeight: isMarketplaceProject(activeProject) ? 700 : 680,
-      padding: isMarketplaceProject(activeProject)
-        ? "28px 0 20px"
-        : "20px 0 16px",
-      background:
-        "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
-    }}
-  >
-    <div
-      style={{
-        width: isMarketplaceProject(activeProject) ? 282 : 304,
-        maxWidth: "min(86vw, 334px)",
-        borderRadius: isMarketplaceProject(activeProject) ? 38 : 36,
-        padding: isMarketplaceProject(activeProject) ? 11 : 10,
-        background: "#0f0f10",
-        boxShadow:
-          "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.08)",
-      }}
-    >
-      <div
-        style={{
-          position: "relative",
-          borderRadius: isMarketplaceProject(activeProject) ? 30 : 28,
-          overflow: "hidden",
-          background: "#000",
-        }}
-      >
         <div
-          style={{
-            position: "absolute",
-            top: 10,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: isMarketplaceProject(activeProject) ? 52 : 80,
-            height: isMarketplaceProject(activeProject) ? 12 : 18,
-            borderRadius: 999,
-            background: "#111",
-            zIndex: 2,
-            opacity: 0.96,
-            boxShadow: "0 1px 3px rgba(255,255,255,0.05) inset",
-          }}
-        />
-        <img
-          src={activeShot.src}
-          alt={activeShot.alt}
-          loading="lazy"
-          style={{
-            width: "100%",
-            height: isMarketplaceProject(activeProject) ? 590 : 610,
-            objectFit: "contain",
-            objectPosition: "center top",
-            display: "block",
-            background: "#000",
-          }}
-        />
-      </div>
-    </div>
-  </div>
-) : (
-  <img
-    src={activeShot.src}
-    alt={activeShot.alt}
-    className="w-full"
-    style={{
-      height: 360,
-      objectFit: "contain",
-      objectPosition: "center",
-      background: "var(--background)",
-      display: "block",
-    }}
-    loading="lazy"
-  />
-)
+          className="fixed inset-0 z-[200] flex items-center justify-center p-2 md:p-4 overflow-x-hidden"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="absolute inset-0"
+            onClick={closeModal}
+            style={{
+              background: "rgba(0,0,0,0.82)",
+              backdropFilter: "blur(4px)",
+              WebkitBackdropFilter: "blur(4px)",
+            }}
+          />
 
+          <div
+            className="relative z-[210] w-full max-w-5xl rounded-2xl border flex flex-col overflow-hidden"
+            style={{
+              background: "var(--card)",
+              borderColor: "var(--card-border)",
+              boxShadow: "0 24px 100px rgba(0,0,0,0.6)",
+              width: "min(100%, 1100px)",
+              maxHeight: "calc(100dvh - 16px)",
+            }}
+          >
+            <div
+              className="flex-none flex items-start justify-between gap-3 p-3 md:p-5 border-b"
+              style={{ borderColor: "var(--card-border)" }}
+            >
+              <div className="min-w-0">
+                {activeProject.badge ? (
+                  <div className="mb-2">
+                    <span
+                      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs"
+                      style={
+                        isLiveBadgeProject(activeProject)
+                          ? {
+                              border: "1px solid rgba(34,197,94,0.35)",
+                              background: "rgba(34,197,94,0.10)",
+                              color: "var(--foreground)",
+                            }
+                          : {
+                              border: "1px solid var(--card-border)",
+                              background: "rgba(255,255,255,0.03)",
+                              color: "var(--muted)",
+                            }
+                      }
+                    >
+                      <span
+                        className={clsx(
+                          "rounded-full",
+                          getDotClass(activeProject.badge)
+                        )}
+                        style={{
+                          width: isLiveBadgeProject(activeProject) ? 9 : 8,
+                          height: isLiveBadgeProject(activeProject) ? 9 : 8,
+                          boxShadow: isLiveBadgeProject(activeProject)
+                            ? "0 0 0 4px rgba(34,197,94,0.12)"
+                            : "none",
+                        }}
+                      />
+                      {activeProject.badge}
+                    </span>
+                  </div>
+                ) : null}
 
-              ) : (
-                <div
-                  className="grid place-items-center"
-                  style={{ height: 360, color: "var(--muted)" }}
+                {getCommercialLabel(activeProject) ? (
+                  <div className="mb-2">
+                    <span
+                      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px]"
+                      style={getCommercialBadgeStyle(activeProject)}
+                    >
+                      <span
+                        className="h-2 w-2 rounded-full"
+                        style={{ background: "currentColor", opacity: 0.9 }}
+                      />
+                      {getCommercialLabel(activeProject)}
+                    </span>
+                  </div>
+                ) : null}
+
+                <h3 className="text-lg md:text-xl font-semibold truncate">
+                  {activeProject.title}
+                </h3>
+
+                <p
+                  className="mt-1 text-[13px] leading-6 md:text-sm md:leading-relaxed md:max-w-none"
+                  style={{
+                    ...mutedStyle,
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                  }}
                 >
-                  {isEs ? "Sin screenshots todavía" : "No screenshots yet"}
-                </div>
-              )}
+                  {activeProject.desc}
+                </p>
 
-              {!showVideo && modalShots.length > 1 ? (
-                <>
-                  <button
-                    type="button"
-                    className="absolute left-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
-                    style={{
-                      background: "rgba(15,15,16,0.72)",
-                      borderColor: "rgba(255,255,255,0.12)",
-                      color: "#fff",
-                      backdropFilter: "blur(6px)",
-                      WebkitBackdropFilter: "blur(6px)",
-                    }}
-                    onClick={async () => {
-                      if (!activeProject) return;
-                      await trackModalEvent(
-                        "/modal/screenshot-prev",
-                        getProjectSlug(activeProject)
-                      );
-                      setShotIndex((v) => Math.max(0, v - 1));
-                    }}
-                    disabled={shotIndex === 0}
-                    aria-label={isEs ? "Anterior" : "Previous"}
-                  >
-                    ←
-                  </button>
+                {isLiveWebsiteProject(activeProject) ? (
+                  <div className="mt-3 md:hidden">
+                    <a
+                      href={getPublicDemoPath(activeProject)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium"
+                      style={{
+                        background: "#16a34a",
+                        color: "#ffffff",
+                        boxShadow: "0 10px 24px rgba(22,163,74,0.22)",
+                      }}
+                    >
+                      <span className="h-2 w-2 rounded-full bg-white/90" />
+                      {getPrimaryLinkLabel(activeProject)}
+                    </a>
+                  </div>
+                ) : null}
+              </div>
 
-                  <button
-                    type="button"
-                    className="absolute right-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
-                    style={{
-                      background: "rgba(15,15,16,0.72)",
-                      borderColor: "rgba(255,255,255,0.12)",
-                      color: "#fff",
-                      backdropFilter: "blur(6px)",
-                      WebkitBackdropFilter: "blur(6px)",
-                    }}
-                    onClick={async () => {
-                      if (!activeProject) return;
-                      await trackModalEvent(
-                        "/modal/screenshot-next",
-                        getProjectSlug(activeProject)
-                      );
-                      setShotIndex((v) =>
-                        Math.min(modalShots.length - 1, v + 1)
-                      );
-                    }}
-                    disabled={shotIndex >= modalShots.length - 1}
-                    aria-label={isEs ? "Siguiente" : "Next"}
-                  >
-                    →
-                  </button>
-                </>
-              ) : null}
+              <button
+                type="button"
+                onClick={closeModal}
+                className="rounded-xl border px-2.5 py-2 text-sm"
+                style={ghostBtnStyle}
+                aria-label={isEs ? "Cerrar" : "Close"}
+                title="Esc"
+              >
+                ✕
+              </button>
             </div>
 
-            {!showVideo && modalShots.length > 1 ? (
-              <div className="mt-3 flex justify-center">
-                <div className="flex items-center gap-2 overflow-x-auto">
-                  {modalShots.map((_, idx) => (
+            <div
+              className="flex-1 overflow-y-auto p-3 md:p-5"
+              style={{ WebkitOverflowScrolling: "touch" }}
+            >
+              <div className="grid grid-cols-1 gap-4 md:gap-5 md:grid-cols-[1.35fr_0.65fr]">
+                <div className="order-1">
+                  {activeProject?.video?.provider === "youtube" &&
+                  activeProject?.video?.id ? (
+                    <div className="mb-3 flex flex-wrap items-center gap-2">
+                      {isIntranetProject(activeProject) && !showVideo ? (
+                        <a
+                          className={ghostBtnClass}
+                          style={ghostBtnStyle}
+                          href={getOpenVideoPath(activeProject)}
+                        >
+                          {activeProject.video.label ||
+                            (isEs ? "Ver video" : "View video")}
+                        </a>
+                      ) : (
+                        <button
+                          type="button"
+                          className={ghostBtnClass}
+                          style={ghostBtnStyle}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setShowVideo((v) => !v);
+                          }}
+                        >
+                          {showVideo
+                            ? isEs
+                              ? "Ver screenshots"
+                              : "View screenshots"
+                            : activeProject.video.label ||
+                              (isEs ? "Ver video" : "View video")}
+                        </button>
+                      )}
+
+                      <span
+                        className="text-xs inline-flex items-center gap-2"
+                        style={muted2Style}
+                      >
+                        {activeProject?.video?.provider === "youtube" &&
+                        activeProject?.video?.id &&
+                        isIntranetProject(activeProject) ? (
+                          <>
+                            <span style={{ opacity: 0.9 }}>▶</span>
+                            <span>
+                              Video demo
+                              {activeProject.video.duration
+                                ? ` (${activeProject.video.duration})`
+                                : " (50s)"}
+                            </span>
+                          </>
+                        ) : (
+                          <span>
+                            {isEs
+                              ? "Tip: podés usar ←/→ para screenshots"
+                              : "Tip: use ←/→ for screenshots"}
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                  ) : null}
+
+                  <div
+                    className="overflow-hidden rounded-xl border relative z-[220]"
+                    style={{
+                      ...cardStyle,
+                      background:
+                        "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+                    }}
+                  >
+                    {showVideo &&
+                    activeProject?.video?.provider === "youtube" &&
+                    activeProject?.video?.id ? (
+                      <div
+                        className="relative z-[230]"
+                        style={{ height: 360, background: "var(--background)" }}
+                      >
+                        <iframe
+                          title={`${activeProject.title} video`}
+                          width="100%"
+                          height="100%"
+                          src={`${YT_EMBED_BASE}/${activeProject.video.id}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=1&controls=1&origin=${encodeURIComponent(
+  SITE_ORIGIN
+)}`}
+
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          style={{ border: 0, display: "block" }}
+                        />
+                      </div>
+                    ) : activeShot ? (
+                      isMobileShot(activeShot, activeProject) ? (
+                        <div
+                          className="grid place-items-center"
+                          style={{
+                            minHeight: isMarketplaceProject(activeProject)
+                              ? 700
+                              : 680,
+                            padding: isMarketplaceProject(activeProject)
+                              ? "28px 0 20px"
+                              : "20px 0 16px",
+                            background:
+                              "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00))",
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: isMarketplaceProject(activeProject)
+                                ? 282
+                                : 304,
+                              maxWidth: "min(86vw, 334px)",
+                              borderRadius: isMarketplaceProject(activeProject)
+                                ? 38
+                                : 36,
+                              padding: isMarketplaceProject(activeProject)
+                                ? 11
+                                : 10,
+                              background: "#0f0f10",
+                              boxShadow:
+                                "0 20px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
+                              border: "1px solid rgba(255,255,255,0.08)",
+                            }}
+                          >
+                            <div
+                              style={{
+                                position: "relative",
+                                borderRadius: isMarketplaceProject(activeProject)
+                                  ? 30
+                                  : 28,
+                                overflow: "hidden",
+                                background: "#000",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  top: 10,
+                                  left: "50%",
+                                  transform: "translateX(-50%)",
+                                  width: isMarketplaceProject(activeProject)
+                                    ? 52
+                                    : 80,
+                                  height: isMarketplaceProject(activeProject)
+                                    ? 12
+                                    : 18,
+                                  borderRadius: 999,
+                                  background: "#111",
+                                  zIndex: 2,
+                                  opacity: 0.96,
+                                  boxShadow:
+                                    "0 1px 3px rgba(255,255,255,0.05) inset",
+                                }}
+                              />
+                              <img
+                                src={activeShot.src}
+                                alt={activeShot.alt}
+                                loading="lazy"
+                                style={{
+                                  width: "100%",
+                                  height: isMarketplaceProject(activeProject)
+                                    ? 590
+                                    : 610,
+                                  objectFit: "contain",
+                                  objectPosition: "center top",
+                                  display: "block",
+                                  background: "#000",
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <img
+                          src={activeShot.src}
+                          alt={activeShot.alt}
+                          className="w-full"
+                          style={{
+                            height: 360,
+                            objectFit: "contain",
+                            objectPosition: "center",
+                            background: "var(--background)",
+                            display: "block",
+                          }}
+                          loading="lazy"
+                        />
+                      )
+                    ) : (
+                      <div
+                        className="grid place-items-center"
+                        style={{ height: 360, color: "var(--muted)" }}
+                      >
+                        {isEs ? "Sin screenshots todavía" : "No screenshots yet"}
+                      </div>
+                    )}
+
+                    {!showVideo && modalShots.length > 1 ? (
+                      <>
+                        <button
+                          type="button"
+                          className="absolute left-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
+                          style={{
+                            background: "rgba(15,15,16,0.72)",
+                            borderColor: "rgba(255,255,255,0.12)",
+                            color: "#fff",
+                            backdropFilter: "blur(6px)",
+                            WebkitBackdropFilter: "blur(6px)",
+                          }}
+                          onClick={async () => {
+                            if (!activeProject) return;
+                            await trackModalEvent(
+                              "/modal/screenshot-prev",
+                              getProjectSlug(activeProject)
+                            );
+                            setShotIndex((v) => Math.max(0, v - 1));
+                          }}
+                          disabled={shotIndex === 0}
+                          aria-label={isEs ? "Anterior" : "Previous"}
+                        >
+                          ←
+                        </button>
+
+                        <button
+                          type="button"
+                          className="absolute right-3 top-1/2 z-[240] -translate-y-1/2 rounded-full border px-3 py-2 text-sm transition disabled:opacity-35"
+                          style={{
+                            background: "rgba(15,15,16,0.72)",
+                            borderColor: "rgba(255,255,255,0.12)",
+                            color: "#fff",
+                            backdropFilter: "blur(6px)",
+                            WebkitBackdropFilter: "blur(6px)",
+                          }}
+                          onClick={async () => {
+                            if (!activeProject) return;
+                            await trackModalEvent(
+                              "/modal/screenshot-next",
+                              getProjectSlug(activeProject)
+                            );
+                            setShotIndex((v) =>
+                              Math.min(modalShots.length - 1, v + 1)
+                            );
+                          }}
+                          disabled={shotIndex >= modalShots.length - 1}
+                          aria-label={isEs ? "Siguiente" : "Next"}
+                        >
+                          →
+                        </button>
+                      </>
+                    ) : null}
+                  </div>
+
+                  {!showVideo && modalShots.length > 1 ? (
+                    <div className="mt-3 flex justify-center">
+                      <div className="flex items-center gap-2 overflow-x-auto">
+                        {modalShots.map((_, idx) => (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={async () => {
+                              if (!activeProject) return;
+                              await trackModalEvent(
+                                "/modal/screenshot-dot",
+                                getProjectSlug(activeProject)
+                              );
+                              setShotIndex(idx);
+                            }}
+                            className="h-2.5 w-2.5 rounded-full border transition"
+                            style={{
+                              borderColor: "var(--card-border)",
+                              background:
+                                idx === shotIndex
+                                  ? "var(--foreground)"
+                                  : "transparent",
+                              opacity: idx === shotIndex ? 1 : 0.6,
+                            }}
+                            aria-label={`Screenshot ${idx + 1}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ) : !showVideo ? (
+                    <div className="mt-3 text-xs" style={muted2Style}>
+                      {isEs
+                        ? "Tip: podés navegar con ← →"
+                        : "Tip: use ← → to navigate"}
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="min-w-0 order-2 pt-1 md:pt-0">
+                  <div className="md:hidden">
                     <button
-                      key={idx}
                       type="button"
-                      onClick={async () => {
-                        if (!activeProject) return;
-                        await trackModalEvent(
-                          "/modal/screenshot-dot",
-                          getProjectSlug(activeProject)
-                        );
-                        setShotIndex(idx);
-                      }}
-                      className="h-2.5 w-2.5 rounded-full border transition"
+                      onClick={() => setShowMobileDetails((v) => !v)}
+                      className="w-full rounded-xl border px-4 py-3 text-sm font-medium transition"
                       style={{
                         borderColor: "var(--card-border)",
                         background:
-                          idx === shotIndex
-                            ? "var(--foreground)"
-                            : "transparent",
-                        opacity: idx === shotIndex ? 1 : 0.6,
+                          "linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))",
+                        color: "var(--foreground)",
                       }}
-                      aria-label={`Screenshot ${idx + 1}`}
-                    />
-                  ))}
+                    >
+                      <span className="flex items-center justify-between gap-3">
+                        <span>
+                          {showMobileDetails
+                            ? isEs
+                              ? "Ver menos"
+                              : "Show less"
+                            : isEs
+                            ? "Ver más"
+                            : "Show more"}
+                        </span>
+
+                        <span
+                          className="inline-block transition-transform duration-300"
+                          style={{
+                            transform: showMobileDetails
+                              ? "rotate(180deg)"
+                              : "rotate(0deg)",
+                          }}
+                        >
+                          ▾
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+
+                  <div className={showMobileDetails ? "mt-4 md:mt-0" : "hidden md:block"}>
+                    {activeProject.statusNote ? (
+                      <div
+                        className="mb-4 rounded-xl border px-4 py-3 text-sm leading-relaxed"
+                        style={{
+                          borderColor: "rgba(34,197,94,0.22)",
+                          background: "rgba(34,197,94,0.08)",
+                          color: "var(--muted)",
+                        }}
+                      >
+                        {activeProject.statusNote}
+                      </div>
+                    ) : null}
+
+                    <h4 className="text-sm md:text-base font-semibold">
+                      {isEs ? "Highlights" : "Highlights"}
+                    </h4>
+
+                    {activeProject.features?.length ? (
+                      <ul
+                        className="mt-2 space-y-2 text-[13px] md:text-sm"
+                        style={mutedStyle}
+                      >
+                        {activeProject.features.slice(0, 10).map((f) => (
+                          <li key={f} className="flex items-start gap-2">
+                            <span
+                              className="mt-2 h-1.5 w-1.5 rounded-full"
+                              style={{ background: "var(--muted-2)" }}
+                            />
+                            <span className="leading-relaxed">{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="mt-3 text-sm" style={mutedStyle}>
+                        {isEs
+                          ? "Agregá `features` en el proyecto para mostrar bullets acá."
+                          : "Add `features` to the project to show bullets here."}
+                      </p>
+                    )}
+
+                    <div className="mt-4 md:mt-5">
+                      <h4 className="font-semibold">{isEs ? "Links" : "Links"}</h4>
+
+                      <div className="mt-3 flex flex-wrap gap-3">
+                        {activeProject.links?.demo ? (
+                          isRestrictedProject(activeProject) ? (
+                            <a
+                              className={primaryBtnClass}
+                              style={primaryBtnStyle}
+                              href={getRequestAccessPath(activeProject)}
+                            >
+                              {isEs ? "Solicitar acceso" : "Request access"}
+                            </a>
+                          ) : (
+                            <a
+                              className={primaryBtnClass}
+                              style={
+                                isLiveWebsiteProject(activeProject)
+                                  ? {
+                                      background: "#16a34a",
+                                      color: "#ffffff",
+                                    }
+                                  : primaryBtnStyle
+                              }
+                              href={getPublicDemoPath(activeProject)}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {isLiveWebsiteProject(activeProject) ? (
+                                <span className="inline-flex items-center gap-2">
+                                  <span className="h-2 w-2 rounded-full bg-white/90" />
+                                  {getPrimaryLinkLabel(activeProject)}
+                                </span>
+                              ) : (
+                                getPrimaryLinkLabel(activeProject)
+                              )}
+                            </a>
+                          )
+                        ) : (
+                          <span
+                            className="rounded-xl border px-4 py-2 text-sm"
+                            style={{
+                              borderColor: "var(--card-border)",
+                              color: "var(--muted-2)",
+                            }}
+                          >
+                            {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
+                          </span>
+                        )}
+
+                        {activeProject.downloadLinks?.apk ? (
+                          <a
+                            className={softBtnClass}
+                            style={{
+                              borderColor: "rgba(59,130,246,0.35)",
+                              background: "rgba(59,130,246,0.10)",
+                              color: "var(--foreground)",
+                            }}
+                            href={activeProject.downloadLinks.apk}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {activeProject.downloadLinks.apkLabel ||
+                              (isEs ? "Descargar APK" : "Download APK")}
+                          </a>
+                        ) : null}
+
+                        {activeProject.downloadLinks?.playTesting ? (
+                          <a
+                            className={softBtnClass}
+                            style={{
+                              borderColor: "rgba(245,158,11,0.35)",
+                              background: "rgba(245,158,11,0.10)",
+                              color: "var(--foreground)",
+                            }}
+                            href={activeProject.downloadLinks.playTesting}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {activeProject.downloadLinks.playLabel ||
+                              "Google Play Testing"}
+                          </a>
+                        ) : null}
+
+                        {activeProject.links?.repo ? (
+                          <a
+                            className={softBtnClass}
+                            style={softBtnStyle}
+                            href={activeProject.links.repo}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Repo
+                          </a>
+                        ) : (
+                          <span
+                            className="rounded-xl border px-4 py-2 text-sm"
+                            style={{
+                              borderColor: "var(--card-border)",
+                              color: "var(--muted)",
+                            }}
+                          >
+                            {isEs ? "Repo: Privado" : "Repo: Private"}
+                          </span>
+                        )}
+
+                        <button
+                          type="button"
+                          className={ghostBtnClass}
+                          style={ghostBtnStyle}
+                          onClick={closeModal}
+                        >
+                          {isEs ? "Cerrar" : "Close"}
+                        </button>
+                      </div>
+
+                      {activeProject.downloadLinks?.note ? (
+                        <div
+                          className="mt-4 rounded-xl border px-4 py-3 text-xs leading-relaxed"
+                          style={{
+                            borderColor: "rgba(245,158,11,0.22)",
+                            background: "rgba(245,158,11,0.08)",
+                            color: "var(--muted)",
+                          }}
+                        >
+                          {activeProject.downloadLinks.note}
+                        </div>
+                      ) : null}
+
+                      <div className="mt-4 text-xs" style={muted2Style}>
+                        {isEs
+                          ? "Esc: cerrar · ←/→: cambiar screenshot"
+                          : "Esc: close · ←/→: change screenshot"}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ) : !showVideo ? (
-              <div className="mt-3 text-xs" style={muted2Style}>
-                {isEs
-                  ? "Tip: podés navegar con ← →"
-                  : "Tip: use ← → to navigate"}
-              </div>
-            ) : null}
+            </div>
           </div>
-
-          <div className="min-w-0 order-2 pt-1 md:pt-0">
-  <div className="md:hidden">
-    <button
-  type="button"
-  onClick={() => setShowMobileDetails((v) => !v)}
-  className="w-full rounded-xl border px-4 py-3 text-sm font-medium transition"
-  style={{
-    borderColor: "var(--card-border)",
-    background:
-      "linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))",
-    color: "var(--foreground)",
-  }}
->
-  <span className="flex items-center justify-between gap-3">
-    <span>
-      {showMobileDetails
-        ? isEs
-          ? "Ver menos"
-          : "Show less"
-        : isEs
-        ? "Ver más"
-        : "Show more"}
-    </span>
-
-    <span
-      className="inline-block transition-transform duration-300"
-      style={{
-        transform: showMobileDetails ? "rotate(180deg)" : "rotate(0deg)",
-      }}
-    >
-      ▾
-    </span>
-  </span>
-</button>
-
-  </div>
-
-  <div className={showMobileDetails ? "mt-4 md:mt-0" : "hidden md:block"}>
-    <h4 className="text-sm md:text-base font-semibold">
-      {isEs ? "Highlights" : "Highlights"}
-    </h4>
-
-    {activeProject.features?.length ? (
-      <ul className="mt-2 space-y-2 text-[13px] md:text-sm" style={mutedStyle}>
-        {activeProject.features.slice(0, 10).map((f) => (
-          <li key={f} className="flex items-start gap-2">
-            <span
-              className="mt-2 h-1.5 w-1.5 rounded-full"
-              style={{ background: "var(--muted-2)" }}
-            />
-            <span className="leading-relaxed">{f}</span>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p className="mt-3 text-sm" style={mutedStyle}>
-        {isEs
-          ? "Agregá `features` en el proyecto para mostrar bullets acá."
-          : "Add `features` to the project to show bullets here."}
-      </p>
-    )}
-
-    <div className="mt-4 md:mt-5">
-      <h4 className="font-semibold">{isEs ? "Links" : "Links"}</h4>
-
-      <div className="mt-3 flex flex-wrap gap-3">
-        {activeProject.links?.demo ? (
-          isRestrictedProject(activeProject) ? (
-            <a
-              className={primaryBtnClass}
-              style={primaryBtnStyle}
-              href={getRequestAccessPath(activeProject)}
-            >
-              {isEs ? "Solicitar acceso" : "Request access"}
-            </a>
-          ) : (
-            <a
-              className={primaryBtnClass}
-              style={
-                isLiveWebsiteProject(activeProject)
-                  ? {
-                      background: "#16a34a",
-                      color: "#ffffff",
-                    }
-                  : primaryBtnStyle
-              }
-              href={getPublicDemoPath(activeProject)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {isLiveWebsiteProject(activeProject) ? (
-                <span className="inline-flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-white/90" />
-                  {getPrimaryLinkLabel(activeProject)}
-                </span>
-              ) : (
-                getPrimaryLinkLabel(activeProject)
-              )}
-            </a>
-          )
-        ) : (
-          <span
-            className="rounded-xl border px-4 py-2 text-sm"
-            style={{
-              borderColor: "var(--card-border)",
-              color: "var(--muted-2)",
-            }}
-          >
-            {isEs ? "Demo (próximamente)" : "Demo (coming soon)"}
-          </span>
-        )}
-
-        {activeProject.links?.repo ? (
-          <a
-            className={softBtnClass}
-            style={softBtnStyle}
-            href={activeProject.links.repo}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Repo
-          </a>
-        ) : (
-          <span
-            className="rounded-xl border px-4 py-2 text-sm"
-            style={{
-              borderColor: "var(--card-border)",
-              color: "var(--muted)",
-            }}
-          >
-            {isEs ? "Repo: Privado" : "Repo: Private"}
-          </span>
-        )}
-
-        <button
-          type="button"
-          className={ghostBtnClass}
-          style={ghostBtnStyle}
-          onClick={closeModal}
-        >
-          {isEs ? "Cerrar" : "Close"}
-        </button>
-      </div>
-
-      <div className="mt-4 text-xs" style={muted2Style}>
-        {isEs
-          ? "Esc: cerrar · ←/→: cambiar screenshot"
-          : "Esc: close · ←/→: change screenshot"}
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-      </div>
-    </div>
-  </div>
-) : null}
-
-
+        </div>
+      ) : null}
     </>
   );
 }
