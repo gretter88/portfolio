@@ -1,0 +1,392 @@
+import type { Lang } from "@/lib/i18n";
+
+export type CaseStudyScreenshot = {
+  src: string;
+  alt: string;
+};
+
+
+
+export type CaseStudy = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  status: string;
+  summary: string;
+  stack: string[];
+  heroImage: string;
+  screenshots: CaseStudyScreenshot[];
+  problem: string;
+  solution: string;
+  highlights: string[];
+  businessValue: string[];
+  nextSteps: string[];
+  requestHref: string;
+  
+  commercial: {
+  availableFor: string[];
+  pricingModel: string;
+  targetAudience: string[];
+  contactLabel: string;
+};
+
+};
+
+export function getCaseStudies(lang: Lang): CaseStudy[] {
+  const isEs = lang === "es";
+
+  return [
+    {
+      slug: "playduel",
+      title: "PlayDuel",
+      subtitle: isEs
+        ? "Plataforma realtime de duelos 1 vs 1"
+        : "Real-time 1v1 duel platform",
+      status: isEs ? "Web App · Realtime Gaming" : "Web App · Realtime Gaming",
+      summary: isEs
+        ? "PlayDuel es una plataforma web full stack para juegos competitivos 1 vs 1 en tiempo real, con lobby, invitaciones, matchmaking, chat por partida, historial, ranking y balance demo."
+        : "PlayDuel is a full-stack web platform for competitive real-time 1v1 games, with lobby, invites, matchmaking, match chat, history, ranking, and demo balance.",
+      stack: ["Next.js", "TypeScript", "Node.js", "Express", "Socket.IO", "PostgreSQL", "Prisma", "Tailwind CSS"],
+      heroImage: "/screenshots/playduel-1.webp",
+	  screenshots: [
+  {
+    src: "/screenshots/playduel-1.webp",
+    alt: isEs ? "PlayDuel — Lobby principal" : "PlayDuel — Main lobby",
+  },
+  {
+    src: "/screenshots/playduel-2.webp",
+    alt: isEs ? "PlayDuel — Partida en tiempo real" : "PlayDuel — Real-time match",
+  },
+  {
+    src: "/screenshots/playduel-3.webp",
+    alt: isEs ? "PlayDuel — Juego competitivo" : "PlayDuel — Competitive game",
+  },
+  {
+    src: "/screenshots/playduel-4.webp",
+    alt: isEs ? "PlayDuel — Ranking e historial" : "PlayDuel — Ranking and history",
+  },
+  {
+    src: "/screenshots/playduel-5.webp",
+    alt: isEs ? "PlayDuel — Ranking e historial" : "PlayDuel — Ranking and history",
+  },
+],
+
+      problem: isEs
+        ? "Crear una base sólida para una plataforma de gaming competitivo que soporte partidas en tiempo real, estados sincronizados, usuarios conectados y evolución futura hacia torneos o wallet real."
+        : "Build a solid foundation for a competitive gaming platform supporting real-time matches, synchronized states, connected users, and future evolution into tournaments or real wallet.",
+      solution: isEs
+        ? "Se desarrolló una arquitectura full stack con lobby realtime, salas por partida, eventos Socket.IO, juegos 1 vs 1, chat persistente, reconexión, historial, ranking y balance demo actualizado por resultado."
+        : "A full-stack architecture was built with real-time lobby, match rooms, Socket.IO events, 1v1 games, persistent chat, reconnection, history, ranking, and demo balance updated by match result.",
+      highlights: isEs
+        ? [
+            "Lobby realtime con usuarios conectados e invitaciones.",
+            "Partidas privadas por link y matchmaking rápido.",
+            "Juegos: TaTeTi, Piedra/Papel/Tijera, Damas, Ajedrez, Dados y Tetris Duel.",
+            "Chat persistente por partida.",
+            "Balance demo actualizado automáticamente.",
+            "Base preparada para torneos, wallet y monetización.",
+          ]
+        : [
+            "Real-time lobby with connected users and invites.",
+            "Private matches by link and quick matchmaking.",
+            "Games: Tic Tac Toe, Rock Paper Scissors, Checkers, Chess, Dice, and Tetris Duel.",
+            "Persistent match chat.",
+            "Demo balance updated automatically.",
+            "Foundation ready for tournaments, wallet, and monetization.",
+          ],
+      businessValue: isEs
+        ? [
+            "Puede adaptarse como plataforma white-label de gaming.",
+            "Permite modelos por torneos, comunidades privadas o entretenimiento competitivo.",
+            "Arquitectura lista para escalar con pagos, wallet real y panel admin.",
+          ]
+        : [
+            "Can be adapted as a white-label gaming platform.",
+            "Supports tournament, private community, or competitive entertainment models.",
+            "Architecture ready to scale with payments, real wallet, and admin panel.",
+          ],
+      nextSteps: isEs
+        ? ["Integrar wallet real.", "Agregar torneos.", "Crear panel admin.", "Agregar pagos y suscripciones."]
+        : ["Integrate real wallet.", "Add tournaments.", "Create admin panel.", "Add payments and subscriptions."],
+      requestHref: "/go/request-access/playduel",
+	  
+	  commercial: {
+  availableFor: isEs
+    ? [
+        "Partnership",
+        "White-label",
+        "Evolución de producto",
+        "Implementación",
+        "Licenciamiento",
+      ]
+    : [
+        "Partnership",
+        "White-label",
+        "Product evolution",
+        "Deployment",
+        "Licensing",
+      ],
+
+  pricingModel: isEs
+    ? "Partnership, licencia o evolución hacia plataforma comercial"
+    : "Partnership, license, or evolution into a commercial platform",
+
+  targetAudience: isEs
+    ? [
+        "Gaming competitivo",
+        "Comunidades privadas",
+        "Torneos online",
+        "Entretenimiento realtime",
+      ]
+    : [
+        "Competitive gaming",
+        "Private communities",
+        "Online tournaments",
+        "Real-time entertainment",
+      ],
+
+  contactLabel: isEs
+    ? "Conversar oportunidad PlayDuel"
+    : "Discuss PlayDuel opportunity",
+},
+
+    },
+
+    {
+      slug: "nutrimvp",
+      title: "NutriMVP",
+      subtitle: isEs
+        ? "App mobile de nutrición, precios y compra inteligente"
+        : "Mobile app for nutrition, prices, and smart shopping",
+      status: isEs ? "Android MVP · Preview bajo solicitud" : "Android MVP · Preview upon request",
+      summary: isEs
+        ? "NutriMVP permite escanear productos, consultar datos nutricionales, comparar precios por supermercado, guardar favoritos, crear alertas y optimizar compras según ubicación."
+        : "NutriMVP lets users scan products, check nutrition facts, compare supermarket prices, save favorites, create alerts, and optimize grocery shopping based on location.",
+      stack: ["React Native", "TypeScript", "Node.js", "Express", "Firebase", "Firestore", "PostgreSQL", "Supabase", "OpenFoodFacts"],
+      heroImage: "/screenshots/nutrimvp-1.webp",
+	  screenshots: [
+  {
+    src: "/screenshots/nutrimvp-1.webp",
+    alt: isEs ? "NutriMVP — Home" : "NutriMVP — Home",
+  },
+  {
+    src: "/screenshots/nutrimvp-2.webp",
+    alt: isEs ? "NutriMVP — Escáner" : "NutriMVP — Scanner",
+  },
+  {
+    src: "/screenshots/nutrimvp-3.webp",
+    alt: isEs ? "NutriMVP — Resultado nutricional" : "NutriMVP — Nutrition result",
+  },
+  {
+    src: "/screenshots/nutrimvp-4.webp",
+    alt: isEs ? "NutriMVP — Comparación de precios" : "NutriMVP — Price comparison",
+  },
+  {
+    src: "/screenshots/nutrimvp-5.webp",
+    alt: isEs ? "NutriMVP — Historial y favoritos" : "NutriMVP — History and favorites",
+  },
+],
+
+      problem: isEs
+        ? "Los usuarios necesitan comparar información nutricional y precios reales de productos de forma simple, rápida y basada en ubicación."
+        : "Users need to compare nutrition information and real product prices in a simple, fast, location-based experience.",
+      solution: isEs
+        ? "Se construyó una app Android con escáner de código de barras, integración con OpenFoodFacts, backend propio, Firebase/Firestore y PostgreSQL/Supabase para productos, supermercados y precios."
+        : "An Android app was built with barcode scanner, OpenFoodFacts integration, custom backend, Firebase/Firestore, and PostgreSQL/Supabase for products, stores, and prices.",
+      highlights: isEs
+        ? [
+            "Escaneo de productos por código de barras.",
+            "Datos nutricionales desde OpenFoodFacts y base propia.",
+            "Comparación de precios por supermercado.",
+            "Mapa de supermercados cercanos.",
+            "Favoritos, historial, alertas de precio y lista de compras.",
+            "Base preparada para rutas inteligentes de compra.",
+          ]
+        : [
+            "Barcode-based product scanning.",
+            "Nutrition data from OpenFoodFacts and internal database.",
+            "Supermarket price comparison.",
+            "Nearby supermarket map.",
+            "Favorites, history, price alerts, and shopping list.",
+            "Foundation ready for smart shopping routes.",
+          ],
+      businessValue: isEs
+        ? [
+            "Aplicable a retail, supermercados, apps de ahorro o nutrición.",
+            "Puede evolucionar hacia partnership con comercios.",
+            "Combina consumo inteligente, ubicación y precios.",
+          ]
+        : [
+            "Applicable to retail, supermarkets, savings apps, or nutrition products.",
+            "Can evolve into partnerships with stores.",
+            "Combines smart consumption, location, and pricing.",
+          ],
+      nextSteps: isEs
+        ? ["Completar importación masiva de precios.", "Optimizar matching de productos.", "Agregar rutas inteligentes.", "Publicar beta cerrada."]
+        : ["Complete bulk price imports.", "Optimize product matching.", "Add smart routes.", "Publish closed beta."],
+      requestHref: "/go/request-access/nutrimvp",
+	  
+	  commercial: {
+  availableFor: isEs
+    ? [
+        "Partnership",
+        "Implementación",
+        "Evolución de producto",
+      ]
+    : [
+        "Partnership",
+        "Deployment",
+        "Product evolution",
+      ],
+
+  pricingModel: isEs
+    ? "Implementación o evolución según alcance"
+    : "Deployment or product evolution",
+
+  targetAudience: isEs
+    ? [
+        "Retail",
+        "Supermercados",
+        "Nutrición",
+        "Apps de ahorro",
+      ]
+    : [
+        "Retail",
+        "Supermarkets",
+        "Nutrition",
+        "Savings apps",
+      ],
+
+  contactLabel: isEs
+    ? "Conversar oportunidad"
+    : "Discuss opportunity",
+},
+
+
+	  
+    },
+
+    {
+      slug: "sg-copilot-crm",
+      title: "SG Copilot CRM",
+      subtitle: isEs
+        ? "CRM SaaS con AI, documentos inteligentes y billing"
+        : "SaaS CRM with AI, smart documents, and billing",
+      status: isEs ? "SaaS · Live" : "SaaS · Live",
+      summary: isEs
+        ? "SG Copilot CRM es un SaaS full stack para gestión comercial con organizaciones, clientes, tareas, documentos inteligentes, AI Assistant, Stripe Billing y módulos premium por plan."
+        : "SG Copilot CRM is a full-stack SaaS for sales operations with organizations, clients, tasks, smart documents, AI Assistant, Stripe Billing, and premium plan-based modules.",
+      stack: ["Next.js", "TypeScript", "Supabase", "Stripe", "OpenAI", "PostgreSQL", "Tailwind CSS", "Vercel"],
+      heroImage: "/screenshots/sg-copilot-crm-1.webp",
+	  
+screenshots: [
+  {
+    src: "/screenshots/sg-copilot-crm-1.webp",
+    alt: isEs ? "SG Copilot CRM — Dashboard" : "SG Copilot CRM — Dashboard",
+  },
+  {
+    src: "/screenshots/sg-copilot-crm-1-1.webp",
+    alt: isEs ? "SG Copilot CRM — Métricas" : "SG Copilot CRM — Metrics",
+  },
+  {
+    src: "/screenshots/sg-copilot-crm-2.webp",
+    alt: isEs ? "SG Copilot CRM — Planes y billing" : "SG Copilot CRM — Plans and billing",
+  },
+  {
+    src: "/screenshots/sg-copilot-crm-3.webp",
+    alt: isEs ? "SG Copilot CRM — AI Assistant" : "SG Copilot CRM — AI Assistant",
+  },
+  {
+    src: "/screenshots/sg-copilot-crm-4.webp",
+    alt: isEs ? "SG Copilot CRM — Documentos inteligentes" : "SG Copilot CRM — Smart documents",
+  },
+  {
+    src: "/screenshots/sg-copilot-crm-5.webp",
+    alt: isEs ? "SG Copilot CRM — Auditoría AI" : "SG Copilot CRM — AI audit",
+  },
+],
+
+
+      problem: isEs
+        ? "Equipos comerciales necesitan centralizar clientes, tareas, documentos y análisis con AI en una herramienta SaaS escalable y monetizable."
+        : "Sales teams need to centralize clients, tasks, documents, and AI-powered analysis in a scalable, monetizable SaaS tool.",
+      solution: isEs
+        ? "Se desarrolló un CRM SaaS con autenticación, organizaciones, planes Free/Pro/Business, límites por plan, Stripe, búsqueda semántica, Q&A sobre documentos y auditoría AI Business-only."
+        : "A SaaS CRM was built with authentication, organizations, Free/Pro/Business plans, plan limits, Stripe, semantic search, document Q&A, and Business-only AI audit.",
+      highlights: isEs
+        ? [
+            "Autenticación y multi-organización con Supabase.",
+            "Suscripciones Stripe con planes Free, Pro y Business.",
+            "AI Assistant para productividad comercial.",
+            "Búsqueda semántica y preguntas sobre documentos.",
+            "Límites y bloqueo de features por plan.",
+            "Módulo Business de auditoría, insights y exportaciones.",
+          ]
+        : [
+            "Authentication and multi-organization setup with Supabase.",
+            "Stripe subscriptions with Free, Pro, and Business plans.",
+            "AI Assistant for sales productivity.",
+            "Semantic search and document Q&A.",
+            "Plan-based limits and feature gating.",
+            "Business audit, insights, and export module.",
+          ],
+      businessValue: isEs
+        ? [
+            "Modelo SaaS comercializable desde el inicio.",
+            "Ideal para white-label, licenciamiento o implementación B2B.",
+            "Base sólida para productos con AI y billing recurrente.",
+          ]
+        : [
+            "Commercial SaaS model from the start.",
+            "Ideal for white-label, licensing, or B2B deployment.",
+            "Strong foundation for AI products with recurring billing.",
+          ],
+      nextSteps: isEs
+        ? ["Mejorar onboarding.", "Agregar templates por industria.", "Expandir analítica AI.", "Preparar estrategia de adquisición de usuarios."]
+        : ["Improve onboarding.", "Add industry templates.", "Expand AI analytics.", "Prepare user acquisition strategy."],
+      requestHref: "/go/request-access/sg-copilot-crm",
+	  
+	  commercial: {
+  availableFor: isEs
+    ? [
+        "Licenciamiento",
+        "White-label",
+        "Implementación",
+      ]
+    : [
+        "Licensing",
+        "White-label",
+        "Deployment",
+      ],
+
+  pricingModel: isEs
+    ? "Licencia SaaS o implementación dedicada"
+    : "SaaS license or dedicated deployment",
+
+  targetAudience: isEs
+    ? [
+        "Consultoras",
+        "Equipos comerciales",
+        "Agencias",
+        "B2B",
+      ]
+    : [
+        "Consulting firms",
+        "Sales teams",
+        "Agencies",
+        "B2B",
+      ],
+
+  contactLabel: isEs
+    ? "Solicitar demo comercial"
+    : "Request commercial demo",
+},
+
+
+    },
+  ];
+}
+
+export function getCaseStudy(lang: Lang, slug: string) {
+  return getCaseStudies(lang).find((item) => item.slug === slug);
+}
