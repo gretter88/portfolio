@@ -7,8 +7,8 @@ const baseUrl = new URL("https://www.santiagogretter.com.uy");
 
 export const metadata: Metadata = {
   metadataBase: baseUrl,
-  title: "Santiago Gretter — Portfolio",
-  description: "Fullstack / Mobile Developer (React Native · Node · Next.js)",
+ title: "Santiago Gretter — Software Studio Uruguay",
+description: "Desarrollo de software, aplicaciones móviles, plataformas SaaS, sitios web y soluciones digitales en Uruguay. Next.js, React Native, Node.js y análisis funcional.",
   verification: {
   google: "LcLYzhsNDjZrqy84BJCnV4pUeDM-QFHZVCWwLfCTA2Q",
 },

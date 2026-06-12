@@ -25,10 +25,12 @@ export async function generateMetadata({
   const baseUrl = new URL("https://www.santiagogretter.com.uy");
   const url = new URL(`/${lang}`, baseUrl);
 const title = isEs
-  ? `${i.name} — Software Studio & Portfolio`
-  : `${i.name} — Software Studio & Portfolio`;
+  ? `${i.name} — Desarrollo de Software, Apps y SaaS en Uruguay`
+  : `${i.name} — Software Development, Mobile Apps and SaaS`;
 
-const description = i.summary;
+const description = isEs
+  ? "Software Studio en Uruguay especializado en desarrollo web, aplicaciones móviles, plataformas SaaS, automatización, integraciones y productos digitales."
+  : "Software Studio specialized in web development, mobile apps, SaaS platforms, automation, integrations, and digital products.";
 
   return {
     metadataBase: baseUrl,
@@ -47,7 +49,7 @@ const description = i.summary;
       url: url.toString(),
       title,
       description,
-      siteName: `${i.name} — Software Studio`,
+      siteName: "Santiago Gretter Software Studio",
       images: [
         {
           url: "/og/og.png",
