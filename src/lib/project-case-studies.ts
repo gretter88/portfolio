@@ -22,6 +22,7 @@ export type CaseStudy = {
   businessValue: string[];
   nextSteps: string[];
   requestHref: string;
+  seoKeywords: string[];
   
   commercial: {
   availableFor: string[];
@@ -108,7 +109,24 @@ export function getCaseStudies(lang: Lang): CaseStudy[] {
       nextSteps: isEs
         ? ["Integrar wallet real.", "Agregar torneos.", "Crear panel admin.", "Agregar pagos y suscripciones."]
         : ["Integrate real wallet.", "Add tournaments.", "Create admin panel.", "Add payments and subscriptions."],
-      requestHref: "/go/request-access/playduel",
+      seoKeywords: isEs
+  ? [
+      "plataforma gaming realtime",
+      "juegos multijugador online",
+      "Socket.IO",
+      "Next.js gaming platform",
+      "desarrollo web full stack",
+      "gaming competitivo",
+    ]
+  : [
+      "real-time gaming platform",
+      "online multiplayer games",
+      "Socket.IO",
+      "Next.js gaming platform",
+      "full-stack web development",
+      "competitive gaming",
+    ],
+	  requestHref: "/go/request-access/playduel",
 	  
 	  commercial: {
   availableFor: isEs
@@ -224,7 +242,24 @@ export function getCaseStudies(lang: Lang): CaseStudy[] {
       nextSteps: isEs
         ? ["Completar importación masiva de precios.", "Optimizar matching de productos.", "Agregar rutas inteligentes.", "Publicar beta cerrada."]
         : ["Complete bulk price imports.", "Optimize product matching.", "Add smart routes.", "Publish closed beta."],
-      requestHref: "/go/request-access/nutrimvp",
+seoKeywords: isEs
+  ? [
+      "app de nutrición",
+      "comparador de precios supermercados",
+      "React Native Uruguay",
+      "escáner de productos",
+      "OpenFoodFacts",
+      "app mobile de compras",
+    ]
+  : [
+      "nutrition app",
+      "supermarket price comparison",
+      "React Native Uruguay",
+      "product scanner",
+      "OpenFoodFacts",
+      "mobile shopping app",
+    ],     
+	 requestHref: "/go/request-access/nutrimvp",
 	  
 	  commercial: {
   availableFor: isEs
@@ -344,7 +379,24 @@ screenshots: [
       nextSteps: isEs
         ? ["Mejorar onboarding.", "Agregar templates por industria.", "Expandir analítica AI.", "Preparar estrategia de adquisición de usuarios."]
         : ["Improve onboarding.", "Add industry templates.", "Expand AI analytics.", "Prepare user acquisition strategy."],
-      requestHref: "/go/request-access/sg-copilot-crm",
+seoKeywords: isEs
+  ? [
+      "CRM con IA",
+      "SaaS B2B",
+      "Next.js SaaS",
+      "Stripe Billing",
+      "Supabase CRM",
+      "automatización comercial",
+    ]
+  : [
+      "AI CRM",
+      "B2B SaaS",
+      "Next.js SaaS",
+      "Stripe Billing",
+      "Supabase CRM",
+      "sales automation",
+    ],     
+	 requestHref: "/go/request-access/sg-copilot-crm",
 	  
 	  commercial: {
   availableFor: isEs
