@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/en/projects/kiosco",
 	"/es/projects/museo",
     "/en/projects/museo",
+	"/es/projects/marketplace",
+    "/en/projects/marketplace",
+	"/es/projects/sg-saas-starter",
+    "/en/projects/sg-saas-starter",
+	"/es/projects/intranet",
+    "/en/projects/intranet",
   ];
 
   return routes.map((route) => ({

@@ -960,7 +960,458 @@ seoKeywords: isEs
     contactLabel: isEs ? "Solicitar propuesta web" : "Request web proposal",
   },
 },
-	
+
+
+{
+  slug: "marketplace",
+
+  title: isEs
+    ? "Marketplace de Servicios"
+    : "Services Marketplace",
+
+  subtitle: isEs
+    ? "Plataforma tipo Uber/Fiverr para conectar clientes y profesionales"
+    : "Uber/Fiverr-style platform connecting clients and service providers",
+
+  status: isEs
+    ? "Mobile + Backend · White-label Ready"
+    : "Mobile + Backend · White-label Ready",
+
+  summary: isEs
+    ? "Marketplace full stack que permite conectar clientes y profesionales mediante solicitudes, chat en tiempo real y gestión de servicios. Diseñado como base reutilizable para múltiples industrias."
+    : "Full-stack marketplace connecting clients and professionals through service requests, real-time chat, and service management. Designed as a reusable foundation for multiple industries.",
+
+  stack: [
+    "React Native",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Socket.IO",
+    "JWT",
+    "Admin Panel"
+  ],
+
+  heroImage: "/screenshots/marketplace-1.webp",
+
+  screenshots: [
+    {
+      src: "/screenshots/marketplace-1.webp",
+      alt: isEs
+        ? "Marketplace — Inicio"
+        : "Marketplace — Home",
+    },
+    {
+      src: "/screenshots/marketplace-2.webp",
+      alt: isEs
+        ? "Marketplace — Solicitudes"
+        : "Marketplace — Requests",
+    },
+    {
+      src: "/screenshots/marketplace-3.webp",
+      alt: isEs
+        ? "Marketplace — Chat"
+        : "Marketplace — Chat",
+    },
+    {
+      src: "/screenshots/marketplace-4.webp",
+      alt: isEs
+        ? "Marketplace — Proveedores"
+        : "Marketplace — Providers",
+    },
+    {
+      src: "/screenshots/marketplace-5.webp",
+      alt: isEs
+        ? "Marketplace — Gestión"
+        : "Marketplace — Management",
+    },
+  ],
+
+  problem: isEs
+    ? "Muchos sectores necesitan conectar clientes y proveedores de forma simple, rápida y trazable."
+    : "Many industries need a simple, fast, and traceable way to connect clients and service providers.",
+
+  solution: isEs
+    ? "Se desarrolló una arquitectura marketplace con aplicación móvil, backend, autenticación, solicitudes, chat en tiempo real y roles diferenciados para clientes y proveedores."
+    : "A marketplace architecture was developed with mobile app, backend, authentication, requests, real-time chat, and separate client/provider roles.",
+
+  highlights: isEs
+    ? [
+        "Roles Cliente y Proveedor.",
+        "Creación y gestión de solicitudes.",
+        "Chat en tiempo real mediante Socket.IO.",
+        "Backend Node.js + MongoDB.",
+        "Autenticación JWT.",
+        "Arquitectura white-label reutilizable.",
+        "Preparado para pagos y monetización.",
+      ]
+    : [
+        "Client and Provider roles.",
+        "Request creation and management.",
+        "Real-time chat using Socket.IO.",
+        "Node.js + MongoDB backend.",
+        "JWT authentication.",
+        "Reusable white-label architecture.",
+        "Ready for payments and monetization.",
+      ],
+
+  businessValue: isEs
+    ? [
+        "Aplicable a múltiples industrias.",
+        "Reduce tiempo de desarrollo de nuevos marketplaces.",
+        "Base sólida para modelos tipo Uber, Fiverr o servicios locales.",
+        "Preparado para escalar comercialmente.",
+      ]
+    : [
+        "Applicable across multiple industries.",
+        "Reduces development time for new marketplaces.",
+        "Strong foundation for Uber, Fiverr, or local services models.",
+        "Ready for commercial scaling.",
+      ],
+
+  nextSteps: isEs
+    ? [
+        "Integrar pagos online.",
+        "Agregar notificaciones push.",
+        "Incorporar geolocalización avanzada.",
+        "Expandir panel administrativo.",
+      ]
+    : [
+        "Integrate online payments.",
+        "Add push notifications.",
+        "Add advanced geolocation.",
+        "Expand admin panel.",
+      ],
+
+  seoKeywords: isEs
+    ? [
+        "Marketplace",
+        "React Native",
+        "Node.js",
+        "MongoDB",
+        "Servicios",
+        "Socket.IO",
+        "White-label",
+        "Uber clone",
+        "Fiverr clone",
+      ]
+    : [
+        "Marketplace",
+        "React Native",
+        "Node.js",
+        "MongoDB",
+        "Services",
+        "Socket.IO",
+        "White-label",
+        "Uber clone",
+        "Fiverr clone",
+      ],
+
+  requestHref: "/go/request-access/marketplace",
+
+  commercial: {
+    availableFor: isEs
+      ? [
+          "White-label",
+          "Implementación",
+          "Licenciamiento",
+        ]
+      : [
+          "White-label",
+          "Deployment",
+          "Licensing",
+        ],
+
+    pricingModel: isEs
+      ? "White-label o implementación dedicada"
+      : "White-label or dedicated deployment",
+
+    targetAudience: isEs
+      ? [
+          "Servicios profesionales",
+          "Oficios",
+          "Delivery",
+          "Marketplace local",
+          "Startups",
+        ]
+      : [
+          "Professional services",
+          "Trades",
+          "Delivery",
+          "Local marketplace",
+          "Startups",
+        ],
+
+    contactLabel: isEs
+      ? "Solicitar información comercial"
+      : "Request commercial information",
+  },
+},
+
+
+	{
+  slug: "sg-saas-starter",
+
+  title: "SG SaaS Starter",
+
+  subtitle: isEs
+    ? "Base SaaS full stack lista para lanzar productos comerciales"
+    : "Full-stack SaaS foundation ready to launch commercial products",
+
+  status: isEs
+    ? "Template SaaS · Comercializable"
+    : "SaaS Template · Commercial Ready",
+
+  summary: isEs
+    ? "Plantilla SaaS full stack diseñada para acelerar la creación de nuevos productos digitales. Incluye autenticación, gestión de usuarios, suscripciones, panel administrativo y estructura escalable lista para personalización."
+    : "Full-stack SaaS template designed to accelerate the creation of new digital products. Includes authentication, user management, subscriptions, admin dashboard, and a scalable architecture ready for customization.",
+
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Stripe",
+    "Supabase",
+    "PostgreSQL",
+    "Vercel"
+  ],
+
+  heroImage: "/screenshots/sg-saas-starter-1.webp",
+
+  screenshots: [
+    {
+      src: "/screenshots/sg-saas-starter-1.webp",
+      alt: isEs
+        ? "SG SaaS Starter — Dashboard"
+        : "SG SaaS Starter — Dashboard",
+    },
+  ],
+
+  problem: isEs
+    ? "Muchos productos SaaS repiten las mismas funcionalidades básicas, aumentando costos y tiempos de desarrollo."
+    : "Many SaaS products repeat the same core features, increasing development costs and launch times.",
+
+  solution: isEs
+    ? "Se creó una base reutilizable con autenticación, suscripciones, panel administrativo y estructura escalable para acelerar nuevos proyectos SaaS."
+    : "A reusable foundation was built with authentication, subscriptions, admin dashboard, and scalable architecture to accelerate new SaaS projects.",
+
+  highlights: isEs
+    ? [
+        "Autenticación lista para producción.",
+        "Integración con Stripe.",
+        "Panel administrativo.",
+        "Gestión de usuarios.",
+        "Arquitectura escalable.",
+        "Base reutilizable para múltiples productos."
+      ]
+    : [
+        "Production-ready authentication.",
+        "Stripe integration.",
+        "Admin dashboard.",
+        "User management.",
+        "Scalable architecture.",
+        "Reusable foundation for multiple products."
+      ],
+
+  businessValue: isEs
+    ? [
+        "Reduce tiempos de lanzamiento.",
+        "Disminuye costos de desarrollo.",
+        "Ideal para startups y MVPs.",
+        "Permite validar productos más rápido."
+      ]
+    : [
+        "Reduces launch times.",
+        "Lowers development costs.",
+        "Ideal for startups and MVPs.",
+        "Allows faster product validation."
+      ],
+
+  nextSteps: isEs
+    ? [
+        "Agregar módulos opcionales.",
+        "Expandir marketplace de plantillas.",
+        "Integrar más proveedores SaaS."
+      ]
+    : [
+        "Add optional modules.",
+        "Expand template marketplace.",
+        "Integrate more SaaS providers."
+      ],
+
+  seoKeywords: isEs
+    ? [
+        "SaaS Starter",
+        "Next.js SaaS",
+        "Stripe",
+        "Supabase",
+        "Boilerplate",
+        "Startup",
+        "MVP"
+      ]
+    : [
+        "SaaS Starter",
+        "Next.js SaaS",
+        "Stripe",
+        "Supabase",
+        "Boilerplate",
+        "Startup",
+        "MVP"
+      ],
+
+  requestHref: "/go/request-access/sg-saas-starter",
+
+  commercial: {
+    availableFor: isEs
+      ? ["Licencia", "Implementación", "Personalización"]
+      : ["License", "Deployment", "Customization"],
+
+    pricingModel: isEs
+      ? "Licencia o personalización"
+      : "License or customization",
+
+    targetAudience: isEs
+      ? ["Startups", "Emprendedores", "SaaS", "Agencias"]
+      : ["Startups", "Entrepreneurs", "SaaS", "Agencies"],
+
+    contactLabel: isEs
+      ? "Consultar plantilla SaaS"
+      : "Inquire about SaaS template",
+  },
+},
+
+
+{
+  slug: "intranet",
+
+  title: "Intranet WordPress",
+
+  subtitle: isEs
+    ? "Portal interno corporativo para gestión y comunicación"
+    : "Corporate internal portal for management and communication",
+
+  status: isEs
+    ? "Proyecto interno · Producción"
+    : "Internal Project · Production",
+
+  summary: isEs
+    ? "Portal corporativo desarrollado sobre WordPress para centralizar información interna, documentación, procesos y comunicación entre equipos."
+    : "Corporate portal developed on WordPress to centralize internal information, documentation, processes, and communication between teams.",
+
+  stack: [
+    "WordPress",
+    "PHP",
+    "MySQL",
+    "JavaScript",
+    "CSS",
+    "Hosting"
+  ],
+
+  heroImage: "/screenshots/intranet-1.webp",
+
+  screenshots: [
+    {
+      src: "/screenshots/intranet-1.webp",
+      alt: isEs
+        ? "Intranet WordPress — Portal interno"
+        : "WordPress Intranet — Internal portal",
+    },
+  ],
+
+  problem: isEs
+    ? "La organización necesitaba centralizar documentación, noticias internas y procesos en una única plataforma."
+    : "The organization needed to centralize documentation, internal news, and processes in a single platform.",
+
+  solution: isEs
+    ? "Se implementó una intranet corporativa basada en WordPress con gestión de contenido, accesos internos y organización de documentación."
+    : "A corporate intranet based on WordPress was implemented with content management, internal access, and document organization.",
+
+  highlights: isEs
+    ? [
+        "Portal interno corporativo.",
+        "Gestión documental.",
+        "Comunicación interna.",
+        "Control de acceso.",
+        "Administración sencilla."
+      ]
+    : [
+        "Corporate internal portal.",
+        "Document management.",
+        "Internal communication.",
+        "Access control.",
+        "Easy administration."
+      ],
+
+  businessValue: isEs
+    ? [
+        "Centraliza información interna.",
+        "Reduce dependencia de correos.",
+        "Mejora acceso a documentación.",
+        "Facilita comunicación organizacional."
+      ]
+    : [
+        "Centralizes internal information.",
+        "Reduces email dependency.",
+        "Improves document access.",
+        "Facilitates organizational communication."
+      ],
+
+  nextSteps: isEs
+    ? [
+        "Integraciones corporativas.",
+        "Flujos de aprobación.",
+        "Automatización documental."
+      ]
+    : [
+        "Corporate integrations.",
+        "Approval workflows.",
+        "Document automation."
+      ],
+
+  seoKeywords: isEs
+    ? [
+        "Intranet",
+        "WordPress",
+        "Portal corporativo",
+        "Gestión documental",
+        "Comunicación interna"
+      ]
+    : [
+        "Intranet",
+        "WordPress",
+        "Corporate portal",
+        "Document management",
+        "Internal communication"
+      ],
+
+  requestHref: "/go/request-access/intranet",
+
+  commercial: {
+    availableFor: isEs
+      ? ["Implementación", "Adaptación"]
+      : ["Deployment", "Adaptation"],
+
+    pricingModel: isEs
+      ? "Proyecto corporativo a medida"
+      : "Custom corporate project",
+
+    targetAudience: isEs
+      ? [
+          "Empresas",
+          "Organizaciones",
+          "Instituciones"
+        ]
+      : [
+          "Companies",
+          "Organizations",
+          "Institutions"
+        ],
+
+    contactLabel: isEs
+      ? "Consultar solución corporativa"
+      : "Inquire about corporate solution",
+  },
+},
   ];
 }
 
