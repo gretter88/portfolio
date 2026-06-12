@@ -436,6 +436,179 @@ seoKeywords: isEs
 
 
     },
+	
+	
+	{
+  slug: "radar",
+  title: "RadarSocial",
+
+  subtitle: isEs
+    ? "App móvil de descubrimiento social en tiempo real mediante Bluetooth"
+    : "Mobile app for real-time social discovery using Bluetooth",
+
+  status: isEs
+    ? "Android · Closed Testing"
+    : "Android · Closed Testing",
+
+  summary: isEs
+    ? "RadarSocial es una aplicación móvil que permite descubrir personas cercanas en tiempo real mediante Bluetooth Low Energy (BLE), creando una experiencia social basada en proximidad física, perfiles y conexiones instantáneas."
+    : "RadarSocial is a mobile application that enables users to discover nearby people in real time using Bluetooth Low Energy (BLE), creating a proximity-based social networking experience.",
+
+  stack: [
+    "React Native",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "MongoDB Atlas",
+    "Socket.IO",
+    "Firebase",
+    "Google Play",
+    "BLE"
+  ],
+
+  heroImage: "/screenshots/radarsocial-1.webp",
+
+  screenshots: [
+    {
+      src: "/screenshots/radarsocial-1.webp",
+      alt: isEs
+        ? "RadarSocial — Pantalla principal"
+        : "RadarSocial — Home screen",
+    },
+    {
+      src: "/screenshots/radarsocial-2.webp",
+      alt: isEs
+        ? "RadarSocial — Usuarios cercanos"
+        : "RadarSocial — Nearby users",
+    },
+    {
+      src: "/screenshots/radarsocial-3.webp",
+      alt: isEs
+        ? "RadarSocial — Perfil social"
+        : "RadarSocial — Social profile",
+    },
+    {
+      src: "/screenshots/radarsocial-4.webp",
+      alt: isEs
+        ? "RadarSocial — Conexiones"
+        : "RadarSocial — Connections",
+    },
+    {
+      src: "/screenshots/radarsocial-5.webp",
+      alt: isEs
+        ? "RadarSocial — Experiencia móvil"
+        : "RadarSocial — Mobile experience",
+    },
+  ],
+
+  problem: isEs
+    ? "Las redes sociales tradicionales conectan personas online pero no aprovechan el contexto físico y la proximidad real entre usuarios."
+    : "Traditional social networks connect people online but do not take advantage of physical proximity and real-world interactions.",
+
+  solution: isEs
+    ? "Se desarrolló una aplicación móvil basada en Bluetooth Low Energy que permite detectar usuarios cercanos, descubrir perfiles, generar conexiones y crear experiencias sociales contextualizadas."
+    : "A Bluetooth Low Energy mobile application was built to detect nearby users, discover profiles, create connections, and enable contextual social experiences.",
+
+highlights: isEs
+  ? [
+      "Versión web en producción y Android en Google Play Closed Testing.",
+      "BLE (Bluetooth Low Energy) para descubrimiento de usuarios cercanos.",
+      "Chat 1:1 en tiempo real con Socket.IO.",
+      "Mensajes de voz, stickers y multimedia.",
+      "Audio llamadas y videollamadas integradas.",
+      "Mapa geolocalizado con usuarios y servicios cercanos.",
+      "Notificaciones push incluso con la app cerrada.",
+      "Monetización mediante AdMob, compras in-app y plan premium.",
+      "Backend Node.js + MongoDB Atlas escalable.",
+      "Panel administrativo para operación y métricas."
+    ]
+    : [
+        "Bluetooth Low Energy advertising and scanning.",
+        "Real-time nearby user discovery.",
+        "Node.js + MongoDB Atlas backend.",
+        "Authentication and user profiles.",
+        "Architecture ready for future monetization.",
+        "Android deployment through Google Play Closed Testing.",
+      ],
+
+businessValue: isEs
+  ? [
+      "Puede adaptarse como red social privada o plataforma de comunidades.",
+      "Aplicable a networking, eventos, asociaciones, turismo y servicios.",
+      "Base tecnológica reutilizable para productos basados en proximidad.",
+      "Arquitectura preparada para monetización y escalabilidad comercial."
+    ]
+    : [
+        "Applicable to networking, events, communities, and in-person experiences.",
+        "Reusable foundation for proximity-based products.",
+        "Scalable architecture for future social features.",
+      ],
+
+  nextSteps: isEs
+    ? [
+        "Integrar sistema de intereses.",
+        "Agregar chat en tiempo real.",
+        "Expandir funcionalidades premium.",
+        "Lanzamiento público en Google Play.",
+      ]
+    : [
+        "Integrate interests system.",
+        "Add real-time chat.",
+        "Expand premium features.",
+        "Public Google Play launch.",
+      ],
+
+seoKeywords: isEs
+  ? [
+      "React Native",
+      "Bluetooth Low Energy",
+      "BLE",
+      "Socket.IO",
+      "Aplicación móvil",
+      "Red social",
+      "Networking",
+      "Geolocalización",
+      "Google Play",
+      "Node.js",
+      "MongoDB",
+      "WebRTC"
+    ]
+    : [
+        "React Native",
+        "Bluetooth Low Energy",
+        "BLE",
+        "Social app",
+        "Mobile application",
+        "Networking",
+      ],
+
+  requestHref: "/go/request-access/radar",
+
+ commercial: {
+  availableFor: [
+    "Licenciamiento",
+    "Partnership",
+    "White-label",
+    "Implementación"
+  ],
+
+  pricingModel:
+    "Licencia, partnership estratégico o implementación personalizada",
+
+  targetAudience: [
+    "Comunidades",
+    "Networking",
+    "Eventos",
+    "Asociaciones",
+    "Turismo",
+    "Servicios geolocalizados"
+  ],
+
+  contactLabel: "Conversar oportunidad RadarSocial",
+}
+},
+	
+	
   ];
 }
 

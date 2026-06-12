@@ -293,7 +293,27 @@ export default async function ProjectCaseStudyPage({
             </div>
           </div>
         </section>
+<section className="mt-8 rounded-2xl border p-5" style={cardStyle}>
+  <h3 className="text-xl font-semibold">
+    {isEs ? "Tecnologías y enfoque" : "Technologies and focus"}
+  </h3>
 
+  <div className="mt-4 flex flex-wrap gap-2">
+    {study.seoKeywords.map((item) => (
+      <span
+        key={item}
+        className="rounded-full border px-3 py-1 text-sm"
+        style={{
+          borderColor: "rgba(96,165,250,0.30)",
+          background: "rgba(96,165,250,0.08)",
+          color: "var(--foreground)",
+        }}
+      >
+        {item}
+      </span>
+    ))}
+  </div>
+</section>
         <section className="mt-8 grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border p-5" style={cardStyle}>
             <h3 className="text-xl font-semibold">
