@@ -22,9 +22,40 @@ export async function generateMetadata({
   }
 
   const url = `https://www.santiagogretter.com.uy/${lang}/projects/${study.slug}`;
+const seoTitleMap: Record<string, string> = {
+  nutrimvp:
+    "NutriMVP | App de nutrición, precios y supermercados | Santiago Gretter",
 
+  playduel:
+    "PlayDuel | Plataforma Gaming Multijugador en Tiempo Real | Santiago Gretter",
+
+  "sg-copilot-crm":
+    "SG Copilot CRM | CRM con IA para Empresas | Santiago Gretter",
+};
+
+const seoTitle =
+  seoTitleMap[study.slug] ??
+  `${study.title} | Software Development Project | Santiago Gretter`;
+  
+  
+  
+  const seoDescriptionMap: Record<string, string> = {
+  nutrimvp:
+    "Aplicación móvil para nutrición, comparación de precios, supermercados cercanos y gestión inteligente de compras.",
+
+  playduel:
+    "Plataforma gaming multijugador con matchmaking, rankings, chat en tiempo real y arquitectura escalable.",
+
+  "sg-copilot-crm":
+    "CRM con inteligencia artificial para automatizar ventas, seguimiento de clientes y procesos comerciales.",
+};
+
+
+  
+  
+  
   return {
-    title: `${study.title} · Case Study · Santiago Gretter`,
+    title: seoTitle,
     description: study.summary,
     alternates: {
       canonical: url,
@@ -35,7 +66,8 @@ export async function generateMetadata({
     },
     openGraph: {
       title: `${study.title} · Case Study`,
-      description: study.summary,
+      description:
+  seoDescriptionMap[study.slug] ?? study.summary,
       url,
       siteName: "Santiago Gretter Portfolio",
       type: "article",
