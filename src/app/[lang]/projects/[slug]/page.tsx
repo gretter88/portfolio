@@ -73,7 +73,7 @@ const seoTitle =
       type: "article",
       images: [
         {
-          url: study.heroImage,
+          url: `/${lang}/projects/${study.slug}/opengraph-image`,
           width: 1200,
           height: 630,
           alt: study.title,
@@ -85,7 +85,7 @@ const seoTitle =
       card: "summary_large_image",
       title: `${study.title} · Case Study`,
       description: study.summary,
-      images: [study.heroImage],
+      images: [`/${lang}/projects/${study.slug}/opengraph-image`],
     },
   };
 }

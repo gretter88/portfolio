@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import JsonLd from "@/components/JsonLd";
 
 const baseUrl = new URL("https://www.santiagogretter.com.uy");
 
@@ -76,6 +77,7 @@ export default function RootLayout({
       </head>
 
       <body className="bg-[var(--background)] text-[var(--foreground)]">
+	  <JsonLd />
         {children}
         <Analytics />
       </body>
