@@ -609,6 +609,188 @@ seoKeywords: isEs
 },
 	
 	
+	{
+  slug: "kiosco",
+
+  title: "Museo Canario Kiosco",
+
+  subtitle: isEs
+    ? "Experiencia interactiva para visitantes en pantalla táctil"
+    : "Interactive touchscreen visitor experience",
+
+  status: isEs
+    ? "Tablet Kiosk · Live"
+    : "Tablet Kiosk · Live",
+
+  summary: isEs
+    ? "Sistema interactivo para tablet horizontal desarrollado para el Museo Canario. Permite explorar piezas, salas, fotografías, contenido multimedia, juegos educativos y mapas interactivos mediante una experiencia optimizada para visitantes."
+    : "Interactive kiosk system developed for the Museo Canario. Visitors can explore exhibits, rooms, photos, multimedia content, educational games, and interactive maps through a touchscreen-optimized experience.",
+
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Framer Motion",
+    "MongoDB",
+    "QR Access",
+    "PWA"
+  ],
+
+  heroImage: "/screenshots/kiosco-1.webp",
+
+  screenshots: [
+    {
+      src: "/screenshots/kiosco-1.webp",
+      alt: isEs
+        ? "Museo Canario Kiosco — Inicio"
+        : "Museum Kiosk — Home",
+    },
+    {
+      src: "/screenshots/kiosco-2.webp",
+      alt: isEs
+        ? "Museo Canario Kiosco — Catálogo"
+        : "Museum Kiosk — Catalog",
+    },
+    {
+      src: "/screenshots/kiosco-3.webp",
+      alt: isEs
+        ? "Museo Canario Kiosco — Plano interactivo"
+        : "Museum Kiosk — Interactive map",
+    },
+    {
+      src: "/screenshots/kiosco-4.webp",
+      alt: isEs
+        ? "Museo Canario Kiosco — Juego memoria"
+        : "Museum Kiosk — Memory game",
+    },
+    {
+      src: "/screenshots/kiosco-5.webp",
+      alt: isEs
+        ? "Museo Canario Kiosco — Puzzle interactivo"
+        : "Museum Kiosk — Puzzle game",
+    },
+  ],
+
+  problem: isEs
+    ? "Los visitantes necesitan acceder a información histórica y cultural de forma atractiva e intuitiva sin depender de personal o material impreso."
+    : "Visitors need access to historical and cultural information through an engaging and intuitive experience without relying on staff or printed materials.",
+
+  solution: isEs
+    ? "Se desarrolló una experiencia kiosk optimizada para tablet horizontal con catálogo interactivo, fichas multimedia, juegos educativos, plano de salas y acceso seguro mediante QR."
+    : "A kiosk experience optimized for landscape tablets was developed with an interactive catalog, multimedia exhibit pages, educational games, room maps, and secure QR access.",
+
+  highlights: isEs
+    ? [
+        "Optimizado para tablet horizontal.",
+        "Acceso protegido mediante QR dinámico.",
+        "Catálogo interactivo de piezas.",
+        "Plano de salas interactivo.",
+        "Juego Memoria personalizado.",
+        "Juego Puzzle personalizado.",
+        "Experiencia multilingüe ES/EN.",
+        "Contenido multimedia administrable.",
+      ]
+    : [
+        "Landscape tablet optimized.",
+        "Secure dynamic QR access.",
+        "Interactive exhibit catalog.",
+        "Interactive room map.",
+        "Custom Memory Game.",
+        "Custom Puzzle Game.",
+        "ES/EN multilingual experience.",
+        "Manageable multimedia content.",
+      ],
+
+  businessValue: isEs
+    ? [
+        "Aplicable a museos y centros culturales.",
+        "Adaptable a ferias, exposiciones y eventos.",
+        "Reduce dependencia de material impreso.",
+        "Mejora la experiencia educativa e interactiva.",
+      ]
+    : [
+        "Applicable to museums and cultural centers.",
+        "Adaptable to fairs, exhibitions, and events.",
+        "Reduces dependency on printed materials.",
+        "Improves educational and interactive experiences.",
+      ],
+
+  nextSteps: isEs
+    ? [
+        "Integración con audio guía.",
+        "Analytics de interacción.",
+        "Realidad aumentada.",
+        "Versiones para múltiples sedes.",
+      ]
+    : [
+        "Audio guide integration.",
+        "Interaction analytics.",
+        "Augmented reality.",
+        "Multi-location deployment.",
+      ],
+
+  seoKeywords: isEs
+    ? [
+        "Kiosco interactivo",
+        "Museo digital",
+        "Next.js",
+        "Tablet interactiva",
+        "Experiencia cultural",
+        "Museo Canario",
+        "Juego educativo",
+        "Plano interactivo",
+      ]
+    : [
+        "Interactive kiosk",
+        "Digital museum",
+        "Next.js",
+        "Interactive tablet",
+        "Cultural experience",
+        "Educational game",
+        "Interactive map",
+      ],
+
+  requestHref: "/go/request-access/kiosco",
+
+  commercial: {
+    availableFor: isEs
+      ? [
+          "Implementación",
+          "Adaptación",
+          "White-label",
+        ]
+      : [
+          "Deployment",
+          "Adaptation",
+          "White-label",
+        ],
+
+    pricingModel: isEs
+      ? "Proyecto a medida o adaptación institucional"
+      : "Custom project or institutional adaptation",
+
+    targetAudience: isEs
+      ? [
+          "Museos",
+          "Centros culturales",
+          "Turismo",
+          "Educación",
+          "Exposiciones",
+        ]
+      : [
+          "Museums",
+          "Cultural centers",
+          "Tourism",
+          "Education",
+          "Exhibitions",
+        ],
+
+    contactLabel: isEs
+      ? "Solicitar propuesta"
+      : "Request proposal",
+  },
+},
+	
   ];
 }
 

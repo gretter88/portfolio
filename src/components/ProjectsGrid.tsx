@@ -1476,7 +1476,7 @@ color: "var(--muted)",
                       <h4 className="font-semibold">{isEs ? "Links" : "Links"}</h4>
 
                       <div className="mt-3 flex flex-wrap gap-3">
-					 {["nutrimvp", "playduel", "sg-copilot-crm", "radar"].includes(
+					 {["nutrimvp", "playduel", "sg-copilot-crm", "radar", "kiosco"].includes(
   getProjectSlug(activeProject)
 ) ? (
 
