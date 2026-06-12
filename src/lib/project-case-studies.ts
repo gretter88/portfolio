@@ -790,6 +790,176 @@ seoKeywords: isEs
       : "Request proposal",
   },
 },
+
+
+{
+  slug: "museo",
+
+  title: "Museo Canario Web",
+
+  subtitle: isEs
+    ? "Sitio institucional bilingüe para museo y gestión cultural"
+    : "Bilingual institutional website for museum and cultural management",
+
+  status: isEs ? "Web · Live" : "Web · Live",
+
+  summary: isEs
+    ? "Sitio web institucional bilingüe desarrollado para el Museo Canario, con contenido dinámico, catálogo de piezas, galería, noticias, secciones culturales y base preparada para integrarse con el ecosistema del kiosco interactivo."
+    : "Bilingual institutional website developed for Museo Canario, featuring dynamic content, exhibit catalog, gallery, news, cultural sections, and a foundation prepared to integrate with the interactive kiosk ecosystem.",
+
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "MongoDB",
+    "Cloudinary",
+    "Vercel",
+    "Cloudflare",
+  ],
+
+  heroImage: "/screenshots/museo-1.webp",
+
+  screenshots: [
+    {
+      src: "/screenshots/museo-1.webp",
+      alt: isEs
+        ? "Museo Canario Web — Inicio"
+        : "Museo Canario Website — Home",
+    },
+    {
+      src: "/screenshots/museo-2.webp",
+      alt: isEs
+        ? "Museo Canario Web — Sección cultural"
+        : "Museo Canario Website — Cultural section",
+    },
+    {
+      src: "/screenshots/museo-3.webp",
+      alt: isEs
+        ? "Museo Canario Web — Contenido institucional"
+        : "Museo Canario Website — Institutional content",
+    },
+    {
+      src: "/screenshots/museo-4.webp",
+      alt: isEs
+        ? "Museo Canario Web — Galería y piezas"
+        : "Museo Canario Website — Gallery and exhibits",
+    },
+    {
+      src: "/screenshots/museo-5.webp",
+      alt: isEs
+        ? "Museo Canario Web — Secciones principales"
+        : "Museo Canario Website — Main sections",
+    },
+  ],
+
+  problem: isEs
+    ? "El museo necesitaba una presencia digital moderna, bilingüe y administrable para presentar su historia, piezas, actividades y contenido cultural de forma clara y accesible."
+    : "The museum needed a modern, bilingual, and manageable digital presence to present its history, exhibits, activities, and cultural content in a clear and accessible way.",
+
+  solution: isEs
+    ? "Se desarrolló un sitio web institucional con Next.js, estructura bilingüe ES/EN, contenido dinámico, galería multimedia, integración con Cloudinary, SEO técnico y despliegue en Vercel con Cloudflare."
+    : "An institutional website was built with Next.js, ES/EN bilingual structure, dynamic content, multimedia gallery, Cloudinary integration, technical SEO, and deployment on Vercel with Cloudflare.",
+
+  highlights: isEs
+    ? [
+        "Sitio institucional bilingüe ES/EN.",
+        "Contenido dinámico administrable.",
+        "Catálogo y galería multimedia.",
+        "Integración con Cloudinary para imágenes.",
+        "SEO técnico, OpenGraph y despliegue productivo.",
+        "Infraestructura Vercel + Cloudflare.",
+        "Base integrada con el ecosistema del kiosco interactivo.",
+      ]
+    : [
+        "ES/EN bilingual institutional website.",
+        "Manageable dynamic content.",
+        "Catalog and multimedia gallery.",
+        "Cloudinary image integration.",
+        "Technical SEO, OpenGraph, and production deployment.",
+        "Vercel + Cloudflare infrastructure.",
+        "Foundation integrated with the interactive kiosk ecosystem.",
+      ],
+
+  businessValue: isEs
+    ? [
+        "Mejora la presencia digital institucional.",
+        "Permite administrar contenido cultural sin depender de cambios manuales en código.",
+        "Funciona como puerta de entrada al museo físico y al kiosco interactivo.",
+        "Base reutilizable para otros museos, asociaciones o centros culturales.",
+      ]
+    : [
+        "Improves institutional digital presence.",
+        "Allows cultural content management without manual code changes.",
+        "Works as an entry point to the physical museum and interactive kiosk.",
+        "Reusable foundation for other museums, associations, or cultural centers.",
+      ],
+
+  nextSteps: isEs
+    ? [
+        "Ampliar catálogo público.",
+        "Agregar agenda avanzada de actividades.",
+        "Mejorar analítica de visitas.",
+        "Integrar más contenidos multimedia.",
+      ]
+    : [
+        "Expand public catalog.",
+        "Add advanced event agenda.",
+        "Improve visit analytics.",
+        "Integrate more multimedia content.",
+      ],
+
+  seoKeywords: isEs
+    ? [
+        "Museo digital",
+        "Sitio web institucional",
+        "Next.js",
+        "Web bilingüe",
+        "Gestión cultural",
+        "Cloudinary",
+        "Museo Canario",
+        "Catálogo digital",
+      ]
+    : [
+        "Digital museum",
+        "Institutional website",
+        "Next.js",
+        "Bilingual website",
+        "Cultural management",
+        "Cloudinary",
+        "Museum website",
+        "Digital catalog",
+      ],
+
+  requestHref: "/go/request-access/museo",
+
+  commercial: {
+    availableFor: isEs
+      ? ["Implementación", "Adaptación", "Proyecto a medida"]
+      : ["Deployment", "Adaptation", "Custom project"],
+
+    pricingModel: isEs
+      ? "Proyecto institucional a medida o adaptación para centros culturales"
+      : "Custom institutional project or adaptation for cultural centers",
+
+    targetAudience: isEs
+      ? [
+          "Museos",
+          "Asociaciones culturales",
+          "Centros educativos",
+          "Instituciones",
+          "Archivos y bibliotecas",
+        ]
+      : [
+          "Museums",
+          "Cultural associations",
+          "Educational centers",
+          "Institutions",
+          "Archives and libraries",
+        ],
+
+    contactLabel: isEs ? "Solicitar propuesta web" : "Request web proposal",
+  },
+},
 	
   ];
 }

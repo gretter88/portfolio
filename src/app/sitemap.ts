@@ -13,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/en/projects/playduel",
     "/es/projects/sg-copilot-crm",
     "/en/projects/sg-copilot-crm",
+	"/es/projects/radar",
+    "/en/projects/radar",
+	"/es/projects/kiosco",
+    "/en/projects/kiosco",
+	"/es/projects/museo",
+    "/en/projects/museo",
   ];
 
   return routes.map((route) => ({
