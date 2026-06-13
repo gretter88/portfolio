@@ -14,7 +14,7 @@ export async function generateMetadata({
   const resolved = await Promise.resolve(params);
   const lang = (LANGS.includes(resolved.lang as Lang) ? resolved.lang : "es") as Lang;
   const study = getCaseStudy(lang, resolved.slug);
-  const faqs = getProjectFaqs(study.slug, lang);
+
 
   if (!study) {
     return {
@@ -104,11 +104,11 @@ export default async function ProjectCaseStudyPage({
   const isEs = lang === "es";
 
   const study = getCaseStudy(lang, resolved.slug);
-const faqs = getProjectFaqs(study.slug, lang);
+
   if (!study) {
     notFound();
   }
-
+const faqs = getProjectFaqs(study.slug, lang);
   const cardStyle: React.CSSProperties = {
     background: "var(--card)",
     borderColor: "var(--card-border)",
