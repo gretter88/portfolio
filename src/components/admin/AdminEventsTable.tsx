@@ -36,17 +36,55 @@ function getProjectLabel(event: AdminEvent) {
   const project = (event.project || "").toLowerCase();
   const path = (event.path || "").toLowerCase();
 
-  if (project === "radar" || path.includes("/radar")) return "RadarSocial";
-  if (project === "nutrimvp" || path.includes("/nutrimvp")) return "NutriMVP";
-  if (project === "sg-copilot-crm" || path.includes("/sg-copilot-crm")) return "SG Copilot CRM";
-  if (project === "playduel" || path.includes("/playduel")) return "PlayDuel";
-  if (project === "kiosco" || path.includes("/kiosco")) return "Kiosco";
-  if (project === "museo" || path.includes("/museo")) return "Museo";
-  if (project === "marketplace" || path.includes("/marketplace")) return "Marketplace";
-  if (project === "intranet" || path.includes("/intranet")) return "Intranet";
+  if (project === "radar" || project === "radarsocial" || path.includes("/radar")) {
+    return "RadarSocial";
+  }
+
+  if (project === "nutrimvp" || path.includes("/nutrimvp")) {
+    return "NutriMVP";
+  }
+
+  if (project === "sg-copilot-crm" || path.includes("/sg-copilot-crm")) {
+    return "SG Copilot CRM";
+  }
+
+  if (project === "playduel" || path.includes("/playduel")) {
+    return "PlayDuel";
+  }
+
+  if (
+    project === "museo-canario-kiosco" ||
+    project === "kiosco" ||
+    path.includes("/museo-canario-kiosco") ||
+    path.includes("/kiosco")
+  ) {
+    return "Museo Canario Kiosco";
+  }
+
+  if (
+    project === "museo-canario-web" ||
+    project === "museo" ||
+    path.includes("/museo-canario-web") ||
+    path.includes("/museo")
+  ) {
+    return "Museo Canario Web";
+  }
+
+  if (project === "marketplace" || path.includes("/marketplace")) {
+    return "Marketplace";
+  }
+
+  if (project === "sg-saas-starter" || path.includes("/sg-saas-starter")) {
+    return "SG SaaS Starter";
+  }
+
+  if (project === "intranet-wordpress" || project === "intranet" || path.includes("/intranet")) {
+    return "Intranet WordPress";
+  }
 
   return "-";
 }
+
 
 function getEventLabel(type?: string | null) {
   switch (type) {
@@ -192,9 +230,18 @@ export default function AdminEventsTable({ events }: Props) {
     setMounted(true);
   }, []);
 
-  const projectOptions = useMemo(() => {
-    return Array.from(new Set(events.map((event) => getProjectLabel(event)))).sort();
-  }, [events]);
+  const projectOptions = [
+  "RadarSocial",
+  "NutriMVP",
+  "SG Copilot CRM",
+  "PlayDuel",
+  "Museo Canario Kiosco",
+  "Museo Canario Web",
+  "Marketplace",
+  "SG SaaS Starter",
+  "Intranet WordPress",
+  "-",
+];
 
   const filteredEvents = useMemo(() => {
     const currentNow = Date.now();

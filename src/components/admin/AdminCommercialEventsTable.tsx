@@ -96,6 +96,28 @@ function getLocation(event: CommercialEvent) {
   return [event.country, event.region, event.city].filter(Boolean).join(" · ") || "-";
 }
 
+
+function getProjectLabel(projectValue?: string | null) {
+  const project = (projectValue || "").toLowerCase();
+
+  if (project === "radar" || project === "radarsocial") return "RadarSocial";
+  if (project === "nutrimvp") return "NutriMVP";
+  if (project === "sg-copilot-crm") return "SG Copilot CRM";
+  if (project === "playduel") return "PlayDuel";
+  if (project === "museo-canario-kiosco" || project === "kiosco") {
+    return "Museo Canario Kiosco";
+  }
+  if (project === "museo-canario-web" || project === "museo") {
+    return "Museo Canario Web";
+  }
+  if (project === "marketplace") return "Marketplace";
+  if (project === "sg-saas-starter") return "SG SaaS Starter";
+  if (project === "intranet-wordpress" || project === "intranet") {
+    return "Intranet WordPress";
+  }
+
+  return projectValue || "-";
+}
 export default function AdminCommercialEventsTable({ events }: Props) {
   const router = useRouter();
 
@@ -113,14 +135,14 @@ export default function AdminCommercialEventsTable({ events }: Props) {
 
   const projectOptions = useMemo(() => {
     return Array.from(
-      new Set(events.map((e) => e.project || "-").filter(Boolean))
+     new Set(events.map((e) => getProjectLabel(e.project)).filter(Boolean))
     ).sort();
   }, [events]);
 
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       if (typeFilter !== "all" && event.type !== typeFilter) return false;
-      if (projectFilter !== "all" && (event.project || "-") !== projectFilter) {
+     if (projectFilter !== "all" && getProjectLabel(event.project) !== projectFilter) {
         return false;
       }
 
@@ -308,7 +330,7 @@ export default function AdminCommercialEventsTable({ events }: Props) {
                   {eventId ? <DeleteEventButton eventId={eventId} /> : null}
                 </div>
 
-                <div className="mt-3 font-semibold">{event.project || "-"}</div>
+                <div className="mt-3 font-semibold">{getProjectLabel(event.project)}</div>
 
                 <div className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
                   {getLocation(event)}
@@ -408,7 +430,7 @@ export default function AdminCommercialEventsTable({ events }: Props) {
                       </span>
                     </td>
 
-                    <td className="px-4 py-3 font-medium">{event.project || "-"}</td>
+                    <td className="px-4 py-3 font-medium">{getProjectLabel(event.project)}</td>
 
                     <td
                       className="max-w-[180px] truncate px-4 py-3"

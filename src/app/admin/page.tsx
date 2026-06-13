@@ -261,6 +261,19 @@ ip: event.ip || null,
 	<div className="mt-10">
   <h3 className="text-base font-semibold">Últimos eventos comerciales</h3>
 
+
+<div className="mb-4 flex justify-end">
+  <a
+    href="/api/admin/commercial-events/export"
+    className="rounded-xl border px-4 py-2 text-sm font-medium"
+    style={{
+      borderColor: "rgba(34,197,94,0.35)",
+      background: "rgba(34,197,94,0.10)",
+    }}
+  >
+    Exportar CSV
+  </a>
+</div>
   <div className="mt-4">
     <AdminCommercialEventsTable events={latestCommercialEventsSerialized} />
   </div>
