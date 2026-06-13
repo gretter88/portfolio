@@ -18,6 +18,9 @@ export type AnalyticsEvent = {
   referrer?: string | null;
   userAgent?: string | null;
   ip?: string | null;
+  country?: string | null;
+region?: string | null;
+city?: string | null;
   createdAt: Date;
 };
 
