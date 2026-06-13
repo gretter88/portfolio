@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import DeleteEventButton from "@/components/admin/DeleteEventButton";
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 20;
 
 const COMMERCIAL_TYPES = [
   "pdf_download",
@@ -220,6 +220,7 @@ export default function AdminEventsTable({ events }: Props) {
   const [typeFilter, setTypeFilter] = useState("all");
   const [projectFilter, setProjectFilter] = useState("all");
   const [dateFilter, setDateFilter] = useState("all");
+  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
   const [page, setPage] = useState(1);
 
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -246,44 +247,51 @@ export default function AdminEventsTable({ events }: Props) {
   const filteredEvents = useMemo(() => {
     const currentNow = Date.now();
 
-    return events.filter((event) => {
-      const eventType = event.type || "";
-      const project = getProjectLabel(event);
-      const createdAt = event.createdAt ? new Date(event.createdAt).getTime() : 0;
+   const filtered = events.filter((event) => {
+  const eventType = event.type || "";
+  const project = getProjectLabel(event);
+  const createdAt = event.createdAt ? new Date(event.createdAt).getTime() : 0;
 
-      if (typeFilter === "commercial" && !COMMERCIAL_TYPES.includes(eventType)) {
-        return false;
-      }
+  if (typeFilter === "commercial" && !COMMERCIAL_TYPES.includes(eventType)) {
+    return false;
+  }
 
-      if (typeFilter !== "all" && typeFilter !== "commercial" && eventType !== typeFilter) {
-        return false;
-      }
+  if (typeFilter !== "all" && typeFilter !== "commercial" && eventType !== typeFilter) {
+    return false;
+  }
 
-      if (projectFilter !== "all" && project !== projectFilter) return false;
+  if (projectFilter !== "all" && project !== projectFilter) return false;
 
-      if (dateFilter === "today") {
-        const oneDay = 24 * 60 * 60 * 1000;
-        if (!createdAt || currentNow - createdAt > oneDay) return false;
-      }
+  if (dateFilter === "today") {
+    const oneDay = 24 * 60 * 60 * 1000;
+    if (!createdAt || currentNow - createdAt > oneDay) return false;
+  }
 
-      if (dateFilter === "7d") {
-        const sevenDays = 7 * 24 * 60 * 60 * 1000;
-        if (!createdAt || currentNow - createdAt > sevenDays) return false;
-      }
+  if (dateFilter === "7d") {
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+    if (!createdAt || currentNow - createdAt > sevenDays) return false;
+  }
 
-      if (dateFilter === "30d") {
-        const thirtyDays = 30 * 24 * 60 * 60 * 1000;
-        if (!createdAt || currentNow - createdAt > thirtyDays) return false;
-      }
+  if (dateFilter === "30d") {
+    const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+    if (!createdAt || currentNow - createdAt > thirtyDays) return false;
+  }
 
-      return true;
-    });
-  }, [events, typeFilter, projectFilter, dateFilter]);
+  return true;
+});
+
+return filtered.sort((a, b) => {
+  const aTime = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+  const bTime = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+
+  return sortOrder === "newest" ? bTime - aTime : aTime - bTime;
+});
+  }, [events, typeFilter, projectFilter, dateFilter, sortOrder]);
 
   useEffect(() => {
     setPage(1);
     setSelectedIds([]);
-  }, [typeFilter, projectFilter, dateFilter]);
+  }, [typeFilter, projectFilter, dateFilter, sortOrder]);
 
   const totalPages = Math.max(1, Math.ceil(filteredEvents.length / PAGE_SIZE));
 
@@ -411,7 +419,18 @@ export default function AdminEventsTable({ events }: Props) {
           <option value="7d">Últimos 7 días</option>
           <option value="30d">Últimos 30 días</option>
         </select>
-
+<select
+  value={sortOrder}
+  onChange={(e) => setSortOrder(e.target.value as "newest" | "oldest")}
+  className="rounded-xl border px-3 py-2 text-sm"
+  style={{
+    background: "var(--background)",
+    borderColor: "var(--card-border)",
+  }}
+>
+  <option value="newest">Más recientes primero</option>
+  <option value="oldest">Más viejos primero</option>
+</select>
         <button
           type="button"
           onClick={handleDeleteSelected}

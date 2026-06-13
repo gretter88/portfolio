@@ -147,10 +147,10 @@ export async function getAnalyticsStats() {
         },
       })
       .sort({ createdAt: -1 })
-      .limit(20)
+      .limit(200)
       .toArray(),
 
-    col.find().sort({ createdAt: -1 }).limit(20).toArray(),
+    col.find().sort({ createdAt: -1 }).limit(200).toArray(),
   ]);
 
   return {
