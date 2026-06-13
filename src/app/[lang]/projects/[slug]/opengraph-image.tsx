@@ -25,11 +25,7 @@ export default async function Image({
     study?.subtitle ??
     (isEs ? "Software Studio & Portfolio" : "Software Studio & Portfolio");
 
-  const stack = study?.stack?.slice(0, 5) ?? [
-    "Next.js",
-    "React Native",
-    "Node.js",
-  ];
+  const stack = study?.stack?.slice(0, 5) ?? ["Next.js", "React Native", "Node.js"];
 
   return new ImageResponse(
     (
@@ -39,79 +35,73 @@ export default async function Image({
           height: "100%",
           display: "flex",
           position: "relative",
-          overflow: "hidden",
           background:
-            "linear-gradient(135deg, #020617 0%, #111827 42%, #1e1b4b 100%)",
+            "linear-gradient(135deg, #020617 0%, #0f172a 45%, #1e1b4b 100%)",
           color: "white",
           fontFamily: "Arial",
+          overflow: "hidden",
         }}
       >
         <div
           style={{
             position: "absolute",
-            width: 520,
-            height: 520,
+            left: -120,
+            top: -120,
+            width: 480,
+            height: 480,
             borderRadius: 999,
-            background: "rgba(96,165,250,0.28)",
+            background: "rgba(96,165,250,0.35)",
             filter: "blur(80px)",
-            left: -140,
-            top: -140,
           }}
         />
 
         <div
           style={{
             position: "absolute",
-            width: 460,
-            height: 460,
+            right: -140,
+            bottom: -140,
+            width: 520,
+            height: 520,
             borderRadius: 999,
-            background: "rgba(167,139,250,0.22)",
-            filter: "blur(80px)",
-            right: -120,
-            bottom: -120,
+            background: "rgba(34,197,94,0.25)",
+            filter: "blur(90px)",
           }}
         />
 
         <div
           style={{
+            width: "100%",
+            padding: 64,
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            width: "100%",
-            padding: "64px",
             zIndex: 2,
           }}
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 16,
-              }}
-            >
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
               <div
                 style={{
-                  width: 64,
-                  height: 64,
-                  borderRadius: 18,
-                  border: "1px solid rgba(255,255,255,0.22)",
-                  background: "rgba(255,255,255,0.10)",
+                  width: 68,
+                  height: 68,
+                  borderRadius: 20,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 26,
-                  fontWeight: 700,
+                  background: "rgba(255,255,255,0.10)",
+                  border: "1px solid rgba(255,255,255,0.20)",
+                  fontSize: 28,
+                  fontWeight: 800,
                 }}
               >
                 SG
               </div>
 
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ fontSize: 24, fontWeight: 700 }}>
+                <div style={{ fontSize: 25, fontWeight: 700 }}>
                   Santiago Gretter
                 </div>
-                <div style={{ fontSize: 18, color: "rgba(255,255,255,0.68)" }}>
+                <div style={{ fontSize: 18, color: "rgba(255,255,255,0.65)" }}>
                   Software Studio
                 </div>
               </div>
@@ -119,8 +109,8 @@ export default async function Image({
 
             <div
               style={{
-                border: "1px solid rgba(96,165,250,0.35)",
-                background: "rgba(96,165,250,0.14)",
+                border: "1px solid rgba(96,165,250,0.40)",
+                background: "rgba(96,165,250,0.16)",
                 borderRadius: 999,
                 padding: "12px 20px",
                 fontSize: 18,
@@ -134,11 +124,11 @@ export default async function Image({
           <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
             <div
               style={{
-                fontSize: 78,
+                fontSize: 76,
                 lineHeight: 1,
-                fontWeight: 800,
+                fontWeight: 900,
                 letterSpacing: "-3px",
-                maxWidth: 900,
+                maxWidth: 920,
               }}
             >
               {title}
@@ -149,7 +139,7 @@ export default async function Image({
                 fontSize: 30,
                 lineHeight: 1.25,
                 color: "rgba(255,255,255,0.78)",
-                maxWidth: 860,
+                maxWidth: 920,
               }}
             >
               {subtitle}
@@ -165,7 +155,7 @@ export default async function Image({
                     borderRadius: 999,
                     padding: "10px 16px",
                     fontSize: 18,
-                    color: "rgba(255,255,255,0.84)",
+                    color: "rgba(255,255,255,0.86)",
                   }}
                 >
                   {item}

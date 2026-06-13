@@ -115,8 +115,34 @@ export default async function ProjectCaseStudyPage({
   const mutedStyle: React.CSSProperties = { color: "var(--muted)" };
   const muted2Style: React.CSSProperties = { color: "var(--muted-2)" };
 
+
+
+const projectSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: study.title,
+  description: study.summary,
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web, Android",
+  creator: {
+    "@type": "Person",
+    name: "Santiago Gretter",
+    url: "https://www.santiagogretter.com.uy",
+  },
+  image: study.heroImage,
+  url: `https://www.santiagogretter.com.uy/${lang}/projects/${study.slug}`,
+};
+
+
   return (
     <main>
+	
+	<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(projectSchema),
+  }}
+/>
       <div className="mx-auto max-w-5xl px-6 py-12">
         <div className="mb-8">
           <Link
