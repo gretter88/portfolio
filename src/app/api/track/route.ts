@@ -18,6 +18,24 @@ export async function POST(req: NextRequest) {
     const forwardedFor = req.headers.get("x-forwarded-for");
     const ip = forwardedFor?.split(",")[0]?.trim() || null;
 
+    const geo = (req as any).geo || {};
+
+    const country =
+      req.headers.get("x-vercel-ip-country") ||
+      req.headers.get("cf-ipcountry") ||
+      geo.country ||
+      null;
+
+    const region =
+      req.headers.get("x-vercel-ip-country-region") ||
+      geo.region ||
+      null;
+
+    const city =
+      req.headers.get("x-vercel-ip-city") ||
+      geo.city ||
+      null;
+
     const eventType = allowedTypes.includes(body.type)
       ? body.type
       : "pageview";
@@ -31,6 +49,9 @@ export async function POST(req: NextRequest) {
       referrer: body.referrer || null,
       userAgent: req.headers.get("user-agent"),
       ip,
+      country,
+      region,
+      city,
       createdAt: new Date(),
     });
 
