@@ -103,7 +103,28 @@ function getAnalyticsLabel(path?: string | null) {
   return value || "-";
 }
 
+function getProjectFriendlyName(project?: string | null) {
+  const value = String(project || "").toLowerCase();
 
+  const labels: Record<string, string> = {
+    radar: "RadarSocial",
+    radarsocial: "RadarSocial",
+    nutrimvp: "NutriMVP",
+    "sg-copilot-crm": "SG Copilot CRM",
+    playduel: "PlayDuel",
+    kiosco: "Museo Canario Kiosco",
+    "museo-canario-kiosco": "Museo Canario Kiosco",
+    museo: "Museo Canario Web",
+    "museo-canario-web": "Museo Canario Web",
+    marketplace: "Marketplace",
+    "sg-saas-starter": "SG SaaS Starter",
+    intranet: "Intranet WordPress",
+    "intranet-wordpress": "Intranet WordPress",
+    commercial: "General comercial",
+  };
+
+  return labels[value] || project || "-";
+}
 
   return (
     <main className="min-h-screen px-6 py-10">
@@ -345,6 +366,73 @@ function getAnalyticsLabel(path?: string | null) {
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+		
+		
+		<div
+  className="mt-8 rounded-2xl border p-5"
+  style={{
+    background: "var(--card)",
+    borderColor: "var(--card-border)",
+  }}
+>
+  <h2 className="text-lg font-semibold">Top proyectos por interés comercial</h2>
+  <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+    Acciones comerciales agrupadas por proyecto.
+  </p>
+
+  <div className="mt-5 overflow-x-auto">
+    <table className="w-full text-sm">
+      <thead>
+        <tr style={{ color: "var(--muted-2)", textAlign: "left" }}>
+          <th
+            className="border-b px-3 py-2"
+            style={{ borderColor: "var(--card-border)" }}
+          >
+            Proyecto
+          </th>
+          <th
+            className="border-b px-3 py-2 text-right"
+            style={{ borderColor: "var(--card-border)" }}
+          >
+            Acciones
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {stats.topCommercialProjects?.length > 0 ? (
+          stats.topCommercialProjects.map((row: any) => (
+            <tr key={row._id || "unknown"}>
+              <td
+                className="border-b px-3 py-2"
+                style={{ borderColor: "var(--card-border)" }}
+                title={String(row._id || "")}
+              >
+                {getProjectFriendlyName(row._id)}
+              </td>
+              <td
+                className="border-b px-3 py-2 text-right font-semibold"
+                style={{ borderColor: "var(--card-border)" }}
+              >
+                {row.count || 0}
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td
+              colSpan={2}
+              className="px-3 py-4 text-sm"
+              style={{ color: "var(--muted)" }}
+            >
+              Todavía no hay acciones comerciales por proyecto.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
   </div>
 </div>
 		

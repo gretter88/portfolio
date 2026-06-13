@@ -68,6 +68,7 @@ export async function getAnalyticsStats() {
     latestCommercialEvents,
 topPages,
 topClicks,
+topCommercialProjects,
     latestEvents,
   ] = await Promise.all([
     col.countDocuments(),
@@ -226,7 +227,53 @@ col
   ])
   .toArray(),
 
-   
+   col
+  .aggregate([
+    {
+      $match: {
+        path: {
+          $regex: "^/go/(request-access|open-modal|open-video)/",
+        },
+      },
+    },
+    {
+      $addFields: {
+        projectFromPath: {
+          $arrayElemAt: [
+            {
+              $split: [
+                {
+                  $arrayElemAt: [
+                    {
+                      $split: ["$path", "?"],
+                    },
+                    0,
+                  ],
+                },
+                "/",
+              ],
+            },
+            3,
+          ],
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$projectFromPath",
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $sort: {
+        count: -1,
+      },
+    },
+    {
+      $limit: 10,
+    },
+  ])
+  .toArray(),
 
     col.find().sort({ createdAt: -1 }).limit(200).toArray(),
   ]);
@@ -251,6 +298,14 @@ const serializedTopClicks = topClicks.map((row: any) => ({
   _id: String(row._id || ""),
   count: row.count || 0,
 }));
+
+
+const serializedTopCommercialProjects = topCommercialProjects.map((row: any) => ({
+  _id: String(row._id || ""),
+  count: row.count || 0,
+}));
+
+
   return {
     totalEvents,
     pageViews,
@@ -286,6 +341,7 @@ const serializedTopClicks = topClicks.map((row: any) => ({
     latestCommercialEvents,
 topPages: serializedTopPages,
 topClicks: serializedTopClicks,
+topCommercialProjects: serializedTopCommercialProjects,
     latestEvents,
   };
 }
