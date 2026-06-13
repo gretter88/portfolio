@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { LANGS, type Lang } from "@/lib/i18n";
 import { getCaseStudy } from "@/lib/project-case-studies";
 import { getProjectFaqs } from "@/lib/project-faq";
+import TrackedCommercialLink from "@/components/TrackedCommercialLink";
 import type { Metadata } from "next";
 
 
@@ -551,8 +552,11 @@ const faqSchema =
     </div>
 
     <div className="mt-6">
-      <a
-        href={study.requestHref}
+     <TrackedCommercialLink
+  href={study.requestHref}
+  type="request_project_info"
+  project={study.slug}
+  lang={lang}
         className="inline-flex items-center rounded-xl px-5 py-3 text-sm font-medium"
         style={{
           background: "var(--foreground)",
@@ -560,8 +564,72 @@ const faqSchema =
         }}
       >
         {study.commercial.contactLabel}
-      </a>
+     </TrackedCommercialLink>
+	 {study.pdfHref ? (
+  <TrackedCommercialLink
+    href={study.pdfHref}
+    type="pdf_download"
+    project={study.slug}
+    lang={lang}
+    target="_blank"
+    rel="noreferrer"
+    className="inline-flex items-center rounded-xl border px-4 py-2 text-sm font-medium"
+    style={{
+      borderColor: "rgba(245,158,11,0.35)",
+      background: "rgba(245,158,11,0.10)",
+      color: "var(--foreground)",
+    }}
+  >
+    {isEs ? "Descargar ficha comercial" : "Download commercial one-pager"}
+  </TrackedCommercialLink>
+) : null}
     </div>
+	<div className="mt-3 flex flex-wrap gap-3">
+  <TrackedCommercialLink
+    href={`${study.requestHref}?type=demo`}
+    type="request_demo"
+    project={study.slug}
+    lang={lang}
+    className="inline-flex items-center rounded-xl border px-4 py-2 text-sm font-medium"
+    style={{
+      borderColor: "rgba(96,165,250,0.30)",
+      background: "rgba(96,165,250,0.08)",
+      color: "var(--foreground)",
+    }}
+  >
+    {isEs ? "Solicitar demo" : "Request demo"}
+  </TrackedCommercialLink>
+
+  <TrackedCommercialLink
+    href={`${study.requestHref}?type=license`}
+    type="request_license"
+    project={study.slug}
+    lang={lang}
+    className="inline-flex items-center rounded-xl border px-4 py-2 text-sm font-medium"
+    style={{
+      borderColor: "rgba(34,197,94,0.30)",
+      background: "rgba(34,197,94,0.08)",
+      color: "var(--foreground)",
+    }}
+  >
+    {isEs ? "Licenciamiento" : "Licensing"}
+  </TrackedCommercialLink>
+
+  <TrackedCommercialLink
+    href={`${study.requestHref}?type=partnership`}
+    type="request_partnership"
+    project={study.slug}
+    lang={lang}
+    className="inline-flex items-center rounded-xl border px-4 py-2 text-sm font-medium"
+    style={{
+      borderColor: "rgba(167,139,250,0.30)",
+      background: "rgba(167,139,250,0.08)",
+      color: "var(--foreground)",
+    }}
+  >
+    Partnership
+  </TrackedCommercialLink>
+</div>
   </div>
 </section>
 {faqs.length > 0 ? (

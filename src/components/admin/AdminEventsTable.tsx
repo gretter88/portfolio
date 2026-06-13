@@ -11,6 +11,10 @@ type AdminEvent = {
   lang?: string | null;
   project?: string | null;
   visitorId?: string | null;
+  ip?: string | null;
+country?: string | null;
+region?: string | null;
+city?: string | null;
   createdAt?: string | Date | null;
 };
 
@@ -279,6 +283,8 @@ useEffect(() => {
               <th className="py-2">Path</th>
               <th className="py-2">Lang</th>
               <th className="py-2">Proyecto</th>
+			  <th className="py-2">Ubicación</th>
+<th className="py-2">IP</th>
               <th className="py-2">Visitor ID</th>
               <th className="py-2">Fecha</th>
               <th className="py-2">Hace cuánto</th>
@@ -310,6 +316,13 @@ useEffect(() => {
                   <td className="py-2">{event.path || "-"}</td>
                   <td className="py-2">{event.lang || "-"}</td>
                   <td className="py-2">{getProjectLabel(event)}</td>
+				  <td className="py-2">
+  {[event.country, event.region, event.city].filter(Boolean).join(" · ") || "-"}
+</td>
+
+<td className="py-2">
+  {event.ip || "-"}
+</td>
                   <td className="py-2">
                     {event.visitorId ? String(event.visitorId).slice(0, 8) : "-"}
                   </td>

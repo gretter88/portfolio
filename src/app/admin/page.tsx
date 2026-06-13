@@ -7,6 +7,7 @@ import DeleteEventButton from "@/components/admin/DeleteEventButton";
 import AdminRefreshButton from "@/components/admin/AdminRefreshButton";
 import DeleteOldEventsButton from "@/components/admin/DeleteOldEventsButton";
 import AdminEventsTable from "@/components/admin/AdminEventsTable";
+import AdminCommercialEventsTable from "@/components/admin/AdminCommercialEventsTable";
 
 export default async function AdminPage() {
   const ok = await isAdminAuthenticated();
@@ -17,7 +18,7 @@ export default async function AdminPage() {
 
   const stats = await getAnalyticsStats();
   
-  const latestEventsSerialized = stats.latestEvents.map((event: any) => ({
+const latestEventsSerialized = stats.latestEvents.map((event: any) => ({
   _id: event._id?.toString() || "",
   type: event.type || null,
   path: event.path || null,
@@ -27,13 +28,28 @@ export default async function AdminPage() {
   referrer: event.referrer || null,
   userAgent: event.userAgent || null,
   ip: event.ip || null,
-  createdAt: event.createdAt
-    ? new Date(event.createdAt).toISOString()
-    : null,
+  country: event.country || null,
+  region: event.region || null,
+  city: event.city || null,
+  createdAt: event.createdAt ? new Date(event.createdAt).toISOString() : null,
 }));
 
+  const latestCommercialEventsSerialized = stats.latestCommercialEvents.map(
+  (event: any) => ({
+    _id: event._id?.toString() || "",
+    type: event.type || null,
+    path: event.path || null,
+    lang: event.lang || null,
+    project: event.project || null,
+    visitorId: event.visitorId || null,
+	country: event.country || null,
+region: event.region || null,
+city: event.city || null,
+ip: event.ip || null,
+    createdAt: event.createdAt ? new Date(event.createdAt).toISOString() : null,
+  })
+);
 
-  
   function getProjectLabel(event: {
   project?: string | null;
   path?: string | null;
@@ -182,6 +198,76 @@ export default async function AdminPage() {
             hint="Todos los eventos guardados"
           />
         </div>
+<div
+  className="mt-8 rounded-2xl border p-5"
+  style={{
+    background: "var(--card)",
+    borderColor: "var(--card-border)",
+  }}
+>
+  <h2 className="text-lg font-semibold">Commercial Analytics</h2>
+  <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+    Eventos comerciales de PDFs, demos, licencias y partnerships.
+  </p>
+
+  <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+    <AdminStatCard label="PDF Downloads" value={stats.pdfDownloads} hint="pdf_download" />
+    <AdminStatCard label="Demo Requests" value={stats.requestDemo} hint="request_demo" />
+    <AdminStatCard label="License Requests" value={stats.requestLicense} hint="request_license" />
+    <AdminStatCard label="Partnership" value={stats.requestPartnership} hint="request_partnership" />
+    <AdminStatCard label="Project Info" value={stats.requestProjectInfo} hint="request_project_info" />
+  </div>
+
+  <div className="mt-6 overflow-x-auto">
+    <table className="min-w-full text-sm">
+      <thead>
+        <tr style={{ color: "var(--muted-2)" }}>
+          <th className="border-b px-3 py-2 text-left" style={{ borderColor: "var(--card-border)" }}>
+            Project
+          </th>
+          <th className="border-b px-3 py-2 text-left" style={{ borderColor: "var(--card-border)" }}>
+            Event
+          </th>
+          <th className="border-b px-3 py-2 text-left" style={{ borderColor: "var(--card-border)" }}>
+            Count
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {stats.commercialByProject.length > 0 ? (
+          stats.commercialByProject.map((row: any) => (
+            <tr key={`${row._id?.project}-${row._id?.type}`}>
+              <td className="border-b px-3 py-2" style={{ borderColor: "var(--card-border)" }}>
+                {row._id?.project || "-"}
+              </td>
+              <td className="border-b px-3 py-2" style={{ borderColor: "var(--card-border)" }}>
+                {row._id?.type || "-"}
+              </td>
+              <td className="border-b px-3 py-2 font-semibold" style={{ borderColor: "var(--card-border)" }}>
+                {row.count || 0}
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td className="px-3 py-4 text-sm" style={{ color: "var(--muted)" }} colSpan={3}>
+              Todavía no hay eventos comerciales.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+	<div className="mt-8">
+  <h3 className="text-base font-semibold">Últimos eventos comerciales</h3>
+
+  <div className="mt-4">
+    <AdminCommercialEventsTable events={latestCommercialEventsSerialized} />
+  </div>
+</div>
+  </div>
+</div>
+
 
         <div
           className="mt-8 rounded-2xl border p-5"

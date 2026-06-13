@@ -22,6 +22,7 @@ export type CaseStudy = {
   businessValue: string[];
   nextSteps: string[];
   requestHref: string;
+  pdfHref?: string;
   seoKeywords: string[];
   
   commercial: {
@@ -260,7 +261,7 @@ seoKeywords: isEs
       "mobile shopping app",
     ],     
 	 requestHref: "/go/request-access/nutrimvp",
-	  
+	  pdfHref: "/NutriMVP_ficha_comercial.pdf",
 	  commercial: {
   availableFor: isEs
     ? [
@@ -397,7 +398,7 @@ seoKeywords: isEs
       "sales automation",
     ],     
 	 requestHref: "/go/request-access/sg-copilot-crm",
-	  
+	  pdfHref: "/SG_Copilot_CRM_ficha_comercial.pdf",
 	  commercial: {
   availableFor: isEs
     ? [
@@ -583,6 +584,7 @@ seoKeywords: isEs
       ],
 
   requestHref: "/go/request-access/radar",
+  pdfHref: "/RadarSocial_ficha_comercial.pdf",
 
  commercial: {
   availableFor: [
