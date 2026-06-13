@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
 import MobileMenu from "@/components/MobileMenu";
 import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
+import PortfolioItemListJsonLd from "@/components/PortfolioItemListJsonLd";
 
 function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
@@ -233,7 +234,7 @@ projects: i.navProjects,
 
         </div>
       </header>
-
+<PortfolioItemListJsonLd />
       {children}
 	  <WhatsAppFloatingButton lang={lang} />
       <Analytics />

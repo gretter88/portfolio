@@ -134,13 +134,47 @@ const projectSchema = {
 };
 
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: isEs ? "Inicio" : "Home",
+      item: `https://www.santiagogretter.com.uy/${lang}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: isEs ? "Proyectos" : "Projects",
+      item: `https://www.santiagogretter.com.uy/${lang}#projects`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: study.title,
+      item: `https://www.santiagogretter.com.uy/${lang}/projects/${study.slug}`,
+    },
+  ],
+};
+
   return (
     <main>
 	
+
+
 	<script
   type="application/ld+json"
   dangerouslySetInnerHTML={{
     __html: JSON.stringify(projectSchema),
+  }}
+/>
+
+	<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(breadcrumbSchema),
   }}
 />
       <div className="mx-auto max-w-5xl px-6 py-12">
