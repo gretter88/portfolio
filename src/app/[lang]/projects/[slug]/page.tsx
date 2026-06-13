@@ -177,7 +177,26 @@ const faqSchema =
       }
     : null;
 	
-	
+	const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: study.title,
+  description: study.summary,
+  image: study.heroImage,
+  brand: {
+    "@type": "Brand",
+    name: "Santiago Gretter Software Studio",
+  },
+  category: "Software",
+  offers: {
+    "@type": "Offer",
+    url: `https://www.santiagogretter.com.uy/${lang}/projects/${study.slug}`,
+    priceCurrency: "USD",
+    price: "0",
+    availability: "https://schema.org/InStock",
+    businessFunction: "https://schema.org/LeaseOut",
+  },
+};
   return (
     <main>
 	
@@ -205,6 +224,14 @@ const faqSchema =
     }}
   />
 ) : null}
+
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(productSchema),
+  }}
+/>
       <div className="mx-auto max-w-5xl px-6 py-12">
         <div className="mb-8">
           <Link
