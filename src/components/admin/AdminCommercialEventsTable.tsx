@@ -27,11 +27,23 @@ type Props = {
 function formatMontevideoDate(value?: string | Date | null) {
   if (!value) return "-";
 
-  return new Intl.DateTimeFormat("es-UY", {
+  const date = new Date(value);
+
+  const parts = new Intl.DateTimeFormat("sv-SE", {
     timeZone: "America/Montevideo",
-    dateStyle: "short",
-    timeStyle: "medium",
-  }).format(new Date(value));
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+
+  const get = (type: string) =>
+    parts.find((p) => p.type === type)?.value || "00";
+
+  return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
 }
 
 function getEventLabel(type?: string | null) {

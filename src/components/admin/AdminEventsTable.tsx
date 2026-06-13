@@ -180,7 +180,8 @@ function formatMontevideoDate(value?: string | Date | null) {
     hour12: false,
   }).formatToParts(date);
 
-  const get = (type: string) => parts.find((p) => p.type === type)?.value || "00";
+  const get = (type: string) =>
+    parts.find((p) => p.type === type)?.value || "00";
 
   return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
 }
