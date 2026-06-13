@@ -34,7 +34,7 @@ const latestEventsSerialized = stats.latestEvents.map((event: any) => ({
   createdAt: event.createdAt ? new Date(event.createdAt).toISOString() : null,
 }));
 
-  const latestCommercialEventsSerialized = stats.latestCommercialEvents.map(
+const latestCommercialEventsSerialized = stats.latestCommercialEvents.map(
   (event: any) => ({
     _id: event._id?.toString() || "",
     type: event.type || null,
@@ -42,10 +42,10 @@ const latestEventsSerialized = stats.latestEvents.map((event: any) => ({
     lang: event.lang || null,
     project: event.project || null,
     visitorId: event.visitorId || null,
-	country: event.country || null,
-region: event.region || null,
-city: event.city || null,
-ip: event.ip || null,
+    ip: event.ip || null,
+    country: event.country || null,
+    region: event.region || null,
+    city: event.city || null,
     createdAt: event.createdAt ? new Date(event.createdAt).toISOString() : null,
   })
 );
@@ -66,7 +66,42 @@ ip: event.ip || null,
 }
 
 
+function getAnalyticsLabel(path?: string | null) {
+  const value = String(path || "");
 
+  const labels: Record<string, string> = {
+    "/es": "Home Español",
+    "/en": "Home Inglés",
+    "/go/cv": "Descargar CV",
+    "/go/linkedin": "LinkedIn",
+    "/go/github": "GitHub",
+    "/nav/projects": "Menú · Proyectos",
+    "/nav/contact": "Menú · Contacto",
+    "/nav/experience": "Menú · Experiencia",
+    "/modal/screenshot-next": "Screenshot · Siguiente",
+    "/modal/screenshot-prev": "Screenshot · Anterior",
+    "/modal/screenshot-dot": "Screenshot · Punto",
+  };
+
+  if (labels[value]) return labels[value];
+
+  if (value.startsWith("/go/request-access/")) {
+    const project = value.replace("/go/request-access/", "").split("?")[0];
+    return `Solicitar acceso · ${project}`;
+  }
+
+  if (value.startsWith("/go/open-modal/")) {
+    const project = value.replace("/go/open-modal/", "").split("?")[0];
+    return `Abrir modal · ${project}`;
+  }
+
+  if (value.startsWith("/go/open-video/")) {
+    const project = value.replace("/go/open-video/", "").split("?")[0];
+    return `Abrir video · ${project}`;
+  }
+
+  return value || "-";
+}
 
 
 
@@ -198,6 +233,121 @@ ip: event.ip || null,
             hint="Todos los eventos guardados"
           />
         </div>
+		
+		<div className="mt-8 grid gap-4 lg:grid-cols-2">
+  <div
+    className="rounded-2xl border p-5"
+    style={{
+      background: "var(--card)",
+      borderColor: "var(--card-border)",
+    }}
+  >
+    <h2 className="text-lg font-semibold">Top páginas visitadas</h2>
+    <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+      Páginas con más pageviews.
+    </p>
+
+    <div className="mt-5 overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead>
+          <tr style={{ color: "var(--muted-2)", textAlign: "left" }}>
+            <th className="border-b px-3 py-2" style={{ borderColor: "var(--card-border)" }}>
+              Página
+            </th>
+            <th className="border-b px-3 py-2 text-right" style={{ borderColor: "var(--card-border)" }}>
+              Vistas
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {stats.topPages?.length > 0 ? (
+            stats.topPages.map((row: any) => (
+              <tr key={row._id || "unknown"}>
+                <td
+                  className="border-b px-3 py-2 max-w-[320px] truncate"
+                  style={{ borderColor: "var(--card-border)" }}
+                  title={String(row._id || "")}
+                >
+                  {getAnalyticsLabel(row._id)}
+                </td>
+                <td
+                  className="border-b px-3 py-2 text-right font-semibold"
+                  style={{ borderColor: "var(--card-border)" }}
+                >
+                  {row.count || 0}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={2} className="px-3 py-4 text-sm" style={{ color: "var(--muted)" }}>
+                Todavía no hay pageviews.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div
+    className="rounded-2xl border p-5"
+    style={{
+      background: "var(--card)",
+      borderColor: "var(--card-border)",
+    }}
+  >
+    <h2 className="text-lg font-semibold">Top clicks</h2>
+    <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+      Enlaces o acciones con más clicks.
+    </p>
+
+    <div className="mt-5 overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead>
+          <tr style={{ color: "var(--muted-2)", textAlign: "left" }}>
+            <th className="border-b px-3 py-2" style={{ borderColor: "var(--card-border)" }}>
+              Acción
+            </th>
+            <th className="border-b px-3 py-2 text-right" style={{ borderColor: "var(--card-border)" }}>
+              Clicks
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {stats.topClicks?.length > 0 ? (
+            stats.topClicks.map((row: any) => (
+              <tr key={row._id || "unknown"}>
+                <td
+                  className="border-b px-3 py-2 max-w-[320px] truncate"
+                  style={{ borderColor: "var(--card-border)" }}
+                  title={String(row._id || "")}
+                >
+                  {String(row._id || "-")}
+                </td>
+                <td
+                  className="border-b px-3 py-2 text-right font-semibold"
+                  style={{ borderColor: "var(--card-border)" }}
+                >
+                  {row.count || 0}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={2} className="px-3 py-4 text-sm" style={{ color: "var(--muted)" }}>
+                Todavía no hay clicks.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+		
 <div
   className="mt-10 rounded-2xl border p-5"
   style={{
@@ -217,7 +367,57 @@ ip: event.ip || null,
     <AdminStatCard label="Partnership" value={stats.requestPartnership} hint="request_partnership" />
     <AdminStatCard label="Project Info" value={stats.requestProjectInfo} hint="request_project_info" />
   </div>
+<div className="mt-8 overflow-x-auto rounded-2xl border" style={{ borderColor: "var(--card-border)" }}>
+  <table className="w-full min-w-[760px] text-sm">
+    <thead>
+      <tr style={{ color: "var(--muted-2)", textAlign: "left" }}>
+        <th className="px-4 py-3">Proyecto</th>
+        <th className="px-4 py-3">PDFs</th>
+        <th className="px-4 py-3">Demo</th>
+        <th className="px-4 py-3">Licencia</th>
+        <th className="px-4 py-3">Partnership</th>
+        <th className="px-4 py-3">Info</th>
+        <th className="px-4 py-3">Total</th>
+      </tr>
+    </thead>
 
+    <tbody>
+      {stats.commercialSummaryByProject.length > 0 ? (
+        stats.commercialSummaryByProject.map((row: any) => (
+          <tr key={row._id || "unknown"}>
+            <td className="border-t px-4 py-3 font-medium" style={{ borderColor: "var(--card-border)" }}>
+              {row._id || "-"}
+            </td>
+            <td className="border-t px-4 py-3" style={{ borderColor: "var(--card-border)" }}>
+              {row.pdfDownloads || 0}
+            </td>
+            <td className="border-t px-4 py-3" style={{ borderColor: "var(--card-border)" }}>
+              {row.demoRequests || 0}
+            </td>
+            <td className="border-t px-4 py-3" style={{ borderColor: "var(--card-border)" }}>
+              {row.licenseRequests || 0}
+            </td>
+            <td className="border-t px-4 py-3" style={{ borderColor: "var(--card-border)" }}>
+              {row.partnershipRequests || 0}
+            </td>
+            <td className="border-t px-4 py-3" style={{ borderColor: "var(--card-border)" }}>
+              {row.infoRequests || 0}
+            </td>
+            <td className="border-t px-4 py-3 font-semibold" style={{ borderColor: "var(--card-border)" }}>
+              {row.total || 0}
+            </td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan={7} className="border-t px-4 py-5 text-sm" style={{ borderColor: "var(--card-border)", color: "var(--muted)" }}>
+            Todavía no hay resumen comercial.
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
   <div className="mt-6 overflow-x-auto">
     <table className="min-w-full text-sm">
       <thead>

@@ -64,8 +64,10 @@ export async function getAnalyticsStats() {
     requestPartnership,
     requestProjectInfo,
     commercialByProject,
+	commercialSummaryByProject,
     latestCommercialEvents,
-
+topPages,
+topClicks,
     latestEvents,
   ] = await Promise.all([
     col.countDocuments(),
@@ -133,8 +135,54 @@ export async function getAnalyticsStats() {
         },
       ])
       .toArray(),
-
-    col
+	  
+	  
+	  col
+  .aggregate([
+    {
+      $match: {
+        type: {
+          $in: [
+            "pdf_download",
+            "request_demo",
+            "request_license",
+            "request_partnership",
+            "request_project_info",
+          ],
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$project",
+        pdfDownloads: {
+          $sum: { $cond: [{ $eq: ["$type", "pdf_download"] }, 1, 0] },
+        },
+        demoRequests: {
+          $sum: { $cond: [{ $eq: ["$type", "request_demo"] }, 1, 0] },
+        },
+        licenseRequests: {
+          $sum: { $cond: [{ $eq: ["$type", "request_license"] }, 1, 0] },
+        },
+        partnershipRequests: {
+          $sum: { $cond: [{ $eq: ["$type", "request_partnership"] }, 1, 0] },
+        },
+        infoRequests: {
+          $sum: { $cond: [{ $eq: ["$type", "request_project_info"] }, 1, 0] },
+        },
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $sort: {
+        total: -1,
+      },
+    },
+  ])
+  .toArray(),
+  
+  
+   col
       .find({
         type: {
           $in: [
@@ -149,10 +197,60 @@ export async function getAnalyticsStats() {
       .sort({ createdAt: -1 })
       .limit(200)
       .toArray(),
+  
+  col
+  .aggregate([
+    { $match: { type: "pageview" } },
+    {
+      $group: {
+        _id: "$path",
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { count: -1 } },
+    { $limit: 10 },
+  ])
+  .toArray(),
+
+col
+  .aggregate([
+    { $match: { type: "click" } },
+    {
+      $group: {
+        _id: "$path",
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { count: -1 } },
+    { $limit: 10 },
+  ])
+  .toArray(),
+
+   
 
     col.find().sort({ createdAt: -1 }).limit(200).toArray(),
   ]);
+  
+  const serializedCommercialSummaryByProject =
+  commercialSummaryByProject.map((row: any) => ({
+    _id: String(row._id || ""),
+    pdfDownloads: row.pdfDownloads || 0,
+    demoRequests: row.demoRequests || 0,
+    licenseRequests: row.licenseRequests || 0,
+    partnershipRequests: row.partnershipRequests || 0,
+    infoRequests: row.infoRequests || 0,
+    total: row.total || 0,
+  }));
+  
+const serializedTopPages = topPages.map((row: any) => ({
+  _id: String(row._id || ""),
+  count: row.count || 0,
+}));
 
+const serializedTopClicks = topClicks.map((row: any) => ({
+  _id: String(row._id || ""),
+  count: row.count || 0,
+}));
   return {
     totalEvents,
     pageViews,
@@ -184,8 +282,10 @@ export async function getAnalyticsStats() {
     requestPartnership,
     requestProjectInfo,
     commercialByProject,
+	commercialSummaryByProject: serializedCommercialSummaryByProject,
     latestCommercialEvents,
-
+topPages: serializedTopPages,
+topClicks: serializedTopClicks,
     latestEvents,
   };
 }
