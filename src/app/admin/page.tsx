@@ -199,7 +199,7 @@ ip: event.ip || null,
           />
         </div>
 <div
-  className="mt-8 rounded-2xl border p-5"
+  className="mt-10 rounded-2xl border p-5"
   style={{
     background: "var(--card)",
     borderColor: "var(--card-border)",
@@ -258,7 +258,7 @@ ip: event.ip || null,
         )}
       </tbody>
     </table>
-	<div className="mt-8">
+	<div className="mt-10">
   <h3 className="text-base font-semibold">Últimos eventos comerciales</h3>
 
   <div className="mt-4">
@@ -270,7 +270,7 @@ ip: event.ip || null,
 
 
         <div
-          className="mt-8 rounded-2xl border p-5"
+          className="mt-10 rounded-2xl border p-5"
           style={{
             background: "var(--card)",
             borderColor: "var(--card-border)",

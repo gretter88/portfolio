@@ -4,6 +4,16 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import DeleteEventButton from "@/components/admin/DeleteEventButton";
 
+const PAGE_SIZE = 10;
+
+const COMMERCIAL_TYPES = [
+  "pdf_download",
+  "request_demo",
+  "request_license",
+  "request_partnership",
+  "request_project_info",
+];
+
 type AdminEvent = {
   _id?: string;
   type?: string | null;
@@ -12,9 +22,9 @@ type AdminEvent = {
   project?: string | null;
   visitorId?: string | null;
   ip?: string | null;
-country?: string | null;
-region?: string | null;
-city?: string | null;
+  country?: string | null;
+  region?: string | null;
+  city?: string | null;
   createdAt?: string | Date | null;
 };
 
@@ -26,12 +36,94 @@ function getProjectLabel(event: AdminEvent) {
   const project = (event.project || "").toLowerCase();
   const path = (event.path || "").toLowerCase();
 
-  if (project === "kiosco" || path.includes("/kiosco")) return "Kiosco";
-  if (project === "intranet" || path.includes("/intranet")) return "Intranet";
-  if (project === "museo" || path.includes("/museo")) return "Museo";
   if (project === "radar" || path.includes("/radar")) return "RadarSocial";
+  if (project === "nutrimvp" || path.includes("/nutrimvp")) return "NutriMVP";
+  if (project === "sg-copilot-crm" || path.includes("/sg-copilot-crm")) return "SG Copilot CRM";
+  if (project === "playduel" || path.includes("/playduel")) return "PlayDuel";
+  if (project === "kiosco" || path.includes("/kiosco")) return "Kiosco";
+  if (project === "museo" || path.includes("/museo")) return "Museo";
+  if (project === "marketplace" || path.includes("/marketplace")) return "Marketplace";
+  if (project === "intranet" || path.includes("/intranet")) return "Intranet";
 
   return "-";
+}
+
+function getEventLabel(type?: string | null) {
+  switch (type) {
+    case "pageview":
+      return "Pageview";
+    case "click":
+      return "Click";
+    case "pdf_download":
+      return "PDF";
+    case "request_demo":
+      return "Demo";
+    case "request_license":
+      return "Licencia";
+    case "request_partnership":
+      return "Partnership";
+    case "request_project_info":
+      return "Info";
+    default:
+      return type || "-";
+  }
+}
+
+function getEventBadgeStyle(type?: string | null): React.CSSProperties {
+  switch (type) {
+    case "pageview":
+      return {
+        borderColor: "rgba(148,163,184,0.35)",
+        background: "rgba(148,163,184,0.10)",
+        color: "var(--muted)",
+      };
+    case "click":
+      return {
+        borderColor: "rgba(59,130,246,0.35)",
+        background: "rgba(59,130,246,0.10)",
+        color: "#93c5fd",
+      };
+    case "pdf_download":
+      return {
+        borderColor: "rgba(245,158,11,0.35)",
+        background: "rgba(245,158,11,0.10)",
+        color: "#fbbf24",
+      };
+    case "request_demo":
+      return {
+        borderColor: "rgba(34,197,94,0.35)",
+        background: "rgba(34,197,94,0.10)",
+        color: "#4ade80",
+      };
+    case "request_license":
+      return {
+        borderColor: "rgba(168,85,247,0.35)",
+        background: "rgba(168,85,247,0.10)",
+        color: "#c084fc",
+      };
+    case "request_partnership":
+      return {
+        borderColor: "rgba(59,130,246,0.35)",
+        background: "rgba(59,130,246,0.10)",
+        color: "#93c5fd",
+      };
+    case "request_project_info":
+      return {
+        borderColor: "rgba(148,163,184,0.35)",
+        background: "rgba(148,163,184,0.10)",
+        color: "var(--muted)",
+      };
+    default:
+      return {
+        borderColor: "var(--card-border)",
+        background: "var(--background)",
+        color: "var(--muted)",
+      };
+  }
+}
+
+function getLocation(event: AdminEvent) {
+  return [event.country, event.region, event.city].filter(Boolean).join(" · ") || "-";
 }
 
 function formatMontevideoDate(value?: string | Date | null) {
@@ -83,52 +175,77 @@ function formatTimeAgo(value: string | Date | null | undefined, now: number) {
   return days === 1 ? "hace 1 día" : `hace ${days} días`;
 }
 
-
-
-
 export default function AdminEventsTable({ events }: Props) {
   const router = useRouter();
 
+  const [mounted, setMounted] = useState(false);
   const [typeFilter, setTypeFilter] = useState("all");
   const [projectFilter, setProjectFilter] = useState("all");
   const [dateFilter, setDateFilter] = useState("all");
+  const [page, setPage] = useState(1);
 
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [bulkDeleting, setBulkDeleting] = useState(false);
-const [now, setNow] = useState(Date.now());
+  const [now, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const projectOptions = useMemo(() => {
+    return Array.from(new Set(events.map((event) => getProjectLabel(event)))).sort();
+  }, [events]);
+
   const filteredEvents = useMemo(() => {
-    const now = Date.now();
+    const currentNow = Date.now();
 
     return events.filter((event) => {
       const eventType = event.type || "";
       const project = getProjectLabel(event);
       const createdAt = event.createdAt ? new Date(event.createdAt).getTime() : 0;
 
-      if (typeFilter !== "all" && eventType !== typeFilter) return false;
+      if (typeFilter === "commercial" && !COMMERCIAL_TYPES.includes(eventType)) {
+        return false;
+      }
+
+      if (typeFilter !== "all" && typeFilter !== "commercial" && eventType !== typeFilter) {
+        return false;
+      }
+
       if (projectFilter !== "all" && project !== projectFilter) return false;
 
       if (dateFilter === "today") {
         const oneDay = 24 * 60 * 60 * 1000;
-        if (!createdAt || now - createdAt > oneDay) return false;
+        if (!createdAt || currentNow - createdAt > oneDay) return false;
       }
 
       if (dateFilter === "7d") {
         const sevenDays = 7 * 24 * 60 * 60 * 1000;
-        if (!createdAt || now - createdAt > sevenDays) return false;
+        if (!createdAt || currentNow - createdAt > sevenDays) return false;
       }
 
       if (dateFilter === "30d") {
         const thirtyDays = 30 * 24 * 60 * 60 * 1000;
-        if (!createdAt || now - createdAt > thirtyDays) return false;
+        if (!createdAt || currentNow - createdAt > thirtyDays) return false;
       }
 
       return true;
     });
   }, [events, typeFilter, projectFilter, dateFilter]);
 
-  const visibleIds = filteredEvents
-    .map((event) => event._id || "")
-    .filter(Boolean);
+  useEffect(() => {
+    setPage(1);
+    setSelectedIds([]);
+  }, [typeFilter, projectFilter, dateFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredEvents.length / PAGE_SIZE));
+
+  const paginatedEvents = filteredEvents.slice(
+    (page - 1) * PAGE_SIZE,
+    page * PAGE_SIZE
+  );
+
+  const visibleIds = paginatedEvents.map((event) => event._id || "").filter(Boolean);
 
   const allVisibleSelected =
     visibleIds.length > 0 && visibleIds.every((id) => selectedIds.includes(id));
@@ -154,9 +271,11 @@ const [now, setNow] = useState(Date.now());
     const confirmed = window.confirm(
       `¿Eliminar ${selectedIds.length} evento(s) seleccionado(s)?`
     );
+
     if (!confirmed) return;
 
     setBulkDeleting(true);
+
     try {
       const res = await fetch("/api/admin/events/bulk-delete", {
         method: "DELETE",
@@ -183,18 +302,17 @@ const [now, setNow] = useState(Date.now());
     }
   }
 
-useEffect(() => {
-  const interval = window.setInterval(() => {
-    setNow(Date.now());
-  }, 30000);
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setNow(Date.now());
+    }, 30000);
 
-  return () => window.clearInterval(interval);
-}, []);
-
+    return () => window.clearInterval(interval);
+  }, []);
 
   return (
     <>
-      <div className="mb-4 flex flex-wrap items-center gap-3">
+      <div className="mb-5 flex flex-wrap items-center gap-3">
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
@@ -205,8 +323,14 @@ useEffect(() => {
           }}
         >
           <option value="all">Todos los tipos</option>
-          <option value="pageview">pageview</option>
-          <option value="click">click</option>
+          <option value="commercial">Comerciales</option>
+          <option value="pageview">Pageview</option>
+          <option value="click">Click</option>
+          <option value="pdf_download">PDF</option>
+          <option value="request_demo">Demo</option>
+          <option value="request_license">Licencia</option>
+          <option value="request_partnership">Partnership</option>
+          <option value="request_project_info">Info</option>
         </select>
 
         <select
@@ -219,11 +343,11 @@ useEffect(() => {
           }}
         >
           <option value="all">Todos los proyectos</option>
-          <option value="Kiosco">Kiosco</option>
-          <option value="Intranet">Intranet</option>
-          <option value="Museo">Museo</option>
-          <option value="RadarSocial">RadarSocial</option>
-          <option value="-">Sin proyecto</option>
+          {projectOptions.map((project) => (
+            <option key={project} value={project}>
+              {project}
+            </option>
+          ))}
         </select>
 
         <select
@@ -247,8 +371,8 @@ useEffect(() => {
           disabled={bulkDeleting || selectedIds.length === 0}
           className="rounded-xl border px-4 py-2 text-sm"
           style={{
-            borderColor: "var(--card-border)",
-            background: "transparent",
+            borderColor: "rgba(239,68,68,0.35)",
+            background: "rgba(239,68,68,0.08)",
             opacity: bulkDeleting || selectedIds.length === 0 ? 0.6 : 1,
           }}
         >
@@ -258,52 +382,26 @@ useEffect(() => {
         </button>
       </div>
 
-      <div className="mb-3 text-sm" style={{ color: "var(--muted)" }}>
+      <div className="mb-4 text-sm" style={{ color: "var(--muted)" }}>
         {filteredEvents.length} evento(s) visible(s)
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr
-              style={{
-                textAlign: "left",
-                color: "var(--muted-2)",
-                borderBottom: "1px solid var(--card-border)",
-              }}
-            >
-              <th className="py-2 pr-3">
-                <input
-                  type="checkbox"
-                  checked={allVisibleSelected}
-                  onChange={toggleAllVisible}
-                />
-              </th>
-              <th className="py-2">Tipo</th>
-              <th className="py-2">Path</th>
-              <th className="py-2">Lang</th>
-              <th className="py-2">Proyecto</th>
-			  <th className="py-2">Ubicación</th>
-<th className="py-2">IP</th>
-              <th className="py-2">Visitor ID</th>
-              <th className="py-2">Fecha</th>
-              <th className="py-2">Hace cuánto</th>
-              <th className="py-2">Acción</th>
+      <div className="space-y-3 md:hidden">
+        {paginatedEvents.length > 0 ? (
+          paginatedEvents.map((event) => {
+            const eventId = event._id || "";
 
-            </tr>
-          </thead>
-          <tbody>
-            {filteredEvents.map((event) => {
-              const eventId = event._id || "";
-
-              return (
-                <tr
-                  key={eventId || `${event.path}-${String(event.createdAt)}`}
-                  style={{
-                    borderBottom: "1px solid var(--card-border)",
-                  }}
-                >
-                  <td className="py-2 pr-3">
+            return (
+              <div
+                key={eventId || `${event.path}-${String(event.createdAt)}`}
+                className="rounded-2xl border p-4"
+                style={{
+                  borderColor: "var(--card-border)",
+                  background: "var(--card)",
+                }}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-2">
                     {eventId ? (
                       <input
                         type="checkbox"
@@ -311,33 +409,209 @@ useEffect(() => {
                         onChange={() => toggleOne(eventId)}
                       />
                     ) : null}
-                  </td>
-                  <td className="py-2">{event.type || "-"}</td>
-                  <td className="py-2">{event.path || "-"}</td>
-                  <td className="py-2">{event.lang || "-"}</td>
-                  <td className="py-2">{getProjectLabel(event)}</td>
-				  <td className="py-2">
-  {[event.country, event.region, event.city].filter(Boolean).join(" · ") || "-"}
-</td>
 
-<td className="py-2">
-  {event.ip || "-"}
-</td>
-                  <td className="py-2">
-                    {event.visitorId ? String(event.visitorId).slice(0, 8) : "-"}
-                  </td>
-                  <td className="py-2">{formatMontevideoDate(event.createdAt)}</td>
-<td className="py-2">{formatTimeAgo(event.createdAt, now)}</td>
+                    <span
+                      className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium"
+                      style={getEventBadgeStyle(event.type)}
+                    >
+                      {getEventLabel(event.type)}
+                    </span>
+                  </div>
 
-<td className="py-2">
-  {eventId ? <DeleteEventButton eventId={eventId} /> : null}
-</td>
+                  {eventId ? <DeleteEventButton eventId={eventId} /> : null}
+                </div>
 
-                </tr>
-              );
-            })}
+                <div className="mt-3 font-semibold">{getProjectLabel(event)}</div>
+
+                <div className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+                  {event.path || "-"}
+                </div>
+
+                <div className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+                  {getLocation(event)}
+                </div>
+
+                <div className="mt-1 text-xs" style={{ color: "var(--muted-2)" }}>
+                  IP: {event.ip || "-"}
+                </div>
+
+                <div className="mt-1 text-xs" style={{ color: "var(--muted-2)" }}>
+                  Visitor:{" "}
+                  {event.visitorId ? String(event.visitorId).slice(0, 8) : "-"}
+                </div>
+
+                <div
+                  className="mt-2 text-xs"
+                  style={{ color: "var(--muted-2)" }}
+                  suppressHydrationWarning
+                >
+                  {mounted ? formatMontevideoDate(event.createdAt) : "-"} ·{" "}
+                  {formatTimeAgo(event.createdAt, now)}
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div
+            className="rounded-2xl border p-4 text-sm"
+            style={{
+              borderColor: "var(--card-border)",
+              color: "var(--muted)",
+            }}
+          >
+            No hay eventos para mostrar.
+          </div>
+        )}
+      </div>
+
+      <div
+        className="hidden overflow-x-auto rounded-2xl border md:block"
+        style={{ borderColor: "var(--card-border)" }}
+      >
+        <table className="w-full min-w-[1100px] border-separate border-spacing-0 text-sm">
+          <thead>
+            <tr
+              style={{
+                textAlign: "left",
+                color: "var(--muted-2)",
+                background: "var(--background)",
+              }}
+            >
+              <th className="px-4 py-3">
+                <input
+                  type="checkbox"
+                  checked={allVisibleSelected}
+                  onChange={toggleAllVisible}
+                />
+              </th>
+              <th className="px-4 py-3">Evento</th>
+              <th className="px-4 py-3">Proyecto</th>
+              <th className="px-4 py-3">Path</th>
+              <th className="px-4 py-3">Ubicación</th>
+              <th className="px-4 py-3">IP</th>
+              <th className="px-4 py-3">Visitor</th>
+              <th className="px-4 py-3">Fecha</th>
+              <th className="px-4 py-3">Hace</th>
+              <th className="px-4 py-3">Acción</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {paginatedEvents.length > 0 ? (
+              paginatedEvents.map((event) => {
+                const eventId = event._id || "";
+
+                return (
+                  <tr
+                    key={eventId || `${event.path}-${String(event.createdAt)}`}
+                    style={{
+                      borderTop: "1px solid var(--card-border)",
+                    }}
+                  >
+                    <td className="px-4 py-3">
+                      {eventId ? (
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.includes(eventId)}
+                          onChange={() => toggleOne(eventId)}
+                        />
+                      ) : null}
+                    </td>
+
+                    <td className="px-4 py-3">
+                      <span
+                        className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium"
+                        style={getEventBadgeStyle(event.type)}
+                      >
+                        {getEventLabel(event.type)}
+                      </span>
+                    </td>
+
+                    <td className="px-4 py-3 font-medium">{getProjectLabel(event)}</td>
+
+                    <td className="max-w-[260px] truncate px-4 py-3" title={event.path || ""}>
+                      {event.path || "-"}
+                    </td>
+
+                    <td
+                      className="max-w-[180px] truncate px-4 py-3"
+                      title={getLocation(event)}
+                    >
+                      {getLocation(event)}
+                    </td>
+
+                    <td className="max-w-[130px] truncate px-4 py-3" title={event.ip || ""}>
+                      {event.ip || "-"}
+                    </td>
+
+                    <td
+                      className="max-w-[110px] truncate px-4 py-3"
+                      title={event.visitorId || ""}
+                    >
+                      {event.visitorId ? String(event.visitorId).slice(0, 8) : "-"}
+                    </td>
+
+                    <td className="whitespace-nowrap px-4 py-3" suppressHydrationWarning>
+                      {mounted ? formatMontevideoDate(event.createdAt) : "-"}
+                    </td>
+
+                    <td className="whitespace-nowrap px-4 py-3">
+                      {formatTimeAgo(event.createdAt, now)}
+                    </td>
+
+                    <td className="px-4 py-3">
+                      {eventId ? <DeleteEventButton eventId={eventId} /> : null}
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td
+                  className="px-4 py-5 text-sm"
+                  colSpan={10}
+                  style={{ color: "var(--muted)" }}
+                >
+                  No hay eventos para mostrar.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-5 flex items-center justify-between gap-3">
+        <button
+          type="button"
+          onClick={() => setPage((p) => Math.max(1, p - 1))}
+          disabled={page === 1}
+          className="rounded-xl border px-4 py-2 text-sm"
+          style={{
+            borderColor: "var(--card-border)",
+            background: "transparent",
+            opacity: page === 1 ? 0.5 : 1,
+          }}
+        >
+          ← Anterior
+        </button>
+
+        <span className="text-sm" style={{ color: "var(--muted)" }}>
+          Página {page} de {totalPages}
+        </span>
+
+        <button
+          type="button"
+          onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+          disabled={page === totalPages}
+          className="rounded-xl border px-4 py-2 text-sm"
+          style={{
+            borderColor: "var(--card-border)",
+            background: "transparent",
+            opacity: page === totalPages ? 0.5 : 1,
+          }}
+        >
+          Siguiente →
+        </button>
       </div>
     </>
   );
