@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LANGS, type Lang } from "@/lib/i18n";
 import { getCaseStudy } from "@/lib/project-case-studies";
+import { getProjectFaqs } from "@/lib/project-faq";
 import type { Metadata } from "next";
 
 
@@ -13,6 +14,7 @@ export async function generateMetadata({
   const resolved = await Promise.resolve(params);
   const lang = (LANGS.includes(resolved.lang as Lang) ? resolved.lang : "es") as Lang;
   const study = getCaseStudy(lang, resolved.slug);
+  const faqs = getProjectFaqs(study.slug, lang);
 
   if (!study) {
     return {
@@ -102,7 +104,7 @@ export default async function ProjectCaseStudyPage({
   const isEs = lang === "es";
 
   const study = getCaseStudy(lang, resolved.slug);
-
+const faqs = getProjectFaqs(study.slug, lang);
   if (!study) {
     notFound();
   }
@@ -159,6 +161,23 @@ const breadcrumbSchema = {
   ],
 };
 
+const faqSchema =
+  faqs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+	
+	
   return (
     <main>
 	
@@ -177,6 +196,15 @@ const breadcrumbSchema = {
     __html: JSON.stringify(breadcrumbSchema),
   }}
 />
+
+{faqSchema ? (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(faqSchema),
+    }}
+  />
+) : null}
       <div className="mx-auto max-w-5xl px-6 py-12">
         <div className="mb-8">
           <Link
@@ -509,7 +537,31 @@ const breadcrumbSchema = {
     </div>
   </div>
 </section>
+{faqs.length > 0 ? (
+  <section className="mt-8 rounded-2xl border p-6" style={cardStyle}>
+    <h3 className="text-xl font-semibold">
+      {isEs ? "Preguntas frecuentes" : "Frequently asked questions"}
+    </h3>
 
+    <div className="mt-5 space-y-4">
+      {faqs.map((item) => (
+        <div
+          key={item.question}
+          className="rounded-xl border p-4"
+          style={{
+            borderColor: "var(--card-border)",
+            background: "var(--background)",
+          }}
+        >
+          <h4 className="font-semibold">{item.question}</h4>
+          <p className="mt-2 text-sm leading-relaxed" style={mutedStyle}>
+            {item.answer}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+) : null}
         <section
           className="mt-8 rounded-2xl border p-6"
           style={{
