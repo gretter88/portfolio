@@ -365,25 +365,34 @@ const projects: Project[] = [
       alt: isEs ? "SG Booking Pro — Administrador - Job Logs" : "SG Booking Pro — Administrator - Job Logs",
     },
   ],
+  statusNote: isEs
+  ? "Estado actual: MVP funcional con frontend en Vercel, backend Node/Express en Render, MongoDB, reservas públicas, gestión de servicios, configuración del negocio y emails automáticos con Resend."
+  : "Current status: functional MVP with frontend on Vercel, Node/Express backend on Render, MongoDB, public bookings, service management, business settings, and automated emails with Resend.",
   features: isEs
-    ? [
-        "Reservas online",
-        "Servicios configurables",
-        "Agenda y disponibilidad",
-        "Confirmaciones automáticas",
-        "Emails transaccionales",
-        "Panel administrativo",
-        "Preparado para multiempresa",
-      ]
-    : [
-        "Online bookings",
-        "Configurable services",
-        "Scheduling and availability",
-        "Automatic confirmations",
-        "Transactional emails",
-        "Admin dashboard",
-        "Ready for multi-tenant SaaS",
-      ],
+  ? [
+      "Plataforma SaaS para reservas online orientada a profesionales y pequeños negocios.",
+      "Frontend desarrollado con Next.js, TypeScript y Tailwind.",
+      "Backend Node.js/Express conectado a MongoDB.",
+      "Página pública de reservas para clientes finales.",
+      "Panel administrativo para gestionar servicios, reservas, clientes y datos del negocio.",
+      "Configuración de horarios, datos comerciales y modalidad de confirmación.",
+      "Emails automáticos para reserva pendiente y reserva confirmada usando Resend.",
+      "Flujo preparado para confirmación manual o automática de reservas.",
+      "Arquitectura lista para evolucionar a multiempresa, pagos online, PWA y notificaciones push.",
+      "Pensado como producto SaaS licenciable, white-label o base para implementación personalizada.",
+    ]
+  : [
+      "SaaS platform for online bookings aimed at professionals and small businesses.",
+      "Frontend built with Next.js, TypeScript, and Tailwind.",
+      "Node.js/Express backend connected to MongoDB.",
+      "Public booking page for end customers.",
+      "Admin dashboard to manage services, bookings, clients, and business information.",
+      "Configuration for schedules, business data, and booking confirmation mode.",
+      "Automated emails for pending and confirmed bookings using Resend.",
+      "Flow prepared for manual or automatic booking confirmation.",
+      "Architecture ready to evolve into multi-tenant SaaS, online payments, PWA, and push notifications.",
+      "Designed as a licensable SaaS product, white-label solution, or custom deployment base.",
+    ],
 },
 
 
@@ -769,23 +778,34 @@ statusNote: isEs
         : "Sociedad Islas Canarias Uruguay — Administrator Workshops",
     },
   ],
-  features: isEs
-    ? [
-        "Sitio institucional bilingüe ES/EN",
-        "Panel administrativo",
-        "Gestión de eventos",
-        "Galería multimedia",
-        "SEO y OpenGraph",
-        "Cloudflare + Vercel",
-      ]
-    : [
-        "Bilingual ES/EN website",
-        "Admin panel",
-        "Event management",
-        "Media gallery",
-        "SEO and OpenGraph",
-        "Cloudflare + Vercel",
-      ],
+  statusNote: isEs
+  ? "Estado actual: sitio institucional en producción, bilingüe, responsive, con contenido cultural, eventos, galería, administración y despliegue en Vercel/Cloudflare."
+  : "Current status: institutional website in production, bilingual, responsive, with cultural content, events, gallery, administration, and deployment on Vercel/Cloudflare.",
+ features: isEs
+  ? [
+      "Sitio institucional desarrollado con Next.js, TypeScript y Tailwind.",
+      "Experiencia bilingüe ES/EN para público local e internacional.",
+      "Diseño responsive adaptado a desktop, tablet y mobile.",
+      "Secciones para historia, cultura, eventos, galería, contacto y contenido institucional.",
+      "Panel administrativo para gestionar contenidos, eventos e imágenes.",
+      "Integración con Supabase para datos y administración de contenido.",
+      "Optimización SEO, metadata, OpenGraph y estructura lista para indexación.",
+      "Deploy productivo con Vercel y configuración DNS/SSL mediante Cloudflare.",
+      "Arquitectura preparada para seguir sumando nuevas secciones, noticias, recursos y contenido multimedia.",
+      "Base reutilizable para asociaciones, instituciones culturales, museos o centros educativos.",
+    ]
+  : [
+      "Institutional website built with Next.js, TypeScript, and Tailwind.",
+      "Bilingual ES/EN experience for local and international audiences.",
+      "Responsive design adapted to desktop, tablet, and mobile.",
+      "Sections for history, culture, events, gallery, contact, and institutional content.",
+      "Admin panel to manage content, events, and images.",
+      "Supabase integration for data and content management.",
+      "SEO optimization, metadata, OpenGraph, and index-ready structure.",
+      "Production deployment with Vercel and DNS/SSL configuration through Cloudflare.",
+      "Architecture ready to keep adding new sections, news, resources, and multimedia content.",
+      "Reusable foundation for associations, cultural institutions, museums, or educational centers.",
+    ],
 },
 
 
