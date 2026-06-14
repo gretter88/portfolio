@@ -204,7 +204,140 @@ export default function AdminLeadsTable({ leads }: Props) {
         {filteredLeads.length} lead(s) visible(s)
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border" style={{ borderColor: "var(--card-border)" }}>
+
+<div className="md:hidden space-y-4">
+  {filteredLeads.map((lead) => {
+    const leadId = lead._id || "";
+
+    return (
+      <div
+        key={leadId}
+        className="rounded-2xl border p-4"
+        style={{
+          borderColor: "var(--card-border)",
+          background: "var(--card)",
+        }}
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <div className="font-semibold">
+              {lead.project || "-"}
+            </div>
+
+            <div
+              className="text-xs"
+              style={{ color: "var(--muted)" }}
+            >
+              {getInterestLabel(lead.interest)}
+            </div>
+          </div>
+
+          <select
+            value={lead.status || "new"}
+            disabled={!leadId || updatingId === leadId}
+            onChange={(e) =>
+              updateStatus(
+                leadId,
+                e.target.value as LeadStatus
+              )
+            }
+            className="rounded-xl border px-2 py-1 text-xs"
+            style={{
+              background: "var(--background)",
+              borderColor: "var(--card-border)",
+            }}
+          >
+            <option value="new">Nuevo</option>
+            <option value="contacted">Contactado</option>
+            <option value="in_conversation">
+              En conversación
+            </option>
+            <option value="closed">Cerrado</option>
+          </select>
+        </div>
+
+        <div className="mt-4 space-y-2 text-sm">
+          <div>
+            <strong>Nombre:</strong> {lead.name || "-"}
+          </div>
+
+          <div>
+            <strong>Email:</strong> {lead.email || "-"}
+          </div>
+
+          <div>
+            <strong>Empresa:</strong> {lead.company || "-"}
+          </div>
+
+          <div>
+            <strong>País:</strong> {lead.country || "-"}
+          </div>
+
+          <div>
+            <strong>Mensaje:</strong>
+            <div
+              className="mt-1 text-xs"
+              style={{ color: "var(--muted)" }}
+            >
+              {lead.message || "-"}
+            </div>
+          </div>
+
+          <div>
+            <strong>Fecha:</strong> {lead.createdAt || "-"}
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <input
+            value={notes[leadId] || ""}
+            onChange={(e) =>
+              setNotes((prev) => ({
+                ...prev,
+                [leadId]: e.target.value,
+              }))
+            }
+            placeholder="Nota interna..."
+            className="w-full rounded-xl border px-3 py-2 text-sm"
+            style={{
+              background: "var(--background)",
+              borderColor: "var(--card-border)",
+            }}
+          />
+        </div>
+
+        <div className="mt-3 flex gap-2">
+          <button
+            type="button"
+            onClick={() => saveNotes(leadId)}
+            className="rounded-xl border px-3 py-2 text-xs"
+            style={{
+              borderColor: "rgba(34,197,94,0.35)",
+              background: "rgba(34,197,94,0.08)",
+            }}
+          >
+            Guardar
+          </button>
+
+          <button
+            type="button"
+            onClick={() => deleteLead(leadId)}
+            className="rounded-xl border px-3 py-2 text-xs"
+            style={{
+              borderColor: "rgba(239,68,68,0.35)",
+              background: "rgba(239,68,68,0.08)",
+            }}
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+
+      <div className="hidden md:block overflow-x-auto rounded-2xl border" style={{ borderColor: "var(--card-border)" }}>
         <table className="w-full min-w-[1300px] text-sm">
           <thead>
             <tr style={{ textAlign: "left", color: "var(--muted-2)" }}>

@@ -10,7 +10,7 @@ import AdminEventsTable from "@/components/admin/AdminEventsTable";
 import AdminCommercialEventsTable from "@/components/admin/AdminCommercialEventsTable";
 import { getLatestLeads, getLeadStats } from "@/lib/leads";
 import AdminLeadsTable from "@/components/admin/AdminLeadsTable";
-
+import Link from "next/link";
 export default async function AdminPage() {
   const ok = await isAdminAuthenticated();
 
@@ -159,6 +159,16 @@ function getProjectFriendlyName(project?: string | null) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+		  <Link
+  href="/admin/leads"
+  className="rounded-xl border px-4 py-2 text-sm"
+  style={{
+    borderColor: "var(--card-border)",
+    background: "transparent",
+  }}
+>
+  Ver leads
+</Link>
   <AdminRefreshButton />
   <DeleteOldEventsButton days={30} />
   <AdminLogoutButton />
@@ -567,7 +577,7 @@ function getProjectFriendlyName(project?: string | null) {
         )}
       </tbody>
     </table>
-	
+	{/* 
 	<div
   className="mt-8 rounded-2xl border p-5"
   style={{
@@ -653,7 +663,7 @@ function getProjectFriendlyName(project?: string | null) {
     <AdminLeadsTable leads={leadsSerialized} />
   </div>
 </div>
-	
+	*/}
 		<div
   className="mt-8 rounded-2xl border p-5"
   style={{
