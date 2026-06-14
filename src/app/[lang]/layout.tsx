@@ -53,7 +53,7 @@ const description = isEs
       siteName: "Santiago Gretter Software Studio",
       images: [
         {
-          url: "/og/og.png",
+          url: "/og/og2.png",
           width: 1200,
           height: 630,
           alt: `${i.name} — Software Studio`,
