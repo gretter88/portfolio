@@ -125,6 +125,16 @@ if (
   };
 }
 
+if (
+  t.includes("booking") ||
+  t.includes("reservas")
+) {
+  return {
+    borderColor: "rgba(14,165,233,0.28)",
+    background: "rgba(14,165,233,0.10)",
+    color: "#38bdf8",
+  };
+}
   return {
     borderColor: "var(--card-border)",
     background: "rgba(255,255,255,0.04)",

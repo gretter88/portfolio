@@ -291,8 +291,107 @@ const projects: Project[] = [
 
 
 
-  {
+{
   order: 2,
+  title: "SG Booking Pro",
+  desc: isEs
+    ? "Plataforma SaaS para reservas online de profesionales y pequeñas empresas. Incluye servicios, agenda, reservas públicas, confirmaciones automáticas y administración."
+    : "SaaS platform for online bookings for professionals and small businesses. Includes services, scheduling, public bookings, automated confirmations, and administration.",
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Resend",
+    "Tailwind",
+  ],
+  image: {
+    src: "/screenshots/sg-booking-pro-1.webp",
+    alt: "SG Booking Pro",
+  },
+  links: {
+    demo: "/go/request-access/sg-booking-pro",
+  },
+  badge: isEs
+    ? "SaaS · MVP funcional"
+    : "SaaS · Functional MVP",
+	screenshots: [
+    {
+      src: "/screenshots/sg-booking-pro-2.webp",
+      alt: isEs ? "SG Booking Pro — Dashboard" : "SG Booking Pro — Dashboard",
+    },
+    {
+      src: "/screenshots/sg-booking-pro-3.webp",
+      alt: isEs ? "SG Booking Pro — Servicios" : "SG Booking Pro — Services",
+    },
+    {
+      src: "/screenshots/sg-booking-pro-4.webp",
+      alt: isEs ? "SG Booking Pro — Reservas" : "SG Booking Pro — Bookings",
+    },
+    {
+      src: "/screenshots/sg-booking-pro-5.webp",
+      alt: isEs ? "SG Booking Pro — Configuración" : "SG Booking Pro — Settings",
+    },
+	 {
+      src: "/screenshots/sg-booking-pro-6.webp",
+      alt: isEs ? "SG Booking Pro — Configuración" : "SG Booking Pro — Settings",
+    },
+	{
+      src: "/screenshots/sg-booking-pro-7.webp",
+      alt: isEs ? "SG Booking Pro — Clientes" : "SG Booking Pro — Client",
+    },
+	
+	{
+      src: "/screenshots/sg-booking-pro-8.webp",
+      alt: isEs ? "SG Booking Pro — Crear Reservas" : "SG Booking Pro — Create Reservations",
+    },
+	{
+      src: "/screenshots/sg-booking-pro-9.webp",
+      alt: isEs ? "SG Booking Pro — Calendario" : "SG Booking Pro — Calendar",
+    },
+	
+	 {
+      src: "/screenshots/sg-booking-pro-10.webp",
+      alt: isEs ? "SG Booking Pro — Dashboard Administrador" : "SG Booking Pro — Dashboard Administrator",
+    },
+	{
+      src: "/screenshots/sg-booking-pro-11.webp",
+      alt: isEs ? "SG Booking Pro — Administrador - Usuarios y Planes" : "SG Booking Pro — Administrator - Users and Plans",
+    },
+	
+	{
+      src: "/screenshots/sg-booking-pro-12.webp",
+      alt: isEs ? "SG Booking Pro — Administrador - Job Logs" : "SG Booking Pro — Administrator - Job Logs",
+    },
+  ],
+  features: isEs
+    ? [
+        "Reservas online",
+        "Servicios configurables",
+        "Agenda y disponibilidad",
+        "Confirmaciones automáticas",
+        "Emails transaccionales",
+        "Panel administrativo",
+        "Preparado para multiempresa",
+      ]
+    : [
+        "Online bookings",
+        "Configurable services",
+        "Scheduling and availability",
+        "Automatic confirmations",
+        "Transactional emails",
+        "Admin dashboard",
+        "Ready for multi-tenant SaaS",
+      ],
+},
+
+
+
+
+
+  {
+  order: 3,
   title: "NutriMVP",
   desc: isEs
   ? "App mobile MVP para escanear productos, consultar información nutricional, comparar precios por supermercado y optimizar compras. Incluye historial, favoritos, alertas de precio, lista inteligente de compras, mapa de supermercados cercanos según ubicación del usuario, mapa de supermercados por producto y rutas sugeridas para comprar productos al menor precio. Integra datos desde OpenFoodFacts, Firebase/Firestore y backend propio con PostgreSQL/Supabase."
@@ -400,7 +499,7 @@ statusNote: isEs
 
   
 {
-  order: 3,
+  order: 4,
   title: "PlayDuel",
   desc: isEs
     ? "Plataforma web full stack de duelos 1 vs 1 en tiempo real con juegos competitivos, lobby, invitaciones, matchmaking, chat por partida, historial, ranking, balance demo y lógica de resultados. Proyecto pensado como base para una plataforma de gaming competitivo con wallet y torneos."
@@ -484,7 +583,7 @@ statusNote: isEs
 
 
  {
-  order: 4,
+  order: 5,
   title: "Museo Canario (Web)",
   desc: isEs
     ? "Sitio oficial bilingüe (ES/EN) en producción, integrado con un panel Admin (compartido con el kiosco) para gestionar contenido, salas y piezas."
@@ -522,7 +621,7 @@ statusNote: isEs
 },
 
 {
-  order: 5,
+  order: 6,
   title: isEs ? "Kiosco Interactivo (Museo)" : "Interactive Kiosk (Museum)",
   desc: isEs
     ? "Experiencia táctil para tablet fija en museo: plano interactivo, tour guiado, piezas 3D (Luma), autoguía con QR por pieza y administración completa vía panel Admin."
@@ -563,8 +662,100 @@ statusNote: isEs
 },
 
 
+
+
 {
-  order: 6,
+  order: 7,
+  title: "Sociedad Islas Canarias Uruguay",
+  desc: isEs
+    ? "Sitio institucional bilingüe desarrollado para la Sociedad Islas Canarias Uruguay. Incluye gestión de contenido, eventos, galería, noticias, administración, SEO y experiencia responsive."
+    : "Bilingual institutional website built for Sociedad Islas Canarias Uruguay. Includes content management, events, gallery, news, administration, SEO, and responsive experience.",
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Tailwind",
+    "MongoDB",
+    "Supabase",
+    "Cloudflare",
+    "Vercel",
+  ],
+  image: {
+    src: "/screenshots/sociedad-canarias-1.webp",
+    alt: "Sociedad Islas Canarias Uruguay",
+  },
+  links: {
+    demo: "https://www.sociedadislascanariasuruguay.com",
+  },
+  badge: "Web: Live",
+     screenshots: [
+    {
+      src: "/screenshots/sociedad-canarias-1.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Home"
+        : "Sociedad Islas Canarias Uruguay — Home",
+    },
+    {
+      src: "/screenshots/sociedad-canarias-2.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Historia"
+        : "Sociedad Islas Canarias Uruguay — History",
+    },
+    {
+      src: "/screenshots/sociedad-canarias-3.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Eventos"
+        : "Sociedad Islas Canarias Uruguay — Events",
+    },
+    {
+      src: "/screenshots/sociedad-canarias-4.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Galería"
+        : "Sociedad Islas Canarias Uruguay — Gallery",
+    },
+	
+	{
+      src: "/screenshots/sociedad-canarias-5.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Noticias"
+        : "Sociedad Islas Canarias Uruguay — News",
+    },
+	
+	{
+      src: "/screenshots/sociedad-canarias-6.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Experiencia"
+        : "Sociedad Islas Canarias Uruguay — Experience",
+    },
+	
+	{
+      src: "/screenshots/sociedad-canarias-7.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Contacto"
+        : "Sociedad Islas Canarias Uruguay — Contact",
+    },
+  ],
+  features: isEs
+    ? [
+        "Sitio institucional bilingüe ES/EN",
+        "Panel administrativo",
+        "Gestión de eventos",
+        "Galería multimedia",
+        "SEO y OpenGraph",
+        "Cloudflare + Vercel",
+      ]
+    : [
+        "Bilingual ES/EN website",
+        "Admin panel",
+        "Event management",
+        "Media gallery",
+        "SEO and OpenGraph",
+        "Cloudflare + Vercel",
+      ],
+},
+
+
+{
+  order: 8,
   title: isEs ? "Intranet (WordPress) — Organismo público" : "Intranet (WordPress) — Public agency",
   desc: isEs
     ? "Intranet interna (sin acceso público) para comunicación y gestión. Implementación completa en WordPress: diseño a medida, módulos sociales, eventos y base de conocimiento, con optimización y mantenimiento."
@@ -605,7 +796,7 @@ statusNote: isEs
 
 
 {
-  order: 7,
+  order: 9,
   title: "SG SaaS Starter",
   desc: isEs
     ? "Starter full stack comercializable orientado a productos SaaS. Incluye dashboard admin moderno, autenticación, usuarios, actividad, notificaciones, configuraciones, backend Node.js API y estructura lista para extender como producto real o base de nuevos desarrollos."
@@ -698,28 +889,8 @@ statusNote: isEs
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {
-  order: 8,
+  order: 10,
   title: isEs
     ? "Marketplace de Servicios"
     : "Services Marketplace",
@@ -813,7 +984,7 @@ statusNote: isEs
 },
 
 {
-  order: 9,
+  order: 11,
   title: isEs ? "SG Copilot CRM" : "SG Copilot CRM",
   desc: isEs
     ? "CRM SaaS full stack orientado a operación comercial, seguimiento de clientes y productividad con AI. Incluye autenticación, organizaciones, suscripciones con Stripe, planes Free/Pro/Business, dashboard de uso, documentos con búsqueda semántica, preguntas sobre documentos, resúmenes AI de clientes y módulo Business-only de auditoría/insights AI."
@@ -1299,6 +1470,28 @@ commercialProjectsItems: [
    pdfHref: "/SG_Copilot_CRM_ficha_comercial.pdf",
 },
 
+
+{
+  title: "SG Booking Pro",
+  status: isEs
+    ? "Disponible para licenciamiento"
+    : "Available for licensing",
+  featuredLabel: "SaaS Booking",
+  description: isEs
+    ? "Plataforma SaaS de reservas para profesionales y pequeñas empresas."
+    : "Booking SaaS platform for professionals and small businesses.",
+  model: isEs
+    ? "Licencia / White-label / Implementación"
+    : "License / White-label / Deployment",
+  idealFor: isEs
+    ? "Consultorios, estudios, centros estéticos, profesionales y servicios."
+    : "Clinics, studios, beauty centers, professionals and services.",
+	tags: isEs
+  ? ["SaaS", "White-label", "Reservas"]
+  : ["SaaS", "White-label", "Booking"],
+  requestHref: "/go/request-access/sg-booking-pro",
+},
+
 {
   title: "NutriMVP",
   status: isEs
@@ -1502,7 +1695,7 @@ statsTitle: isEs ? "Resultados" : "Results",
 statsItems: isEs
   ? [
       {
-        value: "10+",
+        value: "11+",
         label: "Proyectos",
         desc: "Web, Mobile, SaaS y plataformas en producción",
       },
@@ -1517,14 +1710,14 @@ statsItems: isEs
         desc: "Frontend, backend, apps móviles y tiempo real",
       },
       {
-        value: "5+",
+        value: "6+",
         label: "Productos propios",
-        desc: "SaaS, Marketplace, CRM, RadarSocial y NutriMVP",
+        desc: "RadarSocial, SG Booking Pro, NutriMVP, PlayDuel, CRM y SaaS Starter",
       },
     ]
   : [
       {
-        value: "10+",
+        value: "11+",
         label: "Projects",
         desc: "Web, Mobile, SaaS and production platforms",
       },
@@ -1539,9 +1732,9 @@ statsItems: isEs
         desc: "Frontend, backend, mobile apps and realtime",
       },
       {
-        value: "5+",
+        value: "6+",
         label: "Own Products",
-        desc: "SaaS, Marketplace, CRM, RadarSocial and NutriMVP",
+        desc: "RadarSocial, SG Booking Pro, NutriMVP, PlayDuel, CRM and SaaS Starter",
       },
     ],
 

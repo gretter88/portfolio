@@ -610,6 +610,164 @@ seoKeywords: isEs
 }
 },
 	
+	{
+  slug: "sg-booking-pro",
+  title: "SG Booking Pro",
+  subtitle: isEs
+    ? "Plataforma SaaS de reservas online para profesionales y pequeños negocios"
+    : "Online booking SaaS platform for professionals and small businesses",
+  status: isEs ? "SaaS · MVP funcional" : "SaaS · Functional MVP",
+  summary: isEs
+    ? "SG Booking Pro es una plataforma SaaS para gestionar reservas online, servicios, disponibilidad, clientes y confirmaciones automáticas por email desde un panel simple y escalable."
+    : "SG Booking Pro is a SaaS platform to manage online bookings, services, availability, clients, and automated email confirmations from a simple and scalable dashboard.",
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Resend",
+    "Vercel",
+    "Render",
+  ],
+  heroImage: "/screenshots/sg-booking-pro-1.webp",
+  screenshots: [
+    {
+      src: "/screenshots/sg-booking-pro-2.webp",
+      alt: isEs ? "SG Booking Pro — Dashboard" : "SG Booking Pro — Dashboard",
+    },
+    {
+      src: "/screenshots/sg-booking-pro-3.webp",
+      alt: isEs ? "SG Booking Pro — Servicios" : "SG Booking Pro — Services",
+    },
+    {
+      src: "/screenshots/sg-booking-pro-4.webp",
+      alt: isEs ? "SG Booking Pro — Reservas" : "SG Booking Pro — Bookings",
+    },
+    {
+      src: "/screenshots/sg-booking-pro-5.webp",
+      alt: isEs ? "SG Booking Pro — Configuración" : "SG Booking Pro — Settings",
+    },
+	 {
+      src: "/screenshots/sg-booking-pro-6.webp",
+      alt: isEs ? "SG Booking Pro — Configuración" : "SG Booking Pro — Settings",
+    },
+	{
+      src: "/screenshots/sg-booking-pro-7.webp",
+      alt: isEs ? "SG Booking Pro — Clientes" : "SG Booking Pro — Client",
+    },
+	
+	{
+      src: "/screenshots/sg-booking-pro-8.webp",
+      alt: isEs ? "SG Booking Pro — Crear Reservas" : "SG Booking Pro — Create Reservations",
+    },
+	{
+      src: "/screenshots/sg-booking-pro-9.webp",
+      alt: isEs ? "SG Booking Pro — Calendario" : "SG Booking Pro — Calendar",
+    },
+	
+	 {
+      src: "/screenshots/sg-booking-pro-10.webp",
+      alt: isEs ? "SG Booking Pro — Dashboard Administrador" : "SG Booking Pro — Dashboard Administrator",
+    },
+	{
+      src: "/screenshots/sg-booking-pro-11.webp",
+      alt: isEs ? "SG Booking Pro — Administrador - Usuarios y Planes" : "SG Booking Pro — Administrator - Users and Plans",
+    },
+	
+	{
+      src: "/screenshots/sg-booking-pro-12.webp",
+      alt: isEs ? "SG Booking Pro — Administrador - Job Logs" : "SG Booking Pro — Administrator - Job Logs",
+    },
+  ],
+  problem: isEs
+    ? "Muchos profesionales y pequeños negocios gestionan reservas manualmente por WhatsApp, mensajes o llamadas, perdiendo tiempo y generando errores de coordinación."
+    : "Many professionals and small businesses manage bookings manually through WhatsApp, messages, or calls, wasting time and creating scheduling errors.",
+  solution: isEs
+    ? "Se desarrolló una plataforma SaaS con panel administrativo, servicios configurables, página pública de reservas, confirmaciones automáticas y base preparada para multiempresa, pagos y notificaciones."
+    : "A SaaS platform was built with an admin dashboard, configurable services, public booking page, automated confirmations, and a foundation ready for multi-tenant use, payments, and notifications.",
+  highlights: isEs
+    ? [
+        "Gestión de servicios y reservas.",
+        "Página pública para recibir reservas online.",
+        "Confirmaciones automáticas por email.",
+        "Panel administrativo para el negocio.",
+        "Configuración de datos del negocio.",
+        "Backend Node/Express + MongoDB.",
+        "Base preparada para multiempresa, pagos y PWA.",
+      ]
+    : [
+        "Service and booking management.",
+        "Public page to receive online bookings.",
+        "Automated email confirmations.",
+        "Business admin dashboard.",
+        "Business settings management.",
+        "Node/Express + MongoDB backend.",
+        "Foundation ready for multi-tenant SaaS, payments, and PWA.",
+      ],
+  businessValue: isEs
+    ? [
+        "Reduce tareas manuales de agenda.",
+        "Mejora la experiencia de reserva para clientes.",
+        "Aplicable a consultorios, estudios, salones, profesionales y servicios.",
+        "Puede licenciarse o adaptarse como white-label SaaS.",
+      ]
+    : [
+        "Reduces manual scheduling work.",
+        "Improves the booking experience for customers.",
+        "Applicable to clinics, studios, salons, professionals, and service businesses.",
+        "Can be licensed or adapted as a white-label SaaS.",
+      ],
+  nextSteps: isEs
+    ? [
+        "Agregar calendario visual avanzado.",
+        "Integrar bloqueo de horarios.",
+        "Agregar pagos online.",
+        "Evolucionar a multiempresa.",
+        "Agregar PWA y notificaciones.",
+      ]
+    : [
+        "Add advanced visual calendar.",
+        "Integrate time blocking.",
+        "Add online payments.",
+        "Evolve into multi-tenant SaaS.",
+        "Add PWA and notifications.",
+      ],
+  seoKeywords: isEs
+    ? [
+        "SaaS de reservas",
+        "sistema de reservas online",
+        "Next.js booking app",
+        "plataforma de turnos",
+        "software para profesionales",
+        "agenda online",
+      ]
+    : [
+        "booking SaaS",
+        "online booking system",
+        "Next.js booking app",
+        "appointment platform",
+        "software for professionals",
+        "online scheduling",
+      ],
+  requestHref: "/go/request-access/sg-booking-pro",
+  commercial: {
+    availableFor: isEs
+      ? ["Licenciamiento", "White-label", "Implementación", "Personalización"]
+      : ["Licensing", "White-label", "Deployment", "Customization"],
+    pricingModel: isEs
+      ? "Licencia SaaS, white-label o implementación dedicada"
+      : "SaaS license, white-label, or dedicated deployment",
+    targetAudience: isEs
+      ? ["Profesionales", "Consultorios", "Salones", "Estudios", "Pequeñas empresas"]
+      : ["Professionals", "Clinics", "Salons", "Studios", "Small businesses"],
+    contactLabel: isEs
+      ? "Solicitar demo de SG Booking Pro"
+      : "Request SG Booking Pro demo",
+  },
+},
+	
 	
 	{
   slug: "kiosco",
@@ -963,7 +1121,156 @@ seoKeywords: isEs
   },
 },
 
-
+{
+  slug: "sociedad-canarias-uy",
+  title: "Sociedad Islas Canarias Uruguay",
+  subtitle: isEs
+    ? "Sitio institucional bilingüe para asociación cultural"
+    : "Bilingual institutional website for a cultural association",
+  status: isEs ? "Web · Live" : "Web · Live",
+  summary: isEs
+    ? "Sitio institucional desarrollado para la Sociedad Islas Canarias Uruguay, con contenido cultural, historia, eventos, galería, administración y estructura bilingüe."
+    : "Institutional website built for Sociedad Islas Canarias Uruguay, featuring cultural content, history, events, gallery, administration, and bilingual structure.",
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Supabase",
+    "Vercel",
+    "Cloudflare",
+  ],
+  heroImage: "/screenshots/sociedad-canarias-1.webp",
+  screenshots: [
+    {
+      src: "/screenshots/sociedad-canarias-1.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Home"
+        : "Sociedad Islas Canarias Uruguay — Home",
+    },
+    {
+      src: "/screenshots/sociedad-canarias-2.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Historia"
+        : "Sociedad Islas Canarias Uruguay — History",
+    },
+    {
+      src: "/screenshots/sociedad-canarias-3.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Eventos"
+        : "Sociedad Islas Canarias Uruguay — Events",
+    },
+    {
+      src: "/screenshots/sociedad-canarias-4.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Galería"
+        : "Sociedad Islas Canarias Uruguay — Gallery",
+    },
+	
+	{
+      src: "/screenshots/sociedad-canarias-5.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Noticias"
+        : "Sociedad Islas Canarias Uruguay — News",
+    },
+	
+	{
+      src: "/screenshots/sociedad-canarias-6.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Experiencia"
+        : "Sociedad Islas Canarias Uruguay — Experience",
+    },
+	
+	{
+      src: "/screenshots/sociedad-canarias-7.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Contacto"
+        : "Sociedad Islas Canarias Uruguay — Contact",
+    },
+  ],
+  problem: isEs
+    ? "La institución necesitaba una presencia digital moderna para comunicar su historia, actividades, eventos y contenido cultural de forma clara, accesible y administrable."
+    : "The institution needed a modern digital presence to communicate its history, activities, events, and cultural content in a clear, accessible, and manageable way.",
+  solution: isEs
+    ? "Se desarrolló un sitio institucional responsive con Next.js, estructura bilingüe, secciones culturales, eventos, galería, contenido administrable, SEO técnico y despliegue productivo."
+    : "A responsive institutional website was built with Next.js, bilingual structure, cultural sections, events, gallery, manageable content, technical SEO, and production deployment.",
+  highlights: isEs
+    ? [
+        "Sitio institucional moderno y responsive.",
+        "Contenido bilingüe ES/EN.",
+        "Secciones culturales, historia y eventos.",
+        "Galería multimedia.",
+        "Panel administrativo para contenido.",
+        "SEO técnico y OpenGraph.",
+        "Deploy con Vercel + Cloudflare.",
+      ]
+    : [
+        "Modern and responsive institutional website.",
+        "ES/EN bilingual content.",
+        "Cultural sections, history, and events.",
+        "Multimedia gallery.",
+        "Admin panel for content.",
+        "Technical SEO and OpenGraph.",
+        "Deployment with Vercel + Cloudflare.",
+      ],
+  businessValue: isEs
+    ? [
+        "Mejora la presencia digital institucional.",
+        "Facilita la comunicación de actividades y eventos.",
+        "Permite administrar contenido sin depender de cambios manuales.",
+        "Base reutilizable para asociaciones, instituciones y centros culturales.",
+      ]
+    : [
+        "Improves institutional digital presence.",
+        "Makes it easier to communicate activities and events.",
+        "Allows content management without manual code changes.",
+        "Reusable foundation for associations, institutions, and cultural centers.",
+      ],
+  nextSteps: isEs
+    ? [
+        "Ampliar contenido histórico.",
+        "Mejorar agenda de eventos.",
+        "Agregar más recursos multimedia.",
+        "Optimizar SEO por secciones culturales.",
+      ]
+    : [
+        "Expand historical content.",
+        "Improve the events agenda.",
+        "Add more multimedia resources.",
+        "Optimize SEO for cultural sections.",
+      ],
+  seoKeywords: isEs
+    ? [
+        "sitio institucional",
+        "asociación cultural",
+        "Next.js Uruguay",
+        "web bilingüe",
+        "gestión de eventos",
+        "Sociedad Islas Canarias Uruguay",
+      ]
+    : [
+        "institutional website",
+        "cultural association",
+        "Next.js Uruguay",
+        "bilingual website",
+        "event management",
+        "Sociedad Islas Canarias Uruguay",
+      ],
+  requestHref: "/go/request-access/sociedad-canarias-uy",
+  commercial: {
+    availableFor: isEs
+      ? ["Proyecto institucional", "Adaptación", "Implementación"]
+      : ["Institutional project", "Adaptation", "Deployment"],
+    pricingModel: isEs
+      ? "Proyecto institucional a medida"
+      : "Custom institutional project",
+    targetAudience: isEs
+      ? ["Asociaciones", "Instituciones", "Centros culturales", "Organizaciones"]
+      : ["Associations", "Institutions", "Cultural centers", "Organizations"],
+    contactLabel: isEs
+      ? "Solicitar propuesta institucional"
+      : "Request institutional proposal",
+  },
+},
 {
   slug: "marketplace",
 

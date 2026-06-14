@@ -32,7 +32,6 @@ const title = isEs
 const description = isEs
   ? "Software Studio en Uruguay especializado en desarrollo web, aplicaciones móviles, plataformas SaaS, automatización, integraciones y productos digitales."
   : "Software Studio specialized in web development, mobile apps, SaaS platforms, automation, integrations, and digital products.";
-
   return {
     metadataBase: baseUrl,
     title,
@@ -50,13 +49,13 @@ const description = isEs
       url: url.toString(),
       title,
       description,
-      siteName: "Santiago Gretter Software Studio",
+      siteName: "SG Software Studio",
       images: [
         {
-          url: "/og/og2.png",
+          url: "/og/og.png",
           width: 1200,
           height: 630,
-          alt: `${i.name} — Software Studio`,
+          alt: "SG Software Studio — Software que impulsa tu negocio",
         },
       ],
     },

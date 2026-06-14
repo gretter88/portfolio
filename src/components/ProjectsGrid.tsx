@@ -94,8 +94,11 @@ export default function ProjectsGrid({
   const getProjectSlug = (p: Project) => {
     const title = (p.title || "").toLowerCase();
 
-    if (title.includes("sg saas starter")) return "sg-saas-starter";
-	if (title.includes("nutrimvp")) return "nutrimvp";
+   if (title.includes("sg saas starter")) return "sg-saas-starter";
+if (title.includes("sg booking pro")) return "sg-booking-pro";
+if (title.includes("sociedad islas canarias")) return "sociedad-canarias-uy";
+if (title.includes("sociedad canarias")) return "sociedad-canarias-uy";
+if (title.includes("nutrimvp")) return "nutrimvp";
 
 if (title.includes("playduel")) return "playduel";
 if (title.includes("play duel")) return "playduel";
@@ -122,6 +125,7 @@ if (title.includes("apuestas")) return "playduel";
     "playduel",
     "sg-copilot-crm",
     "sg-saas-starter",
+	"sg-booking-pro",
     "marketplace",
   ].includes(slug);
 };
@@ -155,12 +159,12 @@ const isMobileProject = (p: Project) => {
 
   const isLiveWebsiteProject = (p: Project) => {
     const slug = getProjectSlug(p);
-    return slug === "radar" || slug === "museo";
+    return slug === "radar" || slug === "museo" || slug === "sociedad-canarias-uy";
   };
 
   const isLiveBadgeProject = (p: Project) => {
     const slug = getProjectSlug(p);
-    return slug === "radar" || slug === "museo";
+    return slug === "radar" || slug === "museo" || slug === "sociedad-canarias-uy";
   };
 
   const getPrimaryLinkLabel = (p: Project) => {
@@ -170,7 +174,7 @@ const isMobileProject = (p: Project) => {
       return isEs ? "Comprar en Gumroad" : "Buy on Gumroad";
     }
 
-    if (slug === "radar" || slug === "museo") {
+   if (slug === "radar" || slug === "museo" || slug === "sociedad-canarias-uy") {
       return isEs ? "Ver sitio" : "View site";
     }
 
@@ -206,6 +210,10 @@ const isMobileProject = (p: Project) => {
     if (slug === "radar") {
       return isEs ? "Licenciamiento" : "Licensing";
     }
+	
+	if (slug === "sg-booking-pro") {
+  return isEs ? "SaaS reservas" : "Booking SaaS";
+}
 
     if (slug === "marketplace") {
       return isEs ? "White-label / Implementación" : "White-label / Deployment";
@@ -233,6 +241,15 @@ const isMobileProject = (p: Project) => {
         color: "#60a5fa",
       };
     }
+	
+	
+	if (slug === "sg-booking-pro") {
+  return {
+    border: "1px solid rgba(14,165,233,0.28)",
+    background: "rgba(14,165,233,0.10)",
+    color: "#38bdf8",
+  };
+}
 
     if (slug === "marketplace") {
       return {
@@ -277,6 +294,9 @@ if (slug === "playduel") {
     const slug = getProjectSlug(p);
     if (slug === "radar") return "/go/demo/radar";
     if (slug === "museo") return "/go/demo/museo";
+	if (slug === "sociedad-canarias-uy") {
+  return "https://www.sociedadislascanariasuruguay.com";
+}
     if (slug === "marketplace") return "/go/demo/marketplace";
     return p.links?.demo || "#";
   };
@@ -1476,9 +1496,19 @@ color: "var(--muted)",
                       <h4 className="font-semibold">{isEs ? "Links" : "Links"}</h4>
 
                       <div className="mt-3 flex flex-wrap gap-3">
-					 {["nutrimvp", "playduel", "sg-copilot-crm", "radar", "kiosco", "museo","marketplace","sg-saas-starter","intranet"].includes(
-  getProjectSlug(activeProject)
-) ? (
+					 {[
+  "nutrimvp",
+  "playduel",
+  "sg-copilot-crm",
+  "radar",
+  "kiosco",
+  "museo",
+  "marketplace",
+  "sg-saas-starter",
+  "sg-booking-pro",
+  "sociedad-canarias-uy",
+  "intranet",
+].includes(getProjectSlug(activeProject)) ? (
 
   <a
     className={primaryBtnClass}
