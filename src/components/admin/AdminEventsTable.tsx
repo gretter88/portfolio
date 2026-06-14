@@ -227,7 +227,7 @@ export default function AdminEventsTable({ events }: Props) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [bulkDeleting, setBulkDeleting] = useState(false);
   const [now, setNow] = useState(Date.now());
-
+const [countryFilter, setCountryFilter] = useState("all");
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -244,6 +244,13 @@ export default function AdminEventsTable({ events }: Props) {
   "Intranet WordPress",
   "-",
 ];
+
+
+const countryOptions = useMemo(() => {
+  return Array.from(
+    new Set(events.map((event) => event.country || "-").filter(Boolean))
+  ).sort();
+}, [events]);
 
   const filteredEvents = useMemo(() => {
     const currentNow = Date.now();
@@ -277,6 +284,10 @@ export default function AdminEventsTable({ events }: Props) {
     const thirtyDays = 30 * 24 * 60 * 60 * 1000;
     if (!createdAt || currentNow - createdAt > thirtyDays) return false;
   }
+  
+  if (countryFilter !== "all" && (event.country || "-") !== countryFilter) {
+  return false;
+}
 
   return true;
 });
@@ -287,12 +298,15 @@ return filtered.sort((a, b) => {
 
   return sortOrder === "newest" ? bTime - aTime : aTime - bTime;
 });
-  }, [events, typeFilter, projectFilter, dateFilter, sortOrder]);
+  }, [events, typeFilter, projectFilter, dateFilter, sortOrder, countryFilter]);
+
+
+
 
   useEffect(() => {
     setPage(1);
     setSelectedIds([]);
-  }, [typeFilter, projectFilter, dateFilter, sortOrder]);
+  }, [typeFilter, projectFilter, dateFilter, sortOrder, countryFilter]);
 
   const totalPages = Math.max(1, Math.ceil(filteredEvents.length / PAGE_SIZE));
 
@@ -420,6 +434,23 @@ return filtered.sort((a, b) => {
           <option value="7d">Últimos 7 días</option>
           <option value="30d">Últimos 30 días</option>
         </select>
+		
+		<select
+  value={countryFilter}
+  onChange={(e) => setCountryFilter(e.target.value)}
+  className="rounded-xl border px-3 py-2 text-sm"
+  style={{
+    background: "var(--background)",
+    borderColor: "var(--card-border)",
+  }}
+>
+  <option value="all">Todos los países</option>
+  {countryOptions.map((country) => (
+    <option key={country} value={country}>
+      {country}
+    </option>
+  ))}
+</select>
 <select
   value={sortOrder}
   onChange={(e) => setSortOrder(e.target.value as "newest" | "oldest")}

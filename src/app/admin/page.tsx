@@ -8,6 +8,8 @@ import AdminRefreshButton from "@/components/admin/AdminRefreshButton";
 import DeleteOldEventsButton from "@/components/admin/DeleteOldEventsButton";
 import AdminEventsTable from "@/components/admin/AdminEventsTable";
 import AdminCommercialEventsTable from "@/components/admin/AdminCommercialEventsTable";
+import { getLatestLeads, getLeadStats } from "@/lib/leads";
+import AdminLeadsTable from "@/components/admin/AdminLeadsTable";
 
 export default async function AdminPage() {
   const ok = await isAdminAuthenticated();
@@ -17,6 +19,25 @@ export default async function AdminPage() {
   }
 
   const stats = await getAnalyticsStats();
+  
+  const leads = await getLatestLeads(50);
+const leadStats = await getLeadStats();
+
+const leadsSerialized = leads.map((lead: any) => ({
+  _id: lead._id?.toString() || "",
+  project: lead.project || null,
+  interest: lead.interest || null,
+  name: lead.name || null,
+  email: lead.email || null,
+  company: lead.company || null,
+  country: lead.country || null,
+  message: lead.message || null,
+  sourcePath: lead.sourcePath || null,
+  ip: lead.ip || null,
+  status: lead.status || "new",
+internalNotes: lead.internalNotes || null,
+  createdAt: lead.createdAt ? new Date(lead.createdAt).toISOString() : null,
+}));
   
 const latestEventsSerialized = stats.latestEvents.map((event: any) => ({
   _id: event._id?.toString() || "",
@@ -546,10 +567,100 @@ function getProjectFriendlyName(project?: string | null) {
         )}
       </tbody>
     </table>
-	<div className="mt-10">
-  <h3 className="text-base font-semibold">Últimos eventos comerciales</h3>
+	
+	<div
+  className="mt-8 rounded-2xl border p-5"
+  style={{
+    background: "var(--card)",
+    borderColor: "var(--card-border)",
+  }}
+>
+  <h2 className="text-lg font-semibold">Leads</h2>
+  <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+    Solicitudes recibidas desde formularios comerciales.
+  </p>
+<div className="mt-4 flex justify-end">
+  <a
+    href="/api/admin/leads/export"
+    className="rounded-xl border px-4 py-2 text-sm font-medium"
+    style={{
+      borderColor: "rgba(34,197,94,0.35)",
+      background: "rgba(34,197,94,0.10)",
+    }}
+  >
+    Exportar leads CSV
+  </a>
+</div>
 
+<div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+  <AdminStatCard label="Total Leads" value={leadStats.totalLeads} hint="Todos" />
+  <AdminStatCard label="Nuevos" value={leadStats.newLeads} hint="new" />
+  <AdminStatCard label="Contactados" value={leadStats.contactedLeads} hint="contacted" />
+  <AdminStatCard label="En conversación" value={leadStats.inConversationLeads} hint="in_conversation" />
+  <AdminStatCard label="Cerrados" value={leadStats.closedLeads} hint="closed" />
+</div>
+<div
+  className="mt-6 overflow-x-auto rounded-2xl border"
+  style={{ borderColor: "var(--card-border)" }}
+>
+  <table className="w-full min-w-[760px] text-sm">
+    <thead>
+      <tr style={{ textAlign: "left", color: "var(--muted-2)" }}>
+        <th className="px-4 py-3">Proyecto</th>
+        <th className="px-4 py-3">Total</th>
+        <th className="px-4 py-3">Nuevos</th>
+        <th className="px-4 py-3">Contactados</th>
+        <th className="px-4 py-3">En conversación</th>
+        <th className="px-4 py-3">Cerrados</th>
+      </tr>
+    </thead>
 
+    <tbody>
+      {leadStats.leadsByProject.length > 0 ? (
+        leadStats.leadsByProject.map((row: any) => (
+          <tr key={row.project}>
+            <td className="border-t px-4 py-3 font-medium" style={{ borderColor: "var(--card-border)" }}>
+              {row.project}
+            </td>
+            <td className="border-t px-4 py-3 font-semibold" style={{ borderColor: "var(--card-border)" }}>
+              {row.total}
+            </td>
+            <td className="border-t px-4 py-3" style={{ borderColor: "var(--card-border)" }}>
+              {row.new}
+            </td>
+            <td className="border-t px-4 py-3" style={{ borderColor: "var(--card-border)" }}>
+              {row.contacted}
+            </td>
+            <td className="border-t px-4 py-3" style={{ borderColor: "var(--card-border)" }}>
+              {row.inConversation}
+            </td>
+            <td className="border-t px-4 py-3" style={{ borderColor: "var(--card-border)" }}>
+              {row.closed}
+            </td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan={6} className="border-t px-4 py-5 text-sm" style={{ borderColor: "var(--card-border)", color: "var(--muted)" }}>
+            Todavía no hay leads por proyecto.
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
+  <div className="mt-5">
+    <AdminLeadsTable leads={leadsSerialized} />
+  </div>
+</div>
+	
+		<div
+  className="mt-8 rounded-2xl border p-5"
+  style={{
+    background: "var(--card)",
+    borderColor: "var(--card-border)",
+  }}
+>
 <div className="mb-4 flex justify-end">
   <a
     href="/api/admin/commercial-events/export"
@@ -559,15 +670,23 @@ function getProjectFriendlyName(project?: string | null) {
       background: "rgba(34,197,94,0.10)",
     }}
   >
-    Exportar CSV
+    Exportar eventos comerciales CSV
   </a>
 </div>
+	<div className="mt-10">
+  <h3 className="text-base font-semibold">Últimos eventos comerciales</h3>
+
+
+
   <div className="mt-4">
     <AdminCommercialEventsTable events={latestCommercialEventsSerialized} />
   </div>
 </div>
   </div>
 </div>
+</div>
+
+
 
 
         <div
@@ -577,6 +696,18 @@ function getProjectFriendlyName(project?: string | null) {
             borderColor: "var(--card-border)",
           }}
         >
+		<div className="mb-4 flex justify-end">
+  <a
+    href="/api/admin/events/export"
+    className="rounded-xl border px-4 py-2 text-sm font-medium"
+    style={{
+      borderColor: "rgba(59,130,246,0.35)",
+      background: "rgba(59,130,246,0.10)",
+    }}
+  >
+    Exportar todos los eventos CSV
+  </a>
+</div>
           <h2 className="text-lg font-semibold">Últimos eventos</h2>
 
          <div className="mt-4">
