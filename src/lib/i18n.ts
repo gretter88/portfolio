@@ -733,6 +733,41 @@ statusNote: isEs
         ? "Sociedad Islas Canarias Uruguay — Contacto"
         : "Sociedad Islas Canarias Uruguay — Contact",
     },
+	
+		{
+      src: "/screenshots/sociedad-canarias-8.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Dashboard Administrador"
+        : "Sociedad Islas Canarias Uruguay — Administrator Dashboard",
+    },
+	
+		{
+      src: "/screenshots/sociedad-canarias-9.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Noticias Administrador"
+        : "Sociedad Islas Canarias Uruguay — Administrator News",
+    },
+	
+		{
+      src: "/screenshots/sociedad-canarias-10.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Eventos Administrador"
+        : "Sociedad Islas Canarias Uruguay — Administrator Events",
+    },
+	
+		{
+      src: "/screenshots/sociedad-canarias-11.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Galeria Administrador"
+        : "Sociedad Islas Canarias Uruguay — Administrator Gallery",
+    },
+	
+		{
+      src: "/screenshots/sociedad-canarias-12.webp",
+      alt: isEs
+        ? "Sociedad Islas Canarias Uruguay — Talleres Administrador"
+        : "Sociedad Islas Canarias Uruguay — Administrator Workshops",
+    },
   ],
   features: isEs
     ? [
