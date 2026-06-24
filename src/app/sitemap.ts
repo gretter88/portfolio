@@ -1,36 +1,49 @@
+// src/app/sitemap.ts
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.santiagogretter.com.uy";
 
   const routes = [
-    "",
-    "/es",
-    "/en",
-    "/es/projects/nutrimvp",
-    "/en/projects/nutrimvp",
-    "/es/projects/playduel",
-    "/en/projects/playduel",
-    "/es/projects/sg-copilot-crm",
-    "/en/projects/sg-copilot-crm",
-	"/es/projects/radar",
-    "/en/projects/radar",
-	"/es/projects/kiosco",
-    "/en/projects/kiosco",
-	"/es/projects/museo",
-    "/en/projects/museo",
-	"/es/projects/marketplace",
-    "/en/projects/marketplace",
-	"/es/projects/sg-saas-starter",
-    "/en/projects/sg-saas-starter",
-	"/es/projects/intranet",
-    "/en/projects/intranet",
+    { path: "", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/es", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/en", priority: 0.9, changeFrequency: "weekly" as const },
+
+    { path: "/es/projects/nutrimvp", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/nutrimvp", priority: 0.8, changeFrequency: "monthly" as const },
+
+    { path: "/es/projects/playduel", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/playduel", priority: 0.8, changeFrequency: "monthly" as const },
+
+    { path: "/es/projects/sg-copilot-crm", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/sg-copilot-crm", priority: 0.8, changeFrequency: "monthly" as const },
+
+    { path: "/es/projects/radar", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/radar", priority: 0.8, changeFrequency: "monthly" as const },
+
+    { path: "/es/projects/kiosco", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/kiosco", priority: 0.8, changeFrequency: "monthly" as const },
+
+    { path: "/es/projects/museo", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/museo", priority: 0.8, changeFrequency: "monthly" as const },
+
+    { path: "/es/projects/marketplace", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/marketplace", priority: 0.8, changeFrequency: "monthly" as const },
+
+    { path: "/es/projects/sg-saas-starter", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/sg-saas-starter", priority: 0.8, changeFrequency: "monthly" as const },
+
+    { path: "/es/projects/intranet", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/intranet", priority: 0.8, changeFrequency: "monthly" as const },
+	
+	 { path: "/es/projects/sg-booking-pro", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/en/projects/sg-booking-pro", priority: 0.8, changeFrequency: "monthly" as const },
   ];
 
   return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${baseUrl}${route.path}`,
     lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: route === "" || route === "/es" ? 1 : route.includes("/projects/") ? 0.8 : 0.9,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
   }));
 }

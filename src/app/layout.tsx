@@ -3,17 +3,18 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import JsonLd from "@/components/JsonLd";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const baseUrl = new URL("https://www.santiagogretter.com.uy");
 
 export const metadata: Metadata = {
   metadataBase: baseUrl,
- title: "Santiago Gretter — Software Studio Uruguay",
-description: "Desarrollo de software, aplicaciones móviles, plataformas SaaS, sitios web y soluciones digitales en Uruguay. Next.js, React Native, Node.js y análisis funcional.",
+  title: "Santiago Gretter — Software Studio Uruguay",
+  description:
+    "Desarrollo de software, aplicaciones móviles, plataformas SaaS, sitios web y soluciones digitales en Uruguay. Next.js, React Native, Node.js y análisis funcional.",
   verification: {
-  google: "LcLYzhsNDjZrqy84BJCnV4pUeDM-QFHZVCWwLfCTA2Q",
-},
-
+    google: "LcLYzhsNDjZrqy84BJCnV4pUeDM-QFHZVCWwLfCTA2Q",
+  },
   robots: {
     index: true,
     follow: true,
@@ -43,25 +44,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
-    <html suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <head>
         <Script id="theme-init" strategy="beforeInteractive">{`
-(function() {
-  try {
-    var saved = localStorage.getItem('theme');
-    var prefersDark =
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+          (function() {
+            try {
+              var saved = localStorage.getItem('theme');
+              var prefersDark =
+                window.matchMedia &&
+                window.matchMedia('(prefers-color-scheme: dark)').matches;
+              var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
 
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  } catch (e) {}
-})();
+              if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            } catch (e) {}
+          })();
         `}</Script>
 
         <meta
@@ -77,11 +80,14 @@ export default function RootLayout({
       </head>
 
       <body className="bg-[var(--background)] text-[var(--foreground)]">
-	  <JsonLd />
+        <JsonLd />
+
+        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
+
         {children}
+
         <Analytics />
       </body>
     </html>
   );
 }
-
