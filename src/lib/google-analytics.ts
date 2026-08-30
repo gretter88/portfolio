@@ -1,26 +1,44 @@
 // src/lib/google-analytics.ts
 
-export const GA_READY_EVENT = "portfolio:ga-ready";
+import {
+  hasAnalyticsConsent,
+} from "@/lib/privacy-consent";
 
-const PRODUCTION_HOSTS = new Set([
-  "santiagogretter.com.uy",
-  "www.santiagogretter.com.uy",
-]);
+export const GA_READY_EVENT =
+  "portfolio:ga-ready";
+
+const PRODUCTION_HOSTS =
+  new Set([
+    "santiagogretter.com.uy",
+    "www.santiagogretter.com.uy",
+  ]);
 
 type GtagParams = Record<
   string,
-  string | number | boolean | null | undefined
+  | string
+  | number
+  | boolean
+  | null
+  | undefined
 >;
 
-type PortfolioWindow = Window & {
-  gtag?: (...args: any[]) => void;
-  __portfolioGaReady?: boolean;
-  __portfolioGaConfigured?: boolean;
-  __portfolioLastGaPageView?: string;
-};
+type PortfolioWindow =
+  Window & {
+    gtag?: (
+      ...args: any[]
+    ) => void;
+
+    __portfolioGaReady?: boolean;
+
+    __portfolioGaConfigured?: boolean;
+
+    __portfolioLastGaPageView?: string;
+  };
 
 export function isPortfolioProductionHost() {
-  if (typeof window === "undefined") {
+  if (
+    typeof window === "undefined"
+  ) {
     return false;
   }
 
@@ -32,18 +50,25 @@ export function isPortfolioProductionHost() {
 export function normalizeAnalyticsPath(
   value?: string | null
 ) {
-  let path = value || "/";
+  let path =
+    value || "/";
 
-  // Nunca consideramos query params ni hashes como otra página.
-  path = path.split("?")[0] || "/";
-  path = path.split("#")[0] || "/";
+  path =
+    path.split("?")[0] || "/";
+
+  path =
+    path.split("#")[0] || "/";
 
   if (!path.startsWith("/")) {
     path = `/${path}`;
   }
 
-  if (path.length > 1 && path.endsWith("/")) {
-    path = path.slice(0, -1);
+  if (
+    path.length > 1 &&
+    path.endsWith("/")
+  ) {
+    path =
+      path.slice(0, -1);
   }
 
   return path || "/";
@@ -52,7 +77,8 @@ export function normalizeAnalyticsPath(
 export function shouldTrackAnalyticsPath(
   value?: string | null
 ) {
-  const path = normalizeAnalyticsPath(value);
+  const path =
+    normalizeAnalyticsPath(value);
 
   if (
     path === "/admin" ||
@@ -67,7 +93,9 @@ export function shouldTrackAnalyticsPath(
   return true;
 }
 
-function cleanParams(params: GtagParams) {
+function cleanParams(
+  params: GtagParams
+) {
   return Object.fromEntries(
     Object.entries(params).filter(
       ([, value]) =>
@@ -78,18 +106,32 @@ function cleanParams(params: GtagParams) {
   );
 }
 
-function normalizeEventName(name: string) {
+function normalizeEventName(
+  name: string
+) {
   let eventName = name
     .trim()
     .toLowerCase()
-    .replace(/[^a-z0-9_]/g, "_")
-    .replace(/_+/g, "_");
+    .replace(
+      /[^a-z0-9_]/g,
+      "_"
+    )
+    .replace(
+      /_+/g,
+      "_"
+    );
 
-  if (!/^[a-z]/.test(eventName)) {
-    eventName = `portfolio_${eventName}`;
+  if (
+    !/^[a-z]/.test(eventName)
+  ) {
+    eventName =
+      `portfolio_${eventName}`;
   }
 
-  return (eventName || "portfolio_event").slice(0, 40);
+  return (
+    eventName ||
+    "portfolio_event"
+  ).slice(0, 40);
 }
 
 export function sendGoogleAnalyticsPageView(
@@ -97,36 +139,58 @@ export function sendGoogleAnalyticsPageView(
 ) {
   if (
     typeof window === "undefined" ||
-    !isPortfolioProductionHost()
+    !isPortfolioProductionHost() ||
+    !hasAnalyticsConsent()
   ) {
     return false;
   }
 
-  const pagePath = normalizeAnalyticsPath(pathname);
+  const pagePath =
+    normalizeAnalyticsPath(
+      pathname
+    );
 
-  if (!shouldTrackAnalyticsPath(pagePath)) {
+  if (
+    !shouldTrackAnalyticsPath(
+      pagePath
+    )
+  ) {
     return false;
   }
 
-  const win = window as PortfolioWindow;
+  const win =
+    window as PortfolioWindow;
 
-  if (typeof win.gtag !== "function") {
+  if (
+    typeof win.gtag !== "function"
+  ) {
     return false;
   }
 
-  // Evita doble page_view por Strict Mode,
-  // layouts duplicados o componentes repetidos.
-  if (win.__portfolioLastGaPageView === pagePath) {
+  if (
+    win.__portfolioLastGaPageView ===
+    pagePath
+  ) {
     return true;
   }
 
-  win.__portfolioLastGaPageView = pagePath;
+  win.__portfolioLastGaPageView =
+    pagePath;
 
-  win.gtag("event", "page_view", {
-    page_path: pagePath,
-    page_location: `${window.location.origin}${pagePath}`,
-    page_title: document.title,
-  });
+  win.gtag(
+    "event",
+    "page_view",
+    {
+      page_path:
+        pagePath,
+
+      page_location:
+        `${window.location.origin}${pagePath}`,
+
+      page_title:
+        document.title,
+    }
+  );
 
   return true;
 }
@@ -137,22 +201,31 @@ export function sendGoogleAnalyticsEvent(
 ) {
   if (
     typeof window === "undefined" ||
-    !isPortfolioProductionHost()
+    !isPortfolioProductionHost() ||
+    !hasAnalyticsConsent()
   ) {
     return false;
   }
 
-  const pagePath = normalizeAnalyticsPath(
-    window.location.pathname
-  );
+  const pagePath =
+    normalizeAnalyticsPath(
+      window.location.pathname
+    );
 
-  if (!shouldTrackAnalyticsPath(pagePath)) {
+  if (
+    !shouldTrackAnalyticsPath(
+      pagePath
+    )
+  ) {
     return false;
   }
 
-  const win = window as PortfolioWindow;
+  const win =
+    window as PortfolioWindow;
 
-  if (typeof win.gtag !== "function") {
+  if (
+    typeof win.gtag !== "function"
+  ) {
     return false;
   }
 

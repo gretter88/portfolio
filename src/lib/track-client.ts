@@ -3,14 +3,19 @@ import {
   sendGoogleAnalyticsEvent,
 } from "@/lib/google-analytics";
 
-const ALLOWED_EVENT_TYPES = new Set([
-  "click",
-  "pdf_download",
-  "request_demo",
-  "request_license",
-  "request_partnership",
-  "request_project_info",
-]);
+import {
+  hasAnalyticsConsent,
+} from "@/lib/privacy-consent";
+
+const ALLOWED_EVENT_TYPES =
+  new Set([
+    "click",
+    "pdf_download",
+    "request_demo",
+    "request_license",
+    "request_partnership",
+    "request_project_info",
+  ]);
 
 type TrackPortfolioEventInput = {
   type: string;
@@ -20,13 +25,23 @@ type TrackPortfolioEventInput = {
 };
 
 function getVisitorId() {
-  const cookieName = "visitor_id=";
-  const cookies = document.cookie.split(";");
+  const cookieName =
+    "visitor_id=";
 
-  for (const cookie of cookies) {
-    const trimmed = cookie.trim();
+  const cookies =
+    document.cookie.split(";");
 
-    if (trimmed.startsWith(cookieName)) {
+  for (
+    const cookie of cookies
+  ) {
+    const trimmed =
+      cookie.trim();
+
+    if (
+      trimmed.startsWith(
+        cookieName
+      )
+    ) {
       return trimmed.substring(
         cookieName.length
       );
@@ -34,7 +49,8 @@ function getVisitorId() {
   }
 
   const id =
-    globalThis.crypto?.randomUUID?.() ??
+    globalThis.crypto
+      ?.randomUUID?.() ??
     `${Date.now()}-${Math.random()
       .toString(36)
       .slice(2)}`;
@@ -56,14 +72,17 @@ export function trackPortfolioEvent({
 }: TrackPortfolioEventInput) {
   try {
     if (
-      typeof window === "undefined" ||
+      typeof window ===
+        "undefined" ||
       !isPortfolioProductionHost() ||
-      !ALLOWED_EVENT_TYPES.has(type)
+      !hasAnalyticsConsent() ||
+      !ALLOWED_EVENT_TYPES.has(
+        type
+      )
     ) {
       return;
     }
 
-    // Google Analytics 4
     sendGoogleAnalyticsEvent(
       type === "click"
         ? "portfolio_click"
@@ -75,26 +94,38 @@ export function trackPortfolioEvent({
       }
     );
 
-    // Analytics propio / MongoDB
-    const payload = JSON.stringify({
-      type,
-      project,
-      path,
-      lang,
-      visitorId: getVisitorId(),
-      referrer:
-        document.referrer || null,
-    });
+    const payload =
+      JSON.stringify({
+        type,
+        project,
+        path,
+        lang,
 
-    if (navigator.sendBeacon) {
-      const blob = new Blob([payload], {
-        type: "application/json",
+        visitorId:
+          getVisitorId(),
+
+        referrer:
+          document.referrer ||
+          null,
       });
 
-      const sent = navigator.sendBeacon(
-        "/api/track",
-        blob
-      );
+    if (
+      navigator.sendBeacon
+    ) {
+      const blob =
+        new Blob(
+          [payload],
+          {
+            type:
+              "application/json",
+          }
+        );
+
+      const sent =
+        navigator.sendBeacon(
+          "/api/track",
+          blob
+        );
 
       if (sent) {
         return;
@@ -103,15 +134,19 @@ export function trackPortfolioEvent({
 
     fetch("/api/track", {
       method: "POST",
+
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type":
+          "application/json",
       },
+
       body: payload,
+
       keepalive: true,
     }).catch(() => {});
   } catch {
-    // El tracking nunca debe romper
-    // la navegación del portfolio.
+    // El tracking nunca debe
+    // romper la navegación.
   }
 }
 

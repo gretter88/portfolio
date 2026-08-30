@@ -1,7 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import {
+  useEffect,
+  useState,
+} from "react";
+
+import {
+  usePathname,
+} from "next/navigation";
 
 import {
   isPortfolioProductionHost,
@@ -9,23 +15,39 @@ import {
   shouldTrackAnalyticsPath,
 } from "@/lib/google-analytics";
 
+import {
+  CONSENT_UPDATED_EVENT,
+  hasAnalyticsConsent,
+} from "@/lib/privacy-consent";
+
 type Props = {
   path?: string;
   lang?: string;
 };
 
-type TrackingWindow = Window & {
-  __portfolioLastOwnPageView?: string;
-};
+type TrackingWindow =
+  Window & {
+    __portfolioLastOwnPageView?: string;
+  };
 
 function getVisitorId() {
-  const cookieName = "visitor_id=";
-  const cookies = document.cookie.split(";");
+  const cookieName =
+    "visitor_id=";
 
-  for (const cookie of cookies) {
-    const trimmed = cookie.trim();
+  const cookies =
+    document.cookie.split(";");
 
-    if (trimmed.startsWith(cookieName)) {
+  for (
+    const cookie of cookies
+  ) {
+    const trimmed =
+      cookie.trim();
+
+    if (
+      trimmed.startsWith(
+        cookieName
+      )
+    ) {
       return trimmed.substring(
         cookieName.length
       );
@@ -33,7 +55,8 @@ function getVisitorId() {
   }
 
   const id =
-    typeof crypto !== "undefined" &&
+    typeof crypto !==
+      "undefined" &&
     "randomUUID" in crypto
       ? crypto.randomUUID()
       : `${Date.now()}-${Math.random()
@@ -49,12 +72,18 @@ function getVisitorId() {
   return id;
 }
 
-function getLanguageFromPath(path: string) {
-  const segment = path
-    .split("/")
-    .filter(Boolean)[0];
+function getLanguageFromPath(
+  path: string
+) {
+  const segment =
+    path
+      .split("/")
+      .filter(Boolean)[0];
 
-  if (segment === "es" || segment === "en") {
+  if (
+    segment === "es" ||
+    segment === "en"
+  ) {
     return segment;
   }
 
@@ -65,28 +94,64 @@ export default function TrackPageView({
   path,
   lang,
 }: Props = {}) {
-  const pathname = usePathname();
+  const pathname =
+    usePathname();
 
-  const effectivePath = normalizeAnalyticsPath(
-    path || pathname || "/"
-  );
+  const [
+    consentGranted,
+    setConsentGranted,
+  ] = useState(false);
+
+  const effectivePath =
+    normalizeAnalyticsPath(
+      path ||
+        pathname ||
+        "/"
+    );
 
   const effectiveLang =
-    lang || getLanguageFromPath(effectivePath);
+    lang ||
+    getLanguageFromPath(
+      effectivePath
+    );
+
+  useEffect(() => {
+    const refreshConsent =
+      () => {
+        setConsentGranted(
+          hasAnalyticsConsent()
+        );
+      };
+
+    refreshConsent();
+
+    window.addEventListener(
+      CONSENT_UPDATED_EVENT,
+      refreshConsent
+    );
+
+    return () => {
+      window.removeEventListener(
+        CONSENT_UPDATED_EVENT,
+        refreshConsent
+      );
+    };
+  }, []);
 
   useEffect(() => {
     if (
+      !consentGranted ||
       !isPortfolioProductionHost() ||
-      !shouldTrackAnalyticsPath(effectivePath)
+      !shouldTrackAnalyticsPath(
+        effectivePath
+      )
     ) {
       return;
     }
 
-    const win = window as TrackingWindow;
+    const win =
+      window as TrackingWindow;
 
-    // Hay todavía un TrackPageView explícito
-    // en la home. Esto evita que ambas instancias
-    // dupliquen la vista.
     if (
       win.__portfolioLastOwnPageView ===
       effectivePath
@@ -97,24 +162,40 @@ export default function TrackPageView({
     win.__portfolioLastOwnPageView =
       effectivePath;
 
-    const visitorId = getVisitorId();
+    const visitorId =
+      getVisitorId();
 
     fetch("/api/track", {
       method: "POST",
+
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type":
+          "application/json",
       },
+
       body: JSON.stringify({
         type: "pageview",
-        path: effectivePath,
-        lang: effectiveLang,
+
+        path:
+          effectivePath,
+
+        lang:
+          effectiveLang,
+
         visitorId,
+
         referrer:
-          document.referrer || null,
+          document.referrer ||
+          null,
       }),
+
       keepalive: true,
     }).catch(() => {});
-  }, [effectivePath, effectiveLang]);
+  }, [
+    effectivePath,
+    effectiveLang,
+    consentGranted,
+  ]);
 
   return null;
 }

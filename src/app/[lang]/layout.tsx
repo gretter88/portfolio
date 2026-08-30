@@ -1,8 +1,10 @@
 // src/app/[lang]/layout.tsx
 
-import type { Metadata } from "next";
+import type {
+  Metadata,
+} from "next";
+
 import Link from "next/link";
-import { Analytics } from "@vercel/analytics/next";
 
 import {
   LANGS,
@@ -15,64 +17,89 @@ import TrackedLink from "@/components/TrackedLink";
 import MobileMenu from "@/components/MobileMenu";
 import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
 import PortfolioItemListJsonLd from "@/components/PortfolioItemListJsonLd";
+
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import GoogleAnalyticsPageView from "@/components/GoogleAnalyticsPageView";
 import TrackPageView from "@/components/TrackPageView";
 
+import ConsentBanner from "@/components/ConsentBanner";
+import ConsentAwareVercelAnalytics from "@/components/ConsentAwareVercelAnalytics";
+
 function clsx(
   ...arr: Array<
-    string | false | null | undefined
+    | string
+    | false
+    | null
+    | undefined
   >
 ) {
-  return arr.filter(Boolean).join(" ");
+  return arr
+    .filter(Boolean)
+    .join(" ");
 }
 
 export async function generateMetadata({
   params,
 }: {
   params:
-    | { lang: string }
-    | Promise<{ lang: string }>;
+    | {
+        lang: string;
+      }
+    | Promise<{
+        lang: string;
+      }>;
 }): Promise<Metadata> {
   const resolved =
-    await Promise.resolve(params);
+    await Promise.resolve(
+      params
+    );
 
   const lang = (
-    LANGS.includes(resolved.lang as Lang)
+    LANGS.includes(
+      resolved.lang as Lang
+    )
       ? resolved.lang
       : "es"
   ) as Lang;
 
-  const i = t(lang);
+  const i =
+    t(lang);
 
-  const isEs = lang === "es";
+  const isEs =
+    lang === "es";
 
-  const baseUrl = new URL(
-    "https://www.santiagogretter.com.uy"
-  );
+  const baseUrl =
+    new URL(
+      "https://www.santiagogretter.com.uy"
+    );
 
-  const url = new URL(
-    `/${lang}`,
-    baseUrl
-  );
+  const url =
+    new URL(
+      `/${lang}`,
+      baseUrl
+    );
 
-  const title = isEs
-    ? `${i.name} — Desarrollo de Software, Apps y SaaS en Uruguay`
-    : `${i.name} — Software Development, Mobile Apps and SaaS`;
+  const title =
+    isEs
+      ? `${i.name} — Desarrollo de Software, Apps y SaaS en Uruguay`
+      : `${i.name} — Software Development, Mobile Apps and SaaS`;
 
-  const description = isEs
-    ? "Software Studio en Uruguay especializado en desarrollo web, aplicaciones móviles, plataformas SaaS, automatización, integraciones y productos digitales."
-    : "Software Studio specialized in web development, mobile apps, SaaS platforms, automation, integrations, and digital products.";
+  const description =
+    isEs
+      ? "Software Studio en Uruguay especializado en desarrollo web, aplicaciones móviles, plataformas SaaS, automatización, integraciones y productos digitales."
+      : "Software Studio specialized in web development, mobile apps, SaaS platforms, automation, integrations, and digital products.";
 
   return {
-    metadataBase: baseUrl,
+    metadataBase:
+      baseUrl,
 
     title,
 
     description,
 
     alternates: {
-      canonical: url.pathname,
+      canonical:
+        url.pathname,
 
       languages: {
         es: "/es",
@@ -81,14 +108,16 @@ export async function generateMetadata({
     },
 
     openGraph: {
-      type: "website",
+      type:
+        "website",
 
       locale:
         lang === "es"
           ? "es_ES"
           : "en_US",
 
-      url: url.toString(),
+      url:
+        url.toString(),
 
       title,
 
@@ -99,9 +128,15 @@ export async function generateMetadata({
 
       images: [
         {
-          url: "/og/og.png",
-          width: 1200,
-          height: 630,
+          url:
+            "/og/og.png",
+
+          width:
+            1200,
+
+          height:
+            630,
+
           alt:
             "SG Software Studio — Software que impulsa tu negocio",
         },
@@ -109,7 +144,8 @@ export async function generateMetadata({
     },
 
     twitter: {
-      card: "summary_large_image",
+      card:
+        "summary_large_image",
 
       title,
 
@@ -126,22 +162,32 @@ export default async function LangLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
+  children:
+    React.ReactNode;
 
   params:
-    | { lang: string }
-    | Promise<{ lang: string }>;
+    | {
+        lang: string;
+      }
+    | Promise<{
+        lang: string;
+      }>;
 }) {
   const resolved =
-    await Promise.resolve(params);
+    await Promise.resolve(
+      params
+    );
 
   const lang = (
-    LANGS.includes(resolved.lang as Lang)
+    LANGS.includes(
+      resolved.lang as Lang
+    )
       ? resolved.lang
       : "es"
   ) as Lang;
 
-  const i = t(lang);
+  const i =
+    t(lang);
 
   const navLinkClass =
     "rounded-xl border px-3 py-2 text-sm transition hover:-translate-y-0.5";
@@ -157,23 +203,13 @@ export default async function LangLayout({
 
   return (
     <div className="scroll-smooth">
-      {/*
-        Google Analytics 4:
-        - solo producción
-        - sin localhost
-        - sin Vercel Preview
-        - sin query params
-        - compatible con navegación SPA
-      */}
       <GoogleAnalytics />
+
       <GoogleAnalyticsPageView />
 
-      {/*
-        Analytics propio / MongoDB:
-        registra automáticamente todas las rutas
-        públicas ES/EN.
-      */}
-      <TrackPageView lang={lang} />
+      <TrackPageView
+        lang={lang}
+      />
 
       <header
         className="sticky top-0 z-40 border-b backdrop-blur"
@@ -229,7 +265,9 @@ export default async function LangLayout({
                 className={clsx(
                   navLinkClass
                 )}
-                style={navLinkStyle}
+                style={
+                  navLinkStyle
+                }
               >
                 {i.navServices}
               </TrackedLink>
@@ -241,7 +279,9 @@ export default async function LangLayout({
                 className={clsx(
                   navLinkClass
                 )}
-                style={navLinkStyle}
+                style={
+                  navLinkStyle
+                }
               >
                 {i.navProjects}
               </TrackedLink>
@@ -253,7 +293,9 @@ export default async function LangLayout({
                 className={clsx(
                   navLinkClass
                 )}
-                style={navLinkStyle}
+                style={
+                  navLinkStyle
+                }
               >
                 {i.navCommercial}
               </TrackedLink>
@@ -265,7 +307,9 @@ export default async function LangLayout({
                 className={clsx(
                   navLinkClass
                 )}
-                style={navLinkStyle}
+                style={
+                  navLinkStyle
+                }
               >
                 {i.navProcess}
               </TrackedLink>
@@ -277,7 +321,9 @@ export default async function LangLayout({
                 className={clsx(
                   navLinkClass
                 )}
-                style={navLinkStyle}
+                style={
+                  navLinkStyle
+                }
               >
                 {i.navContact}
               </TrackedLink>
@@ -289,17 +335,23 @@ export default async function LangLayout({
                 className={clsx(
                   navLinkClass
                 )}
-                style={navLinkStyle}
+                style={
+                  navLinkStyle
+                }
               >
                 {i.ctaExperience}
               </TrackedLink>
 
               <Link
-                href={i.switchHref}
+                href={
+                  i.switchHref
+                }
                 className={clsx(
                   navLinkClass
                 )}
-                style={navLinkStyle}
+                style={
+                  navLinkStyle
+                }
               >
                 {i.switchTo}
               </Link>
@@ -307,7 +359,9 @@ export default async function LangLayout({
 
             <div className="flex items-center gap-2 md:hidden">
               <Link
-                href={i.switchHref}
+                href={
+                  i.switchHref
+                }
                 className={clsx(
                   "rounded-xl border px-2.5 py-2 text-sm"
                 )}
@@ -327,7 +381,8 @@ export default async function LangLayout({
               <MobileMenu
                 lang={lang}
                 labels={{
-                  name: i.name,
+                  name:
+                    i.name,
 
                   role:
                     i.brandSubtitle,
@@ -380,7 +435,11 @@ export default async function LangLayout({
         lang={lang}
       />
 
-      <Analytics />
+      <ConsentBanner
+        lang={lang}
+      />
+
+      <ConsentAwareVercelAnalytics />
     </div>
   );
 }
