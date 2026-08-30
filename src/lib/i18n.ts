@@ -1705,25 +1705,46 @@ commercialProjectsItems: [
 
 
 {
-  title: isEs ? "SG SaaS Starter" : "SG SaaS Starter",
+  title: isEs
+    ? "SG SaaS Starter Pro"
+    : "SG SaaS Starter Pro",
+
   status: isEs
-    ? "Disponible en Gumroad / Licenciamiento"
-    : "Available on Gumroad / Licensing",
-  featuredLabel: isEs ? "Digital Product" : "Digital Product",
+    ? "Disponible en SG Hub Market"
+    : "Available on SG Hub Market",
+
+  featuredLabel: isEs
+    ? "Producto digital"
+    : "Digital product",
+
   description: isEs
-    ? "Starter full stack orientado a SaaS y dashboards administrativos. Disponible como producto digital en Gumroad y también como base adaptable para implementaciones, white-label o nuevos productos comerciales."
-    : "Full-stack starter focused on SaaS and admin dashboards. Available as a digital product on Gumroad and also as an adaptable base for deployments, white-label solutions, or new commercial products.",
+    ? "Starter full stack premium para crear SaaS, dashboards, CRM, backoffices y plataformas B2B. Incluye organizaciones, roles avanzados, analytics, activity logs, notificaciones realtime y código fuente completo."
+    : "Premium full-stack starter for SaaS products, dashboards, CRM, backoffices, and B2B platforms. Includes organizations, advanced roles, analytics, activity logs, real-time notifications, and full source code.",
+
   model: isEs
-    ? "Producto digital / Licencia / White-label"
-    : "Digital product / License / White-label",
+    ? "Producto digital / Licencia comercial"
+    : "Digital product / Commercial license",
+
   idealFor: isEs
-    ? "Founders, equipos técnicos, agencias o desarrolladores que necesiten una base moderna para lanzar un SaaS o panel administrativo más rápido."
-    : "Founders, technical teams, agencies, or developers who need a modern foundation to launch a SaaS product or admin dashboard faster.",
+    ? "Desarrolladores, freelancers, agencias, founders y equipos técnicos que quieran acelerar el desarrollo de un SaaS o plataforma administrativa."
+    : "Developers, freelancers, agencies, founders, and technical teams looking to accelerate SaaS or admin platform development.",
+
   tags: isEs
-    ? ["Gumroad", "Licencia", "White-label"]
-    : ["Gumroad", "License", "White-label"],
-  requestHref: "/go/request-access/sg-saas-starter",
-  
+    ? [
+        "SG Hub Market",
+        "SaaS",
+        "Código fuente",
+      ]
+    : [
+        "SG Hub Market",
+        "SaaS",
+        "Source code",
+      ],
+
+  requestHref:
+    "https://www.sghub.com.uy/market/sg-saas-starter-pro",
+	
+	marketProduct: true,
 },
 
 

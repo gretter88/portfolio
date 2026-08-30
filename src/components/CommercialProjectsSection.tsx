@@ -1,6 +1,8 @@
-//src/components/CommercialProjectsSection.tsx
+// src/components/CommercialProjectsSection.tsx
+
 import React from "react";
 import AnimatedCard from "@/components/AnimatedCard";
+
 type CommercialProjectItem = {
   title: string;
   status: string;
@@ -11,12 +13,15 @@ type CommercialProjectItem = {
   requestHref: string;
   pdfHref?: string;
   featuredLabel?: string;
+
+  // Si es true, el proyecto es un producto
+  // disponible para compra directa en SG Hub Market.
+  marketProduct?: boolean;
 };
-
-
 
 type Props = {
   lang: "es" | "en";
+
   i: {
     commercialProjectsTitle: string;
     commercialProjectsKicker: string;
@@ -30,14 +35,15 @@ type Props = {
     commercialProjectsRequest: string;
     commercialProjectsBottomNote: string;
     commercialProjectsSecondaryNote: string;
-	commercialProjectsPdf: string;
+    commercialProjectsPdf: string;
 
     commercialProjectsItems: CommercialProjectItem[];
   };
 };
 
-
-function getTagStyle(tag: string): React.CSSProperties {
+function getTagStyle(
+  tag: string
+): React.CSSProperties {
   const t = tag.toLowerCase();
 
   if (
@@ -46,8 +52,10 @@ function getTagStyle(tag: string): React.CSSProperties {
     t.includes("licensing")
   ) {
     return {
-      borderColor: "rgba(59,130,246,0.28)",
-      background: "rgba(59,130,246,0.10)",
+      borderColor:
+        "rgba(59,130,246,0.28)",
+      background:
+        "rgba(59,130,246,0.10)",
       color: "#60a5fa",
     };
   }
@@ -59,8 +67,10 @@ function getTagStyle(tag: string): React.CSSProperties {
     t.includes("adaptation")
   ) {
     return {
-      borderColor: "rgba(168,85,247,0.28)",
-      background: "rgba(168,85,247,0.10)",
+      borderColor:
+        "rgba(168,85,247,0.28)",
+      background:
+        "rgba(168,85,247,0.10)",
       color: "#c084fc",
     };
   }
@@ -72,8 +82,10 @@ function getTagStyle(tag: string): React.CSSProperties {
     t.includes("deployment")
   ) {
     return {
-      borderColor: "rgba(34,197,94,0.28)",
-      background: "rgba(34,197,94,0.10)",
+      borderColor:
+        "rgba(34,197,94,0.28)",
+      background:
+        "rgba(34,197,94,0.10)",
       color: "#4ade80",
     };
   }
@@ -84,80 +96,127 @@ function getTagStyle(tag: string): React.CSSProperties {
     t.includes("venta")
   ) {
     return {
-      borderColor: "rgba(245,158,11,0.28)",
-      background: "rgba(245,158,11,0.10)",
+      borderColor:
+        "rgba(245,158,11,0.28)",
+      background:
+        "rgba(245,158,11,0.10)",
       color: "#fbbf24",
     };
   }
 
-if (
-  t.includes("saas") ||
-  t.includes("crm") ||
-  t.includes("business")
-) {
+  if (
+    t.includes("saas") ||
+    t.includes("crm") ||
+    t.includes("business")
+  ) {
+    return {
+      borderColor:
+        "rgba(14,165,233,0.28)",
+      background:
+        "rgba(14,165,233,0.10)",
+      color: "#38bdf8",
+    };
+  }
+
+  if (
+    t.includes("gaming") ||
+    t.includes("realtime") ||
+    t.includes("real-time")
+  ) {
+    return {
+      borderColor:
+        "rgba(245,158,11,0.28)",
+      background:
+        "rgba(245,158,11,0.10)",
+      color: "#fbbf24",
+    };
+  }
+
+  if (
+    t.includes("mvp") ||
+    t.includes("smart shopping")
+  ) {
+    return {
+      borderColor:
+        "rgba(34,197,94,0.28)",
+      background:
+        "rgba(34,197,94,0.10)",
+      color: "#4ade80",
+    };
+  }
+
+  if (
+    t.includes("booking") ||
+    t.includes("reservas")
+  ) {
+    return {
+      borderColor:
+        "rgba(14,165,233,0.28)",
+      background:
+        "rgba(14,165,233,0.10)",
+      color: "#38bdf8",
+    };
+  }
+
+  if (
+    t.includes("sg hub market") ||
+    t.includes("código fuente") ||
+    t.includes("source code")
+  ) {
+    return {
+      borderColor:
+        "rgba(34,211,238,0.28)",
+      background:
+        "rgba(34,211,238,0.10)",
+      color: "#67e8f9",
+    };
+  }
+
   return {
-    borderColor: "rgba(14,165,233,0.28)",
-    background: "rgba(14,165,233,0.10)",
-    color: "#38bdf8",
+    borderColor:
+      "var(--card-border)",
+    background:
+      "rgba(255,255,255,0.04)",
+    color:
+      "var(--muted)",
   };
 }
 
-if (
-  t.includes("gaming") ||
-  t.includes("realtime") ||
-  t.includes("real-time")
-) {
-  return {
-    borderColor: "rgba(245,158,11,0.28)",
-    background: "rgba(245,158,11,0.10)",
-    color: "#fbbf24",
-  };
-}
+export default function CommercialProjectsSection({
+  i,
+  lang,
+}: Props) {
+  const isEs =
+    lang === "es";
 
-if (
-  t.includes("mvp") ||
-  t.includes("smart shopping")
-) {
-  return {
-    borderColor: "rgba(34,197,94,0.28)",
-    background: "rgba(34,197,94,0.10)",
-    color: "#4ade80",
-  };
-}
-
-if (
-  t.includes("booking") ||
-  t.includes("reservas")
-) {
-  return {
-    borderColor: "rgba(14,165,233,0.28)",
-    background: "rgba(14,165,233,0.10)",
-    color: "#38bdf8",
-  };
-}
-  return {
-    borderColor: "var(--card-border)",
-    background: "rgba(255,255,255,0.04)",
-    color: "var(--muted)",
-  };
-}
-
-export default function CommercialProjectsSection({ i, lang }: Props) {
+  const marketUrl =
+    isEs
+      ? "https://www.sghub.com.uy/market"
+      : "https://www.sghub.com.uy/en/market";
 
   return (
-    <section id="commercial-projects" className="mt-16">
+    <section
+      id="commercial-projects"
+      className="mt-16"
+    >
       <div
-        className="rounded-3xl border overflow-hidden"
+        className="overflow-hidden rounded-3xl border"
         style={{
-          background: "var(--card)",
-          borderColor: "var(--card-border)",
-          boxShadow: "0 18px 60px rgba(0,0,0,0.12)",
+          background:
+            "var(--card)",
+          borderColor:
+            "var(--card-border)",
+          boxShadow:
+            "0 18px 60px rgba(0,0,0,0.12)",
         }}
       >
+        {/* Header */}
         <div
           className="border-b px-6 py-6 md:px-8"
           style={{
-            borderColor: "var(--card-border)",
+            borderColor:
+              "var(--card-border)",
+
             background:
               "linear-gradient(135deg, rgba(34,197,94,0.10), rgba(59,130,246,0.07), rgba(168,85,247,0.06))",
           }}
@@ -166,15 +225,24 @@ export default function CommercialProjectsSection({ i, lang }: Props) {
             <div
               className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs"
               style={{
-                borderColor: "rgba(34,197,94,0.35)",
-                background: "rgba(34,197,94,0.10)",
-                color: "var(--foreground)",
+                borderColor:
+                  "rgba(34,197,94,0.35)",
+
+                background:
+                  "rgba(34,197,94,0.10)",
+
+                color:
+                  "var(--foreground)",
               }}
             >
               <span
                 className="h-2 w-2 rounded-full bg-green-400"
-                style={{ boxShadow: "0 0 0 4px rgba(34,197,94,0.12)" }}
+                style={{
+                  boxShadow:
+                    "0 0 0 4px rgba(34,197,94,0.12)",
+                }}
               />
+
               {i.commercialProjectsBadge}
             </div>
 
@@ -184,14 +252,20 @@ export default function CommercialProjectsSection({ i, lang }: Props) {
 
             <p
               className="mt-3 text-sm leading-relaxed"
-              style={{ color: "var(--muted)" }}
+              style={{
+                color:
+                  "var(--muted)",
+              }}
             >
               {i.commercialProjectsKicker}
             </p>
 
             <p
               className="mt-3 text-sm leading-relaxed"
-              style={{ color: "var(--muted-2)" }}
+              style={{
+                color:
+                  "var(--muted-2)",
+              }}
             >
               {i.commercialProjectsIntro}
             </p>
@@ -199,144 +273,318 @@ export default function CommercialProjectsSection({ i, lang }: Props) {
         </div>
 
         <div className="px-6 py-6 md:px-8 md:py-8">
+          {/* Proyectos comerciales */}
           <div className="grid gap-4 md:grid-cols-3">
-            {i.commercialProjectsItems.map((project) => (
-             <AnimatedCard key={project.title}>
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div
-                    className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs"
+            {i.commercialProjectsItems.map(
+              (project) => (
+                <AnimatedCard
+                  key={project.title}
+                >
+                  {/* Estado */}
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div
+                      className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs"
+                      style={{
+                        borderColor:
+                          "rgba(34,197,94,0.25)",
+
+                        background:
+                          "rgba(34,197,94,0.08)",
+
+                        color:
+                          "var(--foreground)",
+                      }}
+                    >
+                      <span className="h-2 w-2 rounded-full bg-green-400" />
+
+                      {project.status}
+                    </div>
+                  </div>
+
+                  {/* Destacado */}
+                  {project.featuredLabel ? (
+                    <div className="mt-3">
+                      <span
+                        className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px]"
+                        style={{
+                          borderColor:
+                            project.marketProduct
+                              ? "rgba(34,211,238,0.28)"
+                              : "rgba(59,130,246,0.22)",
+
+                          background:
+                            project.marketProduct
+                              ? "rgba(34,211,238,0.08)"
+                              : "rgba(59,130,246,0.08)",
+
+                          color:
+                            project.marketProduct
+                              ? "#67e8f9"
+                              : "#93c5fd",
+                        }}
+                      >
+                        <span
+                          className="h-2 w-2 rounded-full"
+                          style={{
+                            background:
+                              "currentColor",
+                            opacity:
+                              0.9,
+                          }}
+                        />
+
+                        {
+                          project.featuredLabel
+                        }
+                      </span>
+                    </div>
+                  ) : null}
+
+                  {/* Título */}
+                  <h4
+                    className="mt-4 text-lg font-semibold"
                     style={{
-                      borderColor: "rgba(34,197,94,0.25)",
-                      background: "rgba(34,197,94,0.08)",
-                      color: "var(--foreground)",
+                      background:
+                        project.marketProduct
+                          ? "linear-gradient(90deg,#22d3ee,#60a5fa)"
+                          : "linear-gradient(90deg,#60a5fa,#a78bfa)",
+
+                      WebkitBackgroundClip:
+                        "text",
+
+                      color:
+                        "transparent",
                     }}
                   >
-                    <span className="h-2 w-2 rounded-full bg-green-400" />
-                    {project.status}
-                  </div>
-                </div>
-{project.featuredLabel ? (
-  <div className="mt-3">
-    <span
-      className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px]"
-      style={{
-        borderColor: "rgba(59,130,246,0.22)",
-        background: "rgba(59,130,246,0.08)",
-        color: "#93c5fd",
-      }}
-    >
-      <span
-        className="h-2 w-2 rounded-full"
-        style={{ background: "currentColor", opacity: 0.9 }}
-      />
-      {project.featuredLabel}
-    </span>
-  </div>
-) : null}
+                    {project.title}
+                  </h4>
 
-                <h4
-  className="mt-4 text-lg font-semibold"
-  style={{
-    background: "linear-gradient(90deg,#60a5fa,#a78bfa)",
-    WebkitBackgroundClip: "text",
-    color: "transparent",
-  }}
->
-  {project.title}
-</h4>
-
-                <p
-                  className="mt-3 text-sm leading-relaxed"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {project.description}
-                </p>
-
-                <div className="mt-4">
-                  <div
-                    className="text-xs uppercase tracking-wide"
-                    style={{ color: "var(--muted-2)" }}
+                  {/* Descripción */}
+                  <p
+                    className="mt-3 text-sm leading-relaxed"
+                    style={{
+                      color:
+                        "var(--muted)",
+                    }}
                   >
-                    {i.commercialProjectsModelLabel}
+                    {project.description}
+                  </p>
+
+                  {/* Modelo */}
+                  <div className="mt-4">
+                    <div
+                      className="text-xs uppercase tracking-wide"
+                      style={{
+                        color:
+                          "var(--muted-2)",
+                      }}
+                    >
+                      {
+                        i.commercialProjectsModelLabel
+                      }
+                    </div>
+
+                    <div className="mt-1 text-sm font-medium">
+                      {project.model}
+                    </div>
                   </div>
-                  <div className="mt-1 text-sm font-medium">{project.model}</div>
-                </div>
 
-                <div className="mt-4">
-                  <div
-                    className="text-xs uppercase tracking-wide"
-                    style={{ color: "var(--muted-2)" }}
-                  >
-                    {i.commercialProjectsIdealForLabel}
+                  {/* Ideal para */}
+                  <div className="mt-4">
+                    <div
+                      className="text-xs uppercase tracking-wide"
+                      style={{
+                        color:
+                          "var(--muted-2)",
+                      }}
+                    >
+                      {
+                        i.commercialProjectsIdealForLabel
+                      }
+                    </div>
+
+                    <div
+                      className="mt-1 text-sm leading-relaxed"
+                      style={{
+                        color:
+                          "var(--muted)",
+                      }}
+                    >
+                      {project.idealFor}
+                    </div>
                   </div>
-                  <div
-                    className="mt-1 text-sm leading-relaxed"
-                    style={{ color: "var(--muted)" }}
-                  >
-                    {project.idealFor}
+
+                  {/* Tags */}
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {project.tags.map(
+                      (tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full border px-3 py-1 text-xs"
+                          style={
+                            getTagStyle(
+                              tag
+                            )
+                          }
+                        >
+                          {tag}
+                        </span>
+                      )
+                    )}
                   </div>
-                </div>
 
-                <div className="mt-4 flex flex-wrap gap-2">
-  {project.tags.map((tag) => (
-    <span
-      key={tag}
-      className="rounded-full border px-3 py-1 text-xs"
-      style={getTagStyle(tag)}
-    >
-      {tag}
-    </span>
-  ))}
-</div>
+                  {/* CTAs */}
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <a
+                      href={
+                        project.requestHref
+                      }
 
+                      target={
+                        project.marketProduct
+                          ? "_blank"
+                          : undefined
+                      }
 
-<div className="mt-5 flex flex-wrap gap-3">
-  <a
-    href={project.requestHref}
-    className="inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-medium transition hover:-translate-y-0.5"
-    style={{
-      borderColor: "rgba(96,165,250,0.35)",
-background: "rgba(96,165,250,0.10)",
-color: "var(--foreground)",
-    }}
-  >
-    {i.commercialProjectsCardRequest}
-  </a>
+                      rel={
+                        project.marketProduct
+                          ? "noreferrer"
+                          : undefined
+                      }
 
-  {project.pdfHref ? (
-    <a
-      href={project.pdfHref}
-      target="_blank"
-      rel="noreferrer"
-      className="inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-medium transition hover:-translate-y-0.5"
-      style={{
-        borderColor: "rgba(59,130,246,0.35)",
-        background: "rgba(59,130,246,0.10)",
-        color: "var(--foreground)",
-      }}
-    >
-      {i.commercialProjectsPdf}
-    </a>
-  ) : null}
-</div>
+                      className="inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-medium transition hover:-translate-y-0.5"
 
+                      style={{
+                        borderColor:
+                          project.marketProduct
+                            ? "rgba(34,211,238,0.38)"
+                            : "rgba(96,165,250,0.35)",
 
+                        background:
+                          project.marketProduct
+                            ? "rgba(34,211,238,0.10)"
+                            : "rgba(96,165,250,0.10)",
 
+                        color:
+                          "var(--foreground)",
+                      }}
+                    >
+                      {project.marketProduct
+                        ? isEs
+                          ? "Comprar en SG Hub Market"
+                          : "Buy on SG Hub Market"
+                        : i.commercialProjectsCardRequest}
+                    </a>
 
-              </AnimatedCard>
-            ))}
+                    {project.pdfHref ? (
+                      <a
+                        href={
+                          project.pdfHref
+                        }
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-medium transition hover:-translate-y-0.5"
+                        style={{
+                          borderColor:
+                            "rgba(59,130,246,0.35)",
+
+                          background:
+                            "rgba(59,130,246,0.10)",
+
+                          color:
+                            "var(--foreground)",
+                        }}
+                      >
+                        {
+                          i.commercialProjectsPdf
+                        }
+                      </a>
+                    ) : null}
+                  </div>
+                </AnimatedCard>
+              )
+            )}
           </div>
 
+          {/* SG Hub Market */}
+          <div
+            className="mt-6 rounded-2xl border p-5 md:p-6"
+            style={{
+              borderColor:
+                "rgba(34,211,238,0.24)",
+
+              background:
+                "linear-gradient(135deg, rgba(34,211,238,0.08), rgba(59,130,246,0.06))",
+            }}
+          >
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <div
+                  className="text-xs uppercase tracking-[0.18em]"
+                  style={{
+                    color:
+                      "#67e8f9",
+                  }}
+                >
+                  SG Hub Market
+                </div>
+
+                <h4 className="mt-2 text-lg font-semibold">
+                  {isEs
+                    ? "Productos digitales disponibles para compra directa"
+                    : "Digital products available for direct purchase"}
+                </h4>
+
+                <p
+                  className="mt-2 max-w-2xl text-sm leading-relaxed"
+                  style={{
+                    color:
+                      "var(--muted)",
+                  }}
+                >
+                  {isEs
+                    ? "Los productos descargables de Santiago Gretter Software Studio se publican en SG Hub Market. Las plataformas de mayor alcance continúan disponibles mediante licenciamiento, white-label, partnership o implementación."
+                    : "Downloadable products from Santiago Gretter Software Studio are published on SG Hub Market. Larger platforms remain available through licensing, white-label, partnership, or custom deployment."}
+                </p>
+              </div>
+
+              <a
+                href={marketUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex shrink-0 items-center justify-center rounded-xl px-5 py-3 text-sm font-medium transition hover:-translate-y-0.5"
+                style={{
+                  background:
+                    "var(--foreground)",
+
+                  color:
+                    "var(--background)",
+                }}
+              >
+                {isEs
+                  ? "Visitar SG Hub Market"
+                  : "Visit SG Hub Market"}
+              </a>
+            </div>
+          </div>
+
+          {/* CTA general */}
           <div
             className="mt-6 rounded-2xl border p-5"
             style={{
-              borderColor: "var(--card-border)",
-              background: "rgba(255,255,255,0.02)",
+              borderColor:
+                "var(--card-border)",
+
+              background:
+                "rgba(255,255,255,0.02)",
             }}
           >
             <p
               className="text-sm leading-relaxed"
-              style={{ color: "var(--muted)" }}
+              style={{
+                color:
+                  "var(--muted)",
+              }}
             >
               {i.commercialProjectsCta}
             </p>
@@ -346,35 +594,56 @@ color: "var(--foreground)",
                 href="#contact"
                 className="rounded-xl px-4 py-2 text-sm font-medium"
                 style={{
-                  background: "var(--foreground)",
-                  color: "var(--background)",
+                  background:
+                    "var(--foreground)",
+
+                  color:
+                    "var(--background)",
                 }}
               >
-                {i.commercialProjectsContact}
+                {
+                  i.commercialProjectsContact
+                }
               </a>
 
-          <a
-  href={`/go/request-access/commercial?lang=${lang}`}
-  className="rounded-xl border px-4 py-2 text-sm font-medium"
-  style={{
-    background: "rgba(34,197,94,0.10)",
-    borderColor: "rgba(34,197,94,0.35)",
-    color: "var(--foreground)",
-  }}
->
-  {i.commercialProjectsRequest}
-</a>
+              <a
+                href={`/go/request-access/commercial?lang=${lang}`}
+                className="rounded-xl border px-4 py-2 text-sm font-medium"
+                style={{
+                  background:
+                    "rgba(34,197,94,0.10)",
 
+                  borderColor:
+                    "rgba(34,197,94,0.35)",
 
-
+                  color:
+                    "var(--foreground)",
+                }}
+              >
+                {
+                  i.commercialProjectsRequest
+                }
+              </a>
             </div>
 
             <div
               className="mt-4 text-xs leading-relaxed"
-              style={{ color: "var(--muted-2)" }}
+              style={{
+                color:
+                  "var(--muted-2)",
+              }}
             >
-              <div>{i.commercialProjectsBottomNote}</div>
-              <div className="mt-1">{i.commercialProjectsSecondaryNote}</div>
+              <div>
+                {
+                  i.commercialProjectsBottomNote
+                }
+              </div>
+
+              <div className="mt-1">
+                {
+                  i.commercialProjectsSecondaryNote
+                }
+              </div>
             </div>
           </div>
         </div>

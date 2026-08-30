@@ -4,6 +4,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { LINKS, type Lang, type Project } from "@/lib/i18n";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackPortfolioEvent } from "@/lib/track-client";
 
 function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
@@ -185,7 +186,7 @@ const isMobileProject = (p: Project) => {
     const slug = getProjectSlug(p);
 
     if (slug === "sg-saas-starter") {
-      return isEs ? "Comprar en Gumroad" : "Buy on Gumroad";
+      return isEs ? "Comprar en SG Hub Market" : "Buy on SG Hub Market";
     }
 
   if (
@@ -200,7 +201,7 @@ const isMobileProject = (p: Project) => {
     return "Demo";
   };
 
-  const isGumroadProduct = (p: Project) => {
+  const isMarketProduct = (p: Project) => {
     return getProjectSlug(p) === "sg-saas-starter";
   };
 
@@ -226,13 +227,21 @@ const isMobileProject = (p: Project) => {
   const getCommercialLabel = (p: Project) => {
     const slug = getProjectSlug(p);
 
+    if (slug === "sghub") {
+      return isEs ? "Ecosistema digital" : "Digital ecosystem";
+    }
+
+    if (slug === "sg-saas-starter") {
+      return isEs ? "Producto digital" : "Digital product";
+    }
+
     if (slug === "radar") {
       return isEs ? "Licenciamiento" : "Licensing";
     }
-	
-	if (slug === "sg-booking-pro") {
-  return isEs ? "SaaS reservas" : "Booking SaaS";
-}
+
+    if (slug === "sg-booking-pro") {
+      return isEs ? "SaaS reservas" : "Booking SaaS";
+    }
 
     if (slug === "marketplace") {
       return isEs ? "White-label / Implementación" : "White-label / Deployment";
@@ -241,17 +250,24 @@ const isMobileProject = (p: Project) => {
     if (slug === "kiosco") {
       return isEs ? "Adaptable" : "Adaptable";
     }
-	
-	if (slug === "playduel") {
-  return isEs ? "Gaming realtime" : "Realtime gaming";
-}
 
+    if (slug === "playduel") {
+      return isEs ? "Gaming realtime" : "Realtime gaming";
+    }
 
     return null;
   };
 
   const getCommercialBadgeStyle = (p: Project): React.CSSProperties => {
     const slug = getProjectSlug(p);
+
+    if (slug === "sghub" || slug === "sg-saas-starter") {
+      return {
+        border: "1px solid rgba(34,211,238,0.28)",
+        background: "rgba(34,211,238,0.10)",
+        color: "#67e8f9",
+      };
+    }
 
     if (slug === "radar") {
       return {
@@ -260,15 +276,14 @@ const isMobileProject = (p: Project) => {
         color: "#60a5fa",
       };
     }
-	
-	
-	if (slug === "sg-booking-pro") {
-  return {
-    border: "1px solid rgba(14,165,233,0.28)",
-    background: "rgba(14,165,233,0.10)",
-    color: "#38bdf8",
-  };
-}
+
+    if (slug === "sg-booking-pro") {
+      return {
+        border: "1px solid rgba(14,165,233,0.28)",
+        background: "rgba(14,165,233,0.10)",
+        color: "#38bdf8",
+      };
+    }
 
     if (slug === "marketplace") {
       return {
@@ -285,13 +300,14 @@ const isMobileProject = (p: Project) => {
         color: "#c084fc",
       };
     }
-if (slug === "playduel") {
-  return {
-    border: "1px solid rgba(245,158,11,0.28)",
-    background: "rgba(245,158,11,0.10)",
-    color: "#fbbf24",
-  };
-}
+
+    if (slug === "playduel") {
+      return {
+        border: "1px solid rgba(245,158,11,0.28)",
+        background: "rgba(245,158,11,0.10)",
+        color: "#fbbf24",
+      };
+    }
 
     return {
       border: "1px solid var(--card-border)",
@@ -311,7 +327,15 @@ if (slug === "playduel") {
 
   const getPublicDemoPath = (p: Project) => {
     const slug = getProjectSlug(p);
-	if (slug === "sghub") return "https://www.sghub.com.uy";
+
+    if (slug === "sghub") return "https://www.sghub.com.uy";
+
+    if (slug === "sg-saas-starter") {
+      return isEs
+        ? "https://www.sghub.com.uy/market/sg-saas-starter-pro"
+        : "https://www.sghub.com.uy/en/market/sg-saas-starter-pro";
+    }
+
     if (slug === "radar") return "/go/demo/radar";
     if (slug === "museo") return "/go/demo/museo";
 	if (slug === "sociedad-canarias-uy") {
@@ -328,43 +352,13 @@ const getProjectDetailPath = (p: Project) => {
 };
 
 
-  const getVisitorId = () => {
-    if (typeof document === "undefined") return null;
-    const cookieName = "visitor_id=";
-    const cookies = document.cookie.split(";");
-    for (const cookie of cookies) {
-      const trimmed = cookie.trim();
-      if (trimmed.startsWith(cookieName)) {
-        return trimmed.substring(cookieName.length);
-      }
-    }
-    const id =
-  globalThis.crypto?.randomUUID?.() ??
-  `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    document.cookie = `visitor_id=${id}; path=/; max-age=31536000; samesite=lax`;
-    return id;
-  };
-
-  const trackModalEvent = async (path: string, project: string) => {
-    try {
-      const visitorId = getVisitorId();
-      await fetch("/api/track", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "click",
-          path,
-          lang,
-          project,
-          visitorId,
-          referrer:
-            typeof document !== "undefined" ? document.referrer || null : null,
-        }),
-        keepalive: true,
-      });
-    } catch {}
+  const trackModalEvent = (path: string, project: string) => {
+    trackPortfolioEvent({
+      type: "click",
+      path,
+      lang,
+      project,
+    });
   };
 
   const sortedProjects = useMemo(() => {
@@ -799,12 +793,12 @@ color: "var(--muted)",
                     <a
                       className={ghostBtnClass}
                       style={
-                        isGumroadProduct(p)
+                        isMarketProduct(p)
                           ? {
-                              background: "rgba(168,85,247,0.12)",
-                              borderColor: "rgba(168,85,247,0.35)",
+                              background: "rgba(34,211,238,0.10)",
+                              borderColor: "rgba(34,211,238,0.38)",
                               color: "var(--foreground)",
-                              boxShadow: "0 10px 24px rgba(168,85,247,0.16)",
+                              boxShadow: "0 10px 24px rgba(34,211,238,0.14)",
                             }
                           : isLiveWebsiteProject(p)
                           ? {
@@ -819,11 +813,11 @@ color: "var(--muted)",
                       rel="noreferrer"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      {isGumroadProduct(p) ? (
+                      {isMarketProduct(p) ? (
                         <span className="inline-flex items-center gap-2">
                           <span
                             className="h-2 w-2 rounded-full"
-                            style={{ background: "#c084fc" }}
+                            style={{ background: "#67e8f9" }}
                           />
                           {getPrimaryLinkLabel(p)}
                         </span>
@@ -1571,7 +1565,12 @@ color: "var(--muted)",
                             <a
                               className={primaryBtnClass}
                               style={
-                                isLiveWebsiteProject(activeProject)
+                                isMarketProduct(activeProject)
+                                  ? {
+                                      background: "#0891b2",
+                                      color: "#ffffff",
+                                    }
+                                  : isLiveWebsiteProject(activeProject)
                                   ? {
                                       background: "#16a34a",
                                       color: "#ffffff",
@@ -1582,7 +1581,8 @@ color: "var(--muted)",
                               target="_blank"
                               rel="noreferrer"
                             >
-                              {isLiveWebsiteProject(activeProject) ? (
+                              {isMarketProduct(activeProject) ||
+                              isLiveWebsiteProject(activeProject) ? (
                                 <span className="inline-flex items-center gap-2">
                                   <span className="h-2 w-2 rounded-full bg-white/90" />
                                   {getPrimaryLinkLabel(activeProject)}
