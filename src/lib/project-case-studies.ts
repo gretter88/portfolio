@@ -38,6 +38,254 @@ export function getCaseStudies(lang: Lang): CaseStudy[] {
   const isEs = lang === "es";
 
   return [
+  
+  {
+  slug: "sghub",
+  title: "SG Hub",
+
+  subtitle: isEs
+    ? "Ecosistema digital full stack con Tools, Marketplace y procesamiento de documentos"
+    : "Full-stack digital ecosystem with Tools, Marketplace, and document processing",
+
+  status: isEs
+    ? "Web · Producción"
+    : "Web · Production",
+
+  summary: isEs
+    ? "SG Hub es un ecosistema digital full stack en producción que integra herramientas online, marketplace multi-autor de recursos digitales, productos propios, blog, directorio de IA y procesamiento avanzado de documentos mediante API y workers."
+    : "SG Hub is a production full-stack digital ecosystem combining online tools, a multi-author digital resources marketplace, proprietary products, a blog, AI directory, and advanced document processing through an API and workers.",
+
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Redis",
+    "BullMQ",
+    "Docker",
+    "Cloudflare R2",
+    "Mercado Pago",
+    "OCRmyPDF",
+    "Tesseract",
+    "Vercel",
+    "Render",
+  ],
+
+  heroImage: "/screenshots/sghub-1.webp",
+
+screenshots: [
+  {
+    src: "/screenshots/sghub-1.webp",
+    alt: isEs
+      ? "SG Hub — Home y visión general"
+      : "SG Hub — Home and overview",
+  },
+  {
+    src: "/screenshots/sghub-2.webp",
+    alt: isEs
+      ? "SG Hub — Market de recursos digitales"
+      : "SG Hub — Digital resources Market",
+  },
+  {
+    src: "/screenshots/sghub-3.webp",
+    alt: isEs
+      ? "SG Hub — Herramientas online"
+      : "SG Hub — Online tools",
+  },
+  {
+    src: "/screenshots/sghub-4.webp",
+    alt: isEs
+      ? "SG Hub — OCR PDF completado"
+      : "SG Hub — Completed PDF OCR",
+  },
+  {
+    src: "/screenshots/sghub-5.webp",
+    alt: isEs
+      ? "SG Hub — Directorio IA"
+      : "SG Hub — AI directory",
+  },
+  {
+    src: "/screenshots/sghub-6.webp",
+    alt: isEs
+      ? "SG Hub — SG SaaS Starter Pro"
+      : "SG Hub — SG SaaS Starter Pro",
+  },
+  {
+    src: "/screenshots/sghub-7.webp",
+    alt: isEs
+      ? "SG Hub — Blog"
+      : "SG Hub — Blog",
+  },
+  {
+    src: "/screenshots/sghub-8.webp",
+    alt: isEs
+      ? "SG Hub — Plantillas"
+      : "SG Hub — Templates",
+  },
+  {
+    src: "/screenshots/sghub-9.webp",
+    alt: isEs
+      ? "SG Hub — Autores del Market"
+      : "SG Hub — Market authors",
+  },
+],
+
+  problem: isEs
+    ? "Crear una plataforma digital propia capaz de reunir herramientas útiles, contenido, productos digitales y un marketplace comercial dentro de una misma arquitectura, manteniendo SEO, monetización, escalabilidad y procesamiento intensivo de archivos."
+    : "Build a proprietary digital platform capable of combining useful tools, content, digital products, and a commercial marketplace in a single architecture while supporting SEO, monetization, scalability, and compute-intensive file processing.",
+
+  solution: isEs
+    ? "Se desarrolló una arquitectura distribuida con Next.js para la plataforma pública, Node.js/Express para servicios de procesamiento, MongoDB para persistencia, Redis y BullMQ para jobs asíncronos, Cloudflare R2 para archivos y Mercado Pago para compras. El ecosistema incorpora además autores, liquidaciones, promociones, analytics, notificaciones y productos propios."
+    : "A distributed architecture was built with Next.js for the public platform, Node.js/Express for processing services, MongoDB for persistence, Redis and BullMQ for asynchronous jobs, Cloudflare R2 for file storage, and Mercado Pago for purchases. The ecosystem also includes authors, payouts, promotions, analytics, notifications, and proprietary products.",
+
+  highlights: isEs
+    ? [
+        "Plataforma web bilingüe ES/EN en producción.",
+        "Catálogo de herramientas online orientadas a utilidad y adquisición orgánica.",
+        "Marketplace de recursos digitales gratuitos y pagos.",
+        "Arquitectura multi-autor con solicitud, revisión y aprobación administrativa.",
+        "Panel del autor con ventas, vistas, descargas, conversión y actividad.",
+        "Sistema de ganancias y solicitudes de liquidación.",
+        "Pagos con Mercado Pago y soporte para UYU/USD.",
+        "Cupones, promociones públicas y recursos destacados.",
+        "Productos oficiales SG Hub con versiones, changelog y relaciones Lite/Pro.",
+        "Notificaciones para usuarios, autores y administradores.",
+        "Processing API independiente con autenticación interna.",
+        "Colas asíncronas mediante Redis + BullMQ.",
+        "OCR PDF con OCRmyPDF y Tesseract ES/EN.",
+        "Almacenamiento de archivos en Cloudflare R2 mediante URLs firmadas.",
+        "Infraestructura distribuida entre Vercel, Render y Cloudflare.",
+      ]
+    : [
+        "Bilingual ES/EN production web platform.",
+        "Online tools catalog focused on utility and organic acquisition.",
+        "Marketplace for free and paid digital resources.",
+        "Multi-author architecture with application, review, and admin approval.",
+        "Author dashboard with sales, views, downloads, conversion, and activity.",
+        "Earnings and payout request system.",
+        "Mercado Pago payments with UYU/USD support.",
+        "Coupons, public promotions, and featured resources.",
+        "Official SG Hub products with versions, changelog, and Lite/Pro relationships.",
+        "Notifications for users, authors, and administrators.",
+        "Independent Processing API with internal authentication.",
+        "Asynchronous queues using Redis + BullMQ.",
+        "PDF OCR using OCRmyPDF and Tesseract ES/EN.",
+        "Cloudflare R2 file storage through signed URLs.",
+        "Distributed infrastructure across Vercel, Render, and Cloudflare.",
+      ],
+
+  businessValue: isEs
+    ? [
+        "Centraliza adquisición orgánica, herramientas gratuitas y monetización dentro de un mismo ecosistema.",
+        "Permite vender productos digitales propios y de terceros.",
+        "El modelo multi-autor permite evolucionar el Market hacia un marketplace escalable.",
+        "La arquitectura de Processing API permite separar cargas intensivas del frontend.",
+        "Tools, Blog y SEO funcionan como canales de adquisición para el Market.",
+        "La infraestructura modular permite agregar nuevas herramientas y productos sin rehacer la plataforma.",
+      ]
+    : [
+        "Combines organic acquisition, free tools, and monetization within one ecosystem.",
+        "Supports sales of proprietary and third-party digital products.",
+        "The multi-author model enables the Market to evolve into a scalable marketplace.",
+        "The Processing API architecture isolates intensive workloads from the frontend.",
+        "Tools, Blog, and SEO work as acquisition channels for the Market.",
+        "The modular infrastructure allows new tools and products to be added without rebuilding the platform.",
+      ],
+
+  nextSteps: isEs
+    ? [
+        "Expandir catálogo de herramientas.",
+        "Ampliar productos digitales propios.",
+        "Escalar el marketplace multi-autor.",
+        "Continuar optimización SEO internacional.",
+        "Evolucionar SG Hub hacia aplicación móvil.",
+      ]
+    : [
+        "Expand the tools catalog.",
+        "Grow the proprietary digital product catalog.",
+        "Scale the multi-author marketplace.",
+        "Continue international SEO optimization.",
+        "Evolve SG Hub into a mobile application.",
+      ],
+
+  seoKeywords: isEs
+    ? [
+        "Next.js",
+        "Marketplace digital",
+        "SaaS",
+        "Node.js",
+        "MongoDB",
+        "Redis",
+        "BullMQ",
+        "Docker",
+        "Cloudflare R2",
+        "Mercado Pago",
+        "OCR PDF",
+        "Tesseract",
+        "SEO",
+        "Vercel",
+        "Render",
+      ]
+    : [
+        "Next.js",
+        "Digital marketplace",
+        "SaaS",
+        "Node.js",
+        "MongoDB",
+        "Redis",
+        "BullMQ",
+        "Docker",
+        "Cloudflare R2",
+        "Mercado Pago",
+        "PDF OCR",
+        "Tesseract",
+        "SEO",
+        "Vercel",
+        "Render",
+      ],
+
+  requestHref: "https://www.sghub.com.uy",
+
+  commercial: {
+    availableFor: isEs
+      ? [
+          "Producto propio",
+          "Plataforma en producción",
+          "Evolución continua",
+        ]
+      : [
+          "Proprietary product",
+          "Production platform",
+          "Continuous evolution",
+        ],
+
+    pricingModel: isEs
+      ? "Producto propio de SG Hub / Santiago Gretter Software Studio"
+      : "Proprietary product by SG Hub / Santiago Gretter Software Studio",
+
+    targetAudience: isEs
+      ? [
+          "Creadores digitales",
+          "Desarrolladores",
+          "Profesionales",
+          "Emprendedores",
+          "Usuarios de herramientas online",
+        ]
+      : [
+          "Digital creators",
+          "Developers",
+          "Professionals",
+          "Entrepreneurs",
+          "Online tools users",
+        ],
+
+    contactLabel: isEs
+      ? "Visitar SG Hub"
+      : "Visit SG Hub",
+  },
+},
+  
     {
       slug: "playduel",
       title: "PlayDuel",

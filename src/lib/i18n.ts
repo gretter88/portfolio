@@ -42,6 +42,140 @@ export function t(lang: Lang) {
 
 const projects: Project[] = [
 {
+  order: 0,
+  title: "SG Hub",
+  desc: isEs
+    ? "Ecosistema digital full stack en producción que integra herramientas online, marketplace multi-autor de recursos digitales, productos propios, blog, directorio de IA y procesamiento avanzado de documentos. Incluye pagos, autores, ventas, liquidaciones, promociones, analytics, notificaciones, almacenamiento cloud y workers asíncronos."
+    : "Production full-stack digital ecosystem combining online tools, a multi-author digital resources marketplace, proprietary products, blog, AI directory, and advanced document processing. It includes payments, authors, sales, payouts, promotions, analytics, notifications, cloud storage, and asynchronous workers.",
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Redis",
+    "BullMQ",
+    "Docker",
+    "Cloudflare R2",
+    "Mercado Pago",
+    "OCRmyPDF",
+    "Tesseract",
+    "Vercel",
+    "Render",
+  ],
+  image: {
+  src: "/screenshots/sghub-1.webp",
+  alt: isEs
+    ? "SG Hub — Ecosistema digital de herramientas, Market, IA y recursos"
+    : "SG Hub — Digital ecosystem for tools, Market, AI, and resources",
+},
+
+screenshots: [
+  {
+    src: "/screenshots/sghub-1.webp",
+    alt: isEs
+      ? "SG Hub — Home y visión general"
+      : "SG Hub — Home and overview",
+  },
+  {
+    src: "/screenshots/sghub-2.webp",
+    alt: isEs
+      ? "SG Hub — Market de recursos digitales"
+      : "SG Hub — Digital resources Market",
+  },
+  {
+    src: "/screenshots/sghub-3.webp",
+    alt: isEs
+      ? "SG Hub — Herramientas online"
+      : "SG Hub — Online tools",
+  },
+  {
+    src: "/screenshots/sghub-4.webp",
+    alt: isEs
+      ? "SG Hub — OCR PDF completado"
+      : "SG Hub — Completed PDF OCR",
+  },
+  {
+    src: "/screenshots/sghub-5.webp",
+    alt: isEs
+      ? "SG Hub — Directorio IA"
+      : "SG Hub — AI directory",
+  },
+  {
+    src: "/screenshots/sghub-6.webp",
+    alt: isEs
+      ? "SG Hub — SG SaaS Starter Pro"
+      : "SG Hub — SG SaaS Starter Pro",
+  },
+  {
+    src: "/screenshots/sghub-7.webp",
+    alt: isEs
+      ? "SG Hub — Blog"
+      : "SG Hub — Blog",
+  },
+  {
+    src: "/screenshots/sghub-8.webp",
+    alt: isEs
+      ? "SG Hub — Plantillas"
+      : "SG Hub — Templates",
+  },
+  {
+    src: "/screenshots/sghub-9.webp",
+    alt: isEs
+      ? "SG Hub — Autores del Market"
+      : "SG Hub — Market authors",
+  },
+],
+  links: {
+    demo: "https://www.sghub.com.uy",
+    repo: "",
+  },
+  badge: isEs
+    ? "Web: Live · Marketplace + Tools"
+    : "Web: Live · Marketplace + Tools",
+  statusNote: isEs
+    ? "Estado actual: plataforma en producción con herramientas online, marketplace multi-autor, pagos con Mercado Pago, productos digitales, analytics y procesamiento de documentos mediante API + workers."
+    : "Current status: production platform with online tools, multi-author marketplace, Mercado Pago payments, digital products, analytics, and document processing through an API + workers.",
+  features: isEs
+    ? [
+        "Ecosistema web en producción desarrollado con Next.js y TypeScript",
+        "Marketplace de recursos digitales gratuitos y pagos",
+        "Arquitectura multi-autor con solicitud, validación y aprobación administrativa",
+        "Panel de autor con ventas, vistas, descargas, conversión y actividad",
+        "Sistema de ganancias y solicitudes de liquidación para autores",
+        "Pagos integrados con Mercado Pago y soporte UYU/USD",
+        "Cupones, promociones públicas y recursos destacados",
+        "Productos oficiales SG Hub con versiones, changelog y relaciones Lite/Pro",
+        "Centro de notificaciones para usuarios, autores y administradores",
+        "Herramientas online orientadas a SEO y adquisición orgánica",
+        "Procesamiento de PDF mediante API Node/Express y workers BullMQ",
+        "OCR con OCRmyPDF y Tesseract en español e inglés",
+        "Redis para colas y MongoDB para persistencia",
+        "Cloudflare R2 para almacenamiento de archivos mediante URLs firmadas",
+        "Infraestructura distribuida entre Vercel, Render y Cloudflare",
+        "Google Analytics, Search Console y monetización con AdSense",
+      ]
+    : [
+        "Production web ecosystem built with Next.js and TypeScript",
+        "Marketplace for free and paid digital resources",
+        "Multi-author architecture with application, verification, and admin approval",
+        "Author dashboard with sales, views, downloads, conversion, and activity",
+        "Author earnings and payout request system",
+        "Mercado Pago integration with UYU/USD support",
+        "Coupons, public promotions, and featured resources",
+        "Official SG Hub products with versions, changelog, and Lite/Pro relationships",
+        "Notification center for users, authors, and administrators",
+        "Online tools focused on SEO and organic acquisition",
+        "PDF processing through a Node/Express API and BullMQ workers",
+        "OCR using OCRmyPDF and Tesseract in Spanish and English",
+        "Redis queues and MongoDB persistence",
+        "Cloudflare R2 storage through signed URLs",
+        "Distributed infrastructure across Vercel, Render, and Cloudflare",
+        "Google Analytics, Search Console, and AdSense monetization",
+      ],
+},
+
+{
   order: 1,
   title: "RadarSocial",
   desc: isEs
@@ -1750,7 +1884,7 @@ statsTitle: isEs ? "Resultados" : "Results",
 statsItems: isEs
   ? [
       {
-        value: "11+",
+        value: "12+",
         label: "Proyectos",
         desc: "Web, Mobile, SaaS y plataformas en producción",
       },
@@ -1765,14 +1899,14 @@ statsItems: isEs
         desc: "Frontend, backend, apps móviles y tiempo real",
       },
       {
-        value: "6+",
+        value: "8+",
         label: "Productos propios",
-        desc: "RadarSocial, SG Booking Pro, NutriMVP, PlayDuel, CRM y SaaS Starter",
+        desc: "SG Hub, RadarSocial, SG Booking Pro, NutriMVP, PlayDuel, CRM, Marketplace y SaaS Starter",
       },
     ]
   : [
       {
-        value: "11+",
+        value: "12+",
         label: "Projects",
         desc: "Web, Mobile, SaaS and production platforms",
       },
@@ -1787,9 +1921,9 @@ statsItems: isEs
         desc: "Frontend, backend, mobile apps and realtime",
       },
       {
-        value: "6+",
+        value: "8+",
         label: "Own Products",
-        desc: "RadarSocial, SG Booking Pro, NutriMVP, PlayDuel, CRM and SaaS Starter",
+        desc: "SG Hub, RadarSocial, SG Booking Pro, NutriMVP, PlayDuel, CRM, Marketplace and SaaS Starter",
       },
     ],
 
@@ -1846,9 +1980,22 @@ techStackGroups: isEs
         items: ["React Native", "Socket.IO", "WebRTC", "Push Notifications", "Maps", "BLE"],
       },
       {
-        title: "Backend & Cloud",
-        items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Supabase", "Firebase", "Vercel"],
-      },
+  title: "Backend & Cloud",
+  items: [
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "PostgreSQL",
+    "Redis",
+    "BullMQ",
+    "Docker",
+    "Cloudflare R2",
+    "Supabase",
+    "Firebase",
+    "Vercel",
+    "Render",
+  ],
+},
     ]
   : [
       {
@@ -1859,10 +2006,23 @@ techStackGroups: isEs
         title: "Mobile & Realtime",
         items: ["React Native", "Socket.IO", "WebRTC", "Push Notifications", "Maps", "BLE"],
       },
-      {
-        title: "Backend & Cloud",
-        items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Supabase", "Firebase", "Vercel"],
-      },
+     {
+  title: "Backend & Cloud",
+  items: [
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "PostgreSQL",
+    "Redis",
+    "BullMQ",
+    "Docker",
+    "Cloudflare R2",
+    "Supabase",
+    "Firebase",
+    "Vercel",
+    "Render",
+  ],
+},
     ],
 	
 	
@@ -1885,7 +2045,7 @@ whyUsItems: isEs
       },
       {
         title: "Productos propios",
-        desc: "Construcción de plataformas reales como RadarSocial, NutriMVP, SG Copilot CRM, PlayDuel y starters SaaS.",
+       desc: "Construcción de plataformas reales como SG Hub, RadarSocial, SG Booking Pro, SG Copilot CRM, NutriMVP y PlayDuel.",
       },
       {
         title: "Enfoque en negocio",
@@ -1903,7 +2063,7 @@ whyUsItems: isEs
       },
       {
         title: "Own products",
-        desc: "Built real platforms such as RadarSocial, NutriMVP, SG Copilot CRM, PlayDuel, and SaaS starters.",
+        desc: "Building real products such as SG Hub, RadarSocial, SG Booking Pro, SG Copilot CRM, NutriMVP, and PlayDuel.",
       },
       {
         title: "Business focus",

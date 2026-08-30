@@ -168,9 +168,9 @@ export default function HeroSection({ i, lang }: HeroSectionProps) {
             <div className="grid gap-3">
               {[
                 {
-                  value: "10+",
-                  label: lang === "es" ? "Proyectos reales" : "Real projects",
-                },
+  value: "12+",
+  label: lang === "es" ? "Proyectos reales" : "Real projects",
+},
                 {
                   value: "15+",
                   label: lang === "es" ? "Años en IT" : "Years in IT",

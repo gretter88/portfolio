@@ -26,6 +26,12 @@ export async function generateMetadata({
 
   const url = `https://www.santiagogretter.com.uy/${lang}/projects/${study.slug}`;
 const seoTitleMap: Record<string, string> = {
+	
+	sghub:
+  lang === "es"
+    ? "SG Hub | Marketplace, Tools y Plataforma Full Stack | Santiago Gretter"
+    : "SG Hub | Marketplace, Tools & Full-Stack Platform | Santiago Gretter",
+	
   nutrimvp:
     "NutriMVP | App de nutrición, precios y supermercados | Santiago Gretter",
 
@@ -43,6 +49,12 @@ const seoTitle =
   
   
   const seoDescriptionMap: Record<string, string> = {
+	  
+	sghub:
+  lang === "es"
+    ? "SG Hub es un ecosistema full stack con herramientas online, marketplace multi-autor, productos digitales, directorio IA y procesamiento OCR PDF."
+    : "SG Hub is a full-stack ecosystem with online tools, a multi-author marketplace, digital products, AI directory, and PDF OCR processing.",
+	
   nutrimvp:
     "Aplicación móvil para nutrición, comparación de precios, supermercados cercanos y gestión inteligente de compras.",
 
@@ -57,9 +69,9 @@ const seoTitle =
   
   
   
-  return {
-    title: seoTitle,
-    description: study.summary,
+return {
+  title: seoTitle,
+  description: seoDescriptionMap[study.slug] ?? study.summary,
     alternates: {
       canonical: url,
       languages: {
@@ -84,10 +96,10 @@ const seoTitle =
       ],
       locale: lang === "es" ? "es_UY" : "en_US",
     },
-    twitter: {
-      card: "summary_large_image",
-      title: `${study.title} · Case Study`,
-      description: study.summary,
+twitter: {
+  card: "summary_large_image",
+  title: `${study.title} · Case Study`,
+  description: seoDescriptionMap[study.slug] ?? study.summary,
       images: [`/${lang}/projects/${study.slug}/opengraph-image`],
     },
   };
@@ -117,7 +129,7 @@ const faqs = getProjectFaqs(study.slug, lang);
 
   const mutedStyle: React.CSSProperties = { color: "var(--muted)" };
   const muted2Style: React.CSSProperties = { color: "var(--muted-2)" };
-
+const isSgHub = study.slug === "sghub";
 
 
 const projectSchema = {
@@ -125,17 +137,35 @@ const projectSchema = {
   "@type": "SoftwareApplication",
   name: study.title,
   description: study.summary,
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web, Android",
+  applicationCategory: isSgHub
+    ? "UtilitiesApplication"
+    : "BusinessApplication",
+  operatingSystem: isSgHub
+    ? "Web"
+    : "Web, Android",
   creator: {
     "@type": "Person",
     name: "Santiago Gretter",
     url: "https://www.santiagogretter.com.uy",
   },
-  image: study.heroImage,
+  image: `https://www.santiagogretter.com.uy${study.heroImage}`,
   url: `https://www.santiagogretter.com.uy/${lang}/projects/${study.slug}`,
-};
 
+  ...(isSgHub
+    ? {
+        featureList: [
+          "Online tools",
+          "Digital resources marketplace",
+          "Multi-author marketplace",
+          "PDF processing",
+          "PDF OCR",
+          "AI tools directory",
+          "Blog",
+          "Downloadable templates",
+        ],
+      }
+    : {}),
+};
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -178,26 +208,7 @@ const faqSchema =
       }
     : null;
 	
-	const productSchema = {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  name: study.title,
-  description: study.summary,
-  image: study.heroImage,
-  brand: {
-    "@type": "Brand",
-    name: "Santiago Gretter Software Studio",
-  },
-  category: "Software",
-  offers: {
-    "@type": "Offer",
-    url: `https://www.santiagogretter.com.uy/${lang}/projects/${study.slug}`,
-    priceCurrency: "USD",
-    price: "0",
-    availability: "https://schema.org/InStock",
-    businessFunction: "https://schema.org/LeaseOut",
-  },
-};
+
   return (
     <main>
 	
@@ -227,12 +238,7 @@ const faqSchema =
 ) : null}
 
 
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify(productSchema),
-  }}
-/>
+
       <div className="mx-auto max-w-5xl px-6 py-12">
         <div className="mb-8">
           <Link

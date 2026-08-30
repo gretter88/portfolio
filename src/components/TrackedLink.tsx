@@ -2,21 +2,9 @@
 
 import React from "react";
 
-function getVisitorId() {
-  const cookieName = "visitor_id=";
-  const cookies = document.cookie.split(";");
-
-  for (const cookie of cookies) {
-    const trimmed = cookie.trim();
-    if (trimmed.startsWith(cookieName)) {
-      return trimmed.substring(cookieName.length);
-    }
-  }
-
-  const id = crypto.randomUUID();
-  document.cookie = `visitor_id=${id}; path=/; max-age=31536000; samesite=lax`;
-  return id;
-}
+import {
+  trackPortfolioEvent,
+} from "@/lib/track-client";
 
 type Props = {
   href: string;
@@ -39,25 +27,12 @@ export default function TrackedLink({
   target,
   rel,
 }: Props) {
-  async function handleClick() {
-    try {
-      const visitorId = getVisitorId();
-
-      await fetch("/api/track", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "click",
-          path: trackPath,
-          lang: lang || null,
-          visitorId,
-          referrer: document.referrer || null,
-        }),
-        keepalive: true,
-      });
-    } catch {}
+  function handleClick() {
+    trackPortfolioEvent({
+      type: "click",
+      path: trackPath,
+      lang: lang || null,
+    });
   }
 
   return (
@@ -73,4 +48,3 @@ export default function TrackedLink({
     </a>
   );
 }
-

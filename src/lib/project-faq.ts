@@ -6,6 +6,63 @@ export type ProjectFaqItem = {
 };
 
 const faqs: Record<string, Record<Lang, ProjectFaqItem[]>> = {
+sghub: {
+  es: [
+    {
+      question: "¿Qué es SG Hub?",
+      answer:
+        "SG Hub es un ecosistema digital que integra herramientas online, recursos digitales, un marketplace multi-autor, blog, directorio de inteligencia artificial y servicios avanzados de procesamiento de documentos.",
+    },
+    {
+      question: "¿SG Hub incluye un marketplace propio?",
+      answer:
+        "Sí. SG Hub Market permite publicar recursos digitales gratuitos y pagos, incluye productos oficiales de SG Hub y dispone de una arquitectura multi-autor con revisión y aprobación.",
+    },
+    {
+      question: "¿Cómo procesa SG Hub tareas avanzadas como OCR PDF?",
+      answer:
+        "SG Hub utiliza una Processing API independiente con Node.js y Express, Redis y BullMQ para colas de trabajo, workers Docker, OCRmyPDF y Tesseract, además de Cloudflare R2 para almacenamiento de archivos.",
+    },
+    {
+      question: "¿SG Hub está actualmente en producción?",
+      answer:
+        "Sí. SG Hub está desplegado en producción y utiliza una arquitectura distribuida entre Vercel, Render, MongoDB, Redis y Cloudflare.",
+    },
+    {
+      question: "¿SG Hub permite que otros creadores publiquen recursos?",
+      answer:
+        "Sí. El Market incorpora un sistema de autores con solicitud, aprobación, perfiles públicos, publicación de recursos, ventas, métricas y liquidaciones.",
+    },
+  ],
+
+  en: [
+    {
+      question: "What is SG Hub?",
+      answer:
+        "SG Hub is a digital ecosystem combining online tools, digital resources, a multi-author marketplace, blog, artificial intelligence directory, and advanced document processing services.",
+    },
+    {
+      question: "Does SG Hub include its own marketplace?",
+      answer:
+        "Yes. SG Hub Market supports free and paid digital resources, official SG Hub products, and a multi-author architecture with review and approval workflows.",
+    },
+    {
+      question: "How does SG Hub process advanced tasks such as PDF OCR?",
+      answer:
+        "SG Hub uses an independent Node.js and Express Processing API, Redis and BullMQ job queues, Docker workers, OCRmyPDF and Tesseract, plus Cloudflare R2 for file storage.",
+    },
+    {
+      question: "Is SG Hub currently in production?",
+      answer:
+        "Yes. SG Hub is deployed in production using distributed infrastructure across Vercel, Render, MongoDB, Redis, and Cloudflare.",
+    },
+    {
+      question: "Can other creators publish resources on SG Hub?",
+      answer:
+        "Yes. The Market includes an author system with applications, approval, public profiles, resource publishing, sales, analytics, and payouts.",
+    },
+  ],
+},
   radar: {
     es: [
       {

@@ -93,7 +93,8 @@ export default function ProjectsGrid({
 
   const getProjectSlug = (p: Project) => {
     const title = (p.title || "").toLowerCase();
-
+	
+if (title === "sg hub" || title.includes("sghub")) return "sghub";
    if (title.includes("sg saas starter")) return "sg-saas-starter";
 if (title.includes("sg booking pro")) return "sg-booking-pro";
 if (title.includes("sociedad islas canarias")) return "sociedad-canarias-uy";
@@ -119,15 +120,16 @@ if (title.includes("apuestas")) return "playduel";
   const isProductProject = (p: Project) => {
   const slug = getProjectSlug(p);
 
-  return [
-    "radar",
-    "nutrimvp",
-    "playduel",
-    "sg-copilot-crm",
-    "sg-saas-starter",
-	"sg-booking-pro",
-    "marketplace",
-  ].includes(slug);
+return [
+  "sghub",
+  "radar",
+  "nutrimvp",
+  "playduel",
+  "sg-copilot-crm",
+  "sg-saas-starter",
+  "sg-booking-pro",
+  "marketplace",
+].includes(slug);
 };
 
 const isMobileProject = (p: Project) => {
@@ -157,15 +159,27 @@ const isMobileProject = (p: Project) => {
     );
   };
 
-  const isLiveWebsiteProject = (p: Project) => {
-    const slug = getProjectSlug(p);
-    return slug === "radar" || slug === "museo" || slug === "sociedad-canarias-uy";
-  };
+ const isLiveWebsiteProject = (p: Project) => {
+  const slug = getProjectSlug(p);
+
+  return (
+    slug === "sghub" ||
+    slug === "radar" ||
+    slug === "museo" ||
+    slug === "sociedad-canarias-uy"
+  );
+};
 
   const isLiveBadgeProject = (p: Project) => {
-    const slug = getProjectSlug(p);
-    return slug === "radar" || slug === "museo" || slug === "sociedad-canarias-uy";
-  };
+  const slug = getProjectSlug(p);
+
+  return (
+    slug === "sghub" ||
+    slug === "radar" ||
+    slug === "museo" ||
+    slug === "sociedad-canarias-uy"
+  );
+};
 
   const getPrimaryLinkLabel = (p: Project) => {
     const slug = getProjectSlug(p);
@@ -174,9 +188,14 @@ const isMobileProject = (p: Project) => {
       return isEs ? "Comprar en Gumroad" : "Buy on Gumroad";
     }
 
-   if (slug === "radar" || slug === "museo" || slug === "sociedad-canarias-uy") {
-      return isEs ? "Ver sitio" : "View site";
-    }
+  if (
+  slug === "sghub" ||
+  slug === "radar" ||
+  slug === "museo" ||
+  slug === "sociedad-canarias-uy"
+) {
+  return isEs ? "Ver sitio" : "View site";
+}
 
     return "Demo";
   };
@@ -292,6 +311,7 @@ if (slug === "playduel") {
 
   const getPublicDemoPath = (p: Project) => {
     const slug = getProjectSlug(p);
+	if (slug === "sghub") return "https://www.sghub.com.uy";
     if (slug === "radar") return "/go/demo/radar";
     if (slug === "museo") return "/go/demo/museo";
 	if (slug === "sociedad-canarias-uy") {
@@ -1497,6 +1517,7 @@ color: "var(--muted)",
 
                       <div className="mt-3 flex flex-wrap gap-3">
 					 {[
+  "sghub",
   "nutrimvp",
   "playduel",
   "sg-copilot-crm",
