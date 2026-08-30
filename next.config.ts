@@ -2,51 +2,112 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async headers() {
-  if (process.env.NODE_ENV !== "production") {
-    return [];
-  }
+    if (process.env.NODE_ENV !== "production") {
+      return [];
+    }
 
-  const csp = [
-
+    const csp = [
       "default-src 'self'",
-	  "script-src 'self' 'unsafe-inline' https://www.youtube-nocookie.com https://www.youtube.com",
+
+      [
+        "script-src",
+        "'self'",
+        "'unsafe-inline'",
+        "https://www.googletagmanager.com",
+        "https://www.youtube-nocookie.com",
+        "https://www.youtube.com",
+      ].join(" "),
+
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https: https://i.ytimg.com https://*.ytimg.com",
+
+      [
+        "img-src",
+        "'self'",
+        "data:",
+        "blob:",
+        "https:",
+        "https://i.ytimg.com",
+        "https://*.ytimg.com",
+      ].join(" "),
+
       "font-src 'self' data: https:",
-      "connect-src 'self' https: https://*.googlevideo.com https://www.youtube.com https://www.youtube-nocookie.com",
+
+      [
+        "connect-src",
+        "'self'",
+        "https:",
+        "https://www.google-analytics.com",
+        "https://*.google-analytics.com",
+        "https://www.googletagmanager.com",
+        "https://*.googlevideo.com",
+        "https://www.youtube.com",
+        "https://www.youtube-nocookie.com",
+      ].join(" "),
+
       "frame-src https://www.youtube-nocookie.com https://www.youtube.com",
+
       "media-src 'self' https: https://*.googlevideo.com",
+
       "base-uri 'self'",
+
       "form-action 'self' mailto:",
+
       "frame-ancestors 'none'",
+
       "object-src 'none'",
+
       "upgrade-insecure-requests",
     ].join("; ");
 
     return [
       {
         source: "/(.*)",
+
         headers: [
-          { key: "Content-Security-Policy", value: csp },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "DENY" },
+          {
+            key: "Content-Security-Policy",
+            value: csp,
+          },
+
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
+            value:
+              "camera=(), microphone=(), geolocation=()",
           },
+
           {
             key: "Strict-Transport-Security",
-            value: "max-age=31536000; includeSubDomains; preload",
+            value:
+              "max-age=31536000; includeSubDomains; preload",
           },
         ],
       },
     ];
   },
 
-
   async redirects() {
-    return [{ source: "/", destination: "/es", permanent: false }];
+    return [
+      {
+        source: "/",
+        destination: "/es",
+        permanent: false,
+      },
+    ];
   },
 };
 
