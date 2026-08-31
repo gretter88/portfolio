@@ -986,94 +986,131 @@ statusNote: isEs
 
 {
   order: 9,
-  title: "SG SaaS Starter",
+
+  title: "SG SaaS Starter Pro",
+
   desc: isEs
-    ? "Starter full stack comercializable orientado a productos SaaS. Incluye dashboard admin moderno, autenticación, usuarios, actividad, notificaciones, configuraciones, backend Node.js API y estructura lista para extender como producto real o base de nuevos desarrollos."
-    : "Commercial full-stack starter built for SaaS products. It includes a modern admin dashboard, authentication, users, activity, notifications, settings, a Node.js API backend, and a production-ready structure to extend into real products or new commercial builds.",
+    ? "Starter kit full stack premium para acelerar el desarrollo de SaaS, CRM, dashboards, backoffices y plataformas B2B. Incluye autenticación JWT, organizaciones, roles y permisos, analytics, activity logs, notificaciones persistentes y realtime, configuración de workspace, frontend Next.js y backend Node.js/Express."
+    : "Premium full-stack starter kit for accelerating SaaS products, CRMs, dashboards, backoffices and B2B platforms. Includes JWT authentication, organizations, roles and permissions, analytics, activity logs, persistent and real-time notifications, workspace settings, a Next.js frontend and a Node.js/Express backend.",
+
   stack: [
     "Next.js",
+    "React",
     "TypeScript",
     "Tailwind CSS",
     "Node.js",
     "Express",
     "MongoDB",
+    "Mongoose",
+    "JWT",
+    "Socket.IO",
+    "Recharts",
   ],
+
   image: {
     src: "/screenshots/sg-saas-starter-1.webp",
     alt: isEs
-      ? "SG SaaS Starter — Dashboard principal"
-      : "SG SaaS Starter — Main dashboard",
+      ? "SG SaaS Starter Pro — Dashboard administrativo"
+      : "SG SaaS Starter Pro — Admin dashboard",
   },
+
   links: {
-    demo: "https://gretter.gumroad.com/l/qpxbzq",
+    demo:
+      "https://www.sghub.com.uy/market/sg-saas-starter-pro",
     repo: "",
   },
-  badge: isEs ? "Digital Product · Gumroad" : "Digital Product · Gumroad",
+
+  badge: isEs
+    ? "Producto digital · SG Hub Market"
+    : "Digital Product · SG Hub Market",
+
+  statusNote: isEs
+    ? "Estado actual: producto digital Pro publicado en SG Hub Market, con código fuente completo, documentación técnica, seed demo y licencia comercial."
+    : "Current status: Pro digital product published on SG Hub Market, including full source code, technical documentation, demo seed data and a commercial license.",
+
   screenshots: [
     {
       src: "/screenshots/sg-saas-starter-1.webp",
       alt: isEs
-        ? "SG SaaS Starter — Dashboard"
-        : "SG SaaS Starter — Dashboard",
+        ? "SG SaaS Starter Pro — Dashboard"
+        : "SG SaaS Starter Pro — Dashboard",
     },
     {
       src: "/screenshots/sg-saas-starter-2.webp",
       alt: isEs
-        ? "SG SaaS Starter — Users"
-        : "SG SaaS Starter — Users",
+        ? "SG SaaS Starter Pro — Gestión de usuarios"
+        : "SG SaaS Starter Pro — User management",
     },
     {
       src: "/screenshots/sg-saas-starter-3.webp",
       alt: isEs
-        ? "SG SaaS Starter — Activity"
-        : "SG SaaS Starter — Activity",
+        ? "SG SaaS Starter Pro — Activity logs"
+        : "SG SaaS Starter Pro — Activity logs",
     },
     {
       src: "/screenshots/sg-saas-starter-4.webp",
       alt: isEs
-        ? "SG SaaS Starter — Notifications"
-        : "SG SaaS Starter — Notifications",
+        ? "SG SaaS Starter Pro — Notificaciones"
+        : "SG SaaS Starter Pro — Notifications",
     },
     {
       src: "/screenshots/sg-saas-starter-5.webp",
       alt: isEs
-        ? "SG SaaS Starter — Settings"
-        : "SG SaaS Starter — Settings",
+        ? "SG SaaS Starter Pro — Configuración"
+        : "SG SaaS Starter Pro — Settings",
     },
-	{
+    {
       src: "/screenshots/sg-saas-starter-6.webp",
       alt: isEs
-        ? "SG SaaS Starter — Settings"
-        : "SG SaaS Starter — Settings",
+        ? "SG SaaS Starter Pro — Administración del producto"
+        : "SG SaaS Starter Pro — Product administration",
     },
-	{
+    {
       src: "/screenshots/sg-saas-starter-7.webp",
       alt: isEs
-        ? "SG SaaS Starter — Settings"
-        : "SG SaaS Starter — Settings",
+        ? "SG SaaS Starter Pro — Experiencia administrativa"
+        : "SG SaaS Starter Pro — Admin experience",
     },
   ],
+
   features: isEs
     ? [
-        "Dashboard admin moderno listo para usar como base SaaS",
-        "Arquitectura full stack separada entre frontend y backend API",
-        "Gestión de usuarios con vistas administrativas",
-        "Módulo de actividad con filtros y exportación",
-        "Sistema de notificaciones y configuraciones base",
-        "Diseño responsive y estructura extensible para nuevos módulos",
-        "Ideal como starter comercializable, boilerplate privado o base de producto",
+        "Frontend independiente con Next.js, React, TypeScript y Tailwind CSS",
+        "Backend separado con Node.js, Express, TypeScript, MongoDB y Mongoose",
+        "Autenticación JWT y rutas protegidas",
+        "Gestión de usuarios con búsqueda, filtros y paginación",
+        "Roles admin, manager, member y viewer",
+        "Sistema reutilizable de roles y permisos",
+        "Organizaciones, workspaces y base arquitectónica multi-tenant",
+        "Dashboard administrativo con KPIs, métricas y gráficos",
+        "Analytics mediante Recharts",
+        "Activity logs con filtros y exportación",
+        "Notificaciones persistentes almacenadas en MongoDB",
+        "Notificaciones realtime mediante Socket.IO",
+        "Configuración de workspace, branding y preferencias",
+        "Seed demo con organizaciones, usuarios, actividad y notificaciones",
+        "Documentación de instalación, arquitectura, personalización y deployment",
+        "Código fuente completo y licencia comercial",
       ]
     : [
-        "Modern admin dashboard ready to use as a SaaS foundation",
-        "Full-stack architecture with separate frontend and backend API",
-        "User management with admin views",
-        "Activity module with filters and export support",
-        "Base notifications and settings system",
-        "Responsive design and extensible structure for new modules",
-        "Ideal as a commercial starter, private boilerplate, or product foundation",
+        "Independent frontend built with Next.js, React, TypeScript and Tailwind CSS",
+        "Separate backend built with Node.js, Express, TypeScript, MongoDB and Mongoose",
+        "JWT authentication and protected routes",
+        "User management with search, filters and pagination",
+        "Admin, manager, member and viewer roles",
+        "Reusable roles and permissions system",
+        "Organizations, workspaces and a multi-tenant architectural foundation",
+        "Admin dashboard with KPIs, metrics and charts",
+        "Analytics powered by Recharts",
+        "Activity logs with filters and export support",
+        "Persistent notifications stored in MongoDB",
+        "Real-time notifications through Socket.IO",
+        "Workspace settings, branding and preferences",
+        "Demo seed with organizations, users, activity and notifications",
+        "Documentation for installation, architecture, customization and deployment",
+        "Complete source code and commercial license",
       ],
 },
-
 
 
 

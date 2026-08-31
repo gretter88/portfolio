@@ -1744,28 +1744,32 @@ seoKeywords: isEs
 	{
   slug: "sg-saas-starter",
 
-  title: "SG SaaS Starter",
+  title: "SG SaaS Starter Pro",
 
   subtitle: isEs
-    ? "Base SaaS full stack lista para lanzar productos comerciales"
-    : "Full-stack SaaS foundation ready to launch commercial products",
+    ? "Starter kit full stack para acelerar productos SaaS, CRM y plataformas administrativas"
+    : "Full-stack starter kit for faster SaaS, CRM and admin platform development",
 
   status: isEs
-    ? "Template SaaS · Comercializable"
-    : "SaaS Template · Commercial Ready",
+    ? "Producto digital · Pro · SG Hub Market"
+    : "Digital Product · Pro · SG Hub Market",
 
   summary: isEs
-    ? "Plantilla SaaS full stack diseñada para acelerar la creación de nuevos productos digitales. Incluye autenticación, gestión de usuarios, suscripciones, panel administrativo y estructura escalable lista para personalización."
-    : "Full-stack SaaS template designed to accelerate the creation of new digital products. Includes authentication, user management, subscriptions, admin dashboard, and a scalable architecture ready for customization.",
+    ? "SG SaaS Starter Pro es una base full stack comercial desarrollada por Santiago Gretter Software Studio para acelerar la creación de productos SaaS, dashboards administrativos, CRM, backoffices, herramientas internas y aplicaciones multiusuario. Incluye autenticación JWT, organizaciones, roles y permisos, analytics, activity logs, notificaciones persistentes y realtime, configuración de workspace y una arquitectura modular con frontend y backend separados."
+    : "SG SaaS Starter Pro is a commercial full-stack foundation developed by Santiago Gretter Software Studio to accelerate SaaS products, admin dashboards, CRMs, backoffices, internal tools and multi-user applications. It includes JWT authentication, organizations, roles and permissions, analytics, activity logs, persistent and real-time notifications, workspace settings, and a modular architecture with separate frontend and backend applications.",
 
   stack: [
     "Next.js",
+    "React",
     "TypeScript",
     "Tailwind CSS",
-    "Stripe",
-    "Supabase",
-    "PostgreSQL",
-    "Vercel"
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Mongoose",
+    "JWT",
+    "Socket.IO",
+    "Recharts",
   ],
 
   heroImage: "/screenshots/sg-saas-starter-1.webp",
@@ -1774,101 +1778,192 @@ seoKeywords: isEs
     {
       src: "/screenshots/sg-saas-starter-1.webp",
       alt: isEs
-        ? "SG SaaS Starter — Dashboard"
-        : "SG SaaS Starter — Dashboard",
+        ? "SG SaaS Starter Pro — Dashboard administrativo"
+        : "SG SaaS Starter Pro — Admin dashboard",
+    },
+    {
+      src: "/screenshots/sg-saas-starter-2.webp",
+      alt: isEs
+        ? "SG SaaS Starter Pro — Gestión de usuarios"
+        : "SG SaaS Starter Pro — User management",
+    },
+    {
+      src: "/screenshots/sg-saas-starter-3.webp",
+      alt: isEs
+        ? "SG SaaS Starter Pro — Activity logs"
+        : "SG SaaS Starter Pro — Activity logs",
+    },
+    {
+      src: "/screenshots/sg-saas-starter-4.webp",
+      alt: isEs
+        ? "SG SaaS Starter Pro — Notificaciones"
+        : "SG SaaS Starter Pro — Notifications",
+    },
+    {
+      src: "/screenshots/sg-saas-starter-5.webp",
+      alt: isEs
+        ? "SG SaaS Starter Pro — Configuración de workspace"
+        : "SG SaaS Starter Pro — Workspace settings",
     },
   ],
 
   problem: isEs
-    ? "Muchos productos SaaS repiten las mismas funcionalidades básicas, aumentando costos y tiempos de desarrollo."
-    : "Many SaaS products repeat the same core features, increasing development costs and launch times.",
+    ? "Crear un producto SaaS desde cero obliga a repetir módulos fundamentales como autenticación, usuarios, roles, permisos, dashboards, organizaciones, métricas, logs y notificaciones antes de poder trabajar en la funcionalidad específica del negocio."
+    : "Building a SaaS product from scratch requires repeatedly implementing core modules such as authentication, users, roles, permissions, dashboards, organizations, analytics, logs and notifications before work can begin on the product's specific business functionality.",
 
   solution: isEs
-    ? "Se creó una base reutilizable con autenticación, suscripciones, panel administrativo y estructura escalable para acelerar nuevos proyectos SaaS."
-    : "A reusable foundation was built with authentication, subscriptions, admin dashboard, and scalable architecture to accelerate new SaaS projects.",
+    ? "Se desarrolló una arquitectura full stack reutilizable con frontend Next.js y backend Node.js/Express separados, MongoDB para persistencia, autenticación JWT, organizaciones y workspaces, roles avanzados, helpers de permisos, dashboard con analytics, activity logs y notificaciones persistentes y realtime mediante Socket.IO."
+    : "A reusable full-stack architecture was built with separate Next.js frontend and Node.js/Express backend applications, MongoDB persistence, JWT authentication, organizations and workspaces, advanced roles, permission helpers, dashboard analytics, activity logs, and persistent and real-time notifications through Socket.IO.",
 
   highlights: isEs
     ? [
-        "Autenticación lista para producción.",
-        "Integración con Stripe.",
-        "Panel administrativo.",
-        "Gestión de usuarios.",
-        "Arquitectura escalable.",
-        "Base reutilizable para múltiples productos."
+        "Frontend independiente con Next.js, React, TypeScript y Tailwind CSS.",
+        "Backend separado con Node.js, Express, TypeScript, MongoDB y Mongoose.",
+        "Autenticación JWT y rutas protegidas.",
+        "Gestión completa de usuarios con búsqueda, filtros y paginación.",
+        "Roles admin, manager, member y viewer.",
+        "Sistema reutilizable de permisos en frontend y backend.",
+        "Organizaciones, workspaces y base arquitectónica multi-tenant.",
+        "Dashboard administrativo con KPIs, métricas y gráficos.",
+        "Analytics y visualizaciones mediante Recharts.",
+        "Activity logs con filtros y exportación.",
+        "Notificaciones persistentes almacenadas en MongoDB.",
+        "Notificaciones realtime mediante Socket.IO.",
+        "Configuración de workspace, branding y preferencias.",
+        "Seed demo con organizaciones, usuarios, actividad y notificaciones.",
+        "Documentación técnica de instalación, arquitectura, personalización y deployment.",
+        "Código fuente completo y licencia comercial.",
       ]
     : [
-        "Production-ready authentication.",
-        "Stripe integration.",
-        "Admin dashboard.",
-        "User management.",
-        "Scalable architecture.",
-        "Reusable foundation for multiple products."
+        "Independent frontend built with Next.js, React, TypeScript and Tailwind CSS.",
+        "Separate backend built with Node.js, Express, TypeScript, MongoDB and Mongoose.",
+        "JWT authentication and protected routes.",
+        "Complete user management with search, filters and pagination.",
+        "Admin, manager, member and viewer roles.",
+        "Reusable permission system across frontend and backend.",
+        "Organizations, workspaces and a multi-tenant architectural foundation.",
+        "Admin dashboard with KPIs, metrics and charts.",
+        "Analytics and visualizations powered by Recharts.",
+        "Activity logs with filters and export support.",
+        "Persistent notifications stored in MongoDB.",
+        "Real-time notifications through Socket.IO.",
+        "Workspace settings, branding and preferences.",
+        "Demo seed with organizations, users, activity and notifications.",
+        "Technical documentation for installation, architecture, customization and deployment.",
+        "Complete source code and commercial license.",
       ],
 
   businessValue: isEs
     ? [
-        "Reduce tiempos de lanzamiento.",
-        "Disminuye costos de desarrollo.",
-        "Ideal para startups y MVPs.",
-        "Permite validar productos más rápido."
+        "Reduce el tiempo dedicado a desarrollar infraestructura repetitiva de productos SaaS.",
+        "Permite comenzar desde una arquitectura funcional en lugar de una aplicación vacía.",
+        "Sirve como base para SaaS B2B, CRM, dashboards, backoffices y herramientas internas.",
+        "Puede utilizarse en proyectos propios o desarrollos para clientes según la licencia incluida.",
+        "La separación frontend/backend facilita adaptar y desplegar cada capa de forma independiente.",
+        "La estructura modular permite extender el producto con nuevos módulos y lógica específica de negocio.",
       ]
     : [
-        "Reduces launch times.",
-        "Lowers development costs.",
-        "Ideal for startups and MVPs.",
-        "Allows faster product validation."
+        "Reduces the time spent rebuilding repetitive SaaS infrastructure.",
+        "Lets developers start from a functional architecture instead of an empty application.",
+        "Works as a foundation for B2B SaaS products, CRMs, dashboards, backoffices and internal tools.",
+        "Can be used for personal products or client work under the included license.",
+        "The separated frontend/backend architecture makes each layer easier to adapt and deploy independently.",
+        "Its modular structure allows new modules and business-specific logic to be added progressively.",
       ],
 
   nextSteps: isEs
     ? [
-        "Agregar módulos opcionales.",
-        "Expandir marketplace de plantillas.",
-        "Integrar más proveedores SaaS."
+        "Ampliar módulos reutilizables para distintos tipos de SaaS.",
+        "Agregar integraciones opcionales de billing y pagos.",
+        "Continuar fortaleciendo aislamiento multi-tenant y controles de seguridad para escenarios productivos.",
+        "Mantener documentación, compatibilidad y relación Lite/Pro actualizadas.",
       ]
     : [
-        "Add optional modules.",
-        "Expand template marketplace.",
-        "Integrate more SaaS providers."
+        "Expand reusable modules for different SaaS use cases.",
+        "Add optional billing and payment integrations.",
+        "Continue strengthening multi-tenant isolation and security controls for production scenarios.",
+        "Keep documentation, compatibility and Lite/Pro relationships up to date.",
       ],
 
   seoKeywords: isEs
     ? [
+        "SG SaaS Starter Pro",
         "SaaS Starter",
         "Next.js SaaS",
-        "Stripe",
-        "Supabase",
-        "Boilerplate",
-        "Startup",
-        "MVP"
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Mongoose",
+        "JWT",
+        "Socket.IO",
+        "Recharts",
+        "Dashboard administrativo",
+        "CRM",
+        "Multi-tenant",
+        "Starter kit full stack",
       ]
     : [
+        "SG SaaS Starter Pro",
         "SaaS Starter",
         "Next.js SaaS",
-        "Stripe",
-        "Supabase",
-        "Boilerplate",
-        "Startup",
-        "MVP"
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Mongoose",
+        "JWT",
+        "Socket.IO",
+        "Recharts",
+        "Admin dashboard",
+        "CRM",
+        "Multi-tenant",
+        "Full-stack starter kit",
       ],
 
-  requestHref: "/go/request-access/sg-saas-starter",
+  requestHref:
+    "https://www.sghub.com.uy/market/sg-saas-starter-pro",
 
   commercial: {
     availableFor: isEs
-      ? ["Licencia", "Implementación", "Personalización"]
-      : ["License", "Deployment", "Customization"],
+      ? [
+          "Compra directa",
+          "Licencia comercial",
+          "Proyectos propios",
+          "Proyectos para clientes",
+          "Personalización",
+        ]
+      : [
+          "Direct purchase",
+          "Commercial license",
+          "Own products",
+          "Client projects",
+          "Customization",
+        ],
 
     pricingModel: isEs
-      ? "Licencia o personalización"
-      : "License or customization",
+      ? "Licencia comercial mediante SG Hub Market"
+      : "Commercial license through SG Hub Market",
 
     targetAudience: isEs
-      ? ["Startups", "Emprendedores", "SaaS", "Agencias"]
-      : ["Startups", "Entrepreneurs", "SaaS", "Agencies"],
+      ? [
+          "Desarrolladores",
+          "Freelancers",
+          "Agencias",
+          "Startups",
+          "Emprendedores SaaS",
+          "Equipos de producto",
+        ]
+      : [
+          "Developers",
+          "Freelancers",
+          "Agencies",
+          "Startups",
+          "SaaS entrepreneurs",
+          "Product teams",
+        ],
 
     contactLabel: isEs
-      ? "Consultar plantilla SaaS"
-      : "Inquire about SaaS template",
+      ? "Comprar SG SaaS Starter Pro"
+      : "Buy SG SaaS Starter Pro",
   },
 },
 
