@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { LINKS, type Lang, type Project } from "@/lib/i18n";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackPortfolioEvent } from "@/lib/track-client";
+import { buildSgHubPortfolioUrl } from "@/lib/sghub-portfolio-links";
 
 function clsx(...arr: Array<string | false | null | undefined>) {
   return arr.filter(Boolean).join(" ");
@@ -325,15 +326,41 @@ const isMobileProject = (p: Project) => {
   const getRequestAccessPath = (p: Project) =>
     `/go/request-access/${getProjectSlug(p)}`;
 
+  const trackSgHubOutbound = (p: Project) => {
+    const slug = getProjectSlug(p);
+
+    if (
+      slug !== "sghub" &&
+      slug !== "sg-saas-starter"
+    ) {
+      return;
+    }
+
+    trackPortfolioEvent({
+      type: "click",
+      path: `/outbound/sghub/${slug}`,
+      lang,
+      project: slug,
+    });
+  };
+
   const getPublicDemoPath = (p: Project) => {
     const slug = getProjectSlug(p);
 
-    if (slug === "sghub") return "https://www.sghub.com.uy";
+    if (slug === "sghub") {
+      return buildSgHubPortfolioUrl(
+        "/",
+        "projects_grid_sghub"
+      );
+    }
 
     if (slug === "sg-saas-starter") {
-      return isEs
-        ? "https://www.sghub.com.uy/market/sg-saas-starter-pro"
-        : "https://www.sghub.com.uy/en/market/sg-saas-starter-pro";
+      return buildSgHubPortfolioUrl(
+        isEs
+          ? "/market/sg-saas-starter-pro"
+          : "/en/market/sg-saas-starter-pro",
+        "projects_grid_sg_saas_starter_pro"
+      );
     }
 
     if (slug === "radar") return "/go/demo/radar";
@@ -811,7 +838,10 @@ color: "var(--muted)",
                       href={getPublicDemoPath(p)}
                       target="_blank"
                       rel="noreferrer"
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        trackSgHubOutbound(p);
+                      }}
                     >
                       {isMarketProduct(p) ? (
                         <span className="inline-flex items-center gap-2">
@@ -1110,6 +1140,7 @@ color: "var(--muted)",
                       href={getPublicDemoPath(activeProject)}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={() => trackSgHubOutbound(activeProject)}
                       className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium"
                       style={{
                         background: "#16a34a",
@@ -1580,6 +1611,7 @@ color: "var(--muted)",
                               href={getPublicDemoPath(activeProject)}
                               target="_blank"
                               rel="noreferrer"
+                              onClick={() => trackSgHubOutbound(activeProject)}
                             >
                               {isMarketProduct(activeProject) ||
                               isLiveWebsiteProject(activeProject) ? (

@@ -4,6 +4,7 @@ import { LANGS, type Lang } from "@/lib/i18n";
 import { getCaseStudy } from "@/lib/project-case-studies";
 import { getProjectFaqs } from "@/lib/project-faq";
 import TrackedCommercialLink from "@/components/TrackedCommercialLink";
+import { buildSgHubPortfolioUrl } from "@/lib/sghub-portfolio-links";
 import type { Metadata } from "next";
 
 
@@ -130,6 +131,62 @@ const faqs = getProjectFaqs(study.slug, lang);
   const mutedStyle: React.CSSProperties = { color: "var(--muted)" };
   const muted2Style: React.CSSProperties = { color: "var(--muted-2)" };
 const isSgHub = study.slug === "sghub";
+const isSgSaasStarter = study.slug === "sg-saas-starter";
+const usesSgHubDestination = isSgHub || isSgSaasStarter;
+
+const getSgHubCaseStudyHref = (
+  placement: "hero" | "commercial" | "bottom"
+) => {
+  if (isSgHub) {
+    return buildSgHubPortfolioUrl(
+      lang === "es"
+        ? "https://www.sghub.com.uy"
+        : "https://www.sghub.com.uy/en",
+      `case_study_sghub_${placement}`
+    );
+  }
+
+  if (isSgSaasStarter) {
+    return buildSgHubPortfolioUrl(
+      lang === "es"
+        ? "https://www.sghub.com.uy/market/sg-saas-starter-pro"
+        : "https://www.sghub.com.uy/en/market/sg-saas-starter-pro",
+      `case_study_sg_saas_starter_pro_${placement}`
+    );
+  }
+
+  return study.requestHref;
+};
+
+const getPrimaryCtaLabel = () => {
+  if (isSgHub) {
+    return isEs ? "Visitar SG Hub" : "Visit SG Hub";
+  }
+
+  if (isSgSaasStarter) {
+    return isEs
+      ? "Comprar en SG Hub Market"
+      : "Buy on SG Hub Market";
+  }
+
+  return isEs
+    ? "Consultar este proyecto"
+    : "Inquire about this project";
+};
+
+const getCommercialCtaLabel = () => {
+  if (isSgHub) {
+    return isEs ? "Visitar SG Hub" : "Visit SG Hub";
+  }
+
+  if (isSgSaasStarter) {
+    return isEs
+      ? "Comprar en SG Hub Market"
+      : "Buy on SG Hub Market";
+  }
+
+  return study.commercial.contactLabel;
+};
 
 
 const projectSchema = {
@@ -282,16 +339,21 @@ const faqSchema =
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href={study.requestHref}
+              <TrackedCommercialLink
+                href={getSgHubCaseStudyHref("hero")}
+                type="request_project_info"
+                project={study.slug}
+                lang={lang}
+                target={usesSgHubDestination ? "_blank" : undefined}
+                rel={usesSgHubDestination ? "noreferrer" : undefined}
                 className="rounded-xl px-5 py-2 font-medium transition"
                 style={{
                   background: "var(--foreground)",
                   color: "var(--background)",
                 }}
               >
-                {isEs ? "Consultar este proyecto" : "Inquire about this project"}
-              </a>
+                {getPrimaryCtaLabel()}
+              </TrackedCommercialLink>
 
               <Link
                 href={`/${lang}#contact`}
@@ -559,17 +621,19 @@ const faqSchema =
 
     <div className="mt-6">
      <TrackedCommercialLink
-  href={study.requestHref}
+  href={getSgHubCaseStudyHref("commercial")}
   type="request_project_info"
   project={study.slug}
   lang={lang}
+  target={usesSgHubDestination ? "_blank" : undefined}
+  rel={usesSgHubDestination ? "noreferrer" : undefined}
         className="inline-flex items-center rounded-xl px-5 py-3 text-sm font-medium"
         style={{
           background: "var(--foreground)",
           color: "var(--background)",
         }}
       >
-        {study.commercial.contactLabel}
+        {getCommercialCtaLabel()}
      </TrackedCommercialLink>
 	 {study.pdfHref ? (
   <TrackedCommercialLink
@@ -590,6 +654,7 @@ const faqSchema =
   </TrackedCommercialLink>
 ) : null}
     </div>
+{!usesSgHubDestination ? (
 	<div className="mt-3 flex flex-wrap gap-3">
   <TrackedCommercialLink
     href={`${study.requestHref}?type=demo`}
@@ -636,6 +701,7 @@ const faqSchema =
     Partnership
   </TrackedCommercialLink>
 </div>
+) : null}
   </div>
 </section>
 {faqs.length > 0 ? (
@@ -671,26 +737,59 @@ const faqSchema =
           }}
         >
           <h3 className="text-xl font-semibold">
-            {isEs ? "¿Te interesa este proyecto?" : "Interested in this project?"}
+            {isSgHub
+              ? isEs
+                ? "Explorá SG Hub"
+                : "Explore SG Hub"
+              : isSgSaasStarter
+              ? isEs
+                ? "¿Querés usar SG SaaS Starter Pro?"
+                : "Want to use SG SaaS Starter Pro?"
+              : isEs
+              ? "¿Te interesa este proyecto?"
+              : "Interested in this project?"}
           </h3>
 
           <p className="mt-3 text-sm leading-relaxed" style={mutedStyle}>
-            {isEs
+            {isSgHub
+              ? isEs
+                ? "Visitá SG Hub para explorar sus herramientas, Market, recursos digitales, directorio IA, blog, plantillas y ecosistema multi-autor."
+                : "Visit SG Hub to explore its tools, Market, digital resources, AI directory, blog, templates, and multi-author ecosystem."
+              : isSgSaasStarter
+              ? isEs
+                ? "SG SaaS Starter Pro está disponible para compra directa en SG Hub Market con acceso al producto digital y su documentación."
+                : "SG SaaS Starter Pro is available for direct purchase on SG Hub Market with access to the digital product and its documentation."
+              : isEs
               ? "Podés solicitar más información, una demo privada, una ficha comercial o conversar una posible implementación, licencia, white-label o partnership."
               : "You can request more information, a private demo, a commercial one-pager, or discuss a possible deployment, license, white-label, or partnership."}
           </p>
 
           <div className="mt-5 flex flex-wrap gap-3">
-            <a
-              href={study.requestHref}
+            <TrackedCommercialLink
+              href={getSgHubCaseStudyHref("bottom")}
+              type="request_project_info"
+              project={study.slug}
+              lang={lang}
+              target={usesSgHubDestination ? "_blank" : undefined}
+              rel={usesSgHubDestination ? "noreferrer" : undefined}
               className="rounded-xl px-5 py-2 font-medium"
               style={{
                 background: "var(--foreground)",
                 color: "var(--background)",
               }}
             >
-              {isEs ? "Solicitar información" : "Request information"}
-            </a>
+              {isSgHub
+                ? isEs
+                  ? "Visitar SG Hub"
+                  : "Visit SG Hub"
+                : isSgSaasStarter
+                ? isEs
+                  ? "Comprar en SG Hub Market"
+                  : "Buy on SG Hub Market"
+                : isEs
+                ? "Solicitar información"
+                : "Request information"}
+            </TrackedCommercialLink>
 
             <Link
               href={`/${lang}#projects`}
